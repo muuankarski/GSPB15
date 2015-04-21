@@ -9,7 +9,13 @@ This repository contains the files for
 
 Each stage of the process is separated in it's own subdirectory with a dedicated README-file explaining what is been done and why.
 
-![SYB yearbook process](misc/sybprocess.png)
+How to edit in browser
+----------------------------------------------
+
+![](misc/browser_edit.gif)
+
+
+
 
 
 
