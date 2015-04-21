@@ -1,0 +1,149 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Global Statistical Pocketbook 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Global Pocket Yearbook class
+% \documentclass[print, Draft]{faofactbook}
+\documentclass[print]{faofactbook}
+%\documentclass[web, Draft]{faofactbook}
+%\documentclass[web]{faofactbook}
+
+%% Other packages to be loaded
+\usepackage{lipsum,textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{tabularx}
+\usepackage{fixltx2e}
+\usepackage{bpchem}
+\usepackage{arydshln}
+\usepackage{booktabs}
+%\usepackage[document]{ragged2e}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\PrerenderUnicode {ô}
+\makeindex
+
+%% Define the colors
+\definecolor{part1}{cmyk}{0.90,0.40,0.24,0.32}
+\definecolor{part2}{cmyk}{0,0.54,0.96,0.10}
+\definecolor{part3}{cmyk}{0.18,0.90,0.75,0.31}
+\definecolor{part4}{cmyk}{0.73,0.10,0.97,0.29}
+\definecolor{part5}{cmyk}{0,0,0,0.5}
+\definecolor{part6}{cmyk}{0,0,0,0.5}
+
+%% Set the strip width
+\faoset{stripwidth=7.2mm}
+
+\begin{document}
+\faoset{bgcolor=white}\selectcolor
+\twocolumn
+
+%% Cover (just in the web version)
+\ifprint\addtocounter{page}{1}\else
+\begin{picture}(0,0)
+\put(-28,-502){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
+\end{picture}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\fi
+
+%% Title Page
+\input{titlePage.tex}
+
+%% Disclamer
+\ifprint
+\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./GSPB15disclamerPage.pdf}
+\else
+\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./GSPB15disclamerPage.pdf}
+\fi
+
+%% Prelims
+\tableofcontents
+\clearpage
+
+%% List of countries
+%\phantomsection
+%\renewcommand{\indexname}{List of countries} 
+%\addcontentsline{toc}{section}{List of countries}
+%\printindex
+
+%%% List of tables
+%\phantomsection
+%\addcontentsline{toc}{section}{List of Tables}
+%\listoftables
+
+%% To be commented if we want to show the List of countries
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+%% New part - Introduction
+\newpart{white}
+%\addtocounter{page}{1}
+%\cleardoublepage
+\pagenumbering{arabic}  %% Arabic page numbering
+\setlength{\parskip}{3pt plus 3pt minus 1pt}  %% Increasing the spacing in the introduction page
+
+\input{./foreword.tex}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\input{./introduction.tex}
+\setlength{\parskip}{0pt}  %% Restoring the normal spacing
+
+\normalsize
+
+\makeatletter\clearpage\ifodd\c@page\hbox{}\newpage\fi\makeatother %% Remove the colored strip from the introduction page
+
+\input{./Environments.tex}
+
+\newpage
+\pagecolor{FAOblue}
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\pagecolor{white}
+
+%%% COUNTRY DATA
+\newpart{FAOblue}
+\phantomsection
+\addcontentsline{toc}{section}{Country Profiles}
+\faoset{bgcolor=white}\selectcolor
+\parindent=0pt
+\parskip=\medskipamount
+\hangafter=-2
+\input{./CountryProfiles.tex}
+
+%%% METADATA
+\newpart{white}
+\part{}
+%\section{Definitions}
+\phantomsection
+\addcontentsline{toc}{section}{Definitions}
+\input{./Metadata.tex}
+\clearpage
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\ifprint\else
+\begin{picture}(0,0)
+\put(-58,-429){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
+\end{picture}
+\fi
+
+\end{document}
