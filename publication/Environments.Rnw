@@ -1,0 +1,759 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ICN2 pocketbook environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Setting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpart{part1}
+\rowcolors{1}{part1!10}{white}
+
+<<spread_function, eval=FALSE, echo=FALSE>>=
+source('~/btsync/fao_sync/pocketbooks/GSPB15/publication/latex_charts.R')
+@
+
+\clearpage
+
+
+%% Economy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+<<economy, eval=FALSE>>=
+chart_spread(title="Economy",                # Amy you could specify here
+            LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
+            RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
+            LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
+            RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
+            BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
+            MapCode="M.P1.ECON.1.6")         # Amy you could specify here
+@
+
+%% Population %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<population, eval=FALSE>>=
+chart_spread(title="Population",                               # Amy you could specify here
+            LeftTextCode="P1.OVER.1.1",                        # Amy you could specify here
+            RightTextCode="MT.P1.OVER.1.2",                    # Amy you could specify here
+            footnoteRight="Data after 2010 are projections.",  # Amy you could specify here
+            LeftChartCode="C.P1.OVER.1.2",                     # Amy you could specify here
+            RightChartCode="C.P1.OVER.1.3",                    # Amy you could specify here
+            BottomChartCode="C.P1.OVER.1.4",                   # Amy you could specify here
+            MapCode="M.P1.OVER.1.6")                           # Amy you could specify here
+@
+
+% %% Prices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<prices, eval=FALSE>>=
+chart_spread(title="Prices",
+            LeftTextCode="P1.OVER.1.1",
+            RightTextCode="MT.P1.OVER.1.2",
+            footnoteRight="Data after 2010 are projections.",
+            LeftChartCode="C.P1.OVER.1.2",
+            RightChartCode="C.P1.OVER.1.3",
+            BottomChartCode="C.P1.OVER.1.4",
+            MapCode="M.P1.OVER.1.6")
+@
+
+
+
+% \begin{ChartPage}{ Prices }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.PRICE.1.1.tex}{\input{./Text/TXT.P1.PRICE.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.PRICE.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.PRICE.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.PRICE.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.PRICE.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.PRICE.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.PRICE.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.PRICE.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.PRICE.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.PRICE.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.PRICE.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.PRICE.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.PRICE.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.PRICE.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.PRICE.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.PRICE.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Food trade %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Trade }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.TRADE.1.1.tex}{\input{./Text/TXT.P1.TRADE.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\IfFileExists{./Plots/MT.P1.TRADE.1.2.tex}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.TRADE.1.2.tex}
+% 			\input{./Plots/MT.P1.TRADE.1.2.tex}
+% 		\end{table}}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.TRADE.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.TRADE.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.TRADE.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.TRADE.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.TRADE.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.TRADE.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.TRADE.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.TRADE.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.TRADE.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.TRADE.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.TRADE.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.TRADE.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Malnutrition
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newpart{part2}
+% \rowcolors{1}{part2!10}{white}
+
+% %\newpage
+% %\pagecolor{part2}
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\newpage
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\clearpage
+% %\pagecolor{white}
+
+% %% Undernourishment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Undernourishment }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.IAF.1.1.tex}{\input{./Text/TXT.P1.IAF.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\IfFileExists{./Plots/MT.P1.IAF.1.2.tex}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.IAF.1.2.tex}
+% 			\input{./Plots/MT.P1.IAF.1.2.tex}
+% 		\end{table}}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.IAF.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.IAF.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.IAF.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.IAF.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.IAF.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.IAF.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.IAF.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.IAF.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.IAF.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.IAF.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.IAF.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.IAF.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Undernutrition %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{Chart2Page}{ Undernutrition }
+	
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.UT.1.1.tex}{\input{./Text/TXT.P1.UT.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\IfFileExists{./Plots/MT.P1.UT.1.2}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.UT.1.2.tex}
+% 			\input{./Plots/MT.P1.UT.1.2.tex}
+% 		\end{table}}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.UT.1.3.tex}
+%         		\IfFileExists{./Plots/C.P1.UT.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.UT.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.UT.1.4.tex}
+%         		\IfFileExists{./Plots/C.P1.UT.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.UT.1.4}.pdf}}{}
+% 	\end{chart}} 
+          
+% 	\BottomLeftChart{\IfFileExists{./Plots/MT.P1.UT.1.5}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.UT.1.5.tex}
+% 			\input{./Plots/MT.P1.UT.1.5.tex}
+% 		\end{table}}}
+
+% 	\BottomRightChart{\IfFileExists{./Plots/MT.P1.UT.1.6}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.UT.1.6.tex}
+% 			\input{./Plots/MT.P1.UT.1.6.tex}
+% 		\end{table}}}
+
+% \end{Chart2Page}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.UT.1.7.tex}
+%         		\IfFileExists{./Maps/M.P1.UT.1.7.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.UT.1.7}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Obesity/Overweight %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Overweight/Obesity }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.OO.1.1.tex}{\input{./Text/TXT.P1.OO.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OO.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.OO.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.OO.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OO.1.3.tex}
+%         		\IfFileExists{./Plots/C.P1.OO.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.OO.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OO.1.4.tex}
+%         		\IfFileExists{./Plots/C.P1.OO.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.OO.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OO.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.OO.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.OO.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.OO.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.OO.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.OO.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %%  Food security indicators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Food security indicators }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.FSI.1.1.tex}{\input{./Text/TXT.P1.FSI.1.1.tex}}{\lipsum[8]}}
+%   	\RightText{\IfFileExists{./Text/TXT.P1.FSI.1.2.tex}{\input{./Text/TXT.P1.FSI.1.2.tex}}{\lipsum[8]}}
+
+% 	\LeftChart{
+%            	\centering
+% 		\includegraphics[width = 8cm]{./FSIindicators.png}
+% 	} 
+	
+% 	\RightChart{
+
+% 	}	
+% 	\BottomChart{
+% %	\justify
+% %	\lipsum[8]
+% 	\clearpage
+% 	}
+% \end{ChartPage}
+
+% \begin{multicols}{2}
+
+% 	\includegraphics[width = 3.8cm]{./SOFI_1.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_2.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_3.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_4.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_5.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_6.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_7.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_8.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_9.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_all_regions.png}
+% 	\includegraphics[width = 3.8cm]{./SOFI_key.png}
+% \end{multicols}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Diets
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newpart{part3}
+% \rowcolors{1}{part3!10}{white}
+
+% %\newpage
+% %\pagecolor{part3}
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\newpage
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\clearpage
+% %\pagecolor{white}
+
+% %% Dietary energy supply %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Dietary energy supply }
+	
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.DES.1.1.tex}{\input{./Text/TXT.P1.DES.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.DES.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.DES.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.DES.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.DES.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.DES.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.DES.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.DES.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.DES.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.DES.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.DES.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.DES.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.DES.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.DES.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.DES.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.DES.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Cereals %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Cereals - excluding beer }
+	
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.CRLS.1.1.tex}{\input{./Text/TXT.P1.CRLS.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.CRLS.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.CRLS.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.CRLS.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.CRLS.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.CRLS.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.CRLS.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.CRLS.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.CRLS.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.CRLS.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.CRLS.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.CRLS.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.CRLS.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.CRLS.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.CRLS.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.CRLS.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Starchy roots %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Starchy roots }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.SR.1.1.tex}{\input{./Text/TXT.P1.SR.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SR.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.SR.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.SR.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SR.1.3.tex}
+% %		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.SR.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.SR.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SR.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.SR.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.SR.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SR.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.SR.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.SR.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.SR.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.SR.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.SR.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+
+% %% Sugar and sweeteners %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Sugar and sweeteners }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.SS.1.1.tex}{\input{./Text/TXT.P1.SS.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SS.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.SS.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.SS.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SS.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.SS.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.SS.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SS.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.SS.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.SS.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.SS.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.SS.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.SS.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.SS.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.SS.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.SS.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Fruit and Vegetable %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Fruit and vegetables }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.FV.1.1.tex}{\input{./Text/TXT.P1.FV.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FV.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.FV.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.FV.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FV.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.FV.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.FV.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FV.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.FV.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.FV.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FV.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.FV.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.FV.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.FV.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.FV.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.FV.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Meat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Meat }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.MEAT.1.1.tex}{\input{./Text/TXT.P1.MEAT.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEAT.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.MEAT.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.MEAT.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEAT.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.MEAT.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.MEAT.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEAT.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.MEAT.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.MEAT.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEAT.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.MEAT.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.MEAT.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.MEAT.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.MEAT.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.MEAT.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Oilcrops %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Oilcrops }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.OCRPS.1.1.tex}{\input{./Text/TXT.P1.OCRPS.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OCRPS.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.OCRPS.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.OCRPS.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OCRPS.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.OCRPS.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.OCRPS.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OCRPS.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.OCRPS.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.OCRPS.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.OCRPS.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.OCRPS.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.OCRPS.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.OCRPS.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.OCRPS.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.OCRPS.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Fish %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Fish }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.FISH.1.1.tex}{\input{./Text/TXT.P1.FISH.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FISH.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.FISH.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.FISH.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FISH.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.FISH.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.FISH.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FISH.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.FISH.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.FISH.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.FISH.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.FISH.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.FISH.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.FISH.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.FISH.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.FISH.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Milk %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Milk - excluding butter}
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.MEB.1.1.tex}{\input{./Text/TXT.P1.MEB.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEB.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.MEB.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.MEB.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEB.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.MEB.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.MEB.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEB.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.MEB.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.MEB.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.MEB.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.MEB.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.MEB.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.MEB.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.MEB.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.MEB.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Household surveys
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newpart{part3}
+% \textbf{\large{ Inequality within countries  }} 
+%      \vspace{7pt}
+%      \phantomsection
+%      \addcontentsline{toc}{section}{ Inequality within countries }
+% \rowcolors{1}{part3!10}{white}
+% \input{HouseholdSurveys.tex}
+% \clearpage
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Sustainability
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newpart{part4}
+% \rowcolors{1}{part4!10}{white}
+% \normalsize
+% %\newpage
+% %\pagecolor{part4}
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\newpage
+% %\thispagestyle{empty}
+% %\mbox{}
+% %\clearpage
+% %\pagecolor{white}
+
+% %% Water %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Water }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.WATER.1.1.tex}{\input{./Text/TXT.P1.WATER.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\IfFileExists{./Plots/MT.P1.WATER.1.2.tex}
+% 		{\begin{table}
+% 			\input{./Captions/Caption_MT.P1.WATER.1.2.tex}
+% 			\input{./Plots/MT.P1.WATER.1.2.tex}
+% 		\end{table}}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.WATER.1.3.tex}
+% 		\vspace{7pt}
+%         		\IfFileExists{./Plots/C.P1.WATER.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.WATER.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.WATER.1.4.tex}
+%         		\IfFileExists{./Plots/C.P1.WATER.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.WATER.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.WATER.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.WATER.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.WATER.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.WATER.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.WATER.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.WATER.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+
+% %% Greenhouse gas emissions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Greenhouse gas emissions }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.GGE.1.1.tex}{\input{./Text/TXT.P1.GGE.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.GGE.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.GGE.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.GGE.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.GGE.1.3.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.GGE.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.GGE.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.GGE.1.4.tex}
+% 		\vspace{-7pt}
+%         		\IfFileExists{./Plots/C.P1.GGE.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.GGE.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.GGE.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.GGE.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.GGE.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.GGE.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.GGE.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.GGE.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
+
+% %% Organic food %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{ChartPage}{ Organic agriculture }
+
+%   	\LeftText{\IfFileExists{./Text/TXT.P1.ORG.1.1.tex}{\input{./Text/TXT.P1.ORG.1.1.tex}}{\lipsum[2]}}
+
+% 	\RightText{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.ORG.1.2.tex}
+%         		\IfFileExists{./Plots/C.P1.ORG.1.2.pdf}{\includegraphics[width = 4cm, height = 3cm]{{./Plots/C.P1.ORG.1.2}.pdf}}{}
+% 		\end{chart}}
+
+% 	\LeftChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.ORG.1.3.tex}
+%         		\IfFileExists{./Plots/C.P1.ORG.1.3.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.ORG.1.3}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\RightChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.ORG.1.4.tex}
+%         		\IfFileExists{./Plots/C.P1.ORG.1.4.pdf}{\includegraphics[width = 4cm, height = 8cm]{{./Plots/C.P1.ORG.1.4}.pdf}}{}
+% 	\end{chart}} 
+
+% 	\BottomChart{\begin{chart}
+% 		\input{./Captions/Caption_C.P1.ORG.1.5.tex}
+% 		\IfFileExists{./Plots/C.P1.ORG.1.5.pdf}{\includegraphics[width = 8cm, height = 3cm]	{{./Plots/C.P1.ORG.1.5}.pdf}}{}
+% 	\end{chart}}
+
+% \end{ChartPage}
+
+% \begin{figure}
+% 	\input{./Captions/Caption_M.P1.ORG.1.6.tex}
+%         		\IfFileExists{./Maps/M.P1.ORG.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.ORG.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{}
+% \end{figure}
