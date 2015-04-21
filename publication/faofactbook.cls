@@ -43,7 +43,7 @@ left=1cm, right=1cm, twoside}{geometry}
 }
 
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{5.5\p@}{7}%
+   \@setfontsize\normalsize{8\p@}{9}%
    \abovedisplayskip 1\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus2\p@
    \belowdisplayshortskip 1\p@ \@plus2\p@ \@minus2\p@
@@ -51,7 +51,7 @@ left=1cm, right=1cm, twoside}{geometry}
    \let\@listi\@listI}
 \normalsize
 \renewcommand\small{%
-   \@setfontsize\small{5\p@}{6.5}%
+   \@setfontsize\small{7\p@}{8.5}%
    \abovedisplayskip 4\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus1\p@
    \belowdisplayshortskip 2\p@ \@plus\p@ \@minus1\p@
@@ -65,10 +65,10 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\scriptsize{\@setfontsize\scriptsize\@vpt\@vipt}
 \renewcommand\tiny{\@setfontsize\tiny\@ivpt\@vpt}
 \renewcommand\large{\@setfontsize\large\@viipt\@viiipt}
-\renewcommand\Large{\@setfontsize\Large\@xipt{13}}
-\renewcommand\LARGE{\@setfontsize\LARGE\@xivpt{16}}
-\renewcommand\huge{\@setfontsize\huge\@xvpt{18}}
-\renewcommand\Huge{\@setfontsize\Huge\@xviipt{20}}
+\renewcommand\Large{\@setfontsize\Large\@xipt{15}}
+\renewcommand\LARGE{\@setfontsize\LARGE\@xivpt{17}}
+\renewcommand\huge{\@setfontsize\huge\@xvpt{19}}
+\renewcommand\Huge{\@setfontsize\Huge\@xviipt{21}}
 \setlength\parskip{\z@}
 \AtBeginDocument{\geometry{papersize={10cm,19cm}, layoutsize={10cm,19cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
