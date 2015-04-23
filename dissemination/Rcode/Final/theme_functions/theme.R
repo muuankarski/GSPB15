@@ -5,18 +5,18 @@ theme_update(
   #   axis.text = element_text(),
   #   strip.text = element_text(),
   #   axis.line = element_blank(),
-  axis.text.x = element_text(family = "", face = "plain", colour = "black",
-                             size = 8, hjust = 0.6, vjust = 1, angle = 0,
-                             lineheight = 0.7),
-  axis.text.y = element_text(family = "", face = "plain", colour = "black",
-                             size = 8, hjust = 0.6, vjust = 0.5, angle = 0,
-                             lineheight = 0.7),
+  axis.text.x = element_text(family = "PT Sans", face = "plain", colour = "black",
+                             size = 11, hjust = 1, vjust = 1, angle = 0,
+                             lineheight = 0.6),
+  axis.text.y = element_text(family = "PT Sans", face = "plain", colour = "black",
+                             size = 11, hjust = 1, vjust = 0.5, angle = 0,
+                             lineheight = 0.6),
   axis.ticks = element_blank(),
-  axis.title.x = element_text(family = "", face = "plain", colour = "black",
-                              size = 8, hjust = 0.5, vjust = 0.2, angle = 0,
+  axis.title.x = element_text(family = "PT Sans", face = "plain", colour = "black",
+                              size = 11, hjust = 0.5, vjust = 0.2, angle = 0,
                               lineheight = 0.7),
-  axis.title.y = element_text(family = "", face = "plain", colour = "black",
-                              size = 8, hjust = 0.5, vjust = 0.2, angle = 90,
+  axis.title.y = element_text(family = "PT Sans", face = "plain", colour = "black",
+                              size = 11, hjust = 0.5, vjust = 0.2, angle = 90,
                               lineheight = 0.7),
   #   axis.ticks.length = ,
   #   axis.ticks.margin = ,
@@ -26,7 +26,7 @@ theme_update(
   #   legend.key.size = ,
   #   legend.key.height = NULL,
   #   legend.key.width = NULL,
-  legend.text = element_text(size = 8, lineheight = 0.7),
+  legend.text = element_text(size = 11, lineheight = 0.7),
   #   legend.text.align = NULL,
   legend.title = element_blank(),
   #   legend.title.align = NULL,
@@ -36,7 +36,7 @@ theme_update(
   legend.box = NULL,
 #   panel.background = element_rect(fill = col.main3, colour = col.main3,
 #                                   size = NULL, linetype = NULL),
-    panel.background = element_blank(),
+  panel.background = element_blank(),
   panel.border = element_blank(),
   panel.grid.major = element_line(colour = col.main2, size = 0.5),
   panel.grid.minor = element_blank(),
@@ -53,13 +53,13 @@ theme_update(
 )
 
 noLeg = function(x) theme(legend.position = "none")
-yesTitleX = function(x) theme(axis.title.x = element_text(family = "", face = "plain", colour = "black",
-                                                          size = 8, hjust = 0.5, vjust = 0.2, angle = 0,
+yesTitleX = function(x) theme(axis.title.x = element_text(family = "PT Sans", face = "plain", colour = "black",
+                                                          size = 11, hjust = 0.5, vjust = 0.2, angle = 0,
                                                           lineheight = 0.7))
-angleText <- function(angle = 45) theme(axis.text.x = element_text(family = "", face = "plain", colour = "black",
-                                                                   size = 8, hjust = 1, vjust = 1, angle = 45,
-                                                                   lineheight = 0.7))
+angleText <- function(angle = 45) theme(axis.text.x = element_text(family = "PT Sans", face = "plain", colour = "black",
+                                                                   size = 11, hjust = 1, vjust = 1, angle = 45,
+                                                                   lineheight = 0.6))
 centerYear = function(x) theme(axis.text.x = element_text(family = "", face = "plain",
-        colour = "black", size = 8, hjust = 0.5, vjust = 1, angle = 0, lineheight = 0.7))
+        colour = "black", size = 11, hjust = 0.5, vjust = 1, angle = 0, lineheight = 0.6))
 mapLegend = function(x) theme(legend.key.size = unit(2.4, "cm"),
                               legend.text = element_text(size = 32))
