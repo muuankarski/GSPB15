@@ -29,6 +29,7 @@ C.P1.IAF.1.3,2,Inadequate access to food,IAF,1,,3,,CHART,VERTICAL,SHORT_NAME,top
 C.P1.IAF.1.4,2,Inadequate access to food,IAF,1,,4,,CHART,VERTICAL,SHORT_NAME,top_dot,Year,,,Territory,African countries with the highest number of people undernourished in 2012-14,,,,,,1992,2014,,million,people,,AV3YNOU,,,,,,,,,,
 C.P1.IAF.1.5,2,Inadequate access to food,IAF,1,,5,,CHART,RECTANGULAR,Year,reg_uni_line,FAO_TABLE_NAME,,,SOFIMacroRegion,Number of people undernourished,,,,,,1992,2014,,million,people,,AV3YNOU,,,,,,,,,,
 M.P1.IAF.1.6,2,Inadequate access to food,IAF,1,,6,,MAP,LARGE,,,,,,Territory,Prevalence of people undernourished,,,,,,2014,2014,,,percent,,AV3YPOU.DISS,,,,,,,,,,
+M.P1.IAF.1.7,2,Inadequate access to food,IAF,1,,6,,MAP,LARGE,,,,,,Territory,Prevalence of people undernourished,,,,,,2014,2014,,,percent,,AV3YPOU.DISS,,,,,,,,,,
 TXT.P1.UT.1.1,2,Utilization,UT,1,,1,,TEXT,,,,,,,Territory,,,,,,,,,,,,,,,,,,,,,,,
 MT.P1.UT.1.2,2,Utilization,UT,1,,2,,MINITABLE,SQUARE,,,,,,Territory,Countries with the highest share of children under 5 years of age who are wasted,,,,,,1990,2012,,,percent,,SH.STA.WAST.ZS,,,,,,,,,,
 C.P1.UT.1.3,2,Utilization,UT,1,,3,,CHART,VERTICAL,SHORT_NAME,top_dot,Year,,,Territory,"Percentage of children under 5 years of age who are underweight, highest 20",,,,,,2005,2012,7,,percent,,SH.STA.MALN.ZS,,,,,,,,,,

@@ -4,9 +4,9 @@
 
 %% Global Pocket Yearbook class
 % \documentclass[print, Draft]{faofactbook}
-\documentclass[print]{faofactbook}
+%\documentclass[print]{faofactbook}
 %\documentclass[web, Draft]{faofactbook}
-%\documentclass[web]{faofactbook}
+\documentclass[web]{faofactbook}
 
 %% Other packages to be loaded
 \usepackage{lipsum,textcomp}
@@ -18,6 +18,10 @@
 \usepackage{arydshln}
 \usepackage{booktabs}
 %\usepackage[document]{ragged2e}
+
+%\usepackage{titlesec}
+
+% \titleformat*{\section}{\Large\bfseries}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -121,15 +125,15 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 @
 
 
-\newpage
-\pagecolor{FAOblue}
-\thispagestyle{empty}
-\mbox{}
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\clearpage
-\pagecolor{white}
+% \newpage
+% \pagecolor{FAOblue}
+% \thispagestyle{empty}
+% \mbox{}
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
+% \pagecolor{white}
 
 %%% COUNTRY DATA
 \newpart{FAOblue}
@@ -139,7 +143,7 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 \parindent=0pt
 \parskip=\medskipamount
 \hangafter=-2
-% \input{./CountryProfiles.tex}
+\input{./CountryProfiles/CountryProfiles.tex}
 
 %%% METADATA
 \newpart{white}
