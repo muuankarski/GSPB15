@@ -2,6 +2,8 @@
 ##'
 ##' @export
 
+library(scales)
+
 plot_map = function (shpFile, var, data, 
                      countryCode = "FAOST_CODE",
                      n = 5, 
