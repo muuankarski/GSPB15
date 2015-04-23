@@ -13,7 +13,7 @@ colPart1 <- plot_colors(part = 1, 12)
 col.main1 <- colPart1[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart1[["Main"]][2]
-source("./Rcode/Final/theme.R")
+source("./dissemination/Rcode/Final/theme.R")
 
 # Export the plot
 
@@ -498,7 +498,7 @@ colPart1 <- plot_colors(part = 2, 12)
 col.main1 <- colPart1[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart1[["Main"]][2]
-source("./Rcode/Final/theme.R")
+source("./dissemination/Rcode/Final/theme.R")
 
 # MT.P1.IAF.1.2 -----------------------------------------------------------
 
@@ -537,7 +537,8 @@ assign(plotInfo$plotName,
                 scale = plotInfo$scaling,
                 x_lab = plotInfo$xPlotLab,
                 y_lab = plotInfo$yPlotLab,
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]))
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+       )
 C.P1.IAF.1.3 <- C.P1.IAF.1.3 + 
   scale_fill_manual(labels = c("1990-92", "2012-14"),
                     values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +

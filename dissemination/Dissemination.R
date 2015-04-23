@@ -2,34 +2,37 @@
 ## Dissemination ICN2 Statistical Pocketbook 2014
 ###########################################################################
 
+library(rgdal)
+library(ggplot2)
+
 # R version ---------------------------------------------------------------
 
 rVersion <- R.Version()
-if (rVersion$major != 3 | rVersion$minor != 2.0) {
+if (rVersion$major != 3 | rVersion$minor != "2.0") {
   stop("The script is developed under the 3.2.0 R version.")
 }
 rm(rVersion)
 
 # Read the dissemination file ---------------------------------------------
 
-diss.df <- read.csv("./Data/Processed/DisseminationICN2PB14.csv",
+diss.df <- read.csv("./dissemination/DisseminationGSPB15.csv",
                     stringsAsFactors = FALSE, header = TRUE, nrow = 131)
 
 # Country profile ---------------------------------------------------------
 
 FAOcountryProfile <- 
-  read.csv(file = "./Data/Processed/FAOcountryProfile.csv", 
+  read.csv(file = "./database/Data/Processed/FAOcountryProfile.csv", 
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 
 # Construction and metadata files -----------------------------------------
 
-load(file = "./Data/Processed/Construction.RData")
-load(file = "./Data/Processed/Metadata.RData")
+load(file = "./database/Data/Processed/Construction.RData")
+load(file = "./database/Data/Processed/Metadata.RData")
 meta.df <- meta.lst$FULL
 
 # Load the dataset --------------------------------------------------------
 
-load(file = "./Data/Processed/icn2.RData")
+load(file = "./database/Data/Processed/icn2.RData")
 icn2Maps.df <- icn2.df
 colnames(icn2Maps.df)[grep("FAOST_CODE", colnames(icn2Maps.df))] = "FAO_CODE"
 
@@ -143,25 +146,49 @@ require(zoo)
 
 # Source functions --------------------------------------------------------
 
-source("./Rcode/Final/Sourcehttps.R")
+# source("./dissemination/Rcode/Final/Sourcehttps.R")
+# 
+# Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/plot_info.R",
+#             "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/map_info.R",
+#             "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/captions.R",
+#             "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/ZsanitizeToLatex.R",
+#             "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/exp_map.R",
+#             "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/PBminitable.R")
+# source("./dissemination/Rcode/Final/translateUnit.R")
 
+# Source functions --------------------------------------------------------
 
+## -- Sourcings Complementaty scripts from database folder.
 
+debug_functions        = list.files(c("./dissemination/Rcode/Final/debug_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+misc                   = list.files(c("./dissemination/Rcode/Final/misc/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+plot_functions         = list.files(c("./dissemination/Rcode/Final/plot_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+table_functions        = list.files(c("./dissemination/Rcode/Final/table_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+text_functions         = list.files(c("./dissemination/Rcode/Final/text_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+theme_functions        = list.files(c("./dissemination/Rcode/Final/theme_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
 
-Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/plot_info.R",
-            "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/map_info.R",
-            "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/captions.R",
-            "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/ZsanitizeToLatex.R",
-            "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/exp_map.R",
-            "https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/PBminitable.R")
-source("./Rcode/Final/translateUnit.R")
+scripts_to_source <- c(debug_functions,
+                       #misc,
+                       plot_functions,
+                       table_functions,
+                       #text_functions,
+                       theme_functions)
+
+# A nested for loop for sourcing all the scripts
+
+scripts_to_source <- scripts_to_source[-18] # exclude theme.R because:  Error in structure(list(colour = colour, size = size, linetype = linetype,  : object 'col.main2' not found 
+
+for (i in 1:length(scripts_to_source)){
+  source(scripts_to_source[i], encoding = "UTF-8")
+}
+
 
 # Paths -------------------------------------------------------------------
 
-plotsOutput <- "./Outputs/Plots/"
-mapsOutput <- "./Outputs/Maps/"
-captionsOutput <- "./Outputs/Captions/"
-sourcesOutput <- "./Outputs/Sources/"
+plotsOutput <- "./publication/Plots/"
+mapsOutput <- "./publication/Maps/"
+captionsOutput <- "./publication/Captions/"
+sourcesOutput <- "./publication/Sources/"
 
 # Maps --------------------------------------------------------------
 
