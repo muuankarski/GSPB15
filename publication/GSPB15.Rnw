@@ -4,9 +4,9 @@
 
 %% Global Pocket Yearbook class
 % \documentclass[print, Draft]{faofactbook}
-%\documentclass[print]{faofactbook}
+\documentclass[print]{faofactbook}
 %\documentclass[web, Draft]{faofactbook}
-\documentclass[web]{faofactbook}
+%\documentclass[web]{faofactbook}
 
 %% Other packages to be loaded
 \usepackage{lipsum,textcomp}
@@ -46,6 +46,7 @@
 \faoset{bgcolor=white}\selectcolor
 \twocolumn
 
+
 %% Cover (just in the web version)
 \ifprint\addtocounter{page}{1}\else
 \begin{picture}(0,0)
@@ -61,8 +62,15 @@
 \clearpage
 \fi
 
+
+\LARGE{Generated at} \\ 
+\Sexpr{Sys.time()}
+
 %% Title Page
 \input{titlePage.tex}
+
+
+
 
 %% Disclamer
 \ifprint
@@ -104,6 +112,7 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 %\cleardoublepage
 \pagenumbering{arabic}  %% Arabic page numbering
 \setlength{\parskip}{3pt plus 3pt minus 1pt}  %% Increasing the spacing in the introduction page
+
 
 \input{./foreword.tex}
 \clearpage
