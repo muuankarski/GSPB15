@@ -41,9 +41,12 @@ left=1cm, right=1cm, twoside}{geometry}
   pdfpagelayout=TwoColumnRight,
   pdfnewwindow=true
 }
-
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% New Font sizes 
+% ---------------------------------------------------------------------------------
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{6.5\p@}{7.5}%
+   \@setfontsize\normalsize{6.5\p@}{7.5}% Affects caption sizes and texts size within Chatpage environments
    \abovedisplayskip 1\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus2\p@
    \belowdisplayshortskip 1\p@ \@plus2\p@ \@minus2\p@
@@ -51,7 +54,7 @@ left=1cm, right=1cm, twoside}{geometry}
    \let\@listi\@listI}
 \normalsize
 \renewcommand\small{%
-   \@setfontsize\small{6\p@}{7.5}%
+   \@setfontsize\small{5\p@}{6.5}%
    \abovedisplayskip 4\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus1\p@
    \belowdisplayshortskip 2\p@ \@plus\p@ \@minus1\p@
@@ -77,7 +80,10 @@ left=1cm, right=1cm, twoside}{geometry}
 \newlength\@stripwidth
 \define@key{fao}{stripwidth}{\setlength{\@stripwidth}{#1}}
 \faoset{stripwidth=7.2mm}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
 % Headers & Footers
+% ---------------------------------------------------------------------------------
 \fancypagestyle{plain}{%
   \fancyhf{}%
   \fancyfoot[RO,LE]{\thepage}%
@@ -97,11 +103,19 @@ left=1cm, right=1cm, twoside}{geometry}
 \AtBeginDocument{\pagestyle{plain}}
 \footskip15\p@
 \definecolor{FAOblue}{cmyk}{0.69,0.34,0,0}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% New Commands
+% ---------------------------------------------------------------------------------
 \newcommand\CountryData[1]{\clearpage
   \phantomsection
   \addcontentsline{loc}{country}{#1}%
   \index{#1}%
   \colorbox{FAOblue}{\parbox{\dimexpr\columnwidth-2ex}{\Large\color{white}\hypertarget{#1}{#1}}}\par}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the DataUnit environment
+% ---------------------------------------------------------------------------------
 \newenvironment{DataUnit}[1]{%
   \addvspace{-0.5\baselineskip}
   \begin{minipage}{\columnwidth}\begin{multicols}{2}%
@@ -127,11 +141,15 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {1sp}%
                                    {1sp}%
-                                   {\normalfont\Large\bfseries}} % Section font size in introduc
+                                   {\normalfont\large\bfseries}} % Section font size in introduc
 \renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
                                    {8\p@}%
                                    {1sp}%
                                    {\normalfont\bfseries}}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Table of Contents
+% ---------------------------------------------------------------------------------                                   
 \def\tableofcontents{\cleardoublepage
   \@makeschapterhead{Contents}%
   \@mkboth{\MakeUppercase\contentsname}%
@@ -174,6 +192,11 @@ left=1cm, right=1cm, twoside}{geometry}
       \hskip -\leftskip
       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
     \endgroup}
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the ChartPage spread
+% ---------------------------------------------------------------------------------
 \newenvironment{ChartPage}[1]{%
   \faoset{floatwidth=0.52\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
@@ -185,11 +208,11 @@ left=1cm, right=1cm, twoside}{geometry}
   \clearpage\ifodd\c@page\hbox{}\newpage\fi
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
-  \hspace{0.05\textwidth}%
+  \hspace{0.07\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
-  \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@LeftChart}}%
-  \hspace{0.03\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@RightChart}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@LeftChart}}%
+  \hspace{0.05\textwidth}%
+  \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
   \faoset{floatwidth=\columnwidth}
   {\centering\@BottomChart\par}}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
@@ -197,6 +220,11 @@ left=1cm, right=1cm, twoside}{geometry}
 \long\def\LeftChart#1{\gdef\@LeftChart{#1}}
 \long\def\RightChart#1{\gdef\@RightChart{#1}}
 \long\gdef\BottomChart#1{\gdef\@BottomChart{#1}}%
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Chart2Page spread
+% ---------------------------------------------------------------------------------
 \newenvironment{Chart2Page}[1]{%
   \faoset{floatwidth=0.50\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
@@ -224,6 +252,11 @@ left=1cm, right=1cm, twoside}{geometry}
 \long\def\RightChart#1{\gdef\@RightChart{#1}}
 \long\def\BottomLeftChart#1{\gdef\@BottomLeftChart{#1}}
 \long\def\BottomRightChart#1{\gdef\@BottomRightChart{#1}}
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Chart3Page spread
+% ---------------------------------------------------------------------------------
 \newenvironment{Chart3Page}[1]{%
   \faoset{floatwidth=0.50\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
