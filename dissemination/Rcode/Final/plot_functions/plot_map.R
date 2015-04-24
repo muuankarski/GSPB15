@@ -22,7 +22,8 @@ plot_map = function (shpFile, var, data,
     ## Projection and read shapefile
     llCRS = CRS(projargs = shpProj)
     projCRS = CRS(outProj)
-    raw.sp = readShapePoly(shpFile, proj4string = llCRS)
+    #raw.sp = readShapePoly(shpFile, proj4string = llCRS)
+    raw.sp <- readOGR(dsn = "../../GSYB2015/shape/Common/GAULRobinson2013/", layer = "WorldMap_Robin_g2015_S2")
     #transformed.sp = spTransform(raw.sp, CRSobj = projCRS)
     transformed.sp = raw.sp #spTransform(raw.sp, CRSobj = projCRS)
     transformed.df = fortify(transformed.sp, region = countryCode)

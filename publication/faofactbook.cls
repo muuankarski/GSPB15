@@ -54,7 +54,7 @@ left=1cm, right=1cm, twoside}{geometry}
    \let\@listi\@listI}
 \normalsize
 \renewcommand\small{%
-   \@setfontsize\small{5\p@}{6.5}%
+   \@setfontsize\small{6\p@}{6.5}% Affects at least the small tables within ChartPage envisonments
    \abovedisplayskip 4\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus1\p@
    \belowdisplayshortskip 2\p@ \@plus\p@ \@minus1\p@

@@ -207,7 +207,7 @@ loadfonts()
 # Sys.setenv(R_GSCMD='"C:/Program Files/gs/gs9.07/bin/gswin32c.exe"')
 # gpclibPermit()
 ## Shape file needed for global map
-shpLocation <- "../GAULRobinson2013/WorldMap_Robin_g2013_S2"
+shpLocation <- "../../GSYB2015/shape/common/GAULRobinson2013/"
 ## Country coding system used to fill the maps
 mapCountryCode <- "FAO_CODE"
 ## Definition of common colors
