@@ -43,18 +43,21 @@ plot_dictionary = function(x, y, group, type, data, x_lab, y_lab,
              # -- the begin label
              geom_text(data=data[data$Year == min(data$Year) + 1,], # latest year maybe missing
                         aes_string(label = group, col=group), 
-                            hjust=1, # horizontal depends on the length of label
+                            hjust=.5, # horizontal depends on the length of label
                             vjust=-.5, # vertical, bit above now
-                            size=3) + 
+                            size=4,
+                            lineheight = 0.7) + 
              # -- the end label
              geom_text(data=data[data$Year == max(data$Year) - 1,], # latest year maybe missing
                         aes_string(x = x, label = group, col=group), 
-                            hjust=0, # horizontal depends on the length of label
+                            hjust=.5, # horizontal depends on the length of label
                             vjust=-.5, # vertical, bit above now
-                            size=3) + 
+                            size=4,
+                            lineheight = 0.7) + 
              # ---------
              theme(legend.position = "none") +
              scale_x_continuous(breaks = breaks, limits=c(min(data$Year)-2,max(data$Year)+2)) +
+             #scale_y_continuous(limits=c(0,max(data$value)*1.1)) +
              xlab(x_lab) + ylab(y_lab)
          },
          "multi_dodge_bar" = {
