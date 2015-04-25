@@ -1,0 +1,350 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Global Statistical Pocketbook 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Global Pocket Yearbook class
+% \documentclass[print, Draft]{faofactbook}
+\documentclass[print]{faofactbook}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%\documentclass[web, Draft]{faofactbook}
+%\documentclass[web]{faofactbook}
+
+%% Other packages to be loaded
+\usepackage{lipsum,textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{tabularx}
+\usepackage{fixltx2e}
+\usepackage{bpchem}
+\usepackage{arydshln}
+\usepackage{booktabs}
+%\usepackage[document]{ragged2e}
+
+%\usepackage{titlesec}
+
+% \titleformat*{\section}{\Large\bfseries}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\PrerenderUnicode {ô}
+\makeindex
+
+%% Define the colors
+\definecolor{part1}{cmyk}{0.90,0.40,0.24,0.32}
+\definecolor{part2}{cmyk}{0,0.54,0.96,0.10}
+\definecolor{part3}{cmyk}{0.18,0.90,0.75,0.31}
+\definecolor{part4}{cmyk}{0.73,0.10,0.97,0.29}
+\definecolor{part5}{cmyk}{0,0,0,0.5}
+\definecolor{part6}{cmyk}{0,0,0,0.5}
+
+%% Set the strip width
+\faoset{stripwidth=7.2mm}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\faoset{bgcolor=white}\selectcolor
+\twocolumn
+
+
+%% Cover (just in the web version)
+\ifprint\addtocounter{page}{1}\else
+\begin{picture}(0,0)
+\put(-28,-502){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
+\end{picture}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\fi
+
+
+\LARGE{Generated at} \\ 
+2015-04-24 18:30:55
+
+%% Title Page
+\input{titlePage.tex}
+
+
+
+
+%% Disclamer
+\ifprint
+\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./GSPB15disclamerPage.pdf}
+\else
+\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./GSPB15disclamerPage.pdf}
+\fi
+
+%% Prelims
+\tableofcontents
+\clearpage
+
+% Asetetaan koko raportin laajuiset parametrit knitr:lle
+
+
+
+%% List of countries
+%\phantomsection
+%\renewcommand{\indexname}{List of countries} 
+%\addcontentsline{toc}{section}{List of countries}
+%\printindex
+
+%%% List of tables
+%\phantomsection
+%\addcontentsline{toc}{section}{List of Tables}
+%\listoftables
+
+%% To be commented if we want to show the List of countries
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+%% New part - Introduction
+\newpart{white}
+%\addtocounter{page}{1}
+%\cleardoublepage
+\pagenumbering{arabic}  %% Arabic page numbering
+\setlength{\parskip}{3pt plus 3pt minus 1pt}  %% Increasing the spacing in the introduction page
+
+
+\input{./foreword.tex}
+\clearpage
+
+
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\input{./introduction.tex}
+\setlength{\parskip}{0pt}  %% Restoring the normal spacing
+
+\normalsize
+
+\makeatletter\clearpage\ifodd\c@page\hbox{}\newpage\fi\makeatother %% Remove the colored strip from the introduction page
+
+% \input{./Environments.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ICN2 pocketbook environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PART1 - The Setting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpart{part1}
+\rowcolors{1}{part1!10}{white}
+\clearpage
+
+%% Economy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%% Population %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PART2 - Hunger dimensions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpart{part2}
+\rowcolors{1}{part1!10}{white}
+\clearpage
+
+
+%% Undernourishment  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{ChartPage}{ Undernourishment } 
+\LeftText{\IfFileExists{./Text/TXT.P1.IAF.1.1.tex}{\input{./Text/TXT.P1.IAF.1.1.tex}}{\lipsum[2]}} 
+\RightText{\IfFileExists{./Tables/MT.P1.IAF.1.2.tex}  
+	               {\begin{table} 
+
+	               \input{./Captions/Caption_MT.P1.IAF.1.2.tex} 
+
+	               \input{./Tables/MT.P1.IAF.1.2.tex} 
+
+	               \end{table}}} 
+ 
+\LeftChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.3.tex} 
+\footnotesize{}  
+\IfFileExists{./Plots/C.P1.IAF.1.3.pdf}{\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/C.P1.IAF.1.3}.pdf}}{} 
+\end{chart}} 
+\RightChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.4.tex} 
+\footnotesize{}  
+\IfFileExists{./Plots/C.P1.IAF.1.4.pdf}{\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/C.P1.IAF.1.4}.pdf}}{} 
+\end{chart}} 
+\BottomChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.5.tex} 
+\IfFileExists{./Plots/C.P1.IAF.1.5.pdf}{\includegraphics[width = 8cm, height = 3.5cm]{{./Plots/C.P1.IAF.1.5}.pdf}}{} 
+\end{chart}} 
+\end{ChartPage}\begin{figure} 
+\input{./Captions/Caption_M.P1.IAF.1.6.tex} 
+\IfFileExists{./Maps/M.P1.IAF.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.IAF.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{} 
+\end{figure}
+
+
+
+\begin{ChartPage}{ Undernourishment2 } 
+\LeftText{\IfFileExists{./Text/TXT.P1.IAF.1.1.tex}{\input{./Text/TXT.P1.IAF.1.1.tex}}{\lipsum[2]}} 
+\RightText{\IfFileExists{./Tables/MT.P1.IAF.1.2.tex}  
+	               {\begin{table} 
+
+	               \input{./Captions/Caption_MT.P1.IAF.1.2.tex} 
+
+	               \input{./Tables/MT.P1.IAF.1.2.tex} 
+
+	               \end{table}}} 
+ 
+\LeftChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.3.tex} 
+\footnotesize{}  
+\IfFileExists{./Plots/C.P1.IAF.1.3.pdf}{\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/C.P1.IAF.1.3}.pdf}}{} 
+\end{chart}} 
+\RightChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.4.tex} 
+\footnotesize{}  
+\IfFileExists{./Plots/C.P1.IAF.1.4.pdf}{\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/C.P1.IAF.1.4}.pdf}}{} 
+\end{chart}} 
+\BottomChart{\begin{chart} 
+ 
+	               \input{./Captions/Caption_C.P1.IAF.1.5.tex} 
+\IfFileExists{./Plots/C.P1.IAF.1.5.pdf}{\includegraphics[width = 8cm, height = 3.5cm]{{./Plots/C.P1.IAF.1.5}.pdf}}{} 
+\end{chart}} 
+\end{ChartPage}\begin{figure} 
+\input{./Captions/Caption_M.P1.IAF.1.7.tex} 
+\IfFileExists{./Maps/M.P1.IAF.1.7.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.IAF.1.7}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{} 
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PART3 - Food Supply
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpart{part3}
+\rowcolors{1}{part1!10}{white}
+\clearpage
+
+
+%% Production %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PART4 - Sustainability dimensions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpart{part2}
+\rowcolors{1}{part1!10}{white}
+\clearpage
+
+%% Forests %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+% \newpage
+% \pagecolor{FAOblue}
+% \thispagestyle{empty}
+% \mbox{}
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
+% \pagecolor{white}
+
+%%% COUNTRY DATA
+\newpart{FAOblue}
+\phantomsection
+\addcontentsline{toc}{section}{Country Profiles}
+\faoset{bgcolor=white}\selectcolor
+\parindent=0pt
+\parskip=\medskipamount
+\hangafter=-2
+\input{./CountryProfiles/CountryProfiles.tex}
+
+%%% METADATA
+\newpart{white}
+\part{}
+%\section{Definitions}
+\phantomsection
+\addcontentsline{toc}{section}{Definitions}
+% \input{./Metadata.tex}
+\clearpage
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\ifprint\else
+\begin{picture}(0,0)
+\put(-58,-429){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
+\end{picture}
+\fi
+
+\end{document}
