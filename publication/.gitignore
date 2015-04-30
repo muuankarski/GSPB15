@@ -1,4 +1,5 @@
 GSPB15.tex
+<<<<<<< HEAD
 Captions
 CountryProfiles
 Environments-concordance.tex
@@ -9,3 +10,15 @@ Sources
 Tables
 Text
 Environments.tex
+=======
+Environments.tex
+Environments.log
+Maps
+Plots
+Text
+Captions
+Environments-concordance.tex
+CountryProfiles
+Sources
+Tables
+>>>>>>> a55594410a09f11dbf212d73527822340e174a67

@@ -76,6 +76,18 @@ chart_spread(title="Undernourishment2",                # Amy you could specify h
 @
 
 
+<<Undernourishment2, eval=TRUE, results='asis'>>=
+chart_spread(title="Undernourishment2",                # Amy you could specify here
+            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
+            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
+            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
+            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
+            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
+            MapCode="M.P1.IAF.1.7"         # Amy you could specify here
+            )
+@
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PART3 - Food Supply
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
