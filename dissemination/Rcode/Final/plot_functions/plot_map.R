@@ -3,6 +3,7 @@
 ##' @export
 
 library(scales)
+library(sp)
 
 plot_map = function (shpFile, var, data, 
                      countryCode = "FAOST_CODE",
@@ -23,9 +24,9 @@ plot_map = function (shpFile, var, data,
     llCRS = CRS(projargs = shpProj)
     projCRS = CRS(outProj)
     #raw.sp = readShapePoly(shpFile, proj4string = llCRS)
-    raw.sp <- readOGR(dsn = "../../GSYB2015/shape/Common/GAULRobinson2013/", layer = "WorldMap_Robin_g2015_S2")
-    #transformed.sp = spTransform(raw.sp, CRSobj = projCRS)
-    transformed.sp = raw.sp #spTransform(raw.sp, CRSobj = projCRS)
+    #raw.sp <- readOGR(dsn = "../../GSYB2015/shape/Common/GAULRobinson2013/", layer = "WorldMap_Robin_g2015_S2")
+    raw.sp <- fao_world # from gisfao-package
+    transformed.sp = spTransform(raw.sp, CRSobj = projCRS)
     transformed.df = fortify(transformed.sp, region = countryCode)
     transformed.df$id = as.numeric(transformed.df$id)
   } else {

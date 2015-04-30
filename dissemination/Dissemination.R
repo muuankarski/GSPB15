@@ -1,9 +1,10 @@
 ###########################################################################
-## Dissemination ICN2 Statistical Pocketbook 2014
+## Dissemination Global Statistical Pocket Book 2015
 ###########################################################################
 
 library(rgdal)
 library(ggplot2)
+library(gisfao)
 
 # R version ---------------------------------------------------------------
 
@@ -207,7 +208,8 @@ loadfonts()
 # Sys.setenv(R_GSCMD='"C:/Program Files/gs/gs9.07/bin/gswin32c.exe"')
 # gpclibPermit()
 ## Shape file needed for global map
-shpLocation <- "../../GSYB2015/shape/common/GAULRobinson2013/"
+#shpLocation <- "../../GSYB2015/shape/common/GAULRobinson2013/" # How using gisfao-package - not needed anymore 
+ 
 ## Country coding system used to fill the maps
 mapCountryCode <- "FAO_CODE"
 ## Definition of common colors
@@ -227,7 +229,8 @@ mapWidth <- 15; mapHeight = 8
 ## graticules
 ## http://rpsychologist.com/working-with-shapefiles-projections-and-world-maps-in-ggplot/
 ## http://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-graticules/
-grat <- readOGR("../Graticules", layer = "ne_110m_graticules_15")
+#grat <- readOGR("../Graticules", layer = "ne_110m_graticules_15")
+grat <- graticule # from gisfao-package
 grat_robin <- spTransform(grat, CRS("+proj=robin"))  # reproject graticule
 grat_df_robin <- fortify(grat_robin)
 
