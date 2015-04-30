@@ -41,9 +41,12 @@ left=1cm, right=1cm, twoside}{geometry}
   pdfpagelayout=TwoColumnRight,
   pdfnewwindow=true
 }
-
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% New Font sizes 
+% ---------------------------------------------------------------------------------
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{8\p@}{9}%
+   \@setfontsize\normalsize{6.5\p@}{7.5}% Affects caption sizes and texts size within Chatpage environments
    \abovedisplayskip 1\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus2\p@
    \belowdisplayshortskip 1\p@ \@plus2\p@ \@minus2\p@
@@ -51,7 +54,7 @@ left=1cm, right=1cm, twoside}{geometry}
    \let\@listi\@listI}
 \normalsize
 \renewcommand\small{%
-   \@setfontsize\small{7\p@}{8.5}%
+   \@setfontsize\small{6\p@}{6.5}% Affects at least the small tables within ChartPage envisonments
    \abovedisplayskip 4\p@ \@plus1\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus1\p@
    \belowdisplayshortskip 2\p@ \@plus\p@ \@minus1\p@
@@ -65,10 +68,10 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\scriptsize{\@setfontsize\scriptsize\@vpt\@vipt}
 \renewcommand\tiny{\@setfontsize\tiny\@ivpt\@vpt}
 \renewcommand\large{\@setfontsize\large\@viipt\@viiipt}
-\renewcommand\Large{\@setfontsize\Large\@xipt{15}}
-\renewcommand\LARGE{\@setfontsize\LARGE\@xivpt{17}}
-\renewcommand\huge{\@setfontsize\huge\@xvpt{19}}
-\renewcommand\Huge{\@setfontsize\Huge\@xviipt{21}}
+\renewcommand\Large{\@setfontsize\Large\@xipt{13}} % Section are size large
+\renewcommand\LARGE{\@setfontsize\LARGE\@xivpt{16}}
+\renewcommand\huge{\@setfontsize\huge\@xvpt{18}}
+\renewcommand\Huge{\@setfontsize\Huge\@xviipt{20}}
 \setlength\parskip{\z@}
 \AtBeginDocument{\geometry{papersize={10cm,19cm}, layoutsize={10cm,19cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
@@ -77,6 +80,10 @@ left=1cm, right=1cm, twoside}{geometry}
 \newlength\@stripwidth
 \define@key{fao}{stripwidth}{\setlength{\@stripwidth}{#1}}
 \faoset{stripwidth=7.2mm}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Headers & Footers
+% ---------------------------------------------------------------------------------
 \fancypagestyle{plain}{%
   \fancyhf{}%
   \fancyfoot[RO,LE]{\thepage}%
@@ -96,11 +103,19 @@ left=1cm, right=1cm, twoside}{geometry}
 \AtBeginDocument{\pagestyle{plain}}
 \footskip15\p@
 \definecolor{FAOblue}{cmyk}{0.69,0.34,0,0}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% New Commands
+% ---------------------------------------------------------------------------------
 \newcommand\CountryData[1]{\clearpage
   \phantomsection
   \addcontentsline{loc}{country}{#1}%
   \index{#1}%
   \colorbox{FAOblue}{\parbox{\dimexpr\columnwidth-2ex}{\Large\color{white}\hypertarget{#1}{#1}}}\par}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the DataUnit environment
+% ---------------------------------------------------------------------------------
 \newenvironment{DataUnit}[1]{%
   \addvspace{-0.5\baselineskip}
   \begin{minipage}{\columnwidth}\begin{multicols}{2}%
@@ -126,11 +141,15 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {1sp}%
                                    {1sp}%
-                                   {\normalfont\large\bfseries}}
+                                   {\normalfont\large\bfseries}} % Section font size in introduc
 \renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
                                    {8\p@}%
                                    {1sp}%
                                    {\normalfont\bfseries}}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Table of Contents
+% ---------------------------------------------------------------------------------                                   
 \def\tableofcontents{\cleardoublepage
   \@makeschapterhead{Contents}%
   \@mkboth{\MakeUppercase\contentsname}%
@@ -173,8 +192,13 @@ left=1cm, right=1cm, twoside}{geometry}
       \hskip -\leftskip
       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
     \endgroup}
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the ChartPage spread
+% ---------------------------------------------------------------------------------
 \newenvironment{ChartPage}[1]{%
-  \faoset{floatwidth=0.45\textwidth}
+  \faoset{floatwidth=0.52\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
   \LeftText{To Be Done}%
   \RightText{To Be Done}%
@@ -184,11 +208,11 @@ left=1cm, right=1cm, twoside}{geometry}
   \clearpage\ifodd\c@page\hbox{}\newpage\fi
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
-  \hspace{0.09\textwidth}%
+  \hspace{0.07\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftChart}}%
-  \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightChart}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@LeftChart}}%
+  \hspace{0.05\textwidth}%
+  \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
   \faoset{floatwidth=\columnwidth}
   {\centering\@BottomChart\par}}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
@@ -196,8 +220,13 @@ left=1cm, right=1cm, twoside}{geometry}
 \long\def\LeftChart#1{\gdef\@LeftChart{#1}}
 \long\def\RightChart#1{\gdef\@RightChart{#1}}
 \long\gdef\BottomChart#1{\gdef\@BottomChart{#1}}%
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Chart2Page spread
+% ---------------------------------------------------------------------------------
 \newenvironment{Chart2Page}[1]{%
-  \faoset{floatwidth=0.45\textwidth}
+  \faoset{floatwidth=0.50\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
   \LeftText{To Be Done}%
   \RightText{To Be Done}%
@@ -210,20 +239,26 @@ left=1cm, right=1cm, twoside}{geometry}
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
   \hspace{0.09\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftChart}}%
+  \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@LeftChart}}%
   \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightChart}}\par\medskip
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@BottomLeftChart}}%
+  \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@RightChart}}\par\medskip
+  \vspace{0.09\textwidth}%
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@BottomLeftChart}}%
   \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@BottomRightChart}}\par\medskip}
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@BottomRightChart}}\par\medskip}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
 \long\def\RightText#1{\gdef\@RightText{{\bfseries\large\vphantom{\@chartname}\par}#1}}
 \long\def\LeftChart#1{\gdef\@LeftChart{#1}}
 \long\def\RightChart#1{\gdef\@RightChart{#1}}
 \long\def\BottomLeftChart#1{\gdef\@BottomLeftChart{#1}}
 \long\def\BottomRightChart#1{\gdef\@BottomRightChart{#1}}
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Chart3Page spread
+% ---------------------------------------------------------------------------------
 \newenvironment{Chart3Page}[1]{%
-  \faoset{floatwidth=0.45\textwidth}
+  \faoset{floatwidth=0.50\textwidth}
   \gdef\@chartname{\ignorespaces#1}%
   \LeftText{To Be Done}%
   \RightText{To Be Done}%
@@ -231,12 +266,12 @@ left=1cm, right=1cm, twoside}{geometry}
   \RightChart{To Be Done}}{%
   \clearpage\ifodd\c@page\hbox{}\newpage\fi
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
   \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftChart}}%
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@RightText}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftChart}}%
   \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightChart}}\par\medskip}
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@RightChart}}\par\medskip}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
 \long\def\RightText#1{\gdef\@RightText{{\bfseries\large\vphantom{\@chartname}\par}#1}}
 \long\def\LeftChart#1{\gdef\@LeftChart{#1}}

@@ -2,7 +2,7 @@
 %% ICN2 pocketbook environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<spread_function, eval=FALSE, echo=FALSE>>=
+<<spread_function, eval=TRUE, echo=FALSE>>=
 source('~/btsync/fao_sync/pocketbooks/GSPB15/publication/latex_charts.R')
 @
 
@@ -50,18 +50,30 @@ chart_spread(title="Population",                               # Amy you could s
 \clearpage
 
 
-%% Poverty %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Undernourishment  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<Poverty, eval=FALSE>>=
-chart_spread(title="Poverty",                # Amy you could specify here
-            LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            MapCode="M.P1.ECON.1.6")         # Amy you could specify here
+<<Undernourishment, eval=TRUE, results='asis'>>=
+chart_spread(title="Undernourishment",                # Amy you could specify here
+            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
+            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
+            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
+            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
+            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
+            MapCode="M.P1.IAF.1.6"         # Amy you could specify here
+            )
 @
 
+
+<<Undernourishment2, eval=TRUE, results='asis'>>=
+chart_spread(title="Undernourishment2",                # Amy you could specify here
+            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
+            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
+            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
+            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
+            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
+            MapCode="M.P1.IAF.1.7"         # Amy you could specify here
+            )
+@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
