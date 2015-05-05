@@ -193,18 +193,19 @@ load(file = "./database/Data/Processed/AquastatManualData.RData")
 # Merging -----------------------------------------------------------------
 
 initial.df <- Reduce(function(x, y) merge(x, y, all = TRUE),
-                     x = list(WB.df#, 
+                     x = list(WB.df, 
                               #who.df, 
                               #oo.df, 
                               #hsd.df, 
                               #sap.df, 
                               #gnp.df,
-                              #AquastatManualData.df, 
+                              AquastatManualData.df 
                               #MUV.df
                               ), 
                      init = FAOSTAT.df)
 rm(list = c("FAOSTAT.df", "WB.df", "who.df", "oo.df", "hsd.df", "sap.df",
             "gnp.df", "AquastatManualData.df", "MUV.df"))
+# set the year range
 initial.df <- initial.df[initial.df[, "Year"] <= 2020 & 
                            initial.df[, "Year"] >= 1985,]
 
@@ -215,6 +216,13 @@ meta.lst[["UNIT_MULT"]][, "UNIT_MULT"] <-
 
 preConstr.df <- scaleUnit(initial.df, meta.lst[["UNIT_MULT"]])
 rm(initial.df)
+
+# The following variables are not in the data frame:
+#   OA.TPBS.POP.P3
+# OA.TPBS.POP.GR10
+# OA.TPR.POP.ZS
+# OA.TPU.POP.ZS
+
 
 # Imputation --------------------------------------------------------------
 
@@ -301,50 +309,50 @@ load(file = "./database/Data/Processed/postAgg.RData")
 # Merge the FSI dataset ---------------------------------------------------
 
 ## Merge the dataset
-load(file = "./database/Data/Processed/fsi.RData")
-fsiVar <- c("FAOST_CODE", "Year",
-            "AV3YADESA.DISS", "QV.NPV.FOOD.ID.AV3YSHP.DISS", "FB.SDES.CRLSSR.KCD.AV3Y.DISS",
-            "FB.PSQ.GT.GCD.AV3Y.DISS", "FB.PSQ.AO.GCD.AV3Y.DISS", "FB.FSQ.GT.GCD.AV3Y.DISS",
-            "IS.ROD.PAVE.ZS.DISS", "IS.ROD.DNST.K2.DISS", "IS.RRS.DNST.K2.DISS",
-            "DFPLI.IN.NO.DISS", "SH.H2O.SAFE.ZS", "SH.STA.ACSN",
-            "FB.CIDR.CRLS.TN.AV3Y.DISS", "RL.AREA.EQIRR.HA.SHLAV3Y.DISS",
-            "TI.IV.FEFTMT.USD.AV3Y.DISS", "SFEP.NO", "WGI.PSAVT.IN.NO",  
-            "PCFPV.IN.NO.DISS", "PCFSV.IN.NO.DISS", "DFPLIV.IN.NO.DISS",
-            "SH.ANM.CHLD.ZS", "VITAMINA", "IODINE",
-            "SH.STA.WAST.ZS", "SH.STA.STNT.ZS", "SH.STA.MALN.ZS", "SH.STA.AMALN.ZS",
-            "AV3YMDER_1.55.DISS", "AV3YADER_1.85.DISS", "AV3YMDER_1.75.DISS", "CV.DISS", "SK.DISS",
-            "LOSS.DISS", "AV3YDES.DISS", "AV3YPOU.DISS", "AV3YNOU.DISS", 
-            "AV3YPOU", "AV3YNOU", "AV3YDoFD.DISS", "AV3YPoFI.DISS", "AV3YPOP", 
-            "AV3YPCO.DISS", "AV3YNCO.DISS", "NY.GDP.PCAP.PP.KD", "AV3YDES")
-fsi.df <- fsi.df[, fsiVar]
-## We need to add the DES for developed countries
-dvdCountries.df <- 
-  subset(FAOcountryProfile, 
-         SOFI_DVDDVG_REG == "Developed countries" & 
-           !is.na(SOFI_DVDDVG_REG))[, c("FAOST_CODE", "FAO_TABLE_NAME")]
-fsi.df[fsi.df[, "FAOST_CODE"] %in% dvdCountries.df[, "FAOST_CODE"], 
-       "AV3YDES.DISS"] <- 
-  fsi.df[fsi.df[, "FAOST_CODE"] %in% dvdCountries.df[, "FAOST_CODE"], 
-         "AV3YDES"]
-icn2.df <- 
-  merge(icn2.df, fsi.df, all = TRUE, by = c("FAOST_CODE", "Year"))
-rm(fsi.df)
-save(x = icn2.df, file = "./Data/Processed/icn2.RData")
+# load(file = "./database/Data/Processed/fsi.RData")
+# fsiVar <- c("FAOST_CODE", "Year",
+#             "AV3YADESA.DISS", "QV.NPV.FOOD.ID.AV3YSHP.DISS", "FB.SDES.CRLSSR.KCD.AV3Y.DISS",
+#             "FB.PSQ.GT.GCD.AV3Y.DISS", "FB.PSQ.AO.GCD.AV3Y.DISS", "FB.FSQ.GT.GCD.AV3Y.DISS",
+#             "IS.ROD.PAVE.ZS.DISS", "IS.ROD.DNST.K2.DISS", "IS.RRS.DNST.K2.DISS",
+#             "DFPLI.IN.NO.DISS", "SH.H2O.SAFE.ZS", "SH.STA.ACSN",
+#             "FB.CIDR.CRLS.TN.AV3Y.DISS", "RL.AREA.EQIRR.HA.SHLAV3Y.DISS",
+#             "TI.IV.FEFTMT.USD.AV3Y.DISS", "SFEP.NO", "WGI.PSAVT.IN.NO",  
+#             "PCFPV.IN.NO.DISS", "PCFSV.IN.NO.DISS", "DFPLIV.IN.NO.DISS",
+#             "SH.ANM.CHLD.ZS", "VITAMINA", "IODINE",
+#             "SH.STA.WAST.ZS", "SH.STA.STNT.ZS", "SH.STA.MALN.ZS", "SH.STA.AMALN.ZS",
+#             "AV3YMDER_1.55.DISS", "AV3YADER_1.85.DISS", "AV3YMDER_1.75.DISS", "CV.DISS", "SK.DISS",
+#             "LOSS.DISS", "AV3YDES.DISS", "AV3YPOU.DISS", "AV3YNOU.DISS", 
+#             "AV3YPOU", "AV3YNOU", "AV3YDoFD.DISS", "AV3YPoFI.DISS", "AV3YPOP", 
+#             "AV3YPCO.DISS", "AV3YNCO.DISS", "NY.GDP.PCAP.PP.KD", "AV3YDES")
+# fsi.df <- fsi.df[, fsiVar]
+# ## We need to add the DES for developed countries
+# dvdCountries.df <- 
+#   subset(FAOcountryProfile, 
+#          SOFI_DVDDVG_REG == "Developed countries" & 
+#            !is.na(SOFI_DVDDVG_REG))[, c("FAOST_CODE", "FAO_TABLE_NAME")]
+# fsi.df[fsi.df[, "FAOST_CODE"] %in% dvdCountries.df[, "FAOST_CODE"], 
+#        "AV3YDES.DISS"] <- 
+#   fsi.df[fsi.df[, "FAOST_CODE"] %in% dvdCountries.df[, "FAOST_CODE"], 
+#          "AV3YDES"]
+# icn2.df <- 
+#   merge(icn2.df, fsi.df, all = TRUE, by = c("FAOST_CODE", "Year"))
+# rm(fsi.df)
+save(x = PBdata.df, file = "./Data/Processed/PBdata.df.RData")
 
 ## Merge metadata and construction file
-fsicon.df <- ReadConstruction(file = "./database/Data/Processed/FSIconstruction14.csv", 
-                              encoding = "UTF-8", nrows = 287)
-fsimeta.lst <- ReadMetadata(file = "./database/Data/Processed/FSImetadata14.csv", 
-                            encoding = "UTF-8", nrows = 287)
-fsimeta.df <- fsimeta.lst[["FULL"]]
+# fsicon.df <- ReadConstruction(file = "./database/Data/Processed/FSIconstruction14.csv", 
+#                               encoding = "UTF-8", nrows = 287)
+# fsimeta.lst <- ReadMetadata(file = "./database/Data/Processed/FSImetadata14.csv", 
+#                             encoding = "UTF-8", nrows = 287)
+# fsimeta.df <- fsimeta.lst[["FULL"]]
 
-fsicon.df <- fsicon.df[fsicon.df[, "STS_ID"] %in% fsiVar,]
-fsimeta.df <- fsimeta.df[fsimeta.df[, "STS_ID"] %in% fsiVar,]
-
-meta.lst[["FULL"]] <- rbind(meta.lst[["FULL"]], fsimeta.df)
-con.df <- rbind(con.df, 
-                fsicon.df[, -grep("MODULE_FSI|MODULE_POU|MODULE_DES|THRESHOLD_COUNTRIES", 
-                                  colnames(fsicon.df))])
+# fsicon.df <- fsicon.df[fsicon.df[, "STS_ID"] %in% fsiVar,]
+# fsimeta.df <- fsimeta.df[fsimeta.df[, "STS_ID"] %in% fsiVar,]
+# 
+# meta.lst[["FULL"]] <- rbind(meta.lst[["FULL"]], fsimeta.df)
+# con.df <- rbind(con.df, 
+#                 fsicon.df[, -grep("MODULE_FSI|MODULE_POU|MODULE_DES|THRESHOLD_COUNTRIES", 
+#                                   colnames(fsicon.df))])
 
 save(x = con.df, file = "./database/Data/Processed/Construction.RData")
 save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
