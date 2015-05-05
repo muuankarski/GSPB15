@@ -89,7 +89,7 @@ assign(plotInfo$plotName,
 )
 ## Export the plot
 plotWidth  <- 3.2
-plotHeight <- 5.1
+plotHeight <- 5.9
 export_plot(manual_text = "Annual population growth over the last ten years")
 
 
@@ -115,7 +115,7 @@ assign(plotInfo$plotName,
 )
 ## Export the plot
 plotWidth  <- 3.2
-plotHeight <- 5.1
+plotHeight <- 5.9
 export_plot(manual_text = "Something else")
 
 
@@ -187,7 +187,7 @@ C.P1.IAF.1.4 <- C.P1.IAF.1.4 +
                      values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
 ## Export the plot
 plotWidth  <- 3.2
-plotHeight <- 5.1
+plotHeight <- 5.9
 export_plot(manual_text = "African countries with the highest number of people undernourished in 2012-14 (1990-92 and 2012-14)")
 
 
@@ -216,5 +216,5 @@ C.P1.IAF.1.5 <- C.P1.IAF.1.5 +
                      labels = c("1990-92", "2000-02", "2005-07", "2009-11", "2012-14"))
 ## Export the plot
 plotWidth  <- 6
-plotHeight <- 2.6
+plotHeight <- 3
 export_plot(manual_text="Number of people undernourished (1990-92 to 2012-14)")

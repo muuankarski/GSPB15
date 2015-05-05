@@ -30,19 +30,19 @@ chart_spread <- function(title="title",
 	cat(paste0("\\LeftChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",LeftChartCode,".tex} \n",
 	                footnoteLeftText,
-	               "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
+	               "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
 	               "\\end{chart}} \n"))
 	
 	cat(paste0("\\RightChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",RightChartCode,".tex} \n",
 	                footnoteRightText,
-	               "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 6.5cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
+	               "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
 	               "\\end{chart}} \n"))
 
 	
   cat(paste0("\\BottomChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",BottomChartCode,".tex} \n",
-	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 3.5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
+	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
 	           "\\end{chart}} \n"))
 	
 	cat("\\end{ChartPage}")

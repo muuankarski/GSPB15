@@ -26,7 +26,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{faofactbook}
 [2012/03/25 v0.14 Typesetting FAO Factbook]
-\PassOptionsToPackage{papersize={10cm,19cm},top=1cm,bottom=1cm,
+\PassOptionsToPackage{papersize={10cm,21cm},top=1cm,bottom=1cm,
 left=1cm, right=1cm, twoside}{geometry}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{faoyearbook}}
 \ProcessOptions\relax
@@ -73,7 +73,7 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\huge{\@setfontsize\huge\@xvpt{18}}
 \renewcommand\Huge{\@setfontsize\Huge\@xviipt{20}}
 \setlength\parskip{\z@}
-\AtBeginDocument{\geometry{papersize={10cm,19cm}, layoutsize={10cm,19cm},
+\AtBeginDocument{\geometry{papersize={10cm,21cm}, layoutsize={10cm,21cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
   \setlength\columnsep{20pt}%
 \savegeometry{standard}}
