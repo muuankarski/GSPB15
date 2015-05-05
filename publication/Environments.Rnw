@@ -46,7 +46,7 @@ chart_spread(title="Population",                               # Amy you could s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpart{part2}
-\rowcolors{1}{part1!10}{white}
+\rowcolors{1}{part2!10}{white}
 \clearpage
 
 
@@ -76,7 +76,7 @@ chart_spread(title="Undernourishment2",                # Amy you could specify h
 @
 
 
-<<Undernourishment2, eval=TRUE, results='asis'>>=
+<<Undernourishment3, eval=FALSE, results='asis'>>=
 chart_spread(title="Undernourishment2",                # Amy you could specify here
             LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
             RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
@@ -93,7 +93,7 @@ chart_spread(title="Undernourishment2",                # Amy you could specify h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpart{part3}
-\rowcolors{1}{part1!10}{white}
+\rowcolors{1}{part3!10}{white}
 \clearpage
 
 
@@ -114,8 +114,8 @@ chart_spread(title="Production",             # Amy you could specify here
 %% PART4 - Sustainability dimensions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpart{part2}
-\rowcolors{1}{part1!10}{white}
+\newpart{part4}
+\rowcolors{1}{part4!10}{white}
 \clearpage
 
 %% Forests %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -71,9 +71,9 @@ FAOcountryProfile <-
 # Construction and metadata files -----------------------------------------
 
 con.df <- ReadConstruction(file = "./database/Construction2015.csv", 
-                           encoding = "UTF-8", nrows = 10)
+                           encoding = "UTF-8", nrows = 221)
 meta.lst <- ReadMetadata(file = "./database/Metadata2015.csv", 
-                         encoding = "UTF-8", nrows = 10)
+                         encoding = "UTF-8", nrows = 221)
 
 # Parameters --------------------------------------------------------------
 
@@ -173,8 +173,8 @@ rm(downloadWB); rm(WB.lst)
 #                        to = "FAOST_CODE", oldCode = "Country.Code")
 # gnp.df <- gnp.df[, c("FAOST_CODE", "Year", "CP.D.ATLAS.GNP")]
 
-## Aquastat
-# load(file = "./Data/Processed/AquastatManualData.RData")
+# Aquastat
+load(file = "./database/Data/Processed/AquastatManualData.RData")
 # 
 # ## MUV
 # ## data http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTDECPROSPECTS/0,,contentMDK:20587651~menuPK:3279864~pagePK:64165401~piPK:64165026~theSitePK:476883,00.html
