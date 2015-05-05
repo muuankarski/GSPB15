@@ -71,16 +71,14 @@ FAOcountryProfile <-
 # Construction and metadata files -----------------------------------------
 
 con.df <- ReadConstruction(file = "./database/Construction2015.csv", 
-                           encoding = "UTF-8", nrows = 220)
+                           encoding = "UTF-8", nrows = 10)
 meta.lst <- ReadMetadata(file = "./database/Metadata2015.csv", 
-                         encoding = "UTF-8", nrows = 220)
+                         encoding = "UTF-8", nrows = 10)
 
 # Parameters --------------------------------------------------------------
 
-downloadFAOSTAT <- FALSE; CheckLogical(downloadFAOSTAT)
-downloadWB <- FALSE; CheckLogical(downloadWB)
-
-# > > > Here we go!
+downloadFAOSTAT <- TRUE; CheckLogical(downloadFAOSTAT)
+downloadWB <- TRUE; CheckLogical(downloadWB)
 
 
 ###########################################################################
@@ -100,10 +98,10 @@ if (downloadFAOSTAT) {
                               useCHMT = FALSE))
   FAOSTAT.df <- FAO.lst$entity; rm(downloadFAOSTAT); rm(FAO.lst)
   ## ...update list
-  save(x = FAOSTAT.df, file = paste0("./Data/Processed/FAOSTAT", Sys.Date(), ".RData"))
+  save(x = FAOSTAT.df, file = paste0("./database/Data/Processed/FAOSTAT", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/FAOSTAT2014-10-23.RData")
+  load(file = "./database/Data/Processed/FAOSTAT2015-05-04.RData")
 }
 
 # Download variables from WB ----------------------------------------------
@@ -113,10 +111,10 @@ if (downloadWB) {
   WB.lst <- with(meta.lst[["WDI"]],
                  getWDItoSYB(indicator = WDINAME, name = STS_ID))
   ## ...update list
-  save(x = WB.lst, file = paste0("./Data/Processed/WBdata", Sys.Date(), ".RData"))
+  save(x = WB.lst, file = paste0("./database/Data/Processed/WBdata", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/WBdata2014-10-23.RData")
+  load(file = "./database/Data/Processed/WBdata2015-05-04.RData")
 }
 WB.df <- WB.lst$entity
 WB.df <- translateCountryCode(data = WB.df, 
@@ -124,68 +122,69 @@ WB.df <- translateCountryCode(data = WB.df,
 WB.df <- WB.df[, -grep("ISO2_WB_CODE|Country", colnames(WB.df))]
 rm(downloadWB); rm(WB.lst)
 
+
 # Manual data -------------------------------------------------------------
 
 ## Minimum dietary diversity and minimum meal frequency
-who.df <- read.csv("./Data/Processed/dataManuallyExtractedFromWHO.csv", 
-                   header = TRUE, stringsAsFactors = FALSE)
-who.df <- who.df[, -grep("Country", colnames(who.df))]
-
-## Overweight and obesity
-oo.df <- read.csv("./Data/Raw/data-coded.csv", 
-                  header = TRUE, stringsAsFactors = FALSE)
-oo.df <- 
-  oo.df[oo.df[, "GHO"] == "NCD_BMI_25C", c("GHO","YEAR", "COUNTRY", "SEX", "Display.Value")]
-oo.df[, "Display.Value"] <- 
-  sapply(strsplit(oo.df[, "Display.Value"], split = " "), "[", 1)
-oo.df[oo.df[, "Display.Value"] == "...", "Display.Value"] <- NA
-oo.df[, "Display.Value"] <- as.numeric(oo.df[, "Display.Value"])
-oo.df <- translateCountryCode(data = oo.df, from = "ISO3_CODE", 
-                              to = "FAOST_CODE", oldCode = "COUNTRY")
-oo.df <- oo.df[, -grep("ISO3_CODE", colnames(oo.df))]
-oo.df <- 
-  dcast(data = oo.df, FAOST_CODE + YEAR ~ SEX, value.var = "Display.Value")
-colnames(oo.df) <- c("FAOST_CODE", "Year", "N.A.OO.PCT", "N.A.OOFE.PCT", "N.A.OOMA.PCT")
-
-## Household surveys data
-hsd.df <- read.csv("./Data/Processed/HouseholdSurveys.csv", 
-                   header = TRUE, stringsAsFactors = FALSE)
-hsd.df <- dcast(hsd.df, FAOST_CODE + Year ~ Variable, value.var = "Value")
-
-## Share of animal protein
-sap.df <- read.csv("./Data/Processed/ShareAnimalProtein.csv", 
-                   header = TRUE, stringsAsFactors = FALSE)
-sap.df <- sap.df[, -grep("Country", colnames(sap.df))]
-
-## Open defecation
-od.df <- read.csv("./Data/Processed/OpenDefecation.csv", 
-                  header = TRUE, stringsAsFactors = FALSE)
-
-## GNP
-gnp.df <- 
-  read.csv(file = "./Data/Raw/CP.D.ATLAS.GNP.csv", 
-           header = TRUE, na.strings = "", stringsAsFactors = FALSE)
-gnp.df <- 
-  data.frame(Country.Code = rep(gnp.df$Country_Code, 16),
-             Year = rep(2000:2015, each = 210),
-             CP.D.ATLAS.GNP = rep(gnp.df$Weights, 16))
-gnp.df <- 
-  translateCountryCode(data = gnp.df, from = "ISO3_WB_CODE",
-                       to = "FAOST_CODE", oldCode = "Country.Code")
-gnp.df <- gnp.df[, c("FAOST_CODE", "Year", "CP.D.ATLAS.GNP")]
+# who.df <- read.csv("./Data/Processed/dataManuallyExtractedFromWHO.csv", 
+#                    header = TRUE, stringsAsFactors = FALSE)
+# who.df <- who.df[, -grep("Country", colnames(who.df))]
+# 
+# ## Overweight and obesity
+# oo.df <- read.csv("./Data/Raw/data-coded.csv", 
+#                   header = TRUE, stringsAsFactors = FALSE)
+# oo.df <- 
+#   oo.df[oo.df[, "GHO"] == "NCD_BMI_25C", c("GHO","YEAR", "COUNTRY", "SEX", "Display.Value")]
+# oo.df[, "Display.Value"] <- 
+#   sapply(strsplit(oo.df[, "Display.Value"], split = " "), "[", 1)
+# oo.df[oo.df[, "Display.Value"] == "...", "Display.Value"] <- NA
+# oo.df[, "Display.Value"] <- as.numeric(oo.df[, "Display.Value"])
+# oo.df <- translateCountryCode(data = oo.df, from = "ISO3_CODE", 
+#                               to = "FAOST_CODE", oldCode = "COUNTRY")
+# oo.df <- oo.df[, -grep("ISO3_CODE", colnames(oo.df))]
+# oo.df <- 
+#   dcast(data = oo.df, FAOST_CODE + YEAR ~ SEX, value.var = "Display.Value")
+# colnames(oo.df) <- c("FAOST_CODE", "Year", "N.A.OO.PCT", "N.A.OOFE.PCT", "N.A.OOMA.PCT")
+# 
+# ## Household surveys data
+# hsd.df <- read.csv("./Data/Processed/HouseholdSurveys.csv", 
+#                    header = TRUE, stringsAsFactors = FALSE)
+# hsd.df <- dcast(hsd.df, FAOST_CODE + Year ~ Variable, value.var = "Value")
+# 
+# ## Share of animal protein
+# sap.df <- read.csv("./Data/Processed/ShareAnimalProtein.csv", 
+#                    header = TRUE, stringsAsFactors = FALSE)
+# sap.df <- sap.df[, -grep("Country", colnames(sap.df))]
+# 
+# ## Open defecation
+# od.df <- read.csv("./Data/Processed/OpenDefecation.csv", 
+#                   header = TRUE, stringsAsFactors = FALSE)
+# 
+# ## GNP
+# gnp.df <- 
+#   read.csv(file = "./Data/Raw/CP.D.ATLAS.GNP.csv", 
+#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+# gnp.df <- 
+#   data.frame(Country.Code = rep(gnp.df$Country_Code, 16),
+#              Year = rep(2000:2015, each = 210),
+#              CP.D.ATLAS.GNP = rep(gnp.df$Weights, 16))
+# gnp.df <- 
+#   translateCountryCode(data = gnp.df, from = "ISO3_WB_CODE",
+#                        to = "FAOST_CODE", oldCode = "Country.Code")
+# gnp.df <- gnp.df[, c("FAOST_CODE", "Year", "CP.D.ATLAS.GNP")]
 
 ## Aquastat
-load(file = "./Data/Processed/AquastatManualData.RData")
-
-## MUV
-## data http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTDECPROSPECTS/0,,contentMDK:20587651~menuPK:3279864~pagePK:64165401~piPK:64165026~theSitePK:476883,00.html
-MUV.df <- read.csv("./Data/Raw/MUV06-01-2014.csv", na.strings = "", 
-                   header = TRUE, stringsAsFactors = FALSE)
-codes <- subset(FAOcountryProfile, subset = M49 %in% "YES")[, "FAOST_CODE"]
-MUV.df <- data.frame(FAOST_CODE = rep(codes, times = length(unique(MUV.df$Year))),
-                     Year = rep(unique(MUV.df$Year), each = length(codes)),
-                     MUV = rep(MUV.df$MUV, each = length(codes)))
-MUV.df$MUV <- MUV.df$MUV/100
+# load(file = "./Data/Processed/AquastatManualData.RData")
+# 
+# ## MUV
+# ## data http://econ.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTDECPROSPECTS/0,,contentMDK:20587651~menuPK:3279864~pagePK:64165401~piPK:64165026~theSitePK:476883,00.html
+# MUV.df <- read.csv("./Data/Raw/MUV06-01-2014.csv", na.strings = "", 
+#                    header = TRUE, stringsAsFactors = FALSE)
+# codes <- subset(FAOcountryProfile, subset = M49 %in% "YES")[, "FAOST_CODE"]
+# MUV.df <- data.frame(FAOST_CODE = rep(codes, times = length(unique(MUV.df$Year))),
+#                      Year = rep(unique(MUV.df$Year), each = length(codes)),
+#                      MUV = rep(MUV.df$MUV, each = length(codes)))
+# MUV.df$MUV <- MUV.df$MUV/100
 
 ###########################################################################
 ## Processing
@@ -194,8 +193,15 @@ MUV.df$MUV <- MUV.df$MUV/100
 # Merging -----------------------------------------------------------------
 
 initial.df <- Reduce(function(x, y) merge(x, y, all = TRUE),
-                     x = list(WB.df, who.df, oo.df, hsd.df, sap.df, gnp.df,
-                              AquastatManualData.df, MUV.df), 
+                     x = list(WB.df#, 
+                              #who.df, 
+                              #oo.df, 
+                              #hsd.df, 
+                              #sap.df, 
+                              #gnp.df,
+                              #AquastatManualData.df, 
+                              #MUV.df
+                              ), 
                      init = FAOSTAT.df)
 rm(list = c("FAOSTAT.df", "WB.df", "who.df", "oo.df", "hsd.df", "sap.df",
             "gnp.df", "AquastatManualData.df", "MUV.df"))
@@ -212,13 +218,13 @@ rm(initial.df)
 
 # Imputation --------------------------------------------------------------
 
-source("./Rcode/Final/Imputation.R")
+source("./database/Rcode/Final/Imputation.R")
 
 # Construction ------------------------------------------------------------
 
 preAgg.df <- preConstr.df
 ## Manual
-source("./Rcode/Final/ManualConstruction.R")
+source("./database/Rcode/Final/ManualConstruction.R")
 ## Automatic
 postConstr.lst <- with(con.df[con.df[, "CONSTRUCTION_TYPE"] %in% c("share", "growth", "change", "index"),],
                        constructSYB(data = preAgg.df,
@@ -244,9 +250,10 @@ rm(list = c("manScalVars", "i"))
 # Aggregations ------------------------------------------------------------
 
 ## Country aggregation
-Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/CountryAggregation.R")
+source("./database/Rcode/Final/aggregate_functions/CountryAggregation.R")
+
 ## China aggregation
-Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/ChinaAggregates.R")
+source("./database/Rcode/Final/aggregate_functions/ChinaAggregates.R")
 ## Check overlapping in old countries
 country.df <- FAOcheck(var = colnames(country.df)[-grep("FAOST_CODE|Year|Area", colnames(country.df))],
                        data = country.df, type = "overlap",
@@ -267,12 +274,12 @@ country.df <-
   merge(country.df, FAOcountryProfile[, c("FAOST_CODE", "FAO_TABLE_NAME")], 
         by = "FAOST_CODE", all.x = TRUE)
 ## M49 aggregates
-Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/M49aggregates.R")
+source("./database/Rcode/Final/aggregate_functions/M49aggregates.R")
 ## Removing duplicates in the aggregates sofi & M49
 M49.df <- M49.df[!M49.df[, "FAOST_CODE"] %in% 
                    c(348,5100,5205,5206,5500,5303,5304), ]
 ## SOFI aggregates
-Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/SofiAggregates.R")
+source("./database/Rcode/Final/aggregate_functions/SofiAggregates.R")
 ## FAO aggregates
 # Sourcehttps("https://raw.githubusercontent.com/filippogheri/ComplementaryScripts/master/FAOAggregates.R")
 ## Economic aggregates
@@ -287,14 +294,14 @@ postAgg.df <- rbind(country.df, M49.df, sofiAggs.df)
 postAgg.df <- CheckValues(dataset = postAgg.df, columns = colnames(postAgg.df)[
   -grep("FAOST_CODE|Year|Area|POU_DISTR|FAO_TABLE_NAME", colnames(postAgg.df))])
 
-icn2.df <- postAgg.df
-save(x = icn2.df, file = "./Data/Processed/postAgg.RData")
-load(file = "./Data/Processed/postAgg.RData")
+PBdata.df <- postAgg.df
+save(x = PBdata.df, file = "./database/Data/Processed/postAgg.RData")
+load(file = "./database/Data/Processed/postAgg.RData")
 
 # Merge the FSI dataset ---------------------------------------------------
 
 ## Merge the dataset
-load(file = "./Data/Processed/fsi.RData")
+load(file = "./database/Data/Processed/fsi.RData")
 fsiVar <- c("FAOST_CODE", "Year",
             "AV3YADESA.DISS", "QV.NPV.FOOD.ID.AV3YSHP.DISS", "FB.SDES.CRLSSR.KCD.AV3Y.DISS",
             "FB.PSQ.GT.GCD.AV3Y.DISS", "FB.PSQ.AO.GCD.AV3Y.DISS", "FB.FSQ.GT.GCD.AV3Y.DISS",
@@ -325,9 +332,9 @@ rm(fsi.df)
 save(x = icn2.df, file = "./Data/Processed/icn2.RData")
 
 ## Merge metadata and construction file
-fsicon.df <- ReadConstruction(file = "./Data/Processed/FSIconstruction14.csv", 
+fsicon.df <- ReadConstruction(file = "./database/Data/Processed/FSIconstruction14.csv", 
                               encoding = "UTF-8", nrows = 287)
-fsimeta.lst <- ReadMetadata(file = "./Data/Processed/FSImetadata14.csv", 
+fsimeta.lst <- ReadMetadata(file = "./database/Data/Processed/FSImetadata14.csv", 
                             encoding = "UTF-8", nrows = 287)
 fsimeta.df <- fsimeta.lst[["FULL"]]
 
@@ -339,13 +346,13 @@ con.df <- rbind(con.df,
                 fsicon.df[, -grep("MODULE_FSI|MODULE_POU|MODULE_DES|THRESHOLD_COUNTRIES", 
                                   colnames(fsicon.df))])
 
-save(x = con.df, file = "./Data/Processed/Construction.RData")
-save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
+save(x = con.df, file = "./database/Data/Processed/Construction.RData")
+save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
 
 # Post aggregation calculations -------------------------------------------
 
-source("./Rcode/Final/PostAggregation.R")
-save(x = icn2.df, file = "./Data/Processed/icn2.RData")
+source("./database/Rcode/Final/PostAggregation.R")
+save(x = PBdata.df, file = "./database/Data/Processed/PBdata.RData")
 
 ###########################################################################
 ## End

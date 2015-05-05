@@ -50,6 +50,32 @@ export_map <- function(manual_text = "Default map caption") {
   sources(output = sourcesOutput, objectName = mapInfo$mapName, manual = manual_text)
 }
 
+# M.P1.OVER.1.6 ------------------------------------------------------------
+  
+  ## Map info
+  mapInfo <- 
+    map_info(mapName = "M.P1.OVER.1.6", data = PBdataMaps.df, mapArea = "Territory")
+  
+  ## Create the map
+  assign(mapInfo$mapName,
+         plot_map(shpFile = shpLocation,
+                  var = mapInfo$mapVariable,
+                  data = mapInfo$mapData,
+                  countryCode = mapCountryCode,
+                  missCol = NAdataColor,
+                  scale = mapInfo$mapScaling,
+                  style = classIntAlg,
+                  col = mapInfo$mapColors,
+                  #manualBreaks = c(0, 5, 15, 25, 35, 100),
+                  #                 countryCodeTransp = transpCountries[, "FAO_CODE"],
+                  subset = eval(parse(text = "Year %in% c(mapInfo$mapYear) &
+                                    Area %in% c(mapInfo$mapArea)")))
+  )
+  ## export the map
+  export_map(manual_text = "Rural population. Share of total population")
+
+
+
 
 # M.P1.IAF.1.6 ------------------------------------------------------------
 

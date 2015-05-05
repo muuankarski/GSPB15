@@ -33,104 +33,104 @@ meta.df <- meta.lst$FULL
 
 # Load the dataset --------------------------------------------------------
 
-load(file = "./database/Data/Processed/icn2.RData")
-icn2Maps.df <- icn2.df
-colnames(icn2Maps.df)[grep("FAOST_CODE", colnames(icn2Maps.df))] = "FAO_CODE"
+load(file = "./database/Data/Processed/PBdata.RData")
+PBdataMaps.df <- PBdata.df
+colnames(PBdataMaps.df)[grep("FAOST_CODE", colnames(PBdataMaps.df))] = "FAO_CODE"
 
 ## Add the short names
-icn2.df <- 
-  merge(icn2.df, FAOcountryProfile[, c("FAOST_CODE", "SHORT_NAME")],
+PBdata.df <- 
+  merge(PBdata.df, FAOcountryProfile[, c("FAOST_CODE", "SHORT_NAME")],
         by = "FAOST_CODE", all.x = TRUE)
 
 ## Abbreviate names
-icn2.df[icn2.df[, "FAO_TABLE_NAME"] == "Latin America and the Caribbean" & 
-          !is.na(icn2.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+PBdata.df[PBdata.df[, "FAO_TABLE_NAME"] == "Latin America and the Caribbean" & 
+          !is.na(PBdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
   "Latin America\nand the Caribbean"
-icn2.df[icn2.df[, "FAO_TABLE_NAME"] == "Developed countries" & 
-          !is.na(icn2.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+PBdata.df[PBdata.df[, "FAO_TABLE_NAME"] == "Developed countries" & 
+          !is.na(PBdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
   "Developed\ncountries"
-icn2.df[icn2.df[, "FAO_TABLE_NAME"] == "Developing countries" & 
-          !is.na(icn2.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+PBdata.df[PBdata.df[, "FAO_TABLE_NAME"] == "Developing countries" & 
+          !is.na(PBdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
   "Developing\ncountries"
 
-icn2.df[icn2.df[, "SHORT_NAME"] == "Saint Vincent and the Grenadines" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Saint Vincent and the Grenadines" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Saint Vincent\nand the\nGrenadines"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Antigua and Barbuda" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Antigua and Barbuda" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Antigua and\nBarbuda"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Trinidad and Tobago" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Trinidad and Tobago" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Trinidad and\nTobago"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Republic of Moldova" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Republic of Moldova" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Republic of\nMoldova"
-# icn2.df[icn2.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
-#           !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+# PBdata.df[PBdata.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
+#           !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
 #   "Saint Helena,\nAscension and\nTristan da Cunha"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Saint Helena"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Northern Mariana Islands" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Northern Mariana Islands" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "N. Mariana\nIslands"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Wallis and Futuna Islands" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Wallis and Futuna Islands" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Wallis and\nFutuna Is."
-icn2.df[icn2.df[, "SHORT_NAME"] == "United Arab Emirates" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "United Arab Emirates" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "United Arab\nEmirates"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Turks and Caicos Islands" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Turks and Caicos Islands" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Turks and\nCaicos Is."
-icn2.df[icn2.df[, "SHORT_NAME"] == "Central African Republic" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Central African Republic" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Central African\nRepublic"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Sao Tome and Principe" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Sao Tome and Principe" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Sao Tome and\nPrincipe"
-icn2.df[icn2.df[, "SHORT_NAME"] == "United States of America" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "United States of America" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "United States\nof America"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Iran (Islamic Republic of)" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Iran (Islamic Republic of)" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Iran\n(Islamic Republic of)"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Bosnia and Herzegovina" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Bosnia and Herzegovina" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Bosnia and\nHerzegovina"
-icn2.df[icn2.df[, "FAOST_CODE"] == "107" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] == "107" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Côte d'Ivoire"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Falkland Islands (Malvinas)" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Falkland Islands (Malvinas)" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Falkland Islands\n(Malvinas)"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Papua New Guinea" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Papua New Guinea" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Papua New\nGuinea"
-icn2.df[icn2.df[, "SHORT_NAME"] == "American Samoa" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "American Samoa" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "American\nSamoa"
-icn2.df[icn2.df[, "SHORT_NAME"] == "Western Sahara" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Western Sahara" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "Western\nSahara"
 
 ## Chinas
-icn2.df[icn2.df[, "FAOST_CODE"] %in% c(357), "Area"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] %in% c(357), "Area"] <-
   "China 357"
-icn2.df[icn2.df[, "FAOST_CODE"] %in% c(41), "Area"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] %in% c(41), "Area"] <-
   "China 41"
-icn2.df[icn2.df[, "FAOST_CODE"] %in% c(128), "Area"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] %in% c(128), "Area"] <-
   "Macau"
-icn2.df[icn2.df[, "FAOST_CODE"] %in% c(96), "Area"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] %in% c(96), "Area"] <-
   "Hong Kong"
-icn2.df[icn2.df[, "FAOST_CODE"] %in% c(214), "Area"] <-
+PBdata.df[PBdata.df[, "FAOST_CODE"] %in% c(214), "Area"] <-
   "Taiwan"
 ## Occupied Palestinian Territory
-icn2.df[icn2.df[, "SHORT_NAME"] == "Occupied Palestinian Territory" & 
-          !is.na(icn2.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+PBdata.df[PBdata.df[, "SHORT_NAME"] == "Occupied Palestinian Territory" & 
+          !is.na(PBdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
   "West Bank and\nGaza Strip"
-icn2.df[icn2.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" & 
-          !is.na(icn2.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+PBdata.df[PBdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" & 
+          !is.na(PBdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
   "West Bank and Gaza Strip"
 
 # Needed libraries --------------------------------------------------------
