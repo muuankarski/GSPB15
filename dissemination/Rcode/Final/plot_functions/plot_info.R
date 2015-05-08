@@ -7,7 +7,9 @@
 ##' @return Returns the info needed to feed the plot_syb function.
 ##' @export
 
-plot_info = function(dissemination = diss.df, metadata = meta.lst$FULL, plotName) {
+plot_info = function(dissemination = diss.df,
+                     metadata = meta.lst$FULL, 
+                     plotName) {
   specPlot = subset(dissemination, subset = OBJECT_NAME == plotName)
   variables = specPlot[, paste("DATA_KEY", 1:10, sep = "")]
   variables = variables[!is.na(variables) & variables != ""]

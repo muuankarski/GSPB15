@@ -1,0 +1,13 @@
+OBJECT_NAME,PART,TOPIC_NAME,TOPIC_NAME_ABB,SPREAD_NUMBER,TEX_ENVIRONMENT,OBJECT_POSITION,MANUAL,OBJECT_TYPE,OBJECT_LAYOUT,X_AXIS,PLOT_OBJECTIVE,GROUP,X_LAB,Y_LAB,AREA,OBJECT_DESCRIPTION,CAPTION1,CAPTION2,CAPTION3,DIGITS,OBJECT_NOTE,YEAR_START,YEAR_END,INTERVAL,QUANTITY,ORIG_UNIT,DISS_ORIG_UNIT,DATA_KEY1,DATA_KEY2,DATA_KEY3,DATA_KEY4,DATA_KEY5,DATA_KEY6,DATA_KEY7,DATA_KEY8,DATA_KEY9,DATA_KEY10,COMMENTS
+TXT.P1.OVER.1.1,1,Overview,OVER,1,,1,,TEXT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+C.P1.OVER.1.2,1,Overview,OVER,1,,2,,CHART,SQUARE,Year,multi_stack_line,FAO_TABLE_NAME,,,M49world,World rural and urban population,,,,,Data after 2010 are projections.,2000,2020,,billion,people,,OA.TPU.POP.PPL.NO,OA.TPR.POP.PPL.NO,,,,,,,,,
+C.P1.OVER.1.3,1,Overview,OVER,1,,3,,CHART,VERTICAL,SHORT_NAME,top_bot_dot,Year,,,Territory,Annual population growth over the last ten years,,,,,,2013,MRY,,,percent,,OA.TPBS.POP.GR10,,,,,,,,,,
+C.P1.OVER.1.4,1,Overview,OVER,1,,4,,CHART,VERTICAL,SHORT_NAME,bot_dot,Year,,,Territory,"Life expectancy at birth, countries with the lowest values in 2012",,,,,,2000,MRY,,,years,,SP.DYN.LE00.IN,,,,,,,,,,
+C.P1.OVER.1.5,1,Overview,OVER,1,,5,,CHART,RECTANGULAR,Year,reg_uni_line,FAO_TABLE_NAME,,,SOFIMacroRegion,Total economically active population,,,,,,2000,MRY,,million,people,,OA.TEAPT.POP.PPL.NO,,,,,,,,,,
+M.P1.OVER.1.6,1,Overview,OVER,1,,6,,MAP,LARGE,,,,,,Territory,"Rural population, share of total population",,,,,,2013,MRY,,,percent,,OA.TPR.POP.ZS,,,,,,,,,,
+TXT.P1.ECON.1.1,1,Economy,ECON,1,,1,,TEXT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+C.P1.ECON.1.2,1,Economy,ECON,1,,2,,CHART,SMALL,FAO_TABLE_NAME,multi_stack_bar,,,,SOFIMacroRegion,"Value added in agriculture, industry, and services as shares of GDP",,,,,,2012,MRY,,,percent,,NV.AGR.TOTL.ZS,NV.IND.TOTL.ZS,NV.SRV.TETC.ZS,,,,,,,,
+C.P1.ECON.1.3,1,Economy,ECON,1,,3,,CHART,VERTICAL,SHORT_NAME,top_dot,Year,,,Territory,"Agriculture value added per worker, countries with the highest values in 2012",,,,,,2000,MRY,,,US$,constant 2000 US$,EA.PRD.AGRI.KD,,,,,,,,,,
+C.P1.ECON.1.4,1,Economy,ECON,1,,4,,CHART,VERTICAL,SHORT_NAME,top_bot_dot,Year,,,Territory,Annual value added in agriculture growth,,,,,,2012,MRY,,,percent,,NV.AGR.TOTL.KD.ZG,,,,,,,,,,
+C.P1.ECON.1.5,1,Economy,ECON,1,,5,,CHART,RECTANGULAR,Year,reg_uni_line,FAO_TABLE_NAME,,,SOFIMacroRegion,Value added in agriculture as share of GDP,,,,,,2000,MRY,,,percent,,NV.AGR.TOTL.ZS,,,,,,,,,,
+M.P1.ECON.1.6,1,Economy,ECON,1,,6,,MAP,LARGE,,,,,,Territory,Value added in agriculture as share of GDP,,,,,,2012,MRY,,,percent,,NV.AGR.TOTL.ZS,,,,,,,,,,
