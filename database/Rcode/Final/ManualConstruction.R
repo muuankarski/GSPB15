@@ -4,8 +4,8 @@
 
 # MORTWEIGHT --------------------------------------------------------------
 
-# preConstr.df[, "MORTWEIGHT"] <- 
-#   preConstr.df[, "SP.DYN.CBRT.IN"] * preConstr.df[, "OA.TPBS.POP.PPL.NO"] / 1000
+preConstr.df[, "MORTWEIGHT"] <- 
+  preConstr.df[, "SP.DYN.CBRT.IN"] * preConstr.df[, "OA.TPBS.POP.PPL.NO"] / 1000
 
 # # LABPARTFEWEIGHT ---------------------------------------------------------
 # 

@@ -56,12 +56,12 @@ fillCountryCode = function(country, data, outCode = "FAOST_CODE"){
   merge(x = data, y = def, by = country, all.x = TRUE)
 }
 
-# utils::globalVariables(names = c("FAOcountryProfile"))
+utils::globalVariables(names = c("FAOcountryProfile"))
 
 
 # AQ.WAT.WATPCP.MC.NO ---------------------------------------------------------
 
-xls1 <- read.xls("./database/Data//Raw/SYB_AQUASTAT_Water_Tables_20150304.xls", sheet = 1)
+xls1 <- read.xls("./Data//Raw//SYB_AQUASTAT_Water_Tables_20150304.xls", sheet = 1)
 var1 <- xls1[-1:-3,1:7]
 names(var1) <- c("Country","y1990","y1993","y2000","y2003","y2010","y2013")
 var1l <- gather(var1,year,value,2:7)
@@ -84,7 +84,7 @@ names(wrpc.df) <- c("FAOST_CODE", "Year", "AQ.WAT.WATPCP.MC.NO")
 
 # AQ.WAT.IRRPOT.HA.NO ---------------------------------------------------------
 
-xls1 <- read.xls("./database/Data//Raw//SYB_AQUASTAT_Water_Tables_20150304.xls", sheet = 1)
+xls1 <- read.xls("./Data//Raw//SYB_AQUASTAT_Water_Tables_20150304.xls", sheet = 1)
 var1 <- xls1[-1:-3,c(1,9)]
 names(var1) <- c("Country","y2012")
 var1l <- gather(var1,year,value,2)
