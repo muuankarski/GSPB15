@@ -52,17 +52,30 @@ export_map <- function(manual_text = "Default map caption") {
 
 
 
-# M_P1.OVER.1.4 -----------------------------------------------------------
-# World population annual growth
+# M.P1.OVER.1.6 -----------------------------------------------------------
+# Rural population, share of total population
 
 ## Map info
-mapInfo <- map_info(mapName = "M_P1.OVER.1.4", data = gsyb15Maps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P1.OVER.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName,
        meta_plot_map()
 )
 ## export the map
 export_map()
+
+# M.P1.ECON.1.6 -----------------------------------------------------------
+# Value added in agriculture as share of GDP
+
+## Map info
+mapInfo <- map_info(mapName = "M.P1.ECON.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName,
+       meta_plot_map()
+)
+## export the map
+export_map()
+
 
 
 # M_P1.OVER.1.10 -----------------------------------------------------------------------------

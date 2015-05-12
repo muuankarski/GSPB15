@@ -1,5 +1,5 @@
 ###########################################################################
-## This script generates the Global Statistical Yearbook 2015
+## This script generates the Global Statistical Pocketbook 2015
 ###########################################################################
 
 # Set up packrat ----------------------------------------------------------
@@ -94,15 +94,112 @@ meta.df <- meta.lst$FULL
 
 # FAO country profile -----------------------------------------------------
 
-load("./database/Data/Processed/FAOcountryProfile.RData")
+load("./database/FAOcountryProfile.RData")
 
 # Load the dataset --------------------------------------------------------
 
 load(file = "./database/Data/Processed/SYB.RData")
-gsyb15.df <- SYB.df; rm(SYB.df)
+sybdata.df <- SYB.df; rm(SYB.df)
 ## NOTE (FILIPPO): I still need to address the issue of Sudan
-gsyb15Maps.df <- gsyb15.df
-names(gsyb15Maps.df)[names(gsyb15Maps.df)=="FAOST_CODE"] <- "FAO_CODE"
+sybMaps.df <- sybdata.df
+names(sybMaps.df)[names(sybMaps.df)=="FAOST_CODE"] <- "FAO_CODE"
+
+## Add the short names
+sybdata.df <- 
+  merge(sybdata.df, FAOcountryProfile[, c("FAOST_CODE", "SHORT_NAME")],
+        by = "FAOST_CODE", all.x = TRUE)
+
+## Abbreviate names
+sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Latin America and the Caribbean" & 
+            !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+  "Latin America\nand the Caribbean"
+sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Developed countries" & 
+            !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+  "Developed\ncountries"
+sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Developing countries" & 
+            !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+  "Developing\ncountries"
+
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Saint Vincent and the Grenadines" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Saint Vincent\nand the\nGrenadines"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Antigua and Barbuda" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Antigua and\nBarbuda"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Trinidad and Tobago" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Trinidad and\nTobago"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Republic of Moldova" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Republic of\nMoldova"
+# sybdata.df[sybdata.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
+#           !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+#   "Saint Helena,\nAscension and\nTristan da Cunha"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Saint Helena, Ascension and Tristan da Cunha" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Saint Helena"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Northern Mariana Islands" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "N. Mariana\nIslands"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Wallis and Futuna Islands" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Wallis and\nFutuna Is."
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "United Arab Emirates" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "United Arab\nEmirates"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Turks and Caicos Islands" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Turks and\nCaicos Is."
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Central African Republic" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Central African\nRepublic"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Sao Tome and Principe" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Sao Tome and\nPrincipe"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "United States of America" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "United States\nof America"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Iran (Islamic Republic of)" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Iran\n(Islamic Republic of)"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Bosnia and Herzegovina" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Bosnia and\nHerzegovina"
+sybdata.df[sybdata.df[, "FAOST_CODE"] == "107" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Côte d'Ivoire"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Falkland Islands (Malvinas)" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Falkland Islands\n(Malvinas)"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Papua New Guinea" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Papua New\nGuinea"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "American Samoa" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "American\nSamoa"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Western Sahara" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "Western\nSahara"
+
+## Chinas
+sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(357), "Area"] <-
+  "China 357"
+sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(41), "Area"] <-
+  "China 41"
+sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(128), "Area"] <-
+  "Macau"
+sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(96), "Area"] <-
+  "Hong Kong"
+sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(214), "Area"] <-
+  "Taiwan"
+## Occupied Palestinian Territory
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "Occupied Palestinian Territory" & 
+            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-
+  "West Bank and\nGaza Strip"
+sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" & 
+            !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-
+  "West Bank and Gaza Strip"
+
 
 
 # Dissemination file ------------------------------------------------------
@@ -118,9 +215,9 @@ diss.df <-
 
 
 
-diss.df2 <- 
-  read.csv(file = "./dissemination/DisseminationGSYB15.csv", 
-           header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+# diss.df2 <- 
+#   read.csv(file = "./dissemination/DisseminationGSYB15.csv", 
+#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 
 
 
@@ -212,6 +309,17 @@ sourcesOutput <- paste0(path_to_latex,"Sources/")
 # Texts -----------------------------------------------------------
 
 textsOutput <- paste0(path_to_latex,"Text/")
+
+# Extract texts from the dissemination file
+text.df <- diss.df[diss.df[["OBJECT_TYPE"]] == "TEXT",]
+
+# Extract the text from the TEXT column in dissemination file and write into .tex file
+for (r in 1:nrow(text.df)){
+  file_name <- text.df[r,"OBJECT_NAME"]
+  content <- text.df[r,"TEXT"]
+  writeLines(content, con = paste0(textsOutput,file_name,".tex"), sep = "\n", useBytes = FALSE)
+}
+
 
 ###########################################################################
 ## End

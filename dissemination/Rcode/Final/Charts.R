@@ -79,7 +79,8 @@ assign(plotInfo$plotName,
                 type = plotInfo$plotType,
                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
                                     Area %in% c(plotInfo$plotArea)")),
-                data = PBdata.df,
+                #data = PBdata.df,
+                data = gsyb15.df,
                 scale = plotInfo$scaling,
                 x_lab = plotInfo$xPlotLab,
                 y_lab = plotInfo$yPlotLab,
@@ -114,10 +115,26 @@ assign(plotInfo$plotName,
                 col_pallete = plot_colors(part = plotInfo$plotPart, 13)[["Sub"]])
 )
 ## Export the plot
-plotWidth  <- 3.2
-plotHeight <- 5.9
-export_plot(manual_text = "Something else")
+export_plot(manual_text = "Something else", placement = "b")
 
+# C.P1.OVER.1.5 ------------------------------------------------------------
+
+# -> JATKA TÄSTÄ!!
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = icn2.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]))
 
 
 

@@ -65,8 +65,10 @@ source("./database/Rcode/Final/read_functions/ReadMetadata.R")
 
 # Country profile ---------------------------------------------------------
 
-load("./database/Data/Processed/FAOcountryProfile.RData")
-#FAOcountryProfile <- read.csv("./FAOcountryProfile.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+FAOcountryProfile <- read.csv("./database/FAOcountryProfile.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+save(FAOcountryProfile, file="./database/FAOcountryProfile.RData")
+load("./database/FAOcountryProfile.RData")
 
 # Construction and metadata files -----------------------------------------
 
