@@ -82,102 +82,105 @@ M49countries <-
 
 ## Load the indicators we want to show
 indicators.df <- 
-  read.csv(file = "./Data/Processed/Indicators.csv", 
+  read.csv(file = "./database//Data/Processed/Indicators.csv", 
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 ## Create the new .tex file
-fileOut <- paste("./Outputs/CountryProfiles.tex", sep = "")
+fileOut <- paste("./publication/Tables/CountryProfiles.tex", sep = "")
 if(file.exists(fileOut)) file.remove(fileOut)
 file.create(fileOut)
 ## Subset the dataset
 CountryProfile.df <- 
-  icn2.df[, colnames(icn2.df) %in% c("FAOST_CODE", "SHORT_NAME", "Year", 
+  sybdata.df[, colnames(sybdata.df) %in% c("FAOST_CODE", "SHORT_NAME", "Year", 
                                      na.omit(indicators.df[, "INDICATOR1"]),
                                      na.omit(indicators.df[, "INDICATOR2"]),
                                      na.omit(indicators.df[, "INDICATOR3"]))]
-CountryProfile.df[, "OA.TPBS.POP.P"] <- 
-  CountryProfile.df[, "OA.TPBS.POP.P"]/1000000
-CountryProfile.df[, "OA.TPR.POP.P"] <-
-  CountryProfile.df[, "OA.TPR.POP.P"]/1000000
-CountryProfile.df[, "AV3YDES.DISS"] <- 
-  as.character(format(round(CountryProfile.df[, "AV3YDES.DISS"], digits = 0), nsmall = 0, big.mark = ","))
-CountryProfile.df[, "AV3YADESA.DISS"] <- 
-  as.character(CountryProfile.df[, "AV3YADESA.DISS"])
-CountryProfile.df[, "FB.PSQ.GT.GCD.AV3Y.DISS"] <- 
-  as.character(CountryProfile.df[, "FB.PSQ.GT.GCD.AV3Y.DISS"])
-CountryProfile.df[, "FB.PSQ.AO.GCD.AV3Y.DISS"] <- 
-  as.character(CountryProfile.df[, "FB.PSQ.AO.GCD.AV3Y.DISS"])
-CountryProfile.df[, "FB.FSQ.GT.GCD.AV3Y.DISS"] <- 
-  as.character(CountryProfile.df[, "FB.FSQ.GT.GCD.AV3Y.DISS"])
+CountryProfile.df[, "OA.TPBS.POP.PPL.NO"] <- 
+  CountryProfile.df[, "OA.TPBS.POP.PPL.NO"]/1000000
+CountryProfile.df[, "OA.TPR.POP.PPL.NO"] <-
+  CountryProfile.df[, "OA.TPR.POP.PPL.NO"]/1000000
+
+# Not included in pocketbook2015
+
+# CountryProfile.df[, "AV3YDES.DISS"] <- 
+#   as.character(format(round(CountryProfile.df[, "AV3YDES.DISS"], digits = 0), nsmall = 0, big.mark = ","))
+# CountryProfile.df[, "AV3YADESA.DISS"] <- 
+#   as.character(CountryProfile.df[, "AV3YADESA.DISS"])
+# CountryProfile.df[, "FB.PSQ.GT.GCD.AV3Y.DISS"] <- 
+#   as.character(CountryProfile.df[, "FB.PSQ.GT.GCD.AV3Y.DISS"])
+# CountryProfile.df[, "FB.PSQ.AO.GCD.AV3Y.DISS"] <- 
+#   as.character(CountryProfile.df[, "FB.PSQ.AO.GCD.AV3Y.DISS"])
+# CountryProfile.df[, "FB.FSQ.GT.GCD.AV3Y.DISS"] <- 
+#   as.character(CountryProfile.df[, "FB.FSQ.GT.GCD.AV3Y.DISS"])
 
 ## PoU == "" in fsi.df for DVD. We need to replace it with "<5.0"
-dvdCountries.df <- 
-  subset(FAOcountryProfile, 
-         SOFI_DVDDVG_REG == "Developed countries" & 
-           !is.na(SOFI_DVDDVG_REG))[, c("FAOST_CODE", "FAO_TABLE_NAME")]
-CountryProfile.df[CountryProfile.df[, "FAOST_CODE"] %in% 
-                    dvdCountries.df[, "FAOST_CODE"], "AV3YPOU.DISS"] <- "<5.0"
-CountryProfile.df[CountryProfile.df[, "FAOST_CODE"] %in% 
-                    dvdCountries.df[, "FAOST_CODE"], "AV3YNOU.DISS"] <- "ns"
+# dvdCountries.df <- 
+#   subset(FAOcountryProfile, 
+#          SOFI_DVDDVG_REG == "Developed countries" & 
+#            !is.na(SOFI_DVDDVG_REG))[, c("FAOST_CODE", "FAO_TABLE_NAME")]
+# CountryProfile.df[CountryProfile.df[, "FAOST_CODE"] %in% 
+#                     dvdCountries.df[, "FAOST_CODE"], "AV3YPOU.DISS"] <- "<5.0"
+# CountryProfile.df[CountryProfile.df[, "FAOST_CODE"] %in% 
+#                     dvdCountries.df[, "FAOST_CODE"], "AV3YNOU.DISS"] <- "ns"
 
 ## Round the PoU
-for (i in 1:NROW(CountryProfile.df)) {
-  if (!is.na(as.numeric(CountryProfile.df[i, "AV3YPOU.DISS"]))) {
-    CountryProfile.df[i, "AV3YPOU.DISS"] <- 
-      as.character(format(round(as.numeric(CountryProfile.df[i, "AV3YPOU.DISS"]), digits = 1), nsmall = 1, big.mark = ","))
-  }
-  if (!is.na(as.numeric(CountryProfile.df[i, "AV3YNOU.DISS"]))) {
-    CountryProfile.df[i, "AV3YNOU.DISS"] <- 
-      as.character(format(round(as.numeric(CountryProfile.df[i, "AV3YNOU.DISS"]), digits = 1), nsmall = 1, big.mark = ","))
-  }
-  if (!is.na(as.numeric(CountryProfile.df[i, "AV3YDoFD.DISS"]))) {
-    CountryProfile.df[i, "AV3YDoFD.DISS"] <- 
-      as.character(round(as.numeric(CountryProfile.df[i, "AV3YDoFD.DISS"]), digits = 0))
-  }
-}
+# for (i in 1:NROW(CountryProfile.df)) {
+#   if (!is.na(as.numeric(CountryProfile.df[i, "AV3YPOU.DISS"]))) {
+#     CountryProfile.df[i, "AV3YPOU.DISS"] <- 
+#       as.character(format(round(as.numeric(CountryProfile.df[i, "AV3YPOU.DISS"]), digits = 1), nsmall = 1, big.mark = ","))
+#   }
+#   if (!is.na(as.numeric(CountryProfile.df[i, "AV3YNOU.DISS"]))) {
+#     CountryProfile.df[i, "AV3YNOU.DISS"] <- 
+#       as.character(format(round(as.numeric(CountryProfile.df[i, "AV3YNOU.DISS"]), digits = 1), nsmall = 1, big.mark = ","))
+#   }
+#   if (!is.na(as.numeric(CountryProfile.df[i, "AV3YDoFD.DISS"]))) {
+#     CountryProfile.df[i, "AV3YDoFD.DISS"] <- 
+#       as.character(round(as.numeric(CountryProfile.df[i, "AV3YDoFD.DISS"]), digits = 0))
+#   }
+# }
 ## Collaps multiple variables
-CountryProfile.df[, "SH.DTH.COMM.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.DTH.COMM.ZS"], digits = 0),
-        round(CountryProfile.df[, "SH.DTH.NCOM.ZS"], digits = 0),
-        round(CountryProfile.df[, "SH.DTH.INJR.ZS"], digits = 0), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.DTH.COMM.ZS"] == "NA/NA/NA", 
-                  "SH.DTH.COMM.ZS"] <- NA
-CountryProfile.df[, "SH.STA.WAST.MA.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.STA.WAST.MA.ZS"], digits = 1),
-        round(CountryProfile.df[, "SH.STA.WAST.FE.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.STA.WAST.MA.ZS"] == "NA/NA", 
-                  "SH.STA.WAST.MA.ZS"] <- NA
-CountryProfile.df[, "SH.SVR.WAST.MA.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.SVR.WAST.MA.ZS"], digits = 1),
-        round(CountryProfile.df[, "SH.SVR.WAST.FE.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.SVR.WAST.MA.ZS"] == "NA/NA", 
-                  "SH.SVR.WAST.MA.ZS"] <- NA
-CountryProfile.df[, "SH.STA.STNT.MA.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.STA.STNT.MA.ZS"], digits = 1),
-        round(CountryProfile.df[, "SH.STA.STNT.FE.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.STA.STNT.MA.ZS"] == "NA/NA", 
-                  "SH.STA.STNT.MA.ZS"] <- NA
-CountryProfile.df[, "SH.STA.MALN.MA.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.STA.MALN.MA.ZS"], digits = 1),
-        round(CountryProfile.df[, "SH.STA.MALN.FE.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.STA.MALN.MA.ZS"] == "NA/NA", 
-                  "SH.STA.MALN.MA.ZS"] <- NA
-CountryProfile.df[, "SH.STA.OWGH.MA.ZS"] <- 
-  paste(round(CountryProfile.df[, "SH.STA.OWGH.MA.ZS"], digits = 1),
-        round(CountryProfile.df[, "SH.STA.OWGH.FE.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.STA.OWGH.MA.ZS"] == "NA/NA", 
-                  "SH.STA.OWGH.MA.ZS"] <- NA
-CountryProfile.df[, "N.A.OOMA.PCT"] <- 
-  paste(round(CountryProfile.df[, "N.A.OOMA.PCT"], digits = 1),
-        round(CountryProfile.df[, "N.A.OOFE.PCT"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "N.A.OOMA.PCT"] == "NA/NA", 
-                  "N.A.OOMA.PCT"] <- NA
-CountryProfile.df[, "SH.PRG.ANEM"] <- 
-  paste(round(CountryProfile.df[, "SH.PRG.ANEM"], digits = 1),
-        round(CountryProfile.df[, "SH.ANM.NPRG.ZS"], digits = 1), sep = "/")
-CountryProfile.df[CountryProfile.df[, "SH.PRG.ANEM"] == "NA/NA", 
-                  "SH.PRG.ANEM"] <- NA
-CountryProfile.df[CountryProfile.df[, "AV3YDES.DISS"] == "   NA", 
-                  "AV3YDES.DISS"] <- ""
+# CountryProfile.df[, "SH.DTH.COMM.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.DTH.COMM.ZS"], digits = 0),
+#         round(CountryProfile.df[, "SH.DTH.NCOM.ZS"], digits = 0),
+#         round(CountryProfile.df[, "SH.DTH.INJR.ZS"], digits = 0), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.DTH.COMM.ZS"] == "NA/NA/NA", 
+#                   "SH.DTH.COMM.ZS"] <- NA
+# CountryProfile.df[, "SH.STA.WAST.MA.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.STA.WAST.MA.ZS"], digits = 1),
+#         round(CountryProfile.df[, "SH.STA.WAST.FE.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.STA.WAST.MA.ZS"] == "NA/NA", 
+#                   "SH.STA.WAST.MA.ZS"] <- NA
+# CountryProfile.df[, "SH.SVR.WAST.MA.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.SVR.WAST.MA.ZS"], digits = 1),
+#         round(CountryProfile.df[, "SH.SVR.WAST.FE.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.SVR.WAST.MA.ZS"] == "NA/NA", 
+#                   "SH.SVR.WAST.MA.ZS"] <- NA
+# CountryProfile.df[, "SH.STA.STNT.MA.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.STA.STNT.MA.ZS"], digits = 1),
+#         round(CountryProfile.df[, "SH.STA.STNT.FE.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.STA.STNT.MA.ZS"] == "NA/NA", 
+#                   "SH.STA.STNT.MA.ZS"] <- NA
+# CountryProfile.df[, "SH.STA.MALN.MA.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.STA.MALN.MA.ZS"], digits = 1),
+#         round(CountryProfile.df[, "SH.STA.MALN.FE.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.STA.MALN.MA.ZS"] == "NA/NA", 
+#                   "SH.STA.MALN.MA.ZS"] <- NA
+# CountryProfile.df[, "SH.STA.OWGH.MA.ZS"] <- 
+#   paste(round(CountryProfile.df[, "SH.STA.OWGH.MA.ZS"], digits = 1),
+#         round(CountryProfile.df[, "SH.STA.OWGH.FE.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.STA.OWGH.MA.ZS"] == "NA/NA", 
+#                   "SH.STA.OWGH.MA.ZS"] <- NA
+# CountryProfile.df[, "N.A.OOMA.PCT"] <- 
+#   paste(round(CountryProfile.df[, "N.A.OOMA.PCT"], digits = 1),
+#         round(CountryProfile.df[, "N.A.OOFE.PCT"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "N.A.OOMA.PCT"] == "NA/NA", 
+#                   "N.A.OOMA.PCT"] <- NA
+# CountryProfile.df[, "SH.PRG.ANEM"] <- 
+#   paste(round(CountryProfile.df[, "SH.PRG.ANEM"], digits = 1),
+#         round(CountryProfile.df[, "SH.ANM.NPRG.ZS"], digits = 1), sep = "/")
+# CountryProfile.df[CountryProfile.df[, "SH.PRG.ANEM"] == "NA/NA", 
+#                   "SH.PRG.ANEM"] <- NA
+# CountryProfile.df[CountryProfile.df[, "AV3YDES.DISS"] == "   NA", 
+#                   "AV3YDES.DISS"] <- ""
 
 # TeX file ----------------------------------------------------------------
 
@@ -300,309 +303,309 @@ for (i in 1:nrow(M49countries)) {
 
 # Surveys -----------------------------------------------------------------
 
-surveys.df <- 
-  read.csv(file = "./Data/Processed/Surveys.csv", 
-           header = TRUE, na.strings = "", stringsAsFactors = FALSE)
-surveys.df <- surveys.df[, -grep("FAO_TABLE_NAME", colnames(surveys.df))]
-surveys.df <- 
-  merge(surveys.df, FAOcountryProfile[, c("FAOST_CODE", "SHORT_NAME")],
-        by = "FAOST_CODE", all.x = TRUE)
-surveys.df[surveys.df[, "FAOST_CODE"] == 107, "SHORT_NAME"] <- 
-  na.omit(FAOcountryProfile[FAOcountryProfile[, "FAOST_CODE"] == 107, "FAO_TABLE_NAME"])
-surveys.df[, "SHORT_NAME"] <- 
-  sanitizeToLatex(surveys.df[, "SHORT_NAME"])
-surveys.df <- arrange(surveys.df, SHORT_NAME)
+# surveys.df <- 
+#   read.csv(file = "./Data/Processed/Surveys.csv", 
+#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+# surveys.df <- surveys.df[, -grep("FAO_TABLE_NAME", colnames(surveys.df))]
+# surveys.df <- 
+#   merge(surveys.df, FAOcountryProfile[, c("FAOST_CODE", "SHORT_NAME")],
+#         by = "FAOST_CODE", all.x = TRUE)
+# surveys.df[surveys.df[, "FAOST_CODE"] == 107, "SHORT_NAME"] <- 
+#   na.omit(FAOcountryProfile[FAOcountryProfile[, "FAOST_CODE"] == 107, "FAO_TABLE_NAME"])
+# surveys.df[, "SHORT_NAME"] <- 
+#   sanitizeToLatex(surveys.df[, "SHORT_NAME"])
+# surveys.df <- arrange(surveys.df, SHORT_NAME)
 
 # Variables in the table --------------------------------------------------
 
-tableVars <- c("FAOST_CODE", "Year", "HS.PCS.DEC.KCD", "HS.PCS.UDEC.KCD",
-               "HS.PCS.RDEC.KCD", "HS.PCS.MDEC.KCD", "HS.PCS.FDEC.KCD",
-               "HS.NCDEC.PRT.PCT", "HS.NCDEC.UPRT.PCT", "HS.NCDEC.RPRT.PCT",
-               "HS.NCDEC.MPRT.PCT", "HS.NCDEC.FPRT.PCT", "HS.NCDEC.FAT.PCT",
-               "HS.NCDEC.UFAT.PCT", "HS.NCDEC.RFAT.PCT", "HS.NCDEC.MFAT.PCT",
-               "HS.NCDEC.FFAT.PCT", "HS.NCDEC.CRB.PCT", "HS.NCDEC.UCRB.PCT",
-               "HS.NCDEC.RCRB.PCT", "HS.NCDEC.MCRB.PCT", "HS.NCDEC.FCRB.PCT",
-               "HS.SPC.AP.PCT", "HS.SPC.UAP.PCT", "HS.SPC.RAP.PCT", 
-               "HS.SPC.MAP.PCT", "HS.SPC.FAP.PCT")
-## Rounding
-icn2.df[, "HS.PCS.DEC.KCD"] <- round(icn2.df[, "HS.PCS.DEC.KCD"], digits = 0)
-icn2.df[, "HS.PCS.UDEC.KCD"] <- round(icn2.df[, "HS.PCS.UDEC.KCD"], digits = 0)
-icn2.df[, "HS.PCS.RDEC.KCD"] <- round(icn2.df[, "HS.PCS.RDEC.KCD"], digits = 0)
-icn2.df[, "HS.PCS.MDEC.KCD"] <- round(icn2.df[, "HS.PCS.MDEC.KCD"], digits = 0)
-icn2.df[, "HS.PCS.FDEC.KCD"] <- round(icn2.df[, "HS.PCS.FDEC.KCD"], digits = 0)
-
-icn2.df[, "HS.NCDEC.PRT.PCT"] <- round(icn2.df[, "HS.NCDEC.PRT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.UPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.UPRT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.RPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.RPRT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.MPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.MPRT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.FPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.FPRT.PCT"], digits = 0)
-
-icn2.df[, "HS.NCDEC.FAT.PCT"] <- round(icn2.df[, "HS.NCDEC.FAT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.UFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.UFAT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.RFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.RFAT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.MFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.MFAT.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.FFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.FFAT.PCT"], digits = 0)
-
-icn2.df[, "HS.NCDEC.CRB.PCT"] <- round(icn2.df[, "HS.NCDEC.CRB.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.UCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.UCRB.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.RCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.RCRB.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.MCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.MCRB.PCT"], digits = 0)
-icn2.df[, "HS.NCDEC.FCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.FCRB.PCT"], digits = 0)
-
-icn2.df[, "HS.SPC.AP.PCT"] <- round(icn2.df[, "HS.SPC.AP.PCT"], digits = 0)
-icn2.df[, "HS.SPC.UAP.PCT"] <- round(icn2.df[, "HS.SPC.UAP.PCT"], digits = 0)
-icn2.df[, "HS.SPC.RAP.PCT"] <- round(icn2.df[, "HS.SPC.RAP.PCT"], digits = 0)
-icn2.df[, "HS.SPC.MAP.PCT"] <- round(icn2.df[, "HS.SPC.MAP.PCT"], digits = 0)
-icn2.df[, "HS.SPC.FAP.PCT"] <- round(icn2.df[, "HS.SPC.FAP.PCT"], digits = 0)
+# tableVars <- c("FAOST_CODE", "Year", "HS.PCS.DEC.KCD", "HS.PCS.UDEC.KCD",
+#                "HS.PCS.RDEC.KCD", "HS.PCS.MDEC.KCD", "HS.PCS.FDEC.KCD",
+#                "HS.NCDEC.PRT.PCT", "HS.NCDEC.UPRT.PCT", "HS.NCDEC.RPRT.PCT",
+#                "HS.NCDEC.MPRT.PCT", "HS.NCDEC.FPRT.PCT", "HS.NCDEC.FAT.PCT",
+#                "HS.NCDEC.UFAT.PCT", "HS.NCDEC.RFAT.PCT", "HS.NCDEC.MFAT.PCT",
+#                "HS.NCDEC.FFAT.PCT", "HS.NCDEC.CRB.PCT", "HS.NCDEC.UCRB.PCT",
+#                "HS.NCDEC.RCRB.PCT", "HS.NCDEC.MCRB.PCT", "HS.NCDEC.FCRB.PCT",
+#                "HS.SPC.AP.PCT", "HS.SPC.UAP.PCT", "HS.SPC.RAP.PCT", 
+#                "HS.SPC.MAP.PCT", "HS.SPC.FAP.PCT")
+# ## Rounding
+# icn2.df[, "HS.PCS.DEC.KCD"] <- round(icn2.df[, "HS.PCS.DEC.KCD"], digits = 0)
+# icn2.df[, "HS.PCS.UDEC.KCD"] <- round(icn2.df[, "HS.PCS.UDEC.KCD"], digits = 0)
+# icn2.df[, "HS.PCS.RDEC.KCD"] <- round(icn2.df[, "HS.PCS.RDEC.KCD"], digits = 0)
+# icn2.df[, "HS.PCS.MDEC.KCD"] <- round(icn2.df[, "HS.PCS.MDEC.KCD"], digits = 0)
+# icn2.df[, "HS.PCS.FDEC.KCD"] <- round(icn2.df[, "HS.PCS.FDEC.KCD"], digits = 0)
+# 
+# icn2.df[, "HS.NCDEC.PRT.PCT"] <- round(icn2.df[, "HS.NCDEC.PRT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.UPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.UPRT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.RPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.RPRT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.MPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.MPRT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.FPRT.PCT"] <- round(icn2.df[, "HS.NCDEC.FPRT.PCT"], digits = 0)
+# 
+# icn2.df[, "HS.NCDEC.FAT.PCT"] <- round(icn2.df[, "HS.NCDEC.FAT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.UFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.UFAT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.RFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.RFAT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.MFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.MFAT.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.FFAT.PCT"] <- round(icn2.df[, "HS.NCDEC.FFAT.PCT"], digits = 0)
+# 
+# icn2.df[, "HS.NCDEC.CRB.PCT"] <- round(icn2.df[, "HS.NCDEC.CRB.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.UCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.UCRB.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.RCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.RCRB.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.MCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.MCRB.PCT"], digits = 0)
+# icn2.df[, "HS.NCDEC.FCRB.PCT"] <- round(icn2.df[, "HS.NCDEC.FCRB.PCT"], digits = 0)
+# 
+# icn2.df[, "HS.SPC.AP.PCT"] <- round(icn2.df[, "HS.SPC.AP.PCT"], digits = 0)
+# icn2.df[, "HS.SPC.UAP.PCT"] <- round(icn2.df[, "HS.SPC.UAP.PCT"], digits = 0)
+# icn2.df[, "HS.SPC.RAP.PCT"] <- round(icn2.df[, "HS.SPC.RAP.PCT"], digits = 0)
+# icn2.df[, "HS.SPC.MAP.PCT"] <- round(icn2.df[, "HS.SPC.MAP.PCT"], digits = 0)
+# icn2.df[, "HS.SPC.FAP.PCT"] <- round(icn2.df[, "HS.SPC.FAP.PCT"], digits = 0)
 
 # TeX file ----------------------------------------------------------------
 
-tables.df <- 
-  data.frame(Variable = c("Average dietary energy (available for) consumption (kcal/cap/day)", 
-                          "Protein contribution to dietary energy (available for) consumption (%)",
-                          "Fat contribution to dietary energy (available for) consumption (%)",
-                          "Carbohydrate contribution to dietary energy (available for) consumption (%)",
-                          "Share of animal protein in total protein (available for) consumption (%)"),
-#              Title = c("Average dietary energy consumption", 
-#                           "Protein contribution to dietary energy consumption",
-#                           "Fat contribution to dietary energy consumption",
-#                           "Carbohydrate contribution to dietary energy consumption",
-#                           "Share of animal protein in total protein consumption"),
-             National = c("HS.PCS.DEC.KCD", "HS.NCDEC.PRT.PCT", "HS.NCDEC.FAT.PCT",
-                          "HS.NCDEC.CRB.PCT", "HS.SPC.AP.PCT"),
-             Urban = c("HS.PCS.UDEC.KCD", "HS.NCDEC.UPRT.PCT", "HS.NCDEC.UFAT.PCT",
-                       "HS.NCDEC.UCRB.PCT", "HS.SPC.UAP.PCT"),
-             Rural = c("HS.PCS.RDEC.KCD", "HS.NCDEC.RPRT.PCT", "HS.NCDEC.RFAT.PCT",
-                       "HS.NCDEC.RCRB.PCT", "HS.SPC.RAP.PCT"),
-             Male = c("HS.PCS.MDEC.KCD", "HS.NCDEC.MPRT.PCT", "HS.NCDEC.MFAT.PCT",
-                      "HS.NCDEC.MCRB.PCT", "HS.SPC.MAP.PCT"),
-             Female = c("HS.PCS.FDEC.KCD", "HS.NCDEC.FPRT.PCT","HS.NCDEC.FFAT.PCT",
-                        "HS.NCDEC.FCRB.PCT", "HS.SPC.FAP.PCT"),
-             stringsAsFactors = FALSE)
-tables.df[, "Variable"] <- sanitizeToLatex(tables.df[, "Variable"])
-## Create the new .tex file
-fileOut <- paste("./Outputs/HouseholdSurveys.tex", sep = "")
-if(file.exists(fileOut)) file.remove(fileOut)
-file.create(fileOut)
-## This script creates the latex file
-cat("\\renewcommand{\\arraystretch}{1.3}\n",
-    file = fileOut, append = TRUE)
-cat("\\footnotesize\n",
-    file = fileOut, append = TRUE)
-hsc <- 1
-for (t in 1:NROW(tables.df)) {
-#   cat("\\textbf{\\large{", paste0(tables.df[t, "Title"], " from household surveys"), "}} 
-#      \\vspace{7pt}
-#      \\phantomsection
-#      \\addcontentsline{toc}{section}{", paste0(tables.df[t, "Title"], " from household surveys"), "}\n",
-#       file = fileOut, append = TRUE)
-  ## header
-  cat("\\captionof{table}{", tables.df[t, "Variable"], "} \\label{tab:title} 
-      \\begin{tabular}{L{2.0cm} R{0.7cm} R{0.7cm} R{0.7cm} R{0.7cm} R{0.7cm}}
-      \\toprule
-      Country & National & Urban & Rural & Male & Female \\\\
-      \\midrule\n",
-      file = fileOut, append = TRUE)
-  for (cou in 1:NROW(surveys.df)) {
-    national <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
-                          icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "National"]]
-    if (is.na(national)) {
-      national <- ""
-    } else {
-      national <- format(round(national, digits = 0), nsmall = 0, big.mark = ",")
-    }
-    urban <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
-                          icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Urban"]]
-    if (is.na(urban)) {
-      urban <- ""
-    } else {
-      urban <- format(round(urban, digits = 0), nsmall = 0, big.mark = ",")
-    }
-    rural <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
-                          icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Rural"]]
-    if (is.na(rural)) {
-      rural <- ""
-    } else {
-      rural <- format(round(rural, digits = 0), nsmall = 0, big.mark = ",")
-    }
-    male <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
-                          icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Male"]]
-    if (is.na(male)) {
-      male <- ""
-    } else {
-      male <- format(round(male, digits = 0), nsmall = 0, big.mark = ",")
-    }
-    female <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
-                          icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Female"]]
-    if (is.na(female)) {
-      female <- ""
-    } else {
-      female <- format(round(female, digits = 0), nsmall = 0, big.mark = ",")
-    }
-    national <- gsub(pattern = ",", replacement = "\\\\,", x = national)
-    urban <- gsub(pattern = ",", replacement = "\\\\,", x = urban)
-    rural <- gsub(pattern = ",", replacement = "\\\\,", x = rural)
-    male <- gsub(pattern = ",", replacement = "\\\\,", x = male)
-    female <- gsub(pattern = ",", replacement = "\\\\,", x = female)
-    ## table
-    cat("\ \ \ \ \ \ \ ",
-        paste0(surveys.df[cou, "SHORT_NAME"], " (", surveys.df[cou, "Survey"], ")"), 
-        "&", national, "&", urban, "&", rural, "&", male, "&", female, "\\\\\n",
-        file = fileOut, append = TRUE)
-  }    
-  ## tail
-  cat("\ \ \ \ \ \ \ \\toprule
-      \\end{tabular}\n",
-      file = fileOut, append = TRUE)
-  cat("\\clearpage\n\n",
-      file = fileOut, append = TRUE)
-  ## chart
-  cat("\\begin{multicols}{2}\n",
-      file = fileOut, append = TRUE)
-  cat(paste0("\\input{./Captions/Caption_C.P1.HS.1.",hsc,".tex}\n"),
-      file = fileOut, append = TRUE)
-#   cat("\\vspace{-7pt}\n",
-#       file = fileOut, append = TRUE)
-  cat(paste0("\\IfFileExists{./Plots/C.P1.HS.1.",hsc,".pdf}{\\includegraphics[width = 4cm, height = 16cm]{{./Plots/C.P1.HS.1.",hsc,"}.pdf}}{}\n"),
-      file = fileOut, append = TRUE)
-  hsc <- hsc + 1
-  cat(paste0("\\input{./Captions/Caption_C.P1.HS.1.",hsc,".tex}\n"),
-      file = fileOut, append = TRUE)
-#   cat("\\vspace{-7pt}\n",
-#       file = fileOut, append = TRUE)
-  cat(paste0("\\IfFileExists{./Plots/C.P1.HS.1.",hsc,".pdf}{\\includegraphics[width = 4cm, height = 16cm]{{./Plots/C.P1.HS.1.",hsc,"}.pdf}}{}\n"),
-      file = fileOut, append = TRUE)
-  cat("\\end{multicols}\n",
-      file = fileOut, append = TRUE)
-  cat("\\clearpage\n\n",
-      file = fileOut, append = TRUE)
-  hsc <- hsc + 1
-}
-
+# tables.df <- 
+#   data.frame(Variable = c("Average dietary energy (available for) consumption (kcal/cap/day)", 
+#                           "Protein contribution to dietary energy (available for) consumption (%)",
+#                           "Fat contribution to dietary energy (available for) consumption (%)",
+#                           "Carbohydrate contribution to dietary energy (available for) consumption (%)",
+#                           "Share of animal protein in total protein (available for) consumption (%)"),
+# #              Title = c("Average dietary energy consumption", 
+# #                           "Protein contribution to dietary energy consumption",
+# #                           "Fat contribution to dietary energy consumption",
+# #                           "Carbohydrate contribution to dietary energy consumption",
+# #                           "Share of animal protein in total protein consumption"),
+#              National = c("HS.PCS.DEC.KCD", "HS.NCDEC.PRT.PCT", "HS.NCDEC.FAT.PCT",
+#                           "HS.NCDEC.CRB.PCT", "HS.SPC.AP.PCT"),
+#              Urban = c("HS.PCS.UDEC.KCD", "HS.NCDEC.UPRT.PCT", "HS.NCDEC.UFAT.PCT",
+#                        "HS.NCDEC.UCRB.PCT", "HS.SPC.UAP.PCT"),
+#              Rural = c("HS.PCS.RDEC.KCD", "HS.NCDEC.RPRT.PCT", "HS.NCDEC.RFAT.PCT",
+#                        "HS.NCDEC.RCRB.PCT", "HS.SPC.RAP.PCT"),
+#              Male = c("HS.PCS.MDEC.KCD", "HS.NCDEC.MPRT.PCT", "HS.NCDEC.MFAT.PCT",
+#                       "HS.NCDEC.MCRB.PCT", "HS.SPC.MAP.PCT"),
+#              Female = c("HS.PCS.FDEC.KCD", "HS.NCDEC.FPRT.PCT","HS.NCDEC.FFAT.PCT",
+#                         "HS.NCDEC.FCRB.PCT", "HS.SPC.FAP.PCT"),
+#              stringsAsFactors = FALSE)
+# tables.df[, "Variable"] <- sanitizeToLatex(tables.df[, "Variable"])
 # ## Create the new .tex file
 # fileOut <- paste("./Outputs/HouseholdSurveys.tex", sep = "")
 # if(file.exists(fileOut)) file.remove(fileOut)
 # file.create(fileOut)
 # ## This script creates the latex file
-# cat("\\renewcommand{\\arraystretch}{1}\n",
+# cat("\\renewcommand{\\arraystretch}{1.3}\n",
 #     file = fileOut, append = TRUE)
 # cat("\\footnotesize\n",
 #     file = fileOut, append = TRUE)
-# # \\rowcolors{1}{FAOblue!10}{white}
-# for (i in 1:nrow(surveys.df)) {
+# hsc <- 1
+# for (t in 1:NROW(tables.df)) {
+# #   cat("\\textbf{\\large{", paste0(tables.df[t, "Title"], " from household surveys"), "}} 
+# #      \\vspace{7pt}
+# #      \\phantomsection
+# #      \\addcontentsline{toc}{section}{", paste0(tables.df[t, "Title"], " from household surveys"), "}\n",
+# #       file = fileOut, append = TRUE)
 #   ## header
-#   cat("\\captionof{table}{", paste0(surveys.df[i, "SHORT_NAME"], ", ", surveys.df[i, "Survey"]), "} \\label{tab:title} 
-#       \\begin{tabular}{L{2.4cm} R{0.9cm} R{0.5cm} R{0.5cm} R{0.5cm} R{0.9cm}}
+#   cat("\\captionof{table}{", tables.df[t, "Variable"], "} \\label{tab:title} 
+#       \\begin{tabular}{L{2.0cm} R{0.7cm} R{0.7cm} R{0.7cm} R{0.7cm} R{0.7cm}}
 #       \\toprule
-#       & \\multicolumn{1}{C{0.9cm}}{Average dietary energy consumption (kcal/cap/day)} &  \\multicolumn{3}{C{2.3cm}}{Nutrient contribution to dietary energy consumption (\\%)} & \\multicolumn{1}{C{0.9cm}}{Share of animal protein in total protein consumption (\\%)} \\\\
-#       \\cmidrule(r){3-5}
-#        & & Protein & Fat & Carbohydrates & \\\\
+#       Country & National & Urban & Rural & Male & Female \\\\
 #       \\midrule\n",
 #       file = fileOut, append = TRUE)
-#   ## data
-#   tmp.df <- 
-#     icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[i, "FAOST_CODE"] & 
-#               icn2.df[, "Year"] == surveys.df[i, "Year"], tableVars] 
-#   ## table
-#   cat("\\textbf{National} & ", tmp.df[, "HS.PCS.DEC.KCD"], " & ",
-#       tmp.df[, "HS.NCDEC.PRT.PCT"], " & ", tmp.df[, "HS.NCDEC.FAT.PCT"], " & ",
-#       tmp.df[, "HS.NCDEC.CRB.PCT"], " & ", tmp.df[, "HS.SPC.AP.PCT"], "\\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\textbf{Area of residence} & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\ Urban & ", tmp.df[, "HS.PCS.UDEC.KCD"], " & ",
-#       tmp.df[, "HS.NCDEC.UPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.UFAT.PCT"], " & ",
-#       tmp.df[, "HS.NCDEC.UCRB.PCT"], " & ", tmp.df[, "HS.SPC.UAP.PCT"], "\\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\ Rural & ", tmp.df[i, "HS.PCS.RDEC.KCD"], " & ",
-#       tmp.df[, "HS.NCDEC.RPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.RFAT.PCT"], " & ",
-#       tmp.df[, "HS.NCDEC.RCRB.PCT"], " & ", tmp.df[, "HS.SPC.RAP.PCT"], "\\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\textbf{Gender of the head of the household} & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\ Male & ", tmp.df[, "HS.PCS.MDEC.KCD"], " & ",
-#       tmp.df[, "HS.NCDEC.MPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.MFAT.PCT"], " & ",
-#       tmp.df[, "HS.NCDEC.MCRB.PCT"], " & ", tmp.df[, "HS.SPC.MAP.PCT"], "\\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\ Female & ", tmp.df[, "HS.PCS.FDEC.KCD"], " & ",
-#       tmp.df[, "HS.NCDEC.FPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.FFAT.PCT"], " & ",
-#       tmp.df[, "HS.NCDEC.FCRB.PCT"], " & ", tmp.df[, "HS.SPC.FAP.PCT"], "\\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\textbf{The five most consumed food products} & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\", "Product 1", " & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\", "Product 2", " & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\", "Product 3", " & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\", "Product 4", " & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
-#   cat("\t ~ \\", "Product 5", " & & & & & \\\\\n",
-#       file = fileOut, append = TRUE)
+#   for (cou in 1:NROW(surveys.df)) {
+#     national <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
+#                           icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "National"]]
+#     if (is.na(national)) {
+#       national <- ""
+#     } else {
+#       national <- format(round(national, digits = 0), nsmall = 0, big.mark = ",")
+#     }
+#     urban <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
+#                           icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Urban"]]
+#     if (is.na(urban)) {
+#       urban <- ""
+#     } else {
+#       urban <- format(round(urban, digits = 0), nsmall = 0, big.mark = ",")
+#     }
+#     rural <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
+#                           icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Rural"]]
+#     if (is.na(rural)) {
+#       rural <- ""
+#     } else {
+#       rural <- format(round(rural, digits = 0), nsmall = 0, big.mark = ",")
+#     }
+#     male <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
+#                           icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Male"]]
+#     if (is.na(male)) {
+#       male <- ""
+#     } else {
+#       male <- format(round(male, digits = 0), nsmall = 0, big.mark = ",")
+#     }
+#     female <- icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[cou, "FAOST_CODE"] &
+#                           icn2.df[, "Year"] == surveys.df[cou, "Year"], tables.df[t, "Female"]]
+#     if (is.na(female)) {
+#       female <- ""
+#     } else {
+#       female <- format(round(female, digits = 0), nsmall = 0, big.mark = ",")
+#     }
+#     national <- gsub(pattern = ",", replacement = "\\\\,", x = national)
+#     urban <- gsub(pattern = ",", replacement = "\\\\,", x = urban)
+#     rural <- gsub(pattern = ",", replacement = "\\\\,", x = rural)
+#     male <- gsub(pattern = ",", replacement = "\\\\,", x = male)
+#     female <- gsub(pattern = ",", replacement = "\\\\,", x = female)
+#     ## table
+#     cat("\ \ \ \ \ \ \ ",
+#         paste0(surveys.df[cou, "SHORT_NAME"], " (", surveys.df[cou, "Survey"], ")"), 
+#         "&", national, "&", urban, "&", rural, "&", male, "&", female, "\\\\\n",
+#         file = fileOut, append = TRUE)
+#   }    
 #   ## tail
 #   cat("\ \ \ \ \ \ \ \\toprule
-#       \\end{tabular}\n\n",
+#       \\end{tabular}\n",
 #       file = fileOut, append = TRUE)
-#   ## spacing
-#   cat("\\vspace{50pt}",
+#   cat("\\clearpage\n\n",
 #       file = fileOut, append = TRUE)
-#   ## clearpage
-#   if (i %% 2 == 0) {
-#     cat("\\clearpage",
-#         file = fileOut, append = TRUE)
-#   }
+#   ## chart
+#   cat("\\begin{multicols}{2}\n",
+#       file = fileOut, append = TRUE)
+#   cat(paste0("\\input{./Captions/Caption_C.P1.HS.1.",hsc,".tex}\n"),
+#       file = fileOut, append = TRUE)
+# #   cat("\\vspace{-7pt}\n",
+# #       file = fileOut, append = TRUE)
+#   cat(paste0("\\IfFileExists{./Plots/C.P1.HS.1.",hsc,".pdf}{\\includegraphics[width = 4cm, height = 16cm]{{./Plots/C.P1.HS.1.",hsc,"}.pdf}}{}\n"),
+#       file = fileOut, append = TRUE)
+#   hsc <- hsc + 1
+#   cat(paste0("\\input{./Captions/Caption_C.P1.HS.1.",hsc,".tex}\n"),
+#       file = fileOut, append = TRUE)
+# #   cat("\\vspace{-7pt}\n",
+# #       file = fileOut, append = TRUE)
+#   cat(paste0("\\IfFileExists{./Plots/C.P1.HS.1.",hsc,".pdf}{\\includegraphics[width = 4cm, height = 16cm]{{./Plots/C.P1.HS.1.",hsc,"}.pdf}}{}\n"),
+#       file = fileOut, append = TRUE)
+#   cat("\\end{multicols}\n",
+#       file = fileOut, append = TRUE)
+#   cat("\\clearpage\n\n",
+#       file = fileOut, append = TRUE)
+#   hsc <- hsc + 1
 # }
-
-###########################################################################
-## Metadata
-###########################################################################
-
-# # Definitions -------------------------------------------------------------
 # 
-# definitions.df <- 
-#   read.csv(file = "./Data/Processed/Definitions.csv", , nrows = 71,
-#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
-# definitions.df<- arrange(definitions.df, LABEL)
-# definitions.df[, "LABEL"] <- 
-#   sanitizeToLatex(definitions.df[, "LABEL"])
-# definitions.df[, "DEFINITION"] <- 
-#   sanitizeToLatex(definitions.df[, "DEFINITION"])
-# 
-# # TeX file ----------------------------------------------------------------
-# 
-# ## Create the new .tex file
-# fileOut <- paste("./Outputs/Metadata.tex", sep = "")
-# if(file.exists(fileOut)) file.remove(fileOut)
-# file.create(fileOut)
-# ## This script creates the latex file
+# # ## Create the new .tex file
+# # fileOut <- paste("./Outputs/HouseholdSurveys.tex", sep = "")
+# # if(file.exists(fileOut)) file.remove(fileOut)
+# # file.create(fileOut)
+# # ## This script creates the latex file
 # # cat("\\renewcommand{\\arraystretch}{1}\n",
 # #     file = fileOut, append = TRUE)
-# cat("\\begin{MetadataCollection}\n\n",
-#     file = fileOut, append = TRUE)
-# cat("\\twocolumn\n\n",
-#     file = fileOut, append = TRUE)
-# cat("\\LARGE\n\n",
-#     file = fileOut, append = TRUE)
-# cat("\\textbf{Definitions}\n\n",
-#     file = fileOut, append = TRUE)
-# cat("\\footnotesize\n\n",
-#     file = fileOut, append = TRUE)
-# for (i in 1:NROW(definitions.df)) {
-#   cat("\\begin{metadata}{", definitions.df[i, "LABEL"], "}{", definitions.df[i, "STS_ID"], "}\n",
-#       file = fileOut, append = TRUE)
-#   cat(definitions.df[i, "DEFINITION"], "\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\source{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "SOURCE"]), "}\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\owner{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "OWNER"]), "}\n",
-#       file = fileOut, append = TRUE)
-#   cat("\\end{metadata}\n\n",
-#       file = fileOut, append = TRUE)
-# }
-# cat("\\end{MetadataCollection}\n",
-#     file = fileOut, append = TRUE)
+# # cat("\\footnotesize\n",
+# #     file = fileOut, append = TRUE)
+# # # \\rowcolors{1}{FAOblue!10}{white}
+# # for (i in 1:nrow(surveys.df)) {
+# #   ## header
+# #   cat("\\captionof{table}{", paste0(surveys.df[i, "SHORT_NAME"], ", ", surveys.df[i, "Survey"]), "} \\label{tab:title} 
+# #       \\begin{tabular}{L{2.4cm} R{0.9cm} R{0.5cm} R{0.5cm} R{0.5cm} R{0.9cm}}
+# #       \\toprule
+# #       & \\multicolumn{1}{C{0.9cm}}{Average dietary energy consumption (kcal/cap/day)} &  \\multicolumn{3}{C{2.3cm}}{Nutrient contribution to dietary energy consumption (\\%)} & \\multicolumn{1}{C{0.9cm}}{Share of animal protein in total protein consumption (\\%)} \\\\
+# #       \\cmidrule(r){3-5}
+# #        & & Protein & Fat & Carbohydrates & \\\\
+# #       \\midrule\n",
+# #       file = fileOut, append = TRUE)
+# #   ## data
+# #   tmp.df <- 
+# #     icn2.df[icn2.df[, "FAOST_CODE"] == surveys.df[i, "FAOST_CODE"] & 
+# #               icn2.df[, "Year"] == surveys.df[i, "Year"], tableVars] 
+# #   ## table
+# #   cat("\\textbf{National} & ", tmp.df[, "HS.PCS.DEC.KCD"], " & ",
+# #       tmp.df[, "HS.NCDEC.PRT.PCT"], " & ", tmp.df[, "HS.NCDEC.FAT.PCT"], " & ",
+# #       tmp.df[, "HS.NCDEC.CRB.PCT"], " & ", tmp.df[, "HS.SPC.AP.PCT"], "\\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\textbf{Area of residence} & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\ Urban & ", tmp.df[, "HS.PCS.UDEC.KCD"], " & ",
+# #       tmp.df[, "HS.NCDEC.UPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.UFAT.PCT"], " & ",
+# #       tmp.df[, "HS.NCDEC.UCRB.PCT"], " & ", tmp.df[, "HS.SPC.UAP.PCT"], "\\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\ Rural & ", tmp.df[i, "HS.PCS.RDEC.KCD"], " & ",
+# #       tmp.df[, "HS.NCDEC.RPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.RFAT.PCT"], " & ",
+# #       tmp.df[, "HS.NCDEC.RCRB.PCT"], " & ", tmp.df[, "HS.SPC.RAP.PCT"], "\\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\textbf{Gender of the head of the household} & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\ Male & ", tmp.df[, "HS.PCS.MDEC.KCD"], " & ",
+# #       tmp.df[, "HS.NCDEC.MPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.MFAT.PCT"], " & ",
+# #       tmp.df[, "HS.NCDEC.MCRB.PCT"], " & ", tmp.df[, "HS.SPC.MAP.PCT"], "\\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\ Female & ", tmp.df[, "HS.PCS.FDEC.KCD"], " & ",
+# #       tmp.df[, "HS.NCDEC.FPRT.PCT"], " & ", tmp.df[, "HS.NCDEC.FFAT.PCT"], " & ",
+# #       tmp.df[, "HS.NCDEC.FCRB.PCT"], " & ", tmp.df[, "HS.SPC.FAP.PCT"], "\\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\textbf{The five most consumed food products} & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\", "Product 1", " & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\", "Product 2", " & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\", "Product 3", " & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\", "Product 4", " & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\t ~ \\", "Product 5", " & & & & & \\\\\n",
+# #       file = fileOut, append = TRUE)
+# #   ## tail
+# #   cat("\ \ \ \ \ \ \ \\toprule
+# #       \\end{tabular}\n\n",
+# #       file = fileOut, append = TRUE)
+# #   ## spacing
+# #   cat("\\vspace{50pt}",
+# #       file = fileOut, append = TRUE)
+# #   ## clearpage
+# #   if (i %% 2 == 0) {
+# #     cat("\\clearpage",
+# #         file = fileOut, append = TRUE)
+# #   }
+# # }
 # 
-###########################################################################
-## End
-###########################################################################
+# ###########################################################################
+# ## Metadata
+# ###########################################################################
+# 
+# # # Definitions -------------------------------------------------------------
+# # 
+# # definitions.df <- 
+# #   read.csv(file = "./Data/Processed/Definitions.csv", , nrows = 71,
+# #            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+# # definitions.df<- arrange(definitions.df, LABEL)
+# # definitions.df[, "LABEL"] <- 
+# #   sanitizeToLatex(definitions.df[, "LABEL"])
+# # definitions.df[, "DEFINITION"] <- 
+# #   sanitizeToLatex(definitions.df[, "DEFINITION"])
+# # 
+# # # TeX file ----------------------------------------------------------------
+# # 
+# # ## Create the new .tex file
+# # fileOut <- paste("./Outputs/Metadata.tex", sep = "")
+# # if(file.exists(fileOut)) file.remove(fileOut)
+# # file.create(fileOut)
+# # ## This script creates the latex file
+# # # cat("\\renewcommand{\\arraystretch}{1}\n",
+# # #     file = fileOut, append = TRUE)
+# # cat("\\begin{MetadataCollection}\n\n",
+# #     file = fileOut, append = TRUE)
+# # cat("\\twocolumn\n\n",
+# #     file = fileOut, append = TRUE)
+# # cat("\\LARGE\n\n",
+# #     file = fileOut, append = TRUE)
+# # cat("\\textbf{Definitions}\n\n",
+# #     file = fileOut, append = TRUE)
+# # cat("\\footnotesize\n\n",
+# #     file = fileOut, append = TRUE)
+# # for (i in 1:NROW(definitions.df)) {
+# #   cat("\\begin{metadata}{", definitions.df[i, "LABEL"], "}{", definitions.df[i, "STS_ID"], "}\n",
+# #       file = fileOut, append = TRUE)
+# #   cat(definitions.df[i, "DEFINITION"], "\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\source{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "SOURCE"]), "}\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\owner{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "OWNER"]), "}\n",
+# #       file = fileOut, append = TRUE)
+# #   cat("\\end{metadata}\n\n",
+# #       file = fileOut, append = TRUE)
+# # }
+# # cat("\\end{MetadataCollection}\n",
+# #     file = fileOut, append = TRUE)
+# # 
+# ###########################################################################
+# ## End
+# ###########################################################################

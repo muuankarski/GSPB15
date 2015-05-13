@@ -19,9 +19,7 @@
 \usepackage{booktabs}
 %\usepackage[document]{ragged2e}
 
-%\usepackage{titlesec}
 
-% \titleformat*{\section}{\Large\bfseries}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -41,6 +39,15 @@
 
 %% Set the strip width
 \faoset{stripwidth=7.2mm}
+
+%% Trying to control the TOC
+% \usepackage{tocloft}
+% \renewcommand\cftchapfont{\normalsize\bfseries}
+% \renewcommand\cftsecfont{\normalsize}
+
+%\usepackage{titlesec}
+% \titleformat*{\section}{\Large\bfseries}
+
 
 \begin{document}
 \faoset{bgcolor=white}\selectcolor
@@ -79,9 +86,12 @@
 \includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./GSPB15disclamerPage.pdf}
 \fi
 
+
+
 %% Prelims
 \tableofcontents
-\clearpage
+% \clearpage % commented because of the font size issue
+
 
 % Asetetaan koko raportin laajuiset parametrit knitr:lle
 <<setup, echo=FALSE>>=
@@ -134,15 +144,15 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 @
 
 
-% \newpage
-% \pagecolor{FAOblue}
-% \thispagestyle{empty}
-% \mbox{}
-% \newpage
-% \thispagestyle{empty}
-% \mbox{}
-% \clearpage
-% \pagecolor{white}
+\newpage
+\pagecolor{FAOblue}
+\thispagestyle{empty}
+\mbox{}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+\pagecolor{white}
 
 %%% COUNTRY DATA
 \newpart{FAOblue}
@@ -152,7 +162,7 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 \parindent=0pt
 \parskip=\medskipamount
 \hangafter=-2
-\input{./CountryProfiles/CountryProfiles.tex}
+\input{./Tables/CountryProfiles.tex}
 
 %%% METADATA
 \newpart{white}
