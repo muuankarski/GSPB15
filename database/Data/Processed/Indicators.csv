@@ -1,0 +1,51 @@
+PART,ORDER,INDICATOR1,INDICATOR2,INDICATOR3,SERIES_NAME_SHORT,MULTIPLIER,DIGITS
+Setting,1,OA.TPBS.POP.P,,,Total population (mln),million,1
+Setting,2,OA.TPR.POP.P,,,Rural population (mln),million,1
+Setting,3,NY.GDP.PCAP.PP.KD,,,"GDP per capita, PPP (const. 2011 I$)",,1
+Setting,4,SH.DYN.MORT,,,"Mortality rate, under-5 (per 1 000 live births)",,1
+Setting,5,SP.DYN.LE00.IN,,,Life expectancy at birth (years),,1
+Setting,6,SH.H2O.SAFE.ZS,,,Improved water source (%  pop.),,1
+Setting,7,SH.STA.ACSN,,,Improved sanitation facilities (% of pop.),,2
+Setting,8,WSS.SAN.OD.PCT,,,Open defecation (%),,1
+Setting,9,SH.DTH.COMM.ZS,SH.DTH.NCOM.ZS,SH.DTH.INJR.ZS,Cause of death (%),,1
+Anthropometry,10,SH.STA.BRTW.ZS,,,Low-birthweight babies (% of births),,1
+Anthropometry,11,SH.STA.WAST.MA.ZS,SH.STA.WAST.FE.ZS,,"Wasting, children under-5 (M/F, %)",,1
+Anthropometry,12,SH.SVR.WAST.MA.ZS,SH.SVR.WAST.FE.ZS,,"Severe wasting, children under-5 (M/F, %)",,1
+Anthropometry,13,SH.STA.STNT.MA.ZS,SH.STA.STNT.FE.ZS,,"Stunting, children under-5 (M/F, %)",,1
+Anthropometry,14,SH.STA.MALN.MA.ZS,SH.STA.MALN.FE.ZS,,"Underweight, children under-5 (M/F, %)",,1
+Anthropometry,16,SH.STA.AMALN.ZS,,,"Underweight, adults (%)",,1
+Anthropometry,15,SH.STA.OWGH.MA.ZS,SH.STA.OWGH.FE.ZS,,"Overweight, children (M/F, %)",,1
+Anthropometry,18,N.A.OOMA.PCT,N.A.OOFE.PCT,,"Overweight and obesity, adults (M/F, %)",,1
+Anthropometry,17,AV3YPCO.DISS,,,Prevalence of food over-acquisition (%)*,,1
+Nutritional deficiencies,19,SH.PRG.ANEM,SH.ANM.NPRG.ZS,,"Anemia, women (pregnant/non-pregnant, %)",,1
+Nutritional deficiencies,20,SH.ANM.CHLD.ZS,,,"Anemia, children under-5 (%)",,1
+Nutritional deficiencies,21,VITAMINA,,,"Vitamin A deficiency, total pop. (%)",,1
+Nutritional deficiencies,22,IODINE,,,"Iodine deficiency, children (%)",,1
+Nutritional deficiencies,23,AV3YPOU.DISS,,,Prevalence of undernourishment (%)*,,1
+Nutritional deficiencies,24,AV3YNOU.DISS,,,Number of people undernourished (mln)*,million,1
+Nutritional deficiencies,25,AV3YDoFD.DISS,,,Depth of food decifit (kcal/cap/day)*,,0
+Supplementation,26,SN.ITK.VITA.ZS,,,"Vitamin A suppl., children 6-59 mths. (%)",,1
+Supplementation,27,SN.ITK.SALT.ZS,,,Iodized salt consumption (% of households),,1
+Diet,28,SH.STA.BFED.ZS,,,"Exclusive breastfeeding, children < 6 mths. (%)",,1
+Diet,29,N.D.MDDIYC.PCT,,,"Min. dietary diversity, inf. and young child. (%)",,1
+Diet,30,N.D.MMFIYC.PCT,,,"Min. meal frequency, inf. and young child. (%)",,1
+Diet,31,AV3YDES.DISS,,,Dietary energy supply (kcal/cap/day)*,,0
+Diet,32,AV3YADESA.DISS,,,Average dietary energy supply adequacy (%)*,,0
+Diet,33,FB.PSQ.GT.GCD.AV3Y.DISS,,,Average protein supply (g/cap/day)*,,0
+Diet,34,FB.PSQ.AO.GCD.AV3Y.DISS,,,Average supply of animal protein (g/cap/day)*,,0
+Diet,35,FB.FSQ.GT.GCD.AV3Y.DISS,,,Average fat supply (g/cap/day)*,,0
+Share of dietary energy supply,36,FBS.SDES.CRLS.PCT3D,,,Cereals - excluding beer (%)*,,1
+Share of dietary energy supply,37,FBS.SDES.SR.PCT3D,,,Starchy roots (%)*,,1
+Share of dietary energy supply,38,FBS.SDES.SS.PCT3D,,,Sugar and sweeteners (%)*,,1
+Share of dietary energy supply,39,FBS.SDES.PLS.PCT3D,,,Pulses (%)*,,1
+Share of dietary energy supply,40,FBS.SDES.TRNT.PCT3D,,,Treenuts (%)*,,1
+Share of dietary energy supply,41,FBS.SDES.OCRPS.PCT3D,,,Oilcrops (%)*,,1
+Share of dietary energy supply,42,FBS.SDES.VGT.PCT3D,,,Vegetables (%)*,,1
+Share of dietary energy supply,43,FBS.SDES.FEW.PCT3D,,,Fruits - excluding wine (%)*,,1
+Share of dietary energy supply,44,FBS.SDES.AB.PCT3D,,,Alcoholic beverages (%)*,,1
+Share of dietary energy supply,45,FBS.SDES.STM.PCT3D,,,Stimulants (%)*,,1
+Share of dietary energy supply,46,FBS.SDES.MO.PCT3D,,,Meat and offals (%)*,,1
+Share of dietary energy supply,47,FBS.SDES.VOAF.PCT3D,,,Vegetable oils and animal fats (%)*,,1
+Share of dietary energy supply,48,FBS.SDES.FISHAP.PCT3D,,,"Fish, seafood and aquatic products (%)*",,1
+Share of dietary energy supply,49,FBS.SDES.MEB.PCT3D,,,Milk - excluding butter (%)*,,1
+Share of dietary energy supply,50,FBS.SDES.EGG.PCT3D,,,Eggs (%)*,,1
