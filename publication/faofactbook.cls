@@ -131,6 +131,12 @@ left=1cm, right=1cm, twoside}{geometry}
     \Huge \bfseries  #1\par\nobreak
     \vskip 20\p@
   }}
+
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Define the Table of Contents
+% ---------------------------------------------------------------------------------                                   
+
 \def\newpart#1{\clearpage
   \arrayrulecolor{#1}%
   \faoset{bgcolor=#1}\selectcolor
@@ -146,15 +152,13 @@ left=1cm, right=1cm, twoside}{geometry}
                                    {8\p@}%
                                    {1sp}%
                                    {\normalfont\bfseries}}
-% ---------------------------------------------------------------------------------
-% ---------------------------------------------------------------------------------
-% Define the Table of Contents
-% ---------------------------------------------------------------------------------                                   
+
 \def\tableofcontents{\cleardoublepage
   \@makeschapterhead{Contents}%
   \@mkboth{\MakeUppercase\contentsname}%
   {\MakeUppercase\contentsname}%
   \@starttoc{toc}}
+
 \renewcommand*\l@section[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty{-\@highpenalty}%
@@ -170,17 +174,20 @@ left=1cm, right=1cm, twoside}{geometry}
          \everypar{\global\@nobreakfalse\everypar{}}%
     \endgroup
   \fi}
+
 \def\@draw@tocrule@section{\@fao@tocrule@height=\pagetotal
   \advance\@fao@tocrule@height-\@fao@tocrule@start
   \advance\@fao@tocrule@height5\p@
   \bgroup\parskip\z@\small
   \raisebox{\baselineskip}[\z@][\z@]{\parbox[b][\z@]{\z@}{\hspace*{240\p@}\color{@bgcolor}\rule{21\p@}{\@fao@tocrule@height}}}%
   \par\vspace{-\baselineskip}\egroup}
+
 \def\listofcountries{{\twocolumn[\@makeschapterhead{List of
       Countries}]}%
   \@mkboth{\MakeUppercase\indexname}%
   {\MakeUppercase\indexname}%
   \@starttoc{loc}}
+
 \newcommand*\l@country[2]{
     \addpenalty\@secpenalty
     \setlength\@tempdima{1.5em}%
