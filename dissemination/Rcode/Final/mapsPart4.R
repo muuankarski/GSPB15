@@ -51,6 +51,10 @@ export_map <- function(manual_text = "Default map caption") {
 # -------------------------------------------------------------------------
 
 
+###########################################################################
+## LAND
+###########################################################################
+
 
 # M.P4.LAND.1.6 -----------------------------------------------------------
 # Rural population, share of total population
@@ -64,160 +68,62 @@ assign(mapInfo$mapName,
 ## export the map
 export_map(manual_text = "This is LAND")
 
-# M.P1.ECON.1.6 -----------------------------------------------------------
-# Value added in agriculture as share of GDP
+
+###########################################################################
+## WATER
+###########################################################################
 
 ## Map info
-mapInfo <- map_info(mapName = "M.P1.ECON.1.6", data = sybMaps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName,
        meta_plot_map()
 )
 ## export the map
-export_map()
+export_map(manual_text = "This is WATER")
 
 
 
-# M_P1.OVER.1.10 -----------------------------------------------------------------------------
+###########################################################################
+## ENERGY
+###########################################################################
 
+# ## Map info
+# mapInfo <- map_info(mapName = "M.P4.ENER.1.6", data = sybMaps.df, mapArea = "Territory")
+# ## Create the map
+# assign(mapInfo$mapName,
+#        meta_plot_map()
+# )
+# ## export the map
+# export_map(manual_text = "This is ENERGY")
+
+
+###########################################################################
+## FORESTRY
+###########################################################################
 
 ## Map info
-mapInfo <-  map_info(mapName = "M_P1.OVER.1.10", data = gsyb15Maps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P4.FOR.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName,
        meta_plot_map()
 )
 ## export the map
-export_map()
+export_map(manual_text = "This is FORESTRY")
 
-# M_P1.OVER.1.11 -----------------------------------------------------------------------------
+
+
+
+###########################################################################
+## CLIMATE CHANGE
+###########################################################################
 
 
 ## Map info
-mapInfo <- map_info(mapName = "M_P1.OVER.1.11", data = gsyb15Maps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P4.CC.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName,
        meta_plot_map()
 )
 ## export the map
-export_map()
-
-
-
-# M_P1.ECON.1.5 -----------------------------------------------------------------------------
-
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.ECON.1.5", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-
-# M_P1.ECON.1.6 -----------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.ECON.1.6", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-# M_P1.LAWA.1.4 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LAWA.1.4", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-
-# M_P1.LAWA.1.9 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LAWA.1.9", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-
-# M_P1.LAWA.1.10 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LAWA.1.10", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)## export the map
-export_map()
-
-
-
-# M_P1.LABO.1.4 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LABO.1.4", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-# M_P1.LABO.1.5 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LABO.1.5", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-
-# M_P1.LABO.1.6 -----------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.LABO.1.6", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-
-
-# M_P1.INPU.1.4 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.INPU.1.4", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
-
-# M_P1.INPU.1.5 -------------------------------------------------------------------------------
-
-## Map info
-mapInfo <- map_info(mapName = "M_P1.INPU.1.5", data = gsyb15Maps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName,
-       meta_plot_map()
-)
-## export the map
-export_map()
+export_map(manual_text = "This is climate change")
