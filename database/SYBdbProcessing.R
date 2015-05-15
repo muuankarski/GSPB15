@@ -16,11 +16,11 @@
 
 # R version ---------------------------------------------------------------
 
-rVersion <- R.Version()
-if (rVersion$major != 3 | rVersion$minor != 1.3) {
-  stop("The script is developed under the 3.1.3 R version.")
-}
-rm(rVersion)
+# rVersion <- R.Version()
+# if (rVersion$major != 3 | rVersion$minor != 2.0) {
+#   stop("The script is developed under the 3.2.0 R version.")
+# }
+# rm(rVersion)
 
 # Needed libraries --------------------------------------------------------
 
@@ -89,7 +89,7 @@ save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
 
 # Parameters --------------------------------------------------------------
 
-downloadWB <- FALSE; CheckLogical(downloadWB)
+downloadWB <- TRUE; CheckLogical(downloadWB)
 
 ###########################################################################
 ## Data collection
@@ -98,26 +98,26 @@ downloadWB <- FALSE; CheckLogical(downloadWB)
 # Download variables from FAOSTAT, parameters -----------------------------
 
 faostatData.df <- meta.lst[["FAOSTAT"]]
-dwnldOA <- FALSE # Population
-dwnldRL <- FALSE # Resources, Resources - Land
-dwnldRF <- FALSE # Resources - Fertilizers
-dwnldRP <- FALSE # Resources - Pesticides
-dwnldCS <- FALSE # Investments - Capital stock
-dwnldRM <- FALSE # Investments - Machinery
-dwnldIG <- FALSE # Government expenditures
-dwnldA <- FALSE # ASTI
-dwnldQC <- FALSE # Production - Crops
-dwnldQA <- FALSE # Production - Live animals
-dwnldQD <- FALSE # Production - Crops processed
-dwnldQL <- FALSE # Production - Livestock primary
-dwnldQP <- FALSE # Production - Livestock processed
-dwnldQV <- FALSE # Production - Value of agricultural production
-dwnldQI <- FALSE # Production indices
-dwnldTP <- FALSE # Trade - Crops and livestock products
-dwnldTI <- FALSE # Trade - Trade indices
-dwnldFO <- FALSE # Forestry
-dwnldGHG <- FALSE # Greenhouse gases
-dwnldFB <- FALSE # Food balance sheets
+dwnldOA <- TRUE # Population
+dwnldRL <- TRUE # Resources, Resources - Land
+dwnldRF <- TRUE # Resources - Fertilizers
+dwnldRP <- TRUE # Resources - Pesticides
+dwnldCS <- TRUE # Investments - Capital stock
+dwnldRM <- TRUE # Investments - Machinery
+dwnldIG <- TRUE # Government expenditures
+dwnldA <- TRUE # ASTI
+dwnldQC <- TRUE # Production - Crops
+dwnldQA <- TRUE # Production - Live animals
+dwnldQD <- TRUE # Production - Crops processed
+dwnldQL <- TRUE # Production - Livestock primary
+dwnldQP <- TRUE # Production - Livestock processed
+dwnldQV <- TRUE # Production - Value of agricultural production
+dwnldQI <- TRUE # Production indices
+dwnldTP <- TRUE # Trade - Crops and livestock products
+dwnldTI <- TRUE # Trade - Trade indices
+dwnldFO <- TRUE # Forestry
+dwnldGHG <- TRUE # Greenhouse gases
+dwnldFB <- TRUE # Food balance sheets
 
 
 
