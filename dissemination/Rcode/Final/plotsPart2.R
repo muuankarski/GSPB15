@@ -1,13 +1,13 @@
 ###########################################################################
-## GSYB15: Plots and minitables for part 4
+## GSYB15: Plots and minitables for part 2
 ###########################################################################
 
-# Colors part 4 -----------------------------------------------------------
+# Colors part 2 -----------------------------------------------------------
 
-colPart4 <- plot_colors(part = 4, 12)
-col.main1 <- colPart4[["Main"]][1]
+colPart2 <- plot_colors(part = 2, 12)
+col.main1 <- colPart2[["Main"]][1]
 ## color for the grid
-col.main2 <- colPart4[["Main"]][2]
+col.main2 <- colPart2[["Main"]][2]
 source("./dissemination/Rcode/Final/theme_functions/theme.R")
 
 # Export the plot
@@ -42,41 +42,54 @@ export_plot <- function(manual_text =  "Add something here!", placement) {
 }
 
 ###########################################################################
-## LAND
+## UNDERNOURISHED
+###########################################################################
+
+###########################################################################
+## ANTROPOMETRIC
+###########################################################################
+
+###########################################################################
+## POVERTY
+###########################################################################
+
+
+###########################################################################
+## AVAILABILITY
 ###########################################################################
 
 
 # ----------------------------------------------------------------------- #
 # Land area
 
-## Info
-plotInfo <- plot_info(plotName = "C.P4.LAND.1.2")
-
-## Plot
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
-       )
-)
-## Export the plot
-export_plot(manual_text = "This is LAND", placement = "tr")
+# ## Info
+# plotInfo <- plot_info(plotName = "C.P2.LAND.1.2")
+# 
+# ## Plot
+# assign(plotInfo$plotName,
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                                     Area %in% c(plotInfo$plotArea)")),
+#                 data = sybdata.df,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+#        )
+# )
+# ## Export the plot
+# export_plot(manual_text = "This is LAND", placement = "tr")
 
 # ----------------------------------------------------------------------- #
-# Arable land per capita, top 20 countries
+# Energy supply derived from cereals, roots and tubers
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P4.LAND.1.3")
+plotInfo <- plot_info(plotName = "C.P2.AV.1.3")
 ## Plot
 
 assign(plotInfo$plotName,
@@ -96,14 +109,98 @@ assign(plotInfo$plotName,
                 )  # extras
 )
 ## Export the plot
-export_plot(manual_text = "This is LAND",placement="l")
+export_plot(manual_text = "Energy supply derived from cereals, roots and tubers",placement="l")
 
 
 # ----------------------------------------------------------------------- #
-# Arable land per capita, top 20 countries
+# Protein supply quantity, grand total, 3 year averages
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P4.LAND.1.4")
+plotInfo <- plot_info(plotName = "C.P2.AV.1.4")
+## Plot
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+)
+## Export the plot
+export_plot(manual_text = "Protein supply quantity, grand total, 3 year averages",placement="r")
+
+
+# ----------------------------------------------------------------------- #
+# Protein of animal origin, 3 year averages
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.AV.1.5")
+## Plot
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+)
+
+## Export the plot
+export_plot(manual_text = "Protein of animal origin, 3 year averages", placement = "b")
+
+###########################################################################
+## ACCESS
+###########################################################################
+
+# ----------------------------------------------------------------------- #
+# Depth of food decifit, 3 year averages
+
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
+## Plot
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
+                )  # extras
+)
+## Export the plot
+export_plot(manual_text = "Depth of food decifit, 3 year averages",placement="tr")
+
+
+# ----------------------------------------------------------------------- #
+# Domestic food price level index 
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.3")
 ## Plot
 
 assign(plotInfo$plotName,
@@ -118,15 +215,45 @@ assign(plotInfo$plotName,
                 x_lab = plotInfo$xPlotLab,
                 y_lab = plotInfo$yPlotLab,
                 legend_lab = subset(meta.lst$FULL,
-                                   subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
-)
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
+                )
+                )
 ## Export the plot
-export_plot(manual_text = "This is LAND",placement="r")
+export_plot(manual_text = "Domestic food price level index",placement="l")
 
 
 # ----------------------------------------------------------------------- #
-# Agricultural area
+# Prevalence of food inadequacy, 3 year averages
+
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.5")
+## Plot
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+       )
+)
+
+## Export the plot
+export_plot(manual_text = "This is LAND", placement = "r")
+
+
+# ----------------------------------------------------------------------- #
+# Prevalence of food inadequacy, 3 year averages
+
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.LAND.1.5")
@@ -150,90 +277,6 @@ assign(plotInfo$plotName,
 
 ## Export the plot
 export_plot(manual_text = "This is LAND", placement = "b")
-
-###########################################################################
-## WATER
-###########################################################################
-
-# ----------------------------------------------------------------------- #
-# Total water withdrawal per capita, highest 20
-
-
-## Info
-plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
-## Plot
-
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                #                 legend_lab = subset(meta.lst$FULL,
-                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-                )  # extras
-)
-## Export the plot
-export_plot(manual_text = "This is WATER left",placement="l")
-
-
-# ----------------------------------------------------------------------- #
-# Freshwater withdrawal by agricultural sector, share of total, highest 20
-
-## Info
-plotInfo <- plot_info(plotName = "C.P4.WATER.1.4")
-## Plot
-
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
-                )
-## Export the plot
-export_plot(manual_text = "This is WATER right",placement="r")
-
-
-# ----------------------------------------------------------------------- #
-# Saline soils ????
-
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P4.LAND.1.5")
-# ## Plot
-# assign(plotInfo$plotName,
-#        plot_syb(x = plotInfo$xAxis,
-#                 y = plotInfo$yAxis,
-#                 group = plotInfo$group,
-#                 type = plotInfo$plotType,
-#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-#                                     Area %in% c(plotInfo$plotArea)")),
-#                 data = sybdata.df,
-#                 scale = plotInfo$scaling,
-#                 x_lab = plotInfo$xPlotLab,
-#                 y_lab = plotInfo$yPlotLab,
-#                 legend_lab = subset(meta.lst$FULL,
-#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
-#        )
-# )
-# 
-# ## Export the plot
-# export_plot(manual_text = "This is LAND", placement = "b")
 
 
 ###########################################################################

@@ -20,40 +20,40 @@ source('~/btsync/fao_sync/pocketbooks/GSPB15/publication/latex_charts.R')
 %% Population %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<population:draft, eval=TRUE, results='asis'>>=
-chart_spread2(title="Population",                # Amy you could specify here
-            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
-            RightTextCode="C.P1.OVER.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.OVER.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.OVER.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.OVER.1.5", # Amy you could specify here
-            MapCode="M.P1.OVER.1.6"         # Amy you could specify here
+chart_spread2(title="Population",                
+            LeftTextCode="TXT.P1.IAF.1.1",  
+            RightTextCode="C.P1.OVER.1.2",   
+            LeftChartCode="C.P1.OVER.1.3",   
+            RightChartCode="C.P1.OVER.1.4",  
+            BottomChartCode="C.P1.OVER.1.5", 
+            MapCode="M.P1.OVER.1.6"         
             )
 @
 
 
 
 <<economy, eval=TRUE, results='asis'>>=
-chart_spread2(title="Economy",                # Amy you could specify here
-            LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            MapCode="M.P1.ECON.1.6")         # Amy you could specify here
+chart_spread2(title="Economy",                
+            LeftTextCode="TXT.P1.ECON.1.1",  
+            RightTextCode="C.P1.ECON.1.2",   
+            LeftChartCode="C.P1.ECON.1.3",   
+            RightChartCode="C.P1.ECON.1.4",  
+            BottomChartCode="C.P1.ECON.1.5", 
+            MapCode="M.P1.ECON.1.6")         
 @
 
 
 %% Population %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<population, eval=FALSE>>=
-chart_spread(title="Population",                               # Amy you could specify here
-            LeftTextCode="P1.OVER.1.1",                        # Amy you could specify here
-            RightTextCode="MT.P1.OVER.1.2",                    # Amy you could specify here
-            footnoteRight="Data after 2010 are projections.",  # Amy you could specify here
-            LeftChartCode="C.P1.OVER.1.2",                     # Amy you could specify here
-            RightChartCode="C.P1.OVER.1.3",                    # Amy you could specify here
-            BottomChartCode="C.P1.OVER.1.4",                   # Amy you could specify here
-            MapCode="M.P1.OVER.1.6")                           # Amy you could specify here
+chart_spread(title="Population",                               
+            LeftTextCode="P1.OVER.1.1",                        
+            RightTextCode="MT.P1.OVER.1.2",                    
+            footnoteRight="Data after 2010 are projections.",  
+            LeftChartCode="C.P1.OVER.1.2",                     
+            RightChartCode="C.P1.OVER.1.3",                    
+            BottomChartCode="C.P1.OVER.1.4",                   
+            MapCode="M.P1.OVER.1.6")                           
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,17 +64,58 @@ chart_spread(title="Population",                               # Amy you could s
 \rowcolors{1}{part2!10}{white}
 \clearpage
 
+%% Number undernourished and their prevalence in the population %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Availability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<undernourished, eval=TRUE,results='asis'>>=
+chart_spread(title="Number undernourished and their prevalence in the population",                
+            LeftTextCode="TXT.P2.UNNU.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
+            )
+@
+
+%% Anthropometric indicators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<anthropometric, eval=TRUE,results='asis'>>=
+chart_spread(title="Anthropometric indicators",                
+            LeftTextCode="TXT.P2.ANTH.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
+            )
+@
+
+
+%% Poverty %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<poverty, eval=TRUE,results='asis'>>=
+chart_spread(title="Poverty",                
+            LeftTextCode="TXT.P2.POV.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
+            )
+@
+
+
+
+%% Food Availability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Availability, eval=TRUE,results='asis'>>=
-chart_spread(title="Availability"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Food Availability",                
+            LeftTextCode="TXT.P2.AV.1.1",  
+            #RightTextCode="C.P2.AV.1.2",   
+            LeftChartCode="C.P2.AV.1.3",   
+            RightChartCode="C.P2.AV.1.4",  
+            BottomChartCode="C.P2.AV.1.5", 
+            MapCode="M.P2.AV.1.6"         
             )
 @
 
@@ -82,39 +123,39 @@ chart_spread(title="Availability"#,                # Amy you could specify here
 %% Access %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Access, eval=TRUE,results='asis'>>=
-chart_spread(title="Access"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread2(title="Access",                
+            LeftTextCode="TXT.P2.ACCESS.1.1",  
+            RightTextCode="C.P2.ACCESS.1.2",   
+            LeftChartCode="C.P2.ACCESS.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            MapCode="M.P2.ACCESS.1.6"         
             )
 @
 
 %% Stability %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Stability, eval=TRUE,results='asis'>>=
-chart_spread(title="Stability"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Stability"#,                
+            #LeftTextCode="TXT.P1.ECON.1.1",  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Utilization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Utilization, eval=TRUE,results='asis'>>=
-chart_spread(title="Utilization"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Utilization"#,                
+            #LeftTextCode="TXT.P1.ECON.1.1",  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
@@ -122,37 +163,37 @@ chart_spread(title="Utilization"#,                # Amy you could specify here
 %% Undernourishment  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Undernourishment, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment",                # Amy you could specify here
-            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
-            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
-            MapCode="M.P1.IAF.1.6"         # Amy you could specify here
+chart_spread(title="Undernourishment",                
+            LeftTextCode="TXT.P1.IAF.1.1",  
+            RightTextCode="MT.P1.IAF.1.2",   
+            LeftChartCode="C.P1.IAF.1.3",   
+            RightChartCode="C.P1.IAF.1.4",  
+            BottomChartCode="C.P1.IAF.1.5", 
+            MapCode="M.P1.IAF.1.6"         
             )
 @
 
 
 <<Undernourishment2, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment2",                # Amy you could specify here
-            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
-            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
-            MapCode="M.P1.IAF.1.7"         # Amy you could specify here
+chart_spread(title="Undernourishment2",                
+            LeftTextCode="TXT.P1.IAF.1.1",  
+            RightTextCode="MT.P1.IAF.1.2",   
+            LeftChartCode="C.P1.IAF.1.3",   
+            RightChartCode="C.P1.IAF.1.4",  
+            BottomChartCode="C.P1.IAF.1.5", 
+            MapCode="M.P1.IAF.1.7"         
             )
 @
 
 
 <<Undernourishment3, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment2",                # Amy you could specify here
-            LeftTextCode="TXT.P1.IAF.1.1",  # Amy you could specify here
-            RightTextCode="MT.P1.IAF.1.2",   # Amy you could specify here
-            LeftChartCode="C.P1.IAF.1.3",   # Amy you could specify here
-            RightChartCode="C.P1.IAF.1.4",  # Amy you could specify here
-            BottomChartCode="C.P1.IAF.1.5", # Amy you could specify here
-            MapCode="M.P1.IAF.1.7"         # Amy you could specify here
+chart_spread(title="Undernourishment2",                
+            LeftTextCode="TXT.P1.IAF.1.1",  
+            RightTextCode="MT.P1.IAF.1.2",   
+            LeftChartCode="C.P1.IAF.1.3",   
+            RightChartCode="C.P1.IAF.1.4",  
+            BottomChartCode="C.P1.IAF.1.5", 
+            MapCode="M.P1.IAF.1.7"         
             )
 @
 
@@ -166,81 +207,81 @@ chart_spread(title="Undernourishment2",                # Amy you could specify h
 \clearpage
 
 
-%% Aggregate agriculture %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Food supply %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<Aggregate agriculture, eval=TRUE,results='asis'>>=
-chart_spread(title="Aggregate agriculture"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+<<Food supply, eval=TRUE,results='asis'>>=
+chart_spread(title="Food supply",
+            LeftTextCode="TXT.P3.SUP.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Growth in crop production %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Growth in crop production, eval=TRUE,results='asis'>>=
-chart_spread(title="Growth in crop production"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Growth in crop production",
+            LeftTextCode="TXT.P3.CRPRO.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Trends in the crop sector %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
-chart_spread(title="Trends in the crop sector"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Trends in the crop sector",                
+            LeftTextCode="TXT.P3.CRTRE.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Trends in the livestock sector %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
-chart_spread(title="Trends in the livestock sector"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Trends in the livestock sector",
+            LeftTextCode="TXT.P3.LIVE.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Trends in the fisheries sector %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
-chart_spread(title="Trends in the fisheries sector"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Trends in the fisheries sector",
+            LeftTextCode="TXT.P3.FISH.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Trends in agricultural trade %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Trends in agricultural trade, eval=TRUE,results='asis'>>=
-chart_spread(title="Trends in agricultural trade"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Trends in agricultural trade",
+            LeftTextCode="TXT.P3.TRADE.1.1",  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
@@ -256,25 +297,25 @@ chart_spread(title="Trends in agricultural trade"#,                # Amy you cou
 %% Land %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Land, eval=TRUE, results='asis'>>=
-chart_spread2(title="Land",                # Amy you could specify here
-            LeftTextCode="TXT.P4.LAND.1.1",  # Amy you could specify here
-            RightTextCode="C.P4.LAND.1.2",   # Amy you could specify here
-            LeftChartCode="C.P4.LAND.1.3",   # Amy you could specify here
-            RightChartCode="C.P4.LAND.1.4",  # Amy you could specify here
-            BottomChartCode="C.P4.LAND.1.5", # Amy you could specify here
-            MapCode="M.P4.LAND.1.6")         # Amy you could specify here
+chart_spread2(title="Land",                
+            LeftTextCode="TXT.P4.LAND.1.1",  
+            RightTextCode="C.P4.LAND.1.2",   
+            LeftChartCode="C.P4.LAND.1.3",   
+            RightChartCode="C.P4.LAND.1.4",  
+            BottomChartCode="C.P4.LAND.1.5", 
+            MapCode="M.P4.LAND.1.6")         
 @
 
 %% WATER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Water, eval=TRUE,results='asis'>>=
-chart_spread(title="Water",                # Amy you could specify here
-            LeftTextCode="TXT.P4.WATER.1.1",  # Amy you could specify here
-            RightTextCode="MT.P4.WATER.1.2",   # Amy you could specify here
-            LeftChartCode="C.P4.WATER.1.3",   # Amy you could specify here
-            RightChartCode="C.P4.WATER.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            MapCode="M.P4.WATER.1.6"         # Amy you could specify here
+chart_spread(title="Water",                
+            LeftTextCode="TXT.P4.WATER.1.1",  
+            RightTextCode="MT.P4.WATER.1.2",   
+            LeftChartCode="C.P4.WATER.1.3",   
+            RightChartCode="C.P4.WATER.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            MapCode="M.P4.WATER.1.6"         
             )
 @
 
@@ -282,52 +323,52 @@ chart_spread(title="Water",                # Amy you could specify here
 %% ENERGY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Energy, eval=TRUE,results='asis'>>=
-chart_spread(title="Energy",                # Amy you could specify here
-            LeftTextCode="TXT.P4.ENER.1.1"#,  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Energy",                
+            LeftTextCode="TXT.P4.ENER.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% FORESTRY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Forestry, eval=TRUE,results='asis'>>=
-chart_spread2(title="Forestry",                # Amy you could specify here
-            LeftTextCode="TXT.P4.FOR.1.1",  # Amy you could specify here
-            RightTextCode="C.P4.FOR.1.2",   # Amy you could specify here
-            LeftChartCode="C.P4.FOR.1.3",   # Amy you could specify here
-            RightChartCode="C.P4.FOR.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            MapCode="M.P4.FOR.1.6"         # Amy you could specify here
+chart_spread2(title="Forestry",                
+            LeftTextCode="TXT.P4.FOR.1.1",  
+            RightTextCode="C.P4.FOR.1.2",   
+            LeftChartCode="C.P4.FOR.1.3",   
+            RightChartCode="C.P4.FOR.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            MapCode="M.P4.FOR.1.6"         
             )
 @
 
 %% Organic farming %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Organic farming, eval=FALSE,results='asis'>>=
-chart_spread(title="Organic farming",                # Amy you could specify here
-            LeftTextCode="TXT.P1.ECON.1.1"#,  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Organic farming",                
+            LeftTextCode="TXT.P1.ECON.1.1"#,  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
 %% Biodiversity %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Biodiversity, eval=FALSE,results='asis'>>=
-chart_spread(title="Biodiversity"#,                # Amy you could specify here
-            #LeftTextCode="TXT.P1.ECON.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            #LeftChartCode="C.P1.ECON.1.3",   # Amy you could specify here
-            #RightChartCode="C.P1.ECON.1.4",  # Amy you could specify here
-            #BottomChartCode="C.P1.ECON.1.5", # Amy you could specify here
-            #MapCode="M.P1.ECON.1.6"         # Amy you could specify here
+chart_spread(title="Biodiversity"#,                
+            #LeftTextCode="TXT.P1.ECON.1.1",  
+            #RightTextCode="C.P1.ECON.1.2",   
+            #LeftChartCode="C.P1.ECON.1.3",   
+            #RightChartCode="C.P1.ECON.1.4",  
+            #BottomChartCode="C.P1.ECON.1.5", 
+            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
@@ -335,12 +376,12 @@ chart_spread(title="Biodiversity"#,                # Amy you could specify here
 %% Climate change %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<Climate change, eval=TRUE,results='asis'>>=
-chart_spread(title="Climate change",                # Amy you could specify here
-            LeftTextCode="TXT.P4.CC.1.1",  # Amy you could specify here
-            #RightTextCode="C.P1.ECON.1.2",   # Amy you could specify here
-            LeftChartCode="C.P4.CC.1.3",   # Amy you could specify here
-            RightChartCode="C.P4.CC.1.4",  # Amy you could specify here
-            BottomChartCode="C.P4.CC.1.5", # Amy you could specify here
-            MapCode="M.P4.CC.1.6"         # Amy you could specify here
+chart_spread(title="Climate change",                
+            LeftTextCode="TXT.P4.CC.1.1",  
+            #RightTextCode="C.P1.ECON.1.2",   
+            LeftChartCode="C.P4.CC.1.3",   
+            RightChartCode="C.P4.CC.1.4",  
+            BottomChartCode="C.P4.CC.1.5", 
+            MapCode="M.P4.CC.1.6"         
             )
 @

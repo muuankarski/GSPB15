@@ -3,7 +3,7 @@
 
 chart_spread <- function(title="title",
                        LeftTextCode="loremipsum",
-                       RightTextCode="rightU",
+                       RightTextCode="empty_minitable",
                        LeftChartCode="plot",
                        footnoteLeft = NULL,
                        footnoteRight  = NULL,

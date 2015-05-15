@@ -6,7 +6,7 @@
 % \documentclass[print, Draft]{faofactbook}
 %\documentclass[print]{faofactbook}
 %\documentclass[web, Draft]{faofactbook}
-\documentclass[web]{faofactbook}
+\documentclass[twoside,web]{faofactbook}
 
 %% Other packages to be loaded
 \usepackage{lipsum,textcomp}
