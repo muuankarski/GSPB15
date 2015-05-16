@@ -53,6 +53,8 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
 
     
   if (plot_type == 1){
+
+    # "multi_stack_line"
     
    p <-  plot_syb(x = plotInfo$xAxis,
              y = plotInfo$yAxis,
@@ -76,6 +78,11 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
   
   if (plot_type == 2){
 
+    # "top_bot_dot"
+    # "top_dot"
+    # "bot_dot"
+    # "reg_uni_bar"
+
 	 p <- plot_syb(x = plotInfo$xAxis,
 		        y = plotInfo$yAxis,
 		        group = plotInfo$group,
@@ -93,6 +100,10 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
  
     
   }
+
+  # "reg_uni_line"
+  # "multi_stack_bar"
+  # "multi_line"
 
   if (plot_type == 3){
 
@@ -112,6 +123,27 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
                         )
 
   }
+  
+  if (plot_type == "3_1"){
+    p <-  plot_syb(x = plotInfo$xAxis,
+                         y = plotInfo$yAxis,
+                         group = plotInfo$group,
+                         type = plotInfo$plotType,
+                         subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                         data = sybdata.df,
+                         scale = plotInfo$scaling,
+                         x_lab = plotInfo$xPlotLab,
+                         y_lab = expression("    thousand gigagrams CO"[2] * "eq"),
+                         legend_lab = subset(meta.lst$FULL,
+                                             subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                         col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
+                         ) +
+      theme(axis.text.x = element_blank()) + 
+      guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2))
+  }
+  
+  
   
   print(p)
 }

@@ -5,19 +5,7 @@
 # Colors part 3 -----------------------------------------------------------
 
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
-set_part(part=1)
-
-
-
-colPart3 <- plot_colors(part = 3, 12)
-col.main1 <- colPart3[["Main"]][1]
-## color for the grid
-col.main2 <- colPart3[["Main"]][2]
-source("./dissemination/Rcode/Final/theme_functions/theme.R")
-
-# Export the plot
-
-
+set_part(part=3)
 
 ###########################################################################
 ## Food supply
