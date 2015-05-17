@@ -89,7 +89,7 @@ save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
 
 # Parameters --------------------------------------------------------------
 
-downloadWB <- TRUE; CheckLogical(downloadWB)
+downloadWB <- FALSE; CheckLogical(downloadWB)
 
 ###########################################################################
 ## Data collection
@@ -98,26 +98,26 @@ downloadWB <- TRUE; CheckLogical(downloadWB)
 # Download variables from FAOSTAT, parameters -----------------------------
 
 faostatData.df <- meta.lst[["FAOSTAT"]]
-dwnldOA <- TRUE # Population
-dwnldRL <- TRUE # Resources, Resources - Land
-dwnldRF <- TRUE # Resources - Fertilizers
-dwnldRP <- TRUE # Resources - Pesticides
-dwnldCS <- TRUE # Investments - Capital stock
-dwnldRM <- TRUE # Investments - Machinery
-dwnldIG <- TRUE # Government expenditures
-dwnldA <- TRUE # ASTI
-dwnldQC <- TRUE # Production - Crops
-dwnldQA <- TRUE # Production - Live animals
-dwnldQD <- TRUE # Production - Crops processed
-dwnldQL <- TRUE # Production - Livestock primary
-dwnldQP <- TRUE # Production - Livestock processed
-dwnldQV <- TRUE # Production - Value of agricultural production
-dwnldQI <- TRUE # Production indices
-dwnldTP <- TRUE # Trade - Crops and livestock products
-dwnldTI <- TRUE # Trade - Trade indices
-dwnldFO <- TRUE # Forestry
-dwnldGHG <- TRUE # Greenhouse gases
-dwnldFB <- TRUE # Food balance sheets
+dwnldOA <- FALSE # Population
+dwnldRL <- FALSE # Resources, Resources - Land
+dwnldRF <- FALSE # Resources - Fertilizers
+dwnldRP <- FALSE # Resources - Pesticides
+dwnldCS <- FALSE # Investments - Capital stock
+dwnldRM <- FALSE # Investments - Machinery
+dwnldIG <- FALSE # Government expenditures
+dwnldA <- FALSE # ASTI
+dwnldQC <- FALSE # Production - Crops
+dwnldQA <- FALSE # Production - Live animals
+dwnldQD <- FALSE # Production - Crops processed
+dwnldQL <- FALSE # Production - Livestock primary
+dwnldQP <- FALSE # Production - Livestock processed
+dwnldQV <- FALSE # Production - Value of agricultural production
+dwnldQI <- FALSE # Production indices
+dwnldTP <- FALSE # Trade - Crops and livestock products
+dwnldTI <- FALSE # Trade - Trade indices
+dwnldFO <- FALSE # Forestry
+dwnldGHG <- FALSE # Greenhouse gases
+dwnldFB <- FALSE # Food balance sheets
 
 
 
@@ -601,26 +601,28 @@ initial.df = Reduce(function(x, y) merge(x, y, all = TRUE),
                              Fishery.df, # not updated  
                              UNPopManualData.df), # added by Markus 20150401
                     init = WB.df)
-rm(list = c("dwnldA", "dwnldCS", "dwnldFB", "dwnldFO", "dwnldGHG", "dwnldIG",
-            "dwnldOA", "dwnldQA", "dwnldQC", "dwnldQD", "dwnldQI", "dwnldQL",
-            "dwnldQP", "dwnldQV", "dwnldRF", "dwnldRL", "dwnldRM", "dwnldRP",
-            "dwnldTI", "dwnldTP"))
-rm(list = c("FAOoa.df", "FAOrl.df", "FAOrf.df", "FAOrp.df", "FAOcs.df", "FAOrm.df", 
-            "FAOig.df", "FAOa.df", "FAOqc.df", "FAOqa.df", "FAOqd.df", "FAOql.df", 
-            "FAOqp.df", "FAOqv.df", "FAOqi.df", "FAOtp.df", "FAOti.df", "FAOfo.df", 
-            "FAOghg.df", "WBManualData.df", "WB.df", "faostatData.df", "FAOfb.df",
-            "AquastatManualData.df", "gfra.df", "BiofuelProduction.df",
-            "Fishery.df"))
+# rm(list = c("dwnldA", "dwnldCS", "dwnldFB", "dwnldFO", "dwnldGHG", "dwnldIG",
+#             "dwnldOA", "dwnldQA", "dwnldQC", "dwnldQD", "dwnldQI", "dwnldQL",
+#             "dwnldQP", "dwnldQV", "dwnldRF", "dwnldRL", "dwnldRM", "dwnldRP",
+#             "dwnldTI", "dwnldTP"))
+# rm(list = c("FAOoa.df", "FAOrl.df", "FAOrf.df", "FAOrp.df", "FAOcs.df", "FAOrm.df", 
+#             "FAOig.df", "FAOa.df", "FAOqc.df", "FAOqa.df", "FAOqd.df", "FAOql.df", 
+#             "FAOqp.df", "FAOqv.df", "FAOqi.df", "FAOtp.df", "FAOti.df", "FAOfo.df", 
+#             "FAOghg.df", "WBManualData.df", "WB.df", "faostatData.df", "FAOfb.df",
+#             "AquastatManualData.df", "gfra.df", "BiofuelProduction.df",
+#             "Fishery.df"))
 initial.df <- initial.df[initial.df[, "Year"] <= 2020,]
 
 # Scale data to basic unit ------------------------------------------------
 ## -- Convert the characters formats as "thousand" into 1000
 
-meta.lst[["UNIT_MULT"]][, "UNIT_MULT"] <- as.numeric(translateUnit(meta.lst[["UNIT_MULT"]]$UNIT_MULT))
-
+#meta.lst[["UNIT_MULT"]][, "UNIT_MULT"] <- as.numeric(translateUnit(meta.lst[["UNIT_MULT"]]$UNIT_MULT))
 
 preConstr.df <- scaleUnit(initial.df, meta.lst[["UNIT_MULT"]])
-rm(initial.df)
+#rm(initial.df)
+
+# remove duplicates
+preConstr.df <- preConstr.df[!duplicated(preConstr.df[c("FAOST_CODE","Year")]),]
 
 #pre1 <- preConstr.df
 
