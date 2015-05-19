@@ -50,6 +50,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 \faoset{bgcolor=white}\selectcolor
 \twocolumn
 
@@ -95,7 +96,7 @@
 
 % Asetetaan koko raportin laajuiset parametrit knitr:lle
 <<setup, echo=FALSE>>=
-opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE,
+knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE,
                     dev="pdf"))
 @
 
