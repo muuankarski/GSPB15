@@ -124,6 +124,134 @@ assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
 export_map()
 
+###########################################################################
+## Labour
+###########################################################################
+
+## ------------------------------------------------------------------------
+# Labour force participation rate by gender, ages 15+
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.LABO.1.2")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Labour force participation rate by gender, ages 15+", placement = "tr")
+
+## ------------------------------------------------------------------------
+# Female employment in agriculture, share of female employment
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.LABO.1.3")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Female employment in agriculture, share of female employment", placement = "l")
+
+## ------------------------------------------------------------------------
+# Male employment in agriculture, share of male employment
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.LABO.1.4")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Male employment in agriculture, share of male employment", placement = "r")
+
+## ------------------------------------------------------------------------
+# Male employment in agriculture, share of male employment
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Children in employment, total", placement = "b")
+
+## ------------------------------------------------------------------------
+# MAPS
+
+# Value added in agriculture as share of GDP
+
+## Map info
+mapInfo <- map_info(mapName = "M_P1.LABO.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName,meta_plot_map() )
+## export the map
+export_map()
+
+###########################################################################
+## Inputs
+###########################################################################
+
+## ------------------------------------------------------------------------
+# Fertilizer consumption in nutrients per ha of arable land - WORLD & YEARS
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INPU.1.2")
+## Plot
+# assign(plotInfo$plotName,
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                                     Area %in% c(plotInfo$plotArea)")),
+#                 data = gsyb15.df,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+#        )
+# )# +
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "tr")
+
+## ------------------------------------------------------------------------
+# Fertilizer consumption in nutrients per ha of arable land - REGIONS
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INPU.1.3")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "l")
+
+## ------------------------------------------------------------------------
+
+# Fertilizer consumption in nutrients per ha of arable land - COUNTRIES
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INPU.1.4")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "r")
+
+## ------------------------------------------------------------------------
+# Fertilizer consumption in nutrients per ha of arable land - WORLD & YEARS
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INPU.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "b")
+
+## ------------------------------------------------------------------------
+# MAPS
+
+# Value added in agriculture as share of GDP
+
+## Map info
+mapInfo <- map_info(mapName = "M_P1.INPU.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName,meta_plot_map() )
+## export the map
+export_map()
 
 
 

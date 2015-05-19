@@ -66,7 +66,7 @@ export_plot(manual_text = "Energy supply derived from cereals, roots and tubers"
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.AV.1.4")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(manual_text = "Protein supply quantity, grand total, 3 year averages",placement="r")
 
