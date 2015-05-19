@@ -20,8 +20,7 @@ chart_spread <- function(title="title",
   #cat(paste0("\\begin{ChartPage}{ \\Large{",title,"} } \n")) # This fixes the font size but messes the tOC font size
   cat(paste0("\\begin{ChartPage}{ ",title," } \n"))
   
-  cat(paste0("\\LeftText{\\IfFileExists{./Text/",LeftTextCode,".tex}{\\input{./Text/",LeftTextCode,".tex}}{\\lipsum[2]}} \n"))
-
+  cat(paste0("\\LeftText{",LeftTextCode,"} \n"))
 
   cat(paste0("\\RightText{\\IfFileExists{./Tables/",RightTextCode,".tex}  
 	               {\\begin{table} \n
@@ -78,7 +77,7 @@ chart_spread2 <- function(title="title",
   #cat(paste0("\\begin{ChartPage}{ \\Large{",title,"} } \n")) # This fixes the font size but messes the tOC font size
   cat(paste0("\\begin{ChartPage}{ ",title," } \n"))
   
-  cat(paste0("\\LeftText{\\IfFileExists{./Text/",LeftTextCode,".tex}{\\input{./Text/",LeftTextCode,".tex}}{\\lipsum[2]}} \n"))
+  cat(paste0("\\LeftText{",LeftTextCode,"} \n"))
   
   
 #   cat(paste0("\\RightText{\\IfFileExists{./Tables/",RightTextCode,".tex}  
