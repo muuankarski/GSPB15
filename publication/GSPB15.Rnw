@@ -50,7 +50,8 @@
 
 
 \begin{document}
-%/SweaveOpts{concordance=TRUE}
+% \SweaveOpts{concordance=TRUE}
+% \SweaveOpts{concordance=TRUE}
 \faoset{bgcolor=white}\selectcolor
 \twocolumn
 
@@ -80,6 +81,7 @@
 
 
 
+
 %% Disclamer
 \ifprint
 \includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./GSPB15disclamerPage.pdf}
@@ -99,6 +101,7 @@
 knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE,
                     dev="pdf"))
 @
+
 
 
 %% List of countries
@@ -135,13 +138,21 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 \input{./introduction.tex}
 \setlength{\parskip}{0pt}  %% Restoring the normal spacing
 
+\clearpage
+
+<<>>=
+plot(cars)
+@
+
+\clearpage
+
 \normalsize
 
 \makeatletter\clearpage\ifodd\c@page\hbox{}\newpage\fi\makeatother %% Remove the colored strip from the introduction page
 
 % \input{./Environments.tex}
 
-<<child-demo, child='Environments.Rnw'>>=
+<<child-demo, child='Environments.Rnw', eval=TRUE>>=
 @
 
 
