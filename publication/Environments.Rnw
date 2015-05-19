@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 <<spread_function, eval=TRUE, echo=FALSE>>=
-source('~/btsync/fao_sync/pocketbooks/GSPB15/publication/latex_charts.R')
+source('latex_charts.R')
 @
 
 

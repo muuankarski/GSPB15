@@ -50,7 +50,7 @@
 
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+%/SweaveOpts{concordance=TRUE}
 \faoset{bgcolor=white}\selectcolor
 \twocolumn
 
