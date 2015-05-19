@@ -167,10 +167,10 @@ opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,message=FALSE
 %%% METADATA
 \newpart{white}
 \part{}
-%\section{Definitions}
+% \section{Definitions}
 \phantomsection
 \addcontentsline{toc}{section}{Definitions}
-% \input{./Metadata.tex}
+\input{./Metadata.tex}
 \clearpage
 
 \newpage

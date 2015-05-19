@@ -15,8 +15,8 @@ source('~/btsync/fao_sync/pocketbooks/GSPB15/publication/latex_charts.R')
 \rowcolors{1}{part1!10}{white}
 \clearpage
 
-<<population:draft, eval=TRUE, results='asis'>>=
-chart_spread2(title="Population",                
+<<Overview, eval=TRUE, results='asis'>>=
+chart_spread2(title="Overview",                
             LeftTextCode="TXT.P1.IAF.1.1",  
             RightTextCode="C.P1.OVER.1.2",   
             LeftChartCode="C.P1.OVER.1.3",   
@@ -34,17 +34,6 @@ chart_spread2(title="Economy",
             RightChartCode="C.P1.ECON.1.4",  
             BottomChartCode="C.P1.ECON.1.5", 
             MapCode="M.P1.ECON.1.6")         
-@
-
-<<landwater, eval=TRUE, results='asis'>>=
-chart_spread(title="Land and Water"#,                
-            #LeftTextCode="TXT.P1.ECON.1.1",  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"
-            )         
 @
 
 <<labour, eval=TRUE, results='asis'>>=
@@ -69,8 +58,8 @@ chart_spread(title="Inputs"#,
             )         
 @
 
-<<capital_investments, eval=TRUE, results='asis'>>=
-chart_spread(title="Capital and investment"#,                
+<<investments, eval=TRUE, results='asis'>>=
+chart_spread(title="Investment"#,                
             #LeftTextCode="TXT.P1.ECON.1.1",  
             #RightTextCode="C.P1.ECON.1.2",   
             #LeftChartCode="C.P1.ECON.1.3",   
@@ -80,16 +69,6 @@ chart_spread(title="Capital and investment"#,
             )         
 @
 
-<<innovation, eval=TRUE, results='asis'>>=
-chart_spread(title="Innovations"#,                
-            #LeftTextCode="TXT.P1.ECON.1.1",  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"
-            )         
-@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PART2 - Hunger dimensions
@@ -100,38 +79,6 @@ chart_spread(title="Innovations"#,
 \clearpage
 
 
-<<undernourished, eval=TRUE,results='asis'>>=
-chart_spread(title="Number undernourished and their prevalence in the population",                
-            LeftTextCode="TXT.P2.UNNU.1.1"#,  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"         
-            )
-@
-
-<<anthropometric, eval=TRUE,results='asis'>>=
-chart_spread(title="Anthropometric indicators",                
-            LeftTextCode="TXT.P2.ANTH.1.1"#,  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"         
-            )
-@
-
-<<poverty, eval=TRUE,results='asis'>>=
-chart_spread(title="Poverty",                
-            LeftTextCode="TXT.P2.POV.1.1"#,  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"         
-            )
-@
 
 <<Availability, eval=TRUE,results='asis'>>=
 chart_spread(title="Food Availability",                
@@ -177,40 +124,6 @@ chart_spread(title="Utilization"#,
             )
 @
 
-<<Undernourishment, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment",                
-            LeftTextCode="TXT.P1.IAF.1.1",  
-            RightTextCode="MT.P1.IAF.1.2",   
-            LeftChartCode="C.P1.IAF.1.3",   
-            RightChartCode="C.P1.IAF.1.4",  
-            BottomChartCode="C.P1.IAF.1.5", 
-            MapCode="M.P1.IAF.1.6"         
-            )
-@
-
-
-<<Undernourishment2, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment2",                
-            LeftTextCode="TXT.P1.IAF.1.1",  
-            RightTextCode="MT.P1.IAF.1.2",   
-            LeftChartCode="C.P1.IAF.1.3",   
-            RightChartCode="C.P1.IAF.1.4",  
-            BottomChartCode="C.P1.IAF.1.5", 
-            MapCode="M.P1.IAF.1.7"         
-            )
-@
-
-
-<<Undernourishment3, eval=FALSE, results='asis'>>=
-chart_spread(title="Undernourishment2",                
-            LeftTextCode="TXT.P1.IAF.1.1",  
-            RightTextCode="MT.P1.IAF.1.2",   
-            LeftChartCode="C.P1.IAF.1.3",   
-            RightChartCode="C.P1.IAF.1.4",  
-            BottomChartCode="C.P1.IAF.1.5", 
-            MapCode="M.P1.IAF.1.7"         
-            )
-@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PART3 - Food Supply
@@ -338,28 +251,6 @@ chart_spread2(title="Forestry",
             RightChartCode="C.P4.FOR.1.4",  
             #BottomChartCode="C.P1.ECON.1.5", 
             MapCode="M.P4.FOR.1.6"         
-            )
-@
-
-<<Organic farming, eval=FALSE,results='asis'>>=
-chart_spread(title="Organic farming",                
-            LeftTextCode="TXT.P1.ECON.1.1"#,  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"         
-            )
-@
-
-<<Biodiversity, eval=FALSE,results='asis'>>=
-chart_spread(title="Biodiversity"#,                
-            #LeftTextCode="TXT.P1.ECON.1.1",  
-            #RightTextCode="C.P1.ECON.1.2",   
-            #LeftChartCode="C.P1.ECON.1.3",   
-            #RightChartCode="C.P1.ECON.1.4",  
-            #BottomChartCode="C.P1.ECON.1.5", 
-            #MapCode="M.P1.ECON.1.6"         
             )
 @
 
