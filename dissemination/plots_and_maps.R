@@ -4,26 +4,34 @@
 
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@'~~~     ~~~`@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@'                     `@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@'                           `@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@'                               `@@@@@@@@@@@@@@@
-# @@@@@@@@@@@'                                   `@@@@@@@@@@@@@
-# @@@@@@@@@@'                                     `@@@@@@@@@@@@
-# @@@@@@@@@'                                       `@@@@@@@@@@@
-# @@@@@@@@@                                         @@@@@@@@@@@
-# @@@@@@@@'                      n,                 `@@@@@@@@@@
-# @@@@@@@@                     _/ | _                @@@@@@@@@@
-# @@@@@@@@                    /'  `'/                @@@@@@@@@@
-# @@@@@@@@a                 <~    .'                a@@@@@@@@@@
-# @@@@@@@@@                 .'    |                 @@@@@@@@@@@
-# @@@@@@@@@a              _/      |                a@@@@@@@@@@@
-# @@@@@@@@@@a           _/      `.`.              a@@@@@@@@@@@@
-# @@@@@@@@@@@a     ____/ '   \__ | |______       a@@@@@@@@@@@@@
-# @@@@@@@@@@@@@a__/___/      /__\ \ \     \___.a@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@/  (___.'\_______)\_|_|        \@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@|\________                       ~~~~~\@@@@@@@@@@
+# %
+# %                         .^^^\ ../~/\       .==...==.
+# %                        .^\ /\  \    ^-------^^ O    O,
+# %                       / \  \/    ---         ,..++---,
+# %                      / \_\-          _,v.v^V^ ,/\^^^/
+# %                     | \/       /^v^V^   _,.-^^  .;+^
+# %                      \-\   (   \..,+-=~^   .-+/^
+# %                       \--.__________.--+'^^
+# %                    ...^--.__________.---^^^^~+._
+# %   _            _,=^\                            ".
+# %   \'\.       .^           FFFFF                   '
+# %    \-/\     /  \          F  FF           )   /    \
+# %     \-/\   | -      /        FF           )^`\,... |
+# %     /\-\)  | ,,../^^\        FF           /  /     \
+# %    /\.-\)  |^     \  \       FF          /  (      )
+# %   /\. \/   (     \/  /\      FF         /    \/_/_/
+# %  /==)-/\_   \_\_\/ / |      FFFF       )|
+# % (=== /. /^^^~~~~~^^\  \               ) |
+# % (/:/:/ /. /  /  /   \  ^+..........,^^  /
+# %  \/:/:(:.(:.(:.(  (  \,             ,.;|
+# %   \$$(:(:(::(::(::(::: ^^""""""""""^  /\
+# %    ^=U$$$$$Sb\;:\;:\:''"*********+++_/ \)
+# %        ^"=*UUU$$$$$++ /$$$$&&PP!*=/^\ \/
+# %                   |++|            \+ + \_ _
+# %                  _/ . \_           \ .  ___>
+# %               <(^ /  |__)>          `--.___>
+# %                 \/^\/
+# %
 
 ## Part 1
 
@@ -33,6 +41,17 @@ set_part(part=1)
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## POPULATION
 ###########################################################################
 
@@ -92,9 +111,18 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 
-
-
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## ECONOMY
 ###########################################################################
 
@@ -153,6 +181,17 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Labour
 ###########################################################################
 
@@ -209,6 +248,17 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Inputs
 ###########################################################################
 
@@ -272,7 +322,7 @@ export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable 
 ## ------------------------------------------------------------------------
 # MAPS
 
-# Value added in agriculture as share of GDP
+# Pesticides per ha of arable land
 
 ## Map info
 mapInfo <- map_info(mapName = "M.P1.INPU.1.6", data = sybMaps.df, mapArea = "Territory")
@@ -282,11 +332,22 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Investments
 ###########################################################################
 
 # ## ------------------------------------------------------------------------
-# # Varname
+# # ODA received in agriculture, forestry and fishing sectors, share of total ODA
 # 
 # ## Info
 # plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
@@ -296,7 +357,7 @@ export_map()
 # export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "tr")
 # 
 # ## ------------------------------------------------------------------------
-# # Varname
+# # Top ten countries, credit to agriculture as a share of total credit
 # 
 # ## Info
 # plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
@@ -307,7 +368,7 @@ export_map()
 # 
 # ## ------------------------------------------------------------------------
 # 
-# # Varname
+# # Top ten countries, total credit, current US$
 # 
 # ## Info
 # plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
@@ -317,7 +378,7 @@ export_map()
 # export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "r")
 # 
 # ## ------------------------------------------------------------------------
-# # Varname
+# # ODA received in agriculture, forestry and fishing sectors, share of total ODA
 # 
 # ## Info
 # plotInfo <- plot_info(plotName = "C.P1.INV.1.5")
@@ -339,48 +400,53 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@'~~~     ~~~`@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@'                     `@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@'                           `@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@'                               `@@@@@@@@@@@@@@@
-# @@@@@@@@@@@'                                   `@@@@@@@@@@@@@
-# @@@@@@@@@@'                                     `@@@@@@@@@@@@
-# @@@@@@@@@'                                       `@@@@@@@@@@@
-# @@@@@@@@@                                         @@@@@@@@@@@
-# @@@@@@@@'                      n,                 `@@@@@@@@@@
-# @@@@@@@@                     _/ | _                @@@@@@@@@@
-# @@@@@@@@                    /'  `'/                @@@@@@@@@@
-# @@@@@@@@a                 <~    .'                a@@@@@@@@@@
-# @@@@@@@@@                 .'    |                 @@@@@@@@@@@
-# @@@@@@@@@a              _/      |                a@@@@@@@@@@@
-# @@@@@@@@@@a           _/      `.`.              a@@@@@@@@@@@@
-# @@@@@@@@@@@a     ____/ '   \__ | |______       a@@@@@@@@@@@@@
-# @@@@@@@@@@@@@a__/___/      /__\ \ \     \___.a@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@/  (___.'\_______)\_|_|        \@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@|\________                       ~~~~~\@@@@@@@@@@
+# %                         .^^^\ ../~/\       .==...==.
+# %                        .^\ /\  \    ^-------^^ O    O,
+# %                       / \  \/    ---         ,..++---,
+# %                      / \_\-          _,v.v^V^ ,/\^^^/
+# %                     | \/       /^v^V^   _,.-^^  .;+^
+# %                      \-\   (   \..,+-=~^   .-+/^
+# %                       \--.__________.--+'^^
+# %                    ...^--.__________.---^^^^~+._
+# %   _            _,=^\                            ".
+# %   \'\.       .^              FFfffFFF             '
+# %    \-/\     /  \             FF    FF     )   /    \
+# %     \-/\   | -      /              FF     )^`\,... |
+# %     /\-\)  | ,,../^^\             FF      /  /     \
+# %    /\.-\)  |^     \  \           FF      /  (      )
+# %   /\. \/   (     \/  /\        FF       /    \/_/_/
+# %  /==)-/\_   \_\_\/ / |       FFFFFFF   )|
+# % (=== /. /^^^~~~~~^^\  \               ) |
+# % (/:/:/ /. /  /  /   \  ^+..........,^^  /
+# %  \/:/:(:.(:.(:.(  (  \,             ,.;|
+# %   \$$(:(:(::(::(::(::: ^^""""""""""^  /\
+# %    ^=U$$$$$Sb\;:\;:\:''"*********+++_/ \)
+# %        ^"=*UUU$$$$$++ /$$$$&&PP!*=/^\ \/
+# %                   |++|            \+ + \_ _
+# %                  _/ . \_           \ .  ___>
+# %               <(^ /  |__)>          `--.___>
+# %  
+
 
 ## Part 2
-
-set_part(part=2)
 
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=2)
 
-###########################################################################
-## UNDERNOURISHED
-###########################################################################
-
-###########################################################################
-## ANTROPOMETRIC
-###########################################################################
-
-###########################################################################
-## POVERTY
-###########################################################################
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## AVAILABILITY
 ###########################################################################
 
@@ -428,7 +494,7 @@ export_plot(manual_text = "Energy supply derived from cereals, roots and tubers"
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.AV.1.4")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(manual_text = "Protein supply quantity, grand total, 3 year averages",placement="r")
 
@@ -456,6 +522,17 @@ export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## ACCESS
 ###########################################################################
 
@@ -511,27 +588,92 @@ export_map()
 # Prevalence of undernourishment, 3 year averages
 
 
+###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
+## Stability
+###########################################################################
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@'~~~     ~~~`@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@'                     `@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@'                           `@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@'                               `@@@@@@@@@@@@@@@
-# @@@@@@@@@@@'                                   `@@@@@@@@@@@@@
-# @@@@@@@@@@'                                     `@@@@@@@@@@@@
-# @@@@@@@@@'                                       `@@@@@@@@@@@
-# @@@@@@@@@                                         @@@@@@@@@@@
-# @@@@@@@@'                      n,                 `@@@@@@@@@@
-# @@@@@@@@                     _/ | _                @@@@@@@@@@
-# @@@@@@@@                    /'  `'/                @@@@@@@@@@
-# @@@@@@@@a                 <~    .'                a@@@@@@@@@@
-# @@@@@@@@@                 .'    |                 @@@@@@@@@@@
-# @@@@@@@@@a              _/      |                a@@@@@@@@@@@
-# @@@@@@@@@@a           _/      `.`.              a@@@@@@@@@@@@
-# @@@@@@@@@@@a     ____/ '   \__ | |______       a@@@@@@@@@@@@@
-# @@@@@@@@@@@@@a__/___/      /__\ \ \     \___.a@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@/  (___.'\_______)\_|_|        \@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@|\________                       ~~~~~\@@@@@@@@@@
+
+
+# Cereal import dependency ratio
+# Percent of arable land equipped for irrigation
+# Value of food imports over total merchandise exports
+# Political stability and absence of violence/terrorism
+# Domestic food price volatility 
+# Per capita food production variability
+# Per capita food supply variability
+
+
+###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
+## UTILIZATION
+###########################################################################
+
+
+# Access to improved water sources
+# Access to improved sanitation facilities
+# Percentage of children under 5 years of age affected by wasting
+# Percentage of children under 5 years of age who are stunted
+# Percentage of children under 5 years of age who are underweight 
+# Percentage of adults who are underweight 
+# Prevalence of anaemia among pregnant women
+# Prevalence of anaemia among children under 5 years of age
+# Prevalence of vitamin A deficiency in the population
+# Prevalence of iodine deficiency
+
+
+
+
+# %
+# %                         .^^^\ ../~/\       .==...==.
+# %                        .^\ /\  \    ^-------^^ O    O,
+# %                       / \  \/    ---         ,..++---,
+# %                      / \_\-          _,v.v^V^ ,/\^^^/
+# %                     | \/       /^v^V^   _,.-^^  .;+^
+# %                      \-\   (   \..,+-=~^   .-+/^
+# %                       \--.__________.--+'^^
+# %                    ...^--.__________.---^^^^~+._
+# %   _            _,=^\                            ".
+# %   \'\.       .^             FFFffffF              '
+# %    \-/\     /  \                   FF     )   /    \
+# %     \-/\   | -      /              FF      )^`\,... |
+# %     /\-\)  | ,,../^^\        FFffFF       /  /     \
+# %    /\.-\)  |^     \  \            FF     /  (      )
+# %   /\. \/   (     \/  /\           FF    /    \/_/_/
+# %  /==)-/\_   \_\_\/ / |      FFFFFFF    )|
+# % (=== /. /^^^~~~~~^^\  \               ) |
+# % (/:/:/ /. /  /  /   \  ^+..........,^^  /
+# %  \/:/:(:.(:.(:.(  (  \,             ,.;|
+# %   \$$(:(:(::(::(::(::: ^^""""""""""^  /\
+# %    ^=U$$$$$Sb\;:\;:\:''"*********+++_/ \)
+# %        ^"=*UUU$$$$$++ /$$$$&&PP!*=/^\ \/
+# %                   |++|            \+ + \_ _
+# %                  _/ . \_           \ .  ___>
+# %               <(^ /  |__)>          `--.___>
+# %                 \/^\/
+# %
+
+
 
 ## Part 3
 
@@ -548,6 +690,17 @@ source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=3)
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Food supply
 ###########################################################################
 
@@ -562,6 +715,17 @@ set_part(part=3)
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Growth in crop production
 ###########################################################################
 
@@ -588,7 +752,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top 20 food producing countries (based on food net per capita production value (per capita constant 2004-2006 I$))",placement="l")
+export_plot(manual_text="Top 20 food producing countries (based on food net per capita production value (per capita constant 2004-2006 I$))",placement="r")
 
 # -----------------------------------------------------------
 # 5. Bar chart: Growth in cereals production (production, harvested area, yield), world, 2000-MRY
@@ -598,98 +762,344 @@ plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Energy supply derived from cereals, roots and tubers",placement="l")
+export_plot(manual_text = "Growth in cereals production (production, harvested area, yield), world, 2000-MRY",placement="b")
 
-# -----------------------------------------------------------
+##### -------------------------------------------------------
+# MAPS
+
 # 6. Map: Crops, gross per capita production (2004-06 = 100)
 
-
-
+## Map info
+mapInfo <- map_info(mapName = "M.P3.CRPRO.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Trends in the crop sector
 ###########################################################################
 
 # 1. Text:
 # 2. Chart: top five items produced in MRY vs. 2000
-# 3. Top 20 Rice producing countries per capita, 2000 vs. MRY
-# 4. Top 20 maize producing countries per capita, 2000 vs. MRY
-# 5. Line chart: yield by region, 2000-MRY
+
+# -----------------------------------------------------------
+# # 3. Top 20 Rice producing countries per capita (Rice (paddy) production per capita (tonne/cap))
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.CRTRE.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text="Top 20 Rice producing countries per capita (Rice (paddy) production per capita (tonne/cap))",placement="l")
+
+
+# -----------------------------------------------------------
+# 4. Top 20 WHEAT producing countries per capita (Rice (paddy) production per capita (tonne/cap))
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.CRTRE.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text="Top 20 Wheat producing countries per capita (Rice (paddy) production per capita (tonne/cap))",placement="r")
+
+# -----------------------------------------------------------
+# 5. Line chart: yield by region, 2000-MRY - This is an issue!
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.CRTRE.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+## Export the plot
+export_plot(manual_text = "Cereals yield (hg/ha)", placement="b")
+
+
+##### -------------------------------------------------------
+# MAPS
+
 # 6. Map: Cereal producing countries
+
+## Map info
+mapInfo <- map_info(mapName = "M.P3.CRTRE.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Trends in the livestock sector
 ###########################################################################
 
 # 1. Text
 # 2. Per capita meat production (see chart 72 SYB2013)
-# 3. Per capita milk production, top 10 and bottom 10        
-# 4.Per capita egg production, top 10 and bottom 10
-# 5. Proportional pie charts on pig production, by region, 2000 vs. MRY
+
+# Not able to reproduce it..
+
+# ## Info
+# plotInfo <- plot_info(plotName = "C.P3.LIVE.1.2")
+# ## Plot
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+# ## Export the plot
+# export_plot(manual_text = "Depth of food decifit, 3 year averages",placement="tr")
+
+## create the plot - Taken from GSYB13
+# assign(plotInfo$plotName,
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                        Area %in% c(plotInfo$plotArea)")),
+#                 data = sybdata.df,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]])
+#        )
+
+# -----------------------------------------------------------
+# Per capita milk production, top 10 and bottom 10
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.LIVE.1.3")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "(Per capita) TOTAL milk production, top 10 and bottom 10", placement="l")
+
+# -----------------------------------------------------------
+# Per capita egg production, top 10 and bottom 10
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.LIVE.1.4")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "(Per capita) TOTAL egg production, top 10 and bottom 10", placement="r")
+
+
+# -----------------------------------------------------------
+# Proportional pie charts on pig production, by region, 2000 vs. MRY
+
+## Info
+# plotInfo <- plot_info(plotName = "C.P3.LIVE.1.5")
+# ## Plot
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+# ## Export the plot
+# export_plot(manual_text = "(Per capita) TOTAL egg production, top 10 and bottom 10", placement="r")
+
+##### -------------------------------------------------------
+# MAPS
 # 6. Map: Cattle/buffaloes per sq km
+
+## Map info
+mapInfo <- map_info(mapName = "M.P3.LIVE.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Trends in the fisheries sector
 ###########################################################################
 
-# 1. Text
 # 2. Stacked area graph: aquaculture vs. capture production
-# 3. 20 countries with highest value of capture production
-# 4. 20 countries with highest value of aquaculture production
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.FISH.1.2")
+## Create the plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=2) )
+# Export plot
+export_plot(manual_text = "Aquaculture vs. capture production", placement = "tr")
+
+# -----------------------------------------------------------
+# 20 countries with highest value of capture production
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.FISH.1.3")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "20 countries with highest value of capture production", placement="l")
+
+# -----------------------------------------------------------
+# 20 countries with highest value of aquaculture production
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.FISH.1.4")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "20 countries with highest value of aquaculture production", placement="r")
+
 # 5. State of the world’s fishery stocks (see chart 79 in SYB2013)
+# Has
+
+
+##### -------------------------------------------------------
+# MAPS
+
 # 6. Map: Aquaculture producing countries, MRY (see map 48, WDI)
 
+## Map info
+mapInfo <- map_info(mapName = "M.P3.FISH.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
+
+
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## Trade (please see ICN2 publication)
 ###########################################################################
 
 
+# -----------------------------------------------------------
+# Top food importing countries in 2011
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.TRADE.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text="Top food importing countries in 2011 (UPDATE DATA)",placement="l")
+
+
+# -----------------------------------------------------------
+# Top food exporting countries in 2011 (UPDATE DATA)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.TRADE.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text="Top food exporting countries in 2011 (UPDATE DATA)",placement="r")
+
+# -----------------------------------------------------------
+# Exports of cereals (2000 to 2011)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.TRADE.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+## Export the plot
+export_plot(manual_text = "Exports of cereals", placement="b")
+
+##### -------------------------------------------------------
+# MAPS
+
+# 6. Map: Cereal producing countries
+
+## Map info
+mapInfo <- map_info(mapName = "M.P3.TRADE.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
 
 
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@'~~~     ~~~`@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@'                     `@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@@@'                           `@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@'                               `@@@@@@@@@@@@@@@
-# @@@@@@@@@@@'                                   `@@@@@@@@@@@@@
-# @@@@@@@@@@'                                     `@@@@@@@@@@@@
-# @@@@@@@@@'                                       `@@@@@@@@@@@
-# @@@@@@@@@                                         @@@@@@@@@@@
-# @@@@@@@@'                      n,                 `@@@@@@@@@@
-# @@@@@@@@                     _/ | _                @@@@@@@@@@
-# @@@@@@@@                    /'  `'/                @@@@@@@@@@
-# @@@@@@@@a                 <~    .'                a@@@@@@@@@@
-# @@@@@@@@@                 .'    |                 @@@@@@@@@@@
-# @@@@@@@@@a              _/      |                a@@@@@@@@@@@
-# @@@@@@@@@@a           _/      `.`.              a@@@@@@@@@@@@
-# @@@@@@@@@@@a     ____/ '   \__ | |______       a@@@@@@@@@@@@@
-# @@@@@@@@@@@@@a__/___/      /__\ \ \     \___.a@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@@/  (___.'\_______)\_|_|        \@@@@@@@@@@@@@@@@
-# @@@@@@@@@@@@|\________                       ~~~~~\@@@@@@@@@@
+
+
+# %                         .^^^\ ../~/\       .==...==.
+# %                        .^\ /\  \    ^-------^^ O    O,
+# %                       / \  \/    ---         ,..++---,
+# %                      / \_\-          _,v.v^V^ ,/\^^^/
+# %                     | \/       /^v^V^   _,.-^^  .;+^
+# %                      \-\   (   \..,+-=~^   .-+/^
+# %                       \--.__________.--+'^^
+# %                    ...^--.__________.---^^^^~+._
+# %   _            _,=^\                            ".
+# %   \'\.       .^               FFFFF                 '
+# %    \-/\     /  \             FF  FF         )   /    \
+# %     \-/\   | -      /       FF   FF         )^`\,... |
+# %     /\-\)  | ,,../^^\      FF    FF        /  /     \
+# %    /\.-\)  |^     \  \     FFFFFFFFF      /  (      )
+# %   /\. \/   (     \/  /\         FF       /    \/_/_/
+# %  /==)-/\_   \_\_\/ / |          FF     )|
+# % (=== /. /^^^~~~~~^^\  \         FF    ) |
+# % (/:/:/ /. /  /  /   \  ^+..........,^^  /
+# %  \/:/:(:.(:.(:.(  (  \,             ,.;|
+# %   \$$(:(:(::(::(::(::: ^^""""""""""^  /\
+# %    ^=U$$$$$Sb\;:\;:\:''"*********+++_/ \)
+# %        ^"=*UUU$$$$$++ /$$$$&&PP!*=/^\ \/
+# %                   |++|            \+ + \_ _
+# %                  _/ . \_           \ .  ___>
+# %               <(^ /  |__)>          `--.___>
+# %  
 
 ## Part 4
-
-set_part(part=4)
-
-
-
-
-###########################################################################
-## GSYB15: Plots and minitables for part 4
-###########################################################################
 
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=4)
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## LAND
 ###########################################################################
-
 
 # ----------------------------------------------------------------------- #
 # Land area
@@ -743,6 +1153,17 @@ export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## WATER
 ###########################################################################
 
@@ -789,6 +1210,17 @@ export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## ENERGY
 ###########################################################################
 
@@ -816,8 +1248,18 @@ export_map()
 # export_plot(manual_text = "This is LAND",placement="l")
 
 
-
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## FORESTRY
 ###########################################################################
 
@@ -877,8 +1319,29 @@ export_map()
 
 
 ###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
 ## CLIMATE CHANGE
 ###########################################################################
+
+# ----------------------------------------------------------------------- #
+# Greenhouse gas emissions in agriculture
+
+## Info
+plotInfo <- plot_info(plotName = "C.P4.CC.1.2")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Greenhouse gas emissions in agriculture",placement="tr")
 
 # ----------------------------------------------------------------------- #
 # Greehouse gas emissions, highest in 2012

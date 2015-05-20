@@ -75,6 +75,30 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
      geom_vline(xintercept = 2013, linetype = "dashed") +
      scale_x_continuous(breaks=c(1960, 1980, 2000, 2020))
   }
+
+    if (plot_type == "1b"){
+
+    # "multi_stack_line"
+    
+   p <-  plot_syb(x = plotInfo$xAxis,
+             y = plotInfo$yAxis,
+             group = plotInfo$group,
+             type = plotInfo$plotType,
+             subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+             data = gsyb15.df,
+             scale = plotInfo$scaling,
+             x_lab = plotInfo$xPlotLab,
+             y_lab = plotInfo$yPlotLab,
+             legend_lab = subset(meta.lst$FULL,
+                                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+             legend_lab <- c("Urban population","Rural population"),
+             col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]] 
+    ) # +
+     # centerYear() + 
+     # geom_vline(xintercept = 2013, linetype = "dashed") +
+     # scale_x_continuous(breaks=c(1960, 1980, 2000, 2020))
+  }
   
   if (plot_type == 2){
 
