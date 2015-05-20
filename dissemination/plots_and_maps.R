@@ -30,6 +30,8 @@ source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=1)
 
 
+
+
 ###########################################################################
 ## POPULATION
 ###########################################################################
@@ -360,8 +362,22 @@ export_map()
 
 ## Part 2
 
+set_part(part=2)
+
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=2)
+
+###########################################################################
+## UNDERNOURISHED
+###########################################################################
+
+###########################################################################
+## ANTROPOMETRIC
+###########################################################################
+
+###########################################################################
+## POVERTY
+###########################################################################
 
 
 ###########################################################################
@@ -495,21 +511,6 @@ export_map()
 # Prevalence of undernourishment, 3 year averages
 
 
-###########################################################################
-## STABILITY
-###########################################################################
-
-
-
-###########################################################################
-## UTILIZATION
-###########################################################################
-
-
-
-
-
-
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@'~~~     ~~~`@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -534,11 +535,20 @@ export_map()
 
 ## Part 3
 
+set_part(part=3)
+
+
+###########################################################################
+## GSYB15: Plots and minitables for part 3
+###########################################################################
+
+# Colors part 3 -----------------------------------------------------------
+
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=3)
 
 ###########################################################################
-## FOOD SUPPLY
+## Food supply
 ###########################################################################
 
 # Lets wait fore the FSI indicators!!!!
@@ -555,63 +565,45 @@ set_part(part=3)
 ## Growth in crop production
 ###########################################################################
 
-# 1. Text
 # 2. Chart: fastest growing items between 2000-MRY
 
-
-# 3. Top 20 crop producing countries (based on crops, gross per capita production), 2000 vs. MRY
-
-## Info
-plotInfo <- plot_info(plotName = "C.P1.OVER.1.4")
-## Plot
-
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
-)
-## Export the plot
-export_plot(placement="l")
-
-
-# 4. Top 20 food producing countries (based on food, gross per capita production), 2000 vs. MRY
+# -----------------------------------------------------------
+# 3. Top 20 crop producing countries (based on crops net per capita production index number (2004-2006 = 100))
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P1.OVER.1.4")
+plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
-)
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text="Top 20 crop producing countries (based on Crops net per capita production value (per capita constant 2004-2006 I$))",placement="l")
 
+
+# -----------------------------------------------------------
+# 4. Top 20 food producing countries (based on food net per capita production value (per capita constant 2004-2006 I$)), 2000 vs. MRY
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text="Top 20 food producing countries (based on food net per capita production value (per capita constant 2004-2006 I$))",placement="l")
+
+# -----------------------------------------------------------
 # 5. Bar chart: Growth in cereals production (production, harvested area, yield), world, 2000-MRY
 
+## Info
+plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(manual_text = "Energy supply derived from cereals, roots and tubers",placement="l")
 
+# -----------------------------------------------------------
 # 6. Map: Crops, gross per capita production (2004-06 = 100)
+
+
 
 
 
@@ -681,8 +673,18 @@ export_plot(placement="r")
 
 ## Part 4
 
+set_part(part=4)
+
+
+
+
+###########################################################################
+## GSYB15: Plots and minitables for part 4
+###########################################################################
+
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=4)
+
 
 ###########################################################################
 ## LAND
