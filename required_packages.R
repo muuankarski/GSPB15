@@ -1,5 +1,7 @@
-PACKAGES <- c("knitr","Rcpp","ggplot2","devtools","tidyr","dplyr","knitr","reshape2","data.table",
-              "rgdal","zoo","plyr","scales","sp","maptools","extrafont")
+PACKAGES <- c("knitr","Rcpp","ggplot2","devtools",
+              "tidyr","dplyr","knitr","reshape2","data.table",
+              "rgdal","zoo","plyr","scales","sp","maptools",
+              "extrafont","xtable","mapproj","rgeos")
 #  Install packages
 inst <- match(PACKAGES, .packages(all=TRUE))
 need <- which(is.na(inst))

@@ -62,7 +62,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
              type = plotInfo$plotType,
              subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
                                     Area %in% c(plotInfo$plotArea)")),
-             data = gsyb15.df,
+             data = sybdata.df,
              scale = plotInfo$scaling,
              x_lab = plotInfo$xPlotLab,
              y_lab = plotInfo$yPlotLab,
@@ -86,7 +86,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
              type = plotInfo$plotType,
              subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
                                     Area %in% c(plotInfo$plotArea)")),
-             data = gsyb15.df,
+             data = sybdata.df,
              scale = plotInfo$scaling,
              x_lab = plotInfo$xPlotLab,
              y_lab = plotInfo$yPlotLab,

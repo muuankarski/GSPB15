@@ -58,7 +58,26 @@ FAOSYBpackages <- c("ggplot2","plyr","RColorBrewer",
                     "FAOSTAT","grid","scales","gisfao")
 lapply(FAOSYBpackages, require, character.only=T)
 library(mapproj)
-        
+
+# Dissemination file ------------------------------------------------------
+
+# load from ethercalc
+
+#download.file("https://ethercalc.org/5btva8ngeh.csv", destfile = "./dissemination/DisseminationGSPB15_web.csv", method = "curl")
+
+
+diss.df <- 
+  read.csv(file = "./dissemination/DisseminationGPock2.csv", 
+           header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+
+
+
+# diss.df2 <- 
+#   read.csv(file = "./dissemination/DisseminationGSYB15.csv", 
+#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
+
+
+
 # Source functions --------------------------------------------------------
 
 ## -- Sourcings Complementaty scripts from database folder.
@@ -70,6 +89,9 @@ plot_functions         = list.files(c("./dissemination/Rcode/Final/plot_function
 table_functions        = list.files(c("./dissemination/Rcode/Final/table_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
 text_functions         = list.files(c("./dissemination/Rcode/Final/text_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
 theme_functions        = list.files(c("./dissemination/Rcode/Final/theme_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
+
+# Source sanitizeToLatex before
+source(table_functions[4])
 
 scripts_to_source <- c(construction_functions,
                          debug_functions,
@@ -201,23 +223,6 @@ sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" &
   "West Bank and Gaza Strip"
 
 
-
-# Dissemination file ------------------------------------------------------
-
-# load from ethercalc
-
-#download.file("https://ethercalc.org/5btva8ngeh.csv", destfile = "./dissemination/DisseminationGSPB15_web.csv", method = "curl")
-
-
-diss.df <- 
-  read.csv(file = "./dissemination/DisseminationGPock2.csv", 
-           header = TRUE, na.strings = "", stringsAsFactors = FALSE)
-
-
-
-# diss.df2 <- 
-#   read.csv(file = "./dissemination/DisseminationGSYB15.csv", 
-#            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 
 
 
