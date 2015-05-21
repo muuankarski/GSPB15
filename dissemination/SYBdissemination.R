@@ -91,7 +91,10 @@ text_functions         = list.files(c("./dissemination/Rcode/Final/text_function
 theme_functions        = list.files(c("./dissemination/Rcode/Final/theme_functions/"), pattern="*.R$", full.names=TRUE, ignore.case=TRUE)
 
 # Source sanitizeToLatex before
+source(plot_functions[11])
 source(table_functions[4])
+source(theme_functions[2])
+source(theme_functions[1])
 
 scripts_to_source <- c(construction_functions,
                          debug_functions,
