@@ -9,7 +9,8 @@ chart_spread <- function(title="title",
                        footnoteRight  = NULL,
                        RightChartCode="plot",
                        BottomChartCode="plot",
-                       MapCode="plot"){
+                       MapCode="plot",
+                       notes=""){
   
   if (exists("footnoteRight")) footnoteRightText <- paste0("\\footnotesize{",footnoteRight,"}  \n")
   if (!exists("footnoteRight")) footnoteRightText <- "\\vspace{-7pt} \n"
@@ -45,9 +46,12 @@ chart_spread <- function(title="title",
 	               \\input{./Captions/Caption_",BottomChartCode,".tex} \n",
 	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
 	           "\\end{chart}} \n"))
+
 	
 	cat("\\end{ChartPage}")
-  
+	
+	cat("\\vspace{10 mm}")
+  cat(paste0("\\textbf{",notes,"}"))
   
   cat(paste0("\\begin{figure} \n",
   "\\input{./Captions/Caption_",MapCode,".tex} \n", 
@@ -66,7 +70,8 @@ chart_spread2 <- function(title="title",
                          footnoteRight  = NULL,
                          RightChartCode="plot",
                          BottomChartCode="plot",
-                         MapCode="plot"){
+                         MapCode="plot",
+                         notes=""){
   
   if (exists("footnoteRight")) footnoteRightText <- paste0("\\footnotesize{",footnoteRight,"}  \n")
   if (!exists("footnoteRight")) footnoteRightText <- "\\vspace{-7pt} \n"
@@ -114,8 +119,11 @@ chart_spread2 <- function(title="title",
              "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
              "\\end{chart}} \n"))
   
+  
   cat("\\end{ChartPage}")
   
+  cat("\\vspace{10 mm}")
+  cat(paste0("\\textbf{",notes,"}"))
   
   cat(paste0("\\begin{figure} \n",
              "\\input{./Captions/Caption_",MapCode,".tex} \n", 

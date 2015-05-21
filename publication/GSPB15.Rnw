@@ -305,8 +305,8 @@ chart_spread2(title="Overview",
             LeftChartCode="C.P1.OVER.1.3",   
             RightChartCode="C.P1.OVER.1.4",  
             BottomChartCode="C.P1.OVER.1.5", 
-            MapCode="M.P1.OVER.1.6"         
-            )
+            MapCode="M.P1.OVER.1.6",
+            notes="Data Updated. Ready for writing!")
 @
 
 <<economy, eval=TRUE, results='asis'>>=
@@ -326,29 +326,32 @@ chart_spread2(title="Labour",
             LeftChartCode="C.P1.LABO.1.3",   
             RightChartCode="C.P1.LABO.1.4",  
             BottomChartCode="issues", 
-            MapCode="M.P1.LABO.1.6"
+            MapCode="M.P1.LABO.1.6",
+            notes="Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
             )         
 @
 
 <<Inputs, eval=TRUE, results='asis'>>=
-chart_spread2(title="Inputs",                
-            LeftTextCode="Each fo the graphs have to be revised. Which indicators, which regions, how to display etc.",  
+chart_spread2(title="Inputs",
+            LeftTextCode="Text here",  
             RightTextCode="C.P1.INPU.1.2",   
             LeftChartCode="C.P1.INPU.1.3",   
             RightChartCode="C.P1.INPU.1.4",  
             BottomChartCode="C.P1.INPU.1.5", 
-            MapCode="M.P1.INPU.1.6"
+            MapCode="M.P1.INPU.1.6",
+            notes="Maps issues remains. Now we have same indicators for each of the charts - Nitrogen and Phosphate in the top-bottom charts??"
             )         
 @
 
 <<investments, eval=TRUE, results='asis'>>=
 chart_spread2(title="Investment",                
-            LeftTextCode="Each of the proposed indicator missing from the SYB DB. Need to think about replacements or way to include them",  
+            LeftTextCode="Text here!!",  
             RightTextCode="issues",   
             LeftChartCode="issues",   
             RightChartCode="issues",  
             BottomChartCode="issues", 
-            MapCode="M.P1.INV.1.6"
+            MapCode="M.P1.INV.1.6",
+            notes="Each of the proposed indicator missing from the SYB DB. Need to think about replacements or way to include them. Maps issues remains."
             )         
 @
 
@@ -393,23 +396,25 @@ chart_spread2(title="Investment",
 
 <<Availability, eval=TRUE,results='asis'>>=
 chart_spread2(title="Food Availability",                
-            LeftTextCode="Indicator: Average dietary energy supply adequacy, 3 year averages: is manually created. have to find the script if this needs to be reproduced. Other barplots should perhaps be reconsidered, too",  
+            LeftTextCode="Text comes here",  
             RightTextCode="issues",   
             LeftChartCode="C.P2.AV.1.3",   
             RightChartCode="C.P2.AV.1.4",  
             BottomChartCode="C.P2.AV.1.5", 
-            MapCode="M.P2.AV.1.6"         
+            MapCode="M.P2.AV.1.6",
+            notes="Indicator: Average dietary energy supply adequacy, 3 year averages: is manually created. have to find the script if this needs to be reproduced." 
             )
 @
 
 <<Access, eval=TRUE,results='asis'>>=
 chart_spread2(title="Access",                
-            LeftTextCode="VARIABLES FOR Prevalence of undernourishment, 3 year averages AND Prevalence of food inadequacy, 3 year averages missing from the SYB DB",  
+            LeftTextCode="Text here",  
             RightTextCode="C.P2.ACCESS.1.2",   
             LeftChartCode="C.P2.ACCESS.1.3",   
             RightChartCode="issues",  
             BottomChartCode="issues", 
-            MapCode="M.P2.ACCESS.1.6"         
+            MapCode="M.P2.ACCESS.1.6",
+            notes="VARIABLES FOR Prevalence of undernourishment, 3 year averages AND Prevalence of food inadequacy, 3 year averages missing from the SYB DB"
             )
 @
 
@@ -484,45 +489,49 @@ chart_spread2(title="Food supply",
 
 <<Growth in crop production, eval=TRUE,results='asis'>>=
 chart_spread2(title="Growth in crop production",
-            LeftTextCode="ISSUES is with the `2. Chart: fastest growing items between 2000-MRY` - from where and how to get that data",  
+            LeftTextCode="Text here!",  
             RightTextCode="issues",   
             LeftChartCode="C.P3.CRPRO.1.3",   
             RightChartCode="C.P3.CRPRO.1.4",  
             BottomChartCode="C.P3.CRPRO.1.5", 
-            MapCode="M.P3.CRPRO.1.6"
+            MapCode="M.P3.CRPRO.1.6",
+            notes="ISSUES is with the `2. Chart: fastest growing items between 2000-MRY` - from where and how to get that data"
             )
 @
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
 chart_spread2(title="Trends in the crop sector",                
-            LeftTextCode="What type of chart was planned for this:  (Chart: top five items produced in MRY vs. 2000) ",  
+            LeftTextCode="Text here",  
             RightTextCode="issues",   
             LeftChartCode="C.P3.CRTRE.1.3",   
             RightChartCode="C.P3.CRTRE.1.4",  
             BottomChartCode="C.P3.CRTRE.1.5", 
-            MapCode="M.P3.CRTRE.1.6"         
+            MapCode="M.P3.CRTRE.1.6",
+            notes="What type of chart was planned for this:  (Chart: top five items produced in MRY vs. 2000)"
             )
 @
 
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
 chart_spread2(title="Trends in the livestock sector",
-            LeftTextCode="ISSUES: custom charts from SYB13 cannot be reproduced as the scripts are missing... Also, there are no per capita figures available (should be computed. Pie charts are not available in the SYB system)",  
+            LeftTextCode="Text comes here",  
             RightTextCode="issues",
             LeftChartCode="C.P3.LIVE.1.3",
             RightChartCode="C.P3.LIVE.1.4",
             BottomChartCode="issues",
-            MapCode="M.P3.LIVE.1.6"
+            MapCode="M.P3.LIVE.1.6",
+            notes="ISSUES: custom charts from SYB13 cannot be reproduced as the scripts are missing... Also, there are no per capita figures available (should be computed. Pie charts are not available in the SYB system)"
             )
 @
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
 chart_spread2(title="Trends in the fisheries sector",
-            LeftTextCode="FOR BOTTOM PLOT State of the world’s fishery stocks (see chart 79 in SYB2013) HAVE TO BE SCRAPED FOR DATA",  
+            LeftTextCode="Text here",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
             RightChartCode="C.P3.FISH.1.4",  
             BottomChartCode="issues", 
-            MapCode="M.P3.FISH.1.6"         
+            MapCode="M.P3.FISH.1.6",
+            notes="FOR BOTTOM PLOT State of the world’s fishery stocks (see chart 79 in SYB2013) HAVE TO BE SCRAPED FOR DATA"
             )
 @
 
@@ -582,39 +591,44 @@ chart_spread2(title="Land",
             LeftChartCode="C.P4.LAND.1.3",   
             RightChartCode="C.P4.LAND.1.4",  
             BottomChartCode="C.P4.LAND.1.5", 
-            MapCode="M.P4.LAND.1.6")         
+            MapCode="M.P4.LAND.1.6",
+            notes=""
+            )     
 @
 
 <<Water, eval=TRUE,results='asis'>>=
 chart_spread2(title="Water",                
-            LeftTextCode="There are some issues with the water data as can be seen from each of the graphs. SALINE SOILS for the bottom chart has not been defined in metadata. Any leads welcome",  
+            LeftTextCode="Text here",  
             RightTextCode="MT.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
             RightChartCode="C.P4.WATER.1.4",  
             BottomChartCode="issues", 
-            MapCode="M.P4.WATER.1.6"         
+            MapCode="M.P4.WATER.1.6",
+            notes="There are some issues with the water data as can be seen from each of the graphs. SALINE SOILS for the bottom chart has not been defined in metadata. Any leads welcome"
             )
 @
 
 <<Energy, eval=TRUE,results='asis'>>=
 chart_spread2(title="Energy",                
-            LeftTextCode="DATA NOT PREPARED YET",  
+            LeftTextCode="Text here",  
             RightTextCode="not_defined",
             LeftChartCode="not_defined",
             RightChartCode="not_defined",
             BottomChartCode="not_defined",
-            MapCode="not_defined"
+            MapCode="not_defined",
+            notes="DATA NOT PREPARED YET"
             )
 @
 
 <<Forestry, eval=TRUE,results='asis'>>=
 chart_spread2(title="Forestry",                
-            LeftTextCode="Forest characteristics NOT YET SCRAPED FROM FRA REPORT",  
+            LeftTextCode="text here",  
             RightTextCode="C.P4.FOR.1.2",   
             LeftChartCode="C.P4.FOR.1.3",   
             RightChartCode="C.P4.FOR.1.4",  
             BottomChartCode="issues", 
-            MapCode="M.P4.FOR.1.6"         
+            MapCode="M.P4.FOR.1.6",
+            notes="Forest characteristics NOT YET SCRAPED FROM FRA REPORT"
             )
 @
 
@@ -625,7 +639,8 @@ chart_spread2(title="Climate change",
             LeftChartCode="C.P4.CC.1.3",   
             RightChartCode="C.P4.CC.1.4",  
             BottomChartCode="C.P4.CC.1.5", 
-            MapCode="M.P4.CC.1.6"         
+            MapCode="M.P4.CC.1.6",
+            notes=""    
             )
 @
 

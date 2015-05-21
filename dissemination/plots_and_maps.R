@@ -267,23 +267,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INPU.1.2")
 ## Plot
-# assign(plotInfo$plotName,
-#        plot_syb(x = plotInfo$xAxis,
-#                 y = plotInfo$yAxis,
-#                 group = plotInfo$group,
-#                 type = plotInfo$plotType,
-#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-#                                     Area %in% c(plotInfo$plotArea)")),
-#                 data = gsyb15.df,
-#                 scale = plotInfo$scaling,
-#                 x_lab = plotInfo$xPlotLab,
-#                 y_lab = plotInfo$yPlotLab,
-#                 legend_lab = subset(meta.lst$FULL,
-#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
-#        )
-# )# +
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=3) )
 ## Export the plot
 export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "tr")
 
@@ -293,9 +277,17 @@ export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INPU.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "l")
+export_plot(manual_text = "Nitrogen fertilizers consumption in nutrients per ha of arable land", placement = "r")
+
+
+# ## Info
+# plotInfo <- plot_info(plotName = "C.P1.INPU.1.3")
+# ## Plot
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+# ## Export the plot
+# export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "l")
 
 ## ------------------------------------------------------------------------
 
@@ -306,7 +298,7 @@ plotInfo <- plot_info(plotName = "C.P1.INPU.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "r")
+export_plot(manual_text = "Phosphate fertilizers consumption in nutrients per ha of arable land", placement = "r")
 
 ## ------------------------------------------------------------------------
 # Fertilizer consumption in nutrients per ha of arable land - WORLD & YEARS
