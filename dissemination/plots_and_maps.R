@@ -2,8 +2,6 @@
 ## GSYB15: Plots and maps for GSPB2015
 ###########################################################################
 
-source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
-
 # %
 # %                         .^^^\ ../~/\       .==...==.
 # %                        .^\ /\  \    ^-------^^ O    O,
@@ -34,11 +32,11 @@ source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 # %
 
 ## Part 1
-
-set_part(part=1)
-
-
-
+colPart1 <- plot_colors(part = 1, 12)
+col.main1 <- colPart1[["Main"]][1]
+## color for the grid
+col.main2 <- colPart1[["Main"]][2]
+source("./dissemination/Rcode/Final/theme_functions/theme.R")
 
 ###########################################################################
 #
@@ -430,8 +428,12 @@ export_map()
 
 ## Part 2
 
-source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
-set_part(part=2)
+colPart2 <- plot_colors(part = 2, 12)
+col.main2 <- colPart2[["Main"]][1]
+## color for the grid
+col.main2 <- colPart2[["Main"]][2]
+source("./dissemination/Rcode/Final/theme_functions/theme.R")
+
 
 
 
@@ -677,9 +679,12 @@ export_map()
 
 ## Part 3
 
+colPart3 <- plot_colors(part = 3, 12)
+col.main3 <- colPart3[["Main"]][1]
+## color for the grid
+col.main2 <- colPart3[["Main"]][2]
+source("./dissemination/Rcode/Final/theme_functions/theme.R")
 
-source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
-set_part(part=3)
 
 ###########################################################################
 #
@@ -1073,9 +1078,12 @@ export_map()
 # %  
 
 ## Part 4
+colPart4 <- plot_colors(part = 4, 12)
+col.main4 <- colPart4[["Main"]][1]
+## color for the grid
+col.main2 <- colPart4[["Main"]][2]
+source("./dissemination/Rcode/Final/theme_functions
 
-source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
-set_part(part=4)
 
 
 ###########################################################################
