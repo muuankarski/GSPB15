@@ -677,14 +677,6 @@ export_map()
 
 ## Part 3
 
-set_part(part=3)
-
-
-###########################################################################
-## GSYB15: Plots and minitables for part 3
-###########################################################################
-
-# Colors part 3 -----------------------------------------------------------
 
 source("./dissemination/Rcode/Final/plot_functions/plot_setup.R")
 set_part(part=3)

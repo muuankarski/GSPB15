@@ -55,7 +55,7 @@ FAOSYBpackages <- c("ggplot2","plyr","RColorBrewer",
                     "reshape2","maptools","classInt",
                     "rgdal","sp",#"gpclib",
                     "labeling",
-                    "FAOSTAT","grid","scales")
+                    "FAOSTAT","grid","scales","gisfao")
 lapply(FAOSYBpackages, require, character.only=T)
 library(mapproj)
         
