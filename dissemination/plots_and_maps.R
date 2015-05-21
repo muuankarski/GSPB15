@@ -37,6 +37,7 @@ col.main1 <- colPart1[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart1[["Main"]][2]
 source("./dissemination/Rcode/Final/theme_functions/theme.R")
+source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 
 ###########################################################################
 #
@@ -84,7 +85,7 @@ plotInfo <- plot_info(plotName = "C.P1.OVER.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text = "Life expectancy at birth, countries with the lowest values in 2013", placement="r")
 
 
 ## ------------------------------------------------------------------------
@@ -153,7 +154,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text = "Annual value added in agriculture growth", placement="r")
 
 
 # C.P1.ECON.1.5 -----------------------------------------------------------
@@ -433,7 +434,7 @@ col.main2 <- colPart2[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart2[["Main"]][2]
 source("./dissemination/Rcode/Final/theme_functions/theme.R")
-
+source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 
 
 
@@ -684,7 +685,7 @@ col.main3 <- colPart3[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart3[["Main"]][2]
 source("./dissemination/Rcode/Final/theme_functions/theme.R")
-
+source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 
 ###########################################################################
 #
@@ -1082,8 +1083,8 @@ colPart4 <- plot_colors(part = 4, 12)
 col.main4 <- colPart4[["Main"]][1]
 ## color for the grid
 col.main2 <- colPart4[["Main"]][2]
-source("./dissemination/Rcode/Final/theme_functions
-
+source("./dissemination/Rcode/Final/theme_functions/theme.R")
+source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 
 
 ###########################################################################
