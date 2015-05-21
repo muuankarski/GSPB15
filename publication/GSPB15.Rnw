@@ -577,9 +577,7 @@ chart_spread2(title="Trends in agricultural trade",
 
 <<Land, eval=TRUE, results='asis'>>=
 chart_spread2(title="Land",                
-            LeftTextCode="More than 1.5 billion hectares – about 12 percent of the world’s land area – are used for crop production (arable land plus land under permanent crops). Although large amounts of land are potentially suitable for agriculture, much of this land is covered by forests, protected for environmental reasons or are cities. Potentially accessible agricultural land is very unevenly distributed among regions and countries. Some 90 percent is
-in Latin America and sub-Saharan Africa. At the other extreme, there is virtually no spare land available for agricultural expansion in Southern Asia, the Western Asia and Northern
-Africa.",  
+            LeftTextCode="Land is necessary for sustainable agricultural development, essential ecosystem functions and food security. More than 1.5 billion hectares – about 12 percent of the world’s land area – are used for crop production. Although large amounts of land are potentially suitable for agriculture, much of this land is covered by forests, protected for environmental reasons or are part of urban areas. Some 90 percent of agricultural land is in Latin America and sub-Saharan Africa. At the other extreme, there is virtually no spare land available for agricultural expansion in Southern Asia, the Western Asia and Northern Africa.",  
             RightTextCode="C.P4.LAND.1.2",   
             LeftChartCode="C.P4.LAND.1.3",   
             RightChartCode="C.P4.LAND.1.4",  
@@ -611,7 +609,8 @@ chart_spread2(title="Energy",
 
 <<Forestry, eval=TRUE,results='asis'>>=
 chart_spread2(title="Forestry",                
-            LeftTextCode="Forest characteristics NOT YET SCRAPED FROM FRA REPORT",  
+            LeftTextCode="Forests make vital contributions to biodiversity. They also sustain a range of industries, generate jobs and income and act as a source of food, medicine and fuel for more than a billion people. The latest estimate of the world’s total forest area is more than 4 billion hectares, corresponding to about 30 percent of total land area. But today forests face unprecedented pressures. Changes in land cover have caused the most pressing environmental
+issue in recent decades. The impact of deforestation and land use intensification, especially on soil degradation, have been significant.",  
             RightTextCode="C.P4.FOR.1.2",   
             LeftChartCode="C.P4.FOR.1.3",   
             RightChartCode="C.P4.FOR.1.4",  
