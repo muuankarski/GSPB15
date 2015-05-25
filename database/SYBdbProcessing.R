@@ -16,11 +16,11 @@
 
 # R version ---------------------------------------------------------------
 
-# rVersion <- R.Version()
-# if (rVersion$major != 3 | rVersion$minor != 2.0) {
-#   stop("The script is developed under the 3.2.0 R version.")
-# }
-# rm(rVersion)
+rVersion <- R.Version()
+if (rVersion$major != 3 | rVersion$minor != 1.3) {
+  stop("The script is developed under the 3.1.3 R version.")
+}
+rm(rVersion)
 
 # Needed libraries --------------------------------------------------------
 
@@ -40,6 +40,8 @@ require(plyr)
 require(reshape2)
 require(data.table)
 
+setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
+
 # Packrat -----------------------------------------------------------------
 
 # packrat::status()
@@ -47,12 +49,12 @@ require(data.table)
 # packrat::restore()
 
 # Source functions --------------------------------------------------------
-source("./database/Rcode/Final/misc_functions/CheckLogical.R")
-source("./database/Rcode/Final/misc_functions/CheckValues.R")
-source("./database/Rcode/Final/misc_functions/Sourcehttps.R")
-source("./database/Rcode/Final/misc_functions/sum2.R")
-source("./database/Rcode/Final/read_functions/ReadConstruction.R")
-source("./database/Rcode/Final/read_functions/ReadMetadata.R")
+source("./Rcode/Final/misc_functions/CheckLogical.R")
+source("./Rcode/Final/misc_functions/CheckValues.R")
+source("./Rcode/Final/misc_functions/Sourcehttps.R")
+source("./Rcode/Final/misc_functions/sum2.R")
+source("./Rcode/Final/read_functions/ReadConstruction.R")
+source("./Rcode/Final/read_functions/ReadMetadata.R")
 
 
 ## -- Sourcings FAOSYBpackage from SYBdatabase folder. These used to sourced from Filippos github repo
@@ -65,31 +67,29 @@ source("./database/Rcode/Final/read_functions/ReadMetadata.R")
 
 # Country profile ---------------------------------------------------------
 
-
-FAOcountryProfile <- read.csv("./database/FAOcountryProfile.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
-save(FAOcountryProfile, file="./database/FAOcountryProfile.RData")
-load("./database/FAOcountryProfile.RData")
+load("./Data/Processed/FAOcountryProfile.RData")
+#FAOcountryProfile <- read.csv("./FAOcountryProfile.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
 
 # Construction and metadata files -----------------------------------------
 
-con.df <- ReadConstruction(file = "./database/Construction2015.csv", 
+con.df <- ReadConstruction(file = "Construction2015.csv", 
                            encoding = "UTF-8", nrows = 657)
-save(x = con.df, file = "./database/Data/Processed/Construction.RData")
-meta.lst <- ReadMetadata(file = "./database/Metadata2015.csv", 
+save(x = con.df, file = "./Data/Processed/Construction.RData")
+meta.lst <- ReadMetadata(file = "Metadata2015.csv", 
                          encoding = "UTF-8", nrows = 657)
-save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
+save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
-# con.df <- ReadConstruction(file = "./database/Data/old/Construction04-2014.csv", 
+# con.df <- ReadConstruction(file = "./Data/old/Construction04-2014.csv", 
 #                            encoding = "UTF-8", nrows = 670)
-# save(x = con.df, file = "./database/Data/Processed/Construction.RData")
-# meta.lst <- ReadMetadata(file = "./database/Data//old/Metadata04-2014.csv", 
+# save(x = con.df, file = "./Data/Processed/Construction.RData")
+# meta.lst <- ReadMetadata(file = "./Data//old/Metadata04-2014.csv", 
 #                          encoding = "UTF-8", nrows = 670)
-# save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
+# save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
 
 # Parameters --------------------------------------------------------------
 
-downloadWB <- TRUE; CheckLogical(downloadWB)
+downloadWB <- FALSE; CheckLogical(downloadWB)
 
 ###########################################################################
 ## Data collection
@@ -98,38 +98,50 @@ downloadWB <- TRUE; CheckLogical(downloadWB)
 # Download variables from FAOSTAT, parameters -----------------------------
 
 faostatData.df <- meta.lst[["FAOSTAT"]]
-dwnldOA <- TRUE # Population
-dwnldRL <- TRUE # Resources, Resources - Land
-dwnldRF <- TRUE # Resources - Fertilizers
-dwnldRP <- TRUE # Resources - Pesticides
-dwnldCS <- TRUE # Investments - Capital stock
-dwnldRM <- TRUE # Investments - Machinery
-dwnldIG <- TRUE # Government expenditures
-dwnldA <- TRUE # ASTI
-dwnldQC <- TRUE # Production - Crops
-dwnldQA <- TRUE # Production - Live animals
-dwnldQD <- TRUE # Production - Crops processed
-dwnldQL <- TRUE # Production - Livestock primary
-dwnldQP <- TRUE # Production - Livestock processed
-dwnldQV <- TRUE # Production - Value of agricultural production
-dwnldQI <- TRUE # Production indices
-dwnldTP <- TRUE # Trade - Crops and livestock products
-dwnldTI <- TRUE # Trade - Trade indices
-dwnldFO <- TRUE # Forestry
-dwnldGHG <- TRUE # Greenhouse gases
-dwnldFB <- TRUE # Food balance sheets
+dwnldOA <- FALSE # Population
+dwnldRL <- FALSE # Resources, Resources - Land
+dwnldRF <- FALSE # Resources - Fertilizers
+dwnldRP <- FALSE # Resources - Pesticides
+dwnldCS <- FALSE # Investments - Capital stock
+dwnldRM <- FALSE # Investments - Machinery
+dwnldIG <- FALSE # Government expenditures
+dwnldA <- FALSE # ASTI
+dwnldQC <- FALSE # Production - Crops
+dwnldQA <- FALSE # Production - Live animals
+dwnldQD <- FALSE # Production - Crops processed
+dwnldQL <- FALSE # Production - Livestock primary
+dwnldQP <- FALSE # Production - Livestock processed
+dwnldQV <- FALSE # Production - Value of agricultural production
+dwnldQI <- FALSE # Production indices
+dwnldTP <- FALSE # Trade - Crops and livestock products
+dwnldTI <- FALSE # Trade - Trade indices
+dwnldFO <- FALSE # Forestry
+dwnldGHG <- FALSE # Greenhouse gases
+dwnldFB <- FALSE # Food balance sheets
 
-## -----------------------------------------------------------------------
-## -----------------------------------------------------------------------
+# 
+# faostatData.df <- meta.lst[["FAOSTAT"]]
+# dwnldOA <- FALSE # Population
+# dwnldRL <- FALSE # Resources, Resources - Land
+# dwnldRF <- FALSE # Resources - Fertilizers
+# dwnldRP <- FALSE # Resources - Pesticides
+# dwnldCS <- FALSE # Investments - Capital stock
+# dwnldRM <- FALSE # Investments - Machinery
+# dwnldIG <- FALSE # Government expenditures
+# dwnldA <- FALSE # ASTI
+# dwnldQC <- FALSE # Production - Crops
+# dwnldQA <- FALSE # Production - Live animals
+# dwnldQD <- FALSE # Production - Crops processed
+# dwnldQL <- FALSE # Production - Livestock primary
+# dwnldQP <- FALSE # Production - Livestock processed
+# dwnldQV <- FALSE # Production - Value of agricultural production
+# dwnldQI <- FALSE # Production indices
+# dwnldTP <- FALSE # Trade - Crops and livestock products
+# dwnldTI <- FALSE # Trade - Trade indices
+# dwnldFO <- FALSE # Forestry
+# dwnldGHG <- FALSE # Greenhouse gases
+# dwnldFB <- FALSE # Food balance sheets
 
-
-# EEEEEEEEE    EEE           EEEE
-# EE          EE EE        EE    EE 
-# EEEEEE     EE   EE     EE        EE
-# EE        EE     EE   EE          EE
-# EE       EEEEEEEEEEE   EE        EE
-# EE      EE         EE    EE    EE
-# EE     EE           EE     EEEE
 
 
 # FAOSTAT, Population - Annual population ---------------------------------
@@ -145,10 +157,10 @@ if (dwnldOA) {
                               useCHMT = FALSE))
   FAOoa.df <- FAO.lst$entity; rm(dwnldOA); rm(FAO.lst)
   ## ...update list
-  save(x = FAOoa.df, file = paste0("./database/Data/Processed/FAOoa", Sys.Date(), ".RData"))
+  save(x = FAOoa.df, file = paste0("./Data/Processed/FAOoa", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOoa2015-04-15.RData")
+  load(file = "./Data/Processed/FAOoa2015-04-15.RData")
 }
 
 # FAOSTAT, Resources - Land -----------------------------------------------
@@ -164,10 +176,10 @@ if (dwnldRL) {
                               useCHMT = FALSE))
   FAOrl.df <- FAO.lst$entity; rm(dwnldRL); rm(FAO.lst)
   ## ...update list
-  save(x = FAOrl.df, file = paste0("./database/Data/Processed/FAOrl", Sys.Date(), ".RData"))
+  save(x = FAOrl.df, file = paste0("./Data/Processed/FAOrl", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOrl2015-04-15.RData")
+  load(file = "./Data/Processed/FAOrl2015-04-15.RData")
 }
 
 # FAOSTAT, Resources - Fertilizers ----------------------------------------
@@ -183,10 +195,10 @@ if (dwnldRF) {
                               useCHMT = FALSE))
   FAOrf.df <- FAO.lst$entity; rm(dwnldRF); rm(FAO.lst)
   ## ...update list
-  save(x = FAOrf.df, file = paste0("./database/Data/Processed/FAOrf", Sys.Date(), ".RData"))
+  save(x = FAOrf.df, file = paste0("./Data/Processed/FAOrf", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOrf2015-04-15.RData")
+  load(file = "./Data/Processed/FAOrf2015-04-15.RData")
 }
 
 # FAOSTAT, Resources - Pesticides -----------------------------------------
@@ -202,10 +214,10 @@ if (dwnldRP) {
                               useCHMT = FALSE))
   FAOrp.df <- FAO.lst$entity; rm(dwnldRP); rm(FAO.lst)
   ## ...update list
-  save(x = FAOrp.df, file = paste0("./database/Data/Processed/FAOrp", Sys.Date(), ".RData"))
+  save(x = FAOrp.df, file = paste0("./Data/Processed/FAOrp", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOrp2015-04-15.RData")
+  load(file = "./Data/Processed/FAOrp2015-04-15.RData")
 }
 
 # FAOSTAT, Investments - Capital stock ------------------------------------
@@ -221,10 +233,10 @@ if (dwnldCS) {
                               useCHMT = FALSE))
   FAOcs.df <- FAO.lst$entity; rm(dwnldCS); rm(FAO.lst)
   ## ...update list
-  save(x = FAOcs.df, file = paste0("./database/Data/Processed/FAOcs", Sys.Date(), ".RData"))
+  save(x = FAOcs.df, file = paste0("./Data/Processed/FAOcs", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOcs2015-04-15.RData")
+  load(file = "./Data/Processed/FAOcs2015-04-15.RData")
 }
 
 # FAOSTAT, Investments - Machinery ----------------------------------------
@@ -240,10 +252,10 @@ if (dwnldRM) {
                               useCHMT = FALSE))
   FAOrm.df <- FAO.lst$entity; rm(dwnldRM); rm(FAO.lst)
   ## ...update list
-  save(x = FAOrm.df, file = paste0("./database/Data/Processed/FAOrm", Sys.Date(), ".RData"))
+  save(x = FAOrm.df, file = paste0("./Data/Processed/FAOrm", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOrm2015-04-15.RData")
+  load(file = "./Data/Processed/FAOrm2015-04-15.RData")
 }
 
 # FAOSTAT, Government expenditures ----------------------------------------
@@ -259,10 +271,10 @@ if (dwnldIG) {
                               useCHMT = FALSE))
   FAOig.df <- FAO.lst$entity; rm(dwnldIG); rm(FAO.lst)
   ## ...update list
-  save(x = FAOig.df, file = paste0("./database/Data/Processed/FAOig", Sys.Date(), ".RData"))
+  save(x = FAOig.df, file = paste0("./Data/Processed/FAOig", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOig2014-12-05.RData") # so the last time this was built succesfully
+  load(file = "./Data/Processed/FAOig2014-12-05.RData") # so the last time this was built succesfully
 }
 
 # FAOSTAT, ASTI -----------------------------------------------------------
@@ -278,10 +290,10 @@ if (dwnldA) {
                               useCHMT = FALSE))
   FAOa.df <- FAO.lst$entity; rm(dwnldA); rm(FAO.lst)
   ## ...update list
-  save(x = FAOa.df, file = paste0("./database/Data/Processed/FAOa", Sys.Date(), ".RData"))
+  save(x = FAOa.df, file = paste0("./Data/Processed/FAOa", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOa2015-04-15.RData")
+  load(file = "./Data/Processed/FAOa2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Crops ---------------------------------------------
@@ -297,10 +309,10 @@ if (dwnldQC) {
                               useCHMT = FALSE))
   FAOqc.df <- FAO.lst$entity; rm(dwnldQC); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqc.df, file = paste0("./database/Data/Processed/FAOqc", Sys.Date(), ".RData"))
+  save(x = FAOqc.df, file = paste0("./Data/Processed/FAOqc", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqc2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqc2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Live animals --------------------------------------
@@ -316,10 +328,10 @@ if (dwnldQA) {
                               useCHMT = FALSE))
   FAOqa.df <- FAO.lst$entity; rm(dwnldQA); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqa.df, file = paste0("./database/Data/Processed/FAOqa", Sys.Date(), ".RData"))
+  save(x = FAOqa.df, file = paste0("./Data/Processed/FAOqa", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqa2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqa2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Crops processed -----------------------------------
@@ -335,10 +347,10 @@ if (dwnldQD) {
                               useCHMT = FALSE))
   FAOqd.df <- FAO.lst$entity; rm(dwnldQD); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqd.df, file = paste0("./database/Data/Processed/FAOqd", Sys.Date(), ".RData"))
+  save(x = FAOqd.df, file = paste0("./Data/Processed/FAOqd", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqd2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqd2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Livestock primary ---------------------------------
@@ -354,10 +366,10 @@ if (dwnldQL) {
                               useCHMT = FALSE))
   FAOql.df <- FAO.lst$entity; rm(dwnldQL); rm(FAO.lst)
   ## ...update list
-  save(x = FAOql.df, file = paste0("./database/Data/Processed/FAOql", Sys.Date(), ".RData"))
+  save(x = FAOql.df, file = paste0("./Data/Processed/FAOql", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOql2015-04-15.RData")
+  load(file = "./Data/Processed/FAOql2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Livestock processed -------------------------------
@@ -373,10 +385,10 @@ if (dwnldQP) {
                               useCHMT = FALSE))
   FAOqp.df <- FAO.lst$entity; rm(dwnldQP); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqp.df, file = paste0("./database/Data/Processed/FAOqp", Sys.Date(), ".RData"))
+  save(x = FAOqp.df, file = paste0("./Data/Processed/FAOqp", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqp2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqp2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Value of agricultural production ------------------
@@ -392,10 +404,10 @@ if (dwnldQV) {
                               useCHMT = FALSE))
   FAOqv.df <- FAO.lst$entity; rm(dwnldQV); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqv.df, file = paste0("./database/Data/Processed/FAOqv", Sys.Date(), ".RData"))
+  save(x = FAOqv.df, file = paste0("./Data/Processed/FAOqv", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqv2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqv2015-04-15.RData")
 }
 
 # FAOSTAT, Production - Production indices --------------------------------
@@ -411,10 +423,10 @@ if (dwnldQI) {
                               useCHMT = FALSE))
   FAOqi.df <- FAO.lst$entity; rm(dwnldQI); rm(FAO.lst)
   ## ...update list
-  save(x = FAOqi.df, file = paste0("./database/Data/Processed/FAOqi", Sys.Date(), ".RData"))
+  save(x = FAOqi.df, file = paste0("./Data/Processed/FAOqi", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOqi2015-04-15.RData")
+  load(file = "./Data/Processed/FAOqi2015-04-15.RData")
 }
 
 # FAOSTAT, Trade - Crops and livestock products ---------------------------
@@ -430,10 +442,10 @@ if (dwnldTP) {
                               useCHMT = FALSE))
   FAOtp.df <- FAO.lst$entity; rm(dwnldTP); rm(FAO.lst)
   ## ...update list
-  save(x = FAOtp.df, file = paste0("./database/Data/Processed/FAOtp", Sys.Date(), ".RData"))
+  save(x = FAOtp.df, file = paste0("./Data/Processed/FAOtp", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOtp2015-04-15.RData")
+  load(file = "./Data/Processed/FAOtp2015-04-15.RData")
 }
 
 # FAOSTAT, Trade - Trade indices ------------------------------------------
@@ -449,10 +461,10 @@ if (dwnldTI) {
                               useCHMT = FALSE))
   FAOti.df <- FAO.lst$entity; rm(dwnldTI); rm(FAO.lst)
   ## ...update list
-  save(x = FAOti.df, file = paste0("./database/Data/Processed/FAOti", Sys.Date(), ".RData"))
+  save(x = FAOti.df, file = paste0("./Data/Processed/FAOti", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOti2015-04-15.RData")
+  load(file = "./Data/Processed/FAOti2015-04-15.RData")
 }
 
 # FAOSTAT, Forestry -------------------------------------------------------
@@ -468,10 +480,10 @@ if (dwnldFO) {
                               useCHMT = FALSE))
   FAOfo.df <- FAO.lst$entity; rm(dwnldFO); rm(FAO.lst)
   ## ...update list
-  save(x = FAOfo.df, file = paste0("./database/Data/Processed/FAOfo", Sys.Date(), ".RData"))
+  save(x = FAOfo.df, file = paste0("./Data/Processed/FAOfo", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOfo2015-04-15.RData")
+  load(file = "./Data/Processed/FAOfo2015-04-15.RData")
 }
 
 # FAOSTAT, Greenhouse gases -----------------------------------------------
@@ -490,10 +502,10 @@ if (dwnldGHG) {
     FAOghg.df[, i] <- as.numeric(FAOghg.df[, i])
   }
   ## ...update list
-  save(x = FAOghg.df, file = paste0("./database/Data/Processed/FAOghg", Sys.Date(), ".RData"))
+  save(x = FAOghg.df, file = paste0("./Data/Processed/FAOghg", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOghg2015-04-15.RData")
+  load(file = "./Data/Processed/FAOghg2015-04-15.RData")
 }
 
 # FAOSTAT, Food balance sheets --------------------------------------------
@@ -512,22 +524,11 @@ if (dwnldFB) {
     FAOfb.df[, i] <- as.numeric(FAOfb.df[, i])
   }
   ## ...update list
-  save(x = FAOfb.df, file = paste0("./database/Data/Processed/FAOfb", Sys.Date(), ".RData"))
+  save(x = FAOfb.df, file = paste0("./Data/Processed/FAOfb", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./database/Data/Processed/FAOfb2015-04-15.RData")
+  load(file = "./Data/Processed/FAOfb2015-04-15.RData")
 }
-
-## -----------------------------------------------------------------------
-## -----------------------------------------------------------------------
-
-# WW                   WW  WWWWWWW
-#  WW                 WW   WW    WW
-#   WW               WW    WW     W
-#    WW     WWW     WW     WWWWWWW     
-#     WW   WW WW   WW      WW     W
-#      WW WW   WW WW       WW    WW
-#       WWW     WWW        WWWWWWW
 
 # Download variables from WB ----------------------------------------------
 
@@ -536,12 +537,12 @@ if (downloadWB) {
   WB.lst <- with(meta.lst[["WDI"]],
                  getWDItoSYB(indicator = WDINAME, name = STS_ID))
   ## ...update list
-  save(x = WB.lst, file = paste0("./database/Data/Processed/WBdata", Sys.Date(), ".RData"))
+  save(x = WB.lst, file = paste0("./Data/Processed/WBdata", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  #   load(file = "./database/Data/Processed/WBdata2015-03-11.RData")
-  # load(file = "./database/Data/Processed/WBdata2014-07-07.RData")
-  load(file = "./database/Data/Processed/WBdata2015-04-17.RData")
+  #   load(file = "./Data/Processed/WBdata2015-03-11.RData")
+  # load(file = "./Data/Processed/WBdata2014-07-07.RData")
+  load(file = "./Data/Processed/WBdata2015-04-17.RData")
 }
 WB.df <- WB.lst$entity
 ## This is a mistake in the WDI database
@@ -559,26 +560,33 @@ WB.df <- WB.df[, -grep("ISO2_WB_CODE|Country", colnames(WB.df))]
 
 #WB.df <- WB.df[!duplicated(WB.df[c("FAOST_CODE","Year")]),]
 
-## -----------------------------------------------------------------------
-## -----------------------------------------------------------------------
-
-
-# MMMM     MMMM
-# MM MM   MM MM
-# MM  MM MM  MM
-# MM   MMM   MM
-# MM         MM
-# MM         MM
-# MM         MM
-
 # Manual data -------------------------------------------------------------
 
-load("./database/Data/Processed/wbManualData.RData")
-load("./database/Data/Processed/AquastatManualData.RData")
-load("./database/Data/Processed/GlobalForestResourceAssessment.RData")
-load("./database/Data/Processed/BiofuelProduction.RData")
-load("./database/Data/Processed/Fishery.RData")
-load("./database/Data/Processed/UNPopManualData.RData")
+load("./Data/Processed/wbManualData.RData")
+load("./Data/Processed/AquastatManualData.RData")
+load("./Data/Processed/GlobalForestResourceAssessment.RData")
+load("./Data/Processed/BiofuelProduction.RData")
+load("./Data/Processed/Fishery.RData")
+load("./Data/Processed/UNPopManualData.RData")
+
+
+# load("./Data/Processed/AquastatManualData_old.RData")
+# o <- AquastatManualData.df
+# load("./Data/Processed/AquastatManualData.RData")
+# n <- AquastatManualData.df; rm(AquastatManualData.df)
+# load("./Data/Processed/wbManualData.RData")
+# w <- WBManualData.df
+# load("./Data/Processed/UNPopManualData.RData")
+# p <- UNPopManualData.df; rm(UNPopManualData.df)
+# 
+# dim(o);dim(n)
+# head(o);head(n)
+# str(o);str(n);str(p);str(w)
+
+
+
+
+
 
 
 ###########################################################################
@@ -594,7 +602,7 @@ initial.df = Reduce(function(x, y) merge(x, y, all = TRUE),
                              FAOrp.df, # FAOSTAT, Resources - Pesticides
                              FAOcs.df, # FAOSTAT, Investments - Capital stock
                              FAOrm.df, # FAOSTAT, Investments - Machinery
-                             #FAOig.df, # FAOSTAT, Government expenditures - not in the FAOSTAT anymore
+                             FAOig.df, # FAOSTAT, Government expenditures
                              FAOa.df, # FAOSTAT, ASTI
                              FAOqc.df, # FAOSTAT, Production - Crops
                              FAOqa.df, # FAOSTAT, Production - Live animals
@@ -607,15 +615,15 @@ initial.df = Reduce(function(x, y) merge(x, y, all = TRUE),
                              FAOti.df, # FAOSTAT, Trade - Trade indices
                              FAOfo.df, # FAOSTAT, Forestry
                              FAOghg.df,# FAOSTAT, Greenhouse gases
-                             FAOfb.df#, # FAOSTAT, Food balance sheets
-                             #WBManualData.df, # not_update
-                             #AquastatManualData.df, # updated 2015
-                             #gfra.df, # not updated
-                             #BiofuelProduction.df, # not update
-                             #Fishery.df, # not updated  
-                             #UNPopManualData.df, # added by Markus 20150401
-                             ), 
-                    init = WB.df) # Download variables from WB
+                             FAOfb.df, # FAOSTAT, Food balance sheets
+                             #WB.df, # Download variables from WB
+                             WBManualData.df, # not_update
+                             AquastatManualData.df, # updated 2015
+                             gfra.df, # not updated
+                             BiofuelProduction.df, # not update
+                             Fishery.df, # not updated  
+                             UNPopManualData.df), # added by Markus 20150401
+                    init = WB.df)
 # rm(list = c("dwnldA", "dwnldCS", "dwnldFB", "dwnldFO", "dwnldGHG", "dwnldIG",
 #             "dwnldOA", "dwnldQA", "dwnldQC", "dwnldQD", "dwnldQI", "dwnldQL",
 #             "dwnldQP", "dwnldQV", "dwnldRF", "dwnldRL", "dwnldRM", "dwnldRP",
@@ -633,13 +641,9 @@ initial.df <- initial.df[initial.df[, "Year"] <= 2020,]
 
 meta.lst[["UNIT_MULT"]][, "UNIT_MULT"] <- as.numeric(translateUnit(meta.lst[["UNIT_MULT"]]$UNIT_MULT))
 
-preConstr.df <- scaleUnit(df=initial.df, multiplier=meta.lst[["UNIT_MULT"]])
-#rm(initial.df)
 
-# remove duplicates
-# preConstr.df <- preConstr.df[!duplicated(preConstr.df[c("FAOST_CODE","Year")]),]
-
-##################################3
+preConstr.df <- scaleUnit(initial.df, meta.lst[["UNIT_MULT"]])
+rm(initial.df)
 
 #pre1 <- preConstr.df
 
@@ -648,244 +652,7 @@ preConstr.df <- scaleUnit(df=initial.df, multiplier=meta.lst[["UNIT_MULT"]])
 # Construction ------------------------------------------------------------
 
 ## Manual
-#source("./database/Rcode/Final/ManualConstruction.R")
-
-
-
-###########################################################################
-## This script is used to manually construct some variables
-###########################################################################
-
-# MORTWEIGHT --------------------------------------------------------------
-
-preConstr.df[, "MORTWEIGHT"] <- 
-  preConstr.df[, "SP.DYN.CBRT.IN"] * preConstr.df[, "OA.TPBS.POP.PPL.NO"] / 1000
-
-# # LABPARTFEWEIGHT ---------------------------------------------------------
-# 
-# preConstr.df[, "LABPARTFEWEIGHT"] <- 
-#   preConstr.df[, "SP.POP.1564.FE.IN"] + preConstr.df[, "SP.POP.65UP.FE.IN"]
-# 
-# # LABPARTMAWEIGHT ---------------------------------------------------------
-# 
-# preConstr.df[, "LABPARTMAWEIGHT"] <- 
-#   preConstr.df[, "SP.POP.1564.MA.IN"] + preConstr.df[, "SP.POP.65UP.MA.IN"]
-
-# RF.FERT.NIPH.TN.NO ------------------------------------------------------
-
-preConstr.df[, "RF.FERT.NIPH.TN.NO"] <- 
-  preConstr.df[, "RF.FERT.NI.TN.NO"] + preConstr.df[, "RF.FERT.PH.TN.NO"]
-
-# RP.PEST.TOT.TN.NO -------------------------------------------------------
-## NOTE (FILIPPO): we cannot do a simple sum of vector with the operator "+"
-##                 because "+" as the function "sum" doesn't treat NA properly
-RP.PEST.TOT.TN.NO.df <- 
-  apply(preConstr.df[, c("RP.PEST.INS.TN.NO", "RP.PEST.MO.TN.NO",
-                         "RP.PEST.HE.TN.NO", "RP.PEST.FB.TN.NO",
-                         "RP.PEST.STF.TN.NO", "RP.PEST.STI.TN.NO")],
-        MARGIN = 1, FUN = sum2)
-preConstr.df[, "RP.PEST.TOT.TN.NO"] <- RP.PEST.TOT.TN.NO.df
-rm(RP.PEST.TOT.TN.NO.df)
-
-# QC.PRD.FRUNOGR.TN.NO ----------------------------------------------------
-
-preConstr.df[, "QC.PRD.FRUNOGR.TN.NO"] <- 
-  preConstr.df[, "QC.PRD.FRU.TN.NO"] - preConstr.df[, "QD.PRD.WINE.TN.NO"]
-
-# QC.RHRV.FRUNOGR.HA.NO ---------------------------------------------------
-
-preConstr.df[, "QC.RHRV.FRUNOGR.HA.NO"] <- 
-  preConstr.df[, "QC.RHRV.FRU.HA.NO"] - preConstr.df[, "QD.RHRV.VINE.HA.NO"]
-
-# POP.TOT.BASE.0406 -------------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "OA.TPBS.POP.PPL.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "POP.TOT.BASE.0406"
-base = base[, c("FAOST_CODE", "POP.TOT.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by = "FAOST_CODE", all.x = TRUE)
-
-# QV.GPV.FOOD.BASE.0406 ---------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.GPV.FOOD.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.GPV.FOOD.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.GPV.FOOD.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.FOOD.BASE.0406 ---------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.FOOD.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.FOOD.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.FOOD.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.CRPS.BASE.0406 ---------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.CRPS.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.CRPS.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.CRPS.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.GPV.AGR.BASE.0406 ----------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.GPV.AGR.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.GPV.AGR.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.GPV.AGR.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.AGR.BASE.0406 ----------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.AGR.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.AGR.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.AGR.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.CRLS.BASE.0406 ---------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.CRLS.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.CRLS.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.CRLS.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.LVSTCK.BASE.0406 -------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.LVSTCK.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.LVSTCK.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.LVSTCK.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# QV.NPV.NNFOOD.BASE.0406 -------------------------------------------------
-
-base = ddply(subset(preConstr.df, 
-                    subset = Year %in% c(2004,2005,2006),
-                    select = c("FAOST_CODE", "Year", "QV.NPV.NNFOOD.ID.NO")),
-             .(FAOST_CODE), numcolwise(mean), na.rm = TRUE)
-colnames(base)[3] = "QV.NPV.NNFOOD.BASE.0406"
-base = base[, c("FAOST_CODE", "QV.NPV.NNFOOD.BASE.0406")]
-preConstr.df = merge(preConstr.df, base, by="FAOST_CODE", all.x=TRUE)
-
-# TP.NETVAL.CRLSPREP.USD.NO -----------------------------------------------
-
-preConstr.df$TP.NETVAL.CRLSPREP.USD.NO = preConstr.df$TP.EXVAL.CRLSPREP.USD.NO - 
-  preConstr.df$TP.IMVAL.CRLSPREP.USD.NO
-
-# TP.NETVAL.MEATPREP.USD.NO -----------------------------------------------
-
-preConstr.df$TP.NETVAL.MEATPREP.USD.NO = preConstr.df$TP.EXVAL.MEATPREP.USD.NO - 
-  preConstr.df$TP.IMVAL.MEATPREP.USD.NO
-
-# TP.NETVAL.FV.USD.NO -----------------------------------------------------
-
-preConstr.df$TP.NETVAL.FV.USD.NO = preConstr.df$TP.EXVAL.FV.USD.NO - 
-  preConstr.df$TP.IMVAL.FV.USD.NO
-
-# TP.NETVAL.MILKEQ.USD.NO -------------------------------------------------
-
-preConstr.df$TP.NETVAL.MILKEQ.USD.NO = preConstr.df$TP.EXVAL.MILKEQ.USD.NO - 
-  preConstr.df$TP.IMVAL.MILKEQ.USD.NO
-
-# TP.NETVAL.AFOVO.USD.NO --------------------------------------------------
-
-preConstr.df$TP.NETVAL.AFOVO.USD.NO = preConstr.df$TP.EXVAL.ANFATS.USD.NO + 
-  preConstr.df$TP.EXVAL.OILSEEDS.USD.NO + preConstr.df$TP.EXVAL.VEGOIL.USD.NO -
-  preConstr.df$TP.IMVAL.ANFATS.USD.NO + preConstr.df$TP.IMVAL.OILSEEDS.USD.NO -
-  preConstr.df$TP.IMVAL.VEGOIL.USD.NO
-
-# TP.NETVAL.BEV.USD.NO ----------------------------------------------------
-
-preConstr.df$TP.NETVAL.BEV.USD.NO = preConstr.df$TP.EXVAL.BEV.USD.NO - 
-  preConstr.df$TP.IMVAL.BEV.USD.NO
-
-# TP.NETVAL.CTCS.USD.NO ---------------------------------------------------
-
-preConstr.df$TP.NETVAL.CTCS.USD.NO = preConstr.df$TP.EXVAL.CTCS.USD.NO - 
-  preConstr.df$TP.IMVAL.CTCS.USD.NO
-
-# TP.NETVAL.SUGHON.USD.NO -------------------------------------------------
-
-preConstr.df$TP.NETVAL.SUGHON.USD.NO = preConstr.df$TP.EXVAL.SUGHON.USD.NO - 
-  preConstr.df$TP.IMVAL.SUGHON.USD.NO
-
-# GLI.CHPF.TOT.ECO2EQ.NO --------------------------------------------------
-
-preConstr.df$GLI.CHPF.TOT.ECO2EQ.NO = preConstr.df$GL.CL.TOT.NERCO2EQ.NO + 
-  preConstr.df$GL.GL.TOT.NERCO2EQ.NO
-
-# GHG.AFOLU.TOT.ECO2EQ.NO -------------------------------------------------
-
-preConstr.df$GHG.AFOLU.TOT.ECO2EQ.NO = preConstr.df$GHG.TOT.ALL.GG.NO + 
-  preConstr.df$GL.LU.TOT.NERCO2EQ.NO
-
-# GN.UI.EA.TJPIN.NO -------------------------------------------------------
-
-preConstr.df[, "GN.UI.EA.TJPIN.NO"] <- 
-  preConstr.df[, "GN.TE.CIA.TJ.NO"]/preConstr.df[, "QV.GPV.AGR.ID.NO"]*1000000
-
-# FI.PRD.TOT.TN.NO --------------------------------------------------------
-
-preConstr.df$FI.PRD.TOT.TN.NO = preConstr.df$FI.PRD.AQ.TN.NO + 
-  preConstr.df$FI.PRD.CAPT.TN.NO
-
-#######################################################################
-
-#   ,-(|)--(|)-.
-#   \_   ..   _/
-#     \______/
-#       V  V                                  ____
-#       `.^^`.                               /^,--`
-#         \^^^\                             (^^\
-#         |^^^|                  _,-._       \^^\
-#        (^^^^\      __      _,-'^^^^^`.    _,'^^)
-#         \^^^^`._,-'^^`-._.'^^^^__^^^^ `--'^^^_/
-#          \^^^^^ ^^^_^^^^^^^_,-'  `.^^^^^^^^_/ 
-#           `.____,-' `-.__.'        `-.___.'   
-
-# PROBLEMS start --------------------------------
-
-
-# FI.NETVAL.FISH.USD.NO ---------------------------------------------------
-
-preConstr.df$FI.NETVAL.FISH.USD.NO = preConstr.df$FI.EXVAL.FISH.USD.NO - 
-  preConstr.df$FI.IMVAL.FISH.USD.NO
-
-# TP.EXVAL.FOODWF.USD.NO --------------------------------------------------
-
-preConstr.df$TP.EXVAL.FOODWF.USD.NO = preConstr.df$TP.EXVAL.FOOD.USD.NO + 
-  preConstr.df$FI.EXVAL.FISH.USD.NO
-
-# TP.IMVAL.FOODWF.USD.NO --------------------------------------------------
-
-preConstr.df$TP.IMVAL.FOODWF.USD.NO = preConstr.df$TP.IMVAL.FOOD.USD.NO + 
-  preConstr.df$FI.IMVAL.FISH.USD.NO
-
-# PROBLEMS end --------------------------------
-
-# Clean the environment ---------------------------------------------------
-
-rm(list = "base")
+source("./Rcode/Final/ManualConstruction.R")
 
 
 ## Automatic
@@ -961,30 +728,33 @@ postAgg.df <- CheckValues(dataset = postAgg.df, columns = colnames(postAgg.df)[
   -grep("FAOST_CODE|Year|Area|POU_DISTR|FAO_TABLE_NAME", colnames(postAgg.df))])
 
 SYB.df <- postAgg.df
-save(x = SYB.df, file = "./database/Data/Processed/SYB.RData")
-load(file = "./database/Data/Processed/SYB.RData")
+save(x = SYB.df, file = "./Data/Processed/SYB.RData")
+load(file = "./Data/Processed/SYB.RData")
+
+myvars <- names(SYB.df) %in% fsiVar[-1:-2]
+SYB.df <- SYB.df[!myvars]
 
 # Merge the FSI dataset ---------------------------------------------------
 
 ## Merge the dataset
-load(file = "./database/Data/Processed/fsi.RData")
-fsiVar <- c("FAOST_CODE", "Year",
-            "AV3YADESA.DISS", "QV.NPV.FOOD.ID.AV3YSHP.DISS", "FB.SDES.CRLSSR.KCD.AV3Y.DISS",
-            "FB.PSQ.GT.GCD.AV3Y.DISS", "FB.PSQ.AO.GCD.AV3Y.DISS", "FB.FSQ.GT.GCD.AV3Y.DISS",
-            "IS.ROD.PAVE.ZS.DISS", "IS.ROD.DNST.K2.DISS", "IS.RRS.DNST.K2.DISS",
-            "DFPLI.IN.NO.DISS", "SH.H2O.SAFE.ZS", "SH.STA.ACSN",
-            "FB.CIDR.CRLS.TN.AV3Y.DISS", "RL.AREA.EQIRR.HA.SHLAV3Y.DISS",
-            "TI.IV.FEFTMT.USD.AV3Y.DISS", "SFEP.NO", "WGI.PSAVT.IN.NO",  
-            "PCFPV.IN.NO.DISS", "PCFSV.IN.NO.DISS", "DFPLIV.IN.NO.DISS",
-            "SH.ANM.CHLD.ZS", "VITAMINA", "IODINE", "SH.PRG.ANEM",
-            "SH.STA.WAST.ZS", "SH.STA.STNT.ZS", "SH.STA.MALN.ZS", "SH.STA.AMALN.ZS",
-            "AV3YMDER_1.55.DISS", "AV3YADER_1.85.DISS", "AV3YMDER_1.75.DISS", "CV.DISS", "SK.DISS",
-            "LOSS.DISS", "AV3YDES.DISS", "AV3YPOU.DISS", "AV3YNOU.DISS", 
-            "AV3YPOU", "AV3YNOU", "AV3YDoFD.DISS", "AV3YPoFI.DISS", "AV3YPOP")
-fsi.df <- fsi.df[, fsiVar]
+load(file = "./Data/Processed/fsi.RData")
+# fsiVar <- c("FAOST_CODE", "Year",
+#             "AV3YADESA.DISS", "QV.NPV.FOOD.ID.AV3YSHP.DISS", "FB.SDES.CRLSSR.KCD.AV3Y.DISS",
+#             "FB.PSQ.GT.GCD.AV3Y.DISS", "FB.PSQ.AO.GCD.AV3Y.DISS", "FB.FSQ.GT.GCD.AV3Y.DISS",
+#             "IS.ROD.PAVE.ZS.DISS", "IS.ROD.DNST.K2.DISS", "IS.RRS.DNST.K2.DISS",
+#             "DFPLI.IN.NO.DISS", "SH.H2O.SAFE.ZS", "SH.STA.ACSN",
+#             "FB.CIDR.CRLS.TN.AV3Y.DISS", "RL.AREA.EQIRR.HA.SHLAV3Y.DISS",
+#             "TI.IV.FEFTMT.USD.AV3Y.DISS", "SFEP.NO", "WGI.PSAVT.IN.NO",  
+#             "PCFPV.IN.NO.DISS", "PCFSV.IN.NO.DISS", "DFPLIV.IN.NO.DISS",
+#             "SH.ANM.CHLD.ZS", "VITAMINA", "IODINE", "SH.PRG.ANEM",
+#             "SH.STA.WAST.ZS", "SH.STA.STNT.ZS", "SH.STA.MALN.ZS", "SH.STA.AMALN.ZS",
+#             "AV3YMDER_1.55.DISS", "AV3YADER_1.85.DISS", "AV3YMDER_1.75.DISS", "CV.DISS", "SK.DISS",
+#             "LOSS.DISS", "AV3YDES.DISS", "AV3YPOU.DISS", "AV3YNOU.DISS", 
+#             "AV3YPOU", "AV3YNOU", "AV3YDoFD.DISS", "AV3YPoFI.DISS", "AV3YPOP")
+# fsi.df <- fsi.df[, fsiVar]
 SYB.df <- merge(SYB.df, fsi.df, all = FALSE, by = c("FAOST_CODE", "Year"))
 rm(fsi.df)
-save(x = SYB.df, file = "./database/Data/Processed/SYB.RData")
+save(x = SYB.df, file = "./Data/Processed/SYB.RData")
 
 ## Merge metadata and construction file
 fsicon.df <- ReadConstruction(file = "FSIconstruction15.csv", 
@@ -1002,8 +772,8 @@ con.df <- rbind(con.df,
                 fsicon.df[, -grep("MODULE_FSI|MODULE_POU|MODULE_DES", 
                                   colnames(fsicon.df))])
 
-save(x = con.df, file = "./database/Data/Processed/Construction.RData")
-save(x = meta.lst, file = "./database/Data/Processed/Metadata.RData")
+save(x = con.df, file = "./Data/Processed/Construction.RData")
+save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
 ###########################################################################
 ## End
