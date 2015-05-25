@@ -2,6 +2,8 @@
 ## This script generates the dataset for the Statistical Yearbooks
 ###########################################################################
 
+setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
+
 # One shot commands -------------------------------------------------------
 
 # require(devtools)
@@ -40,7 +42,7 @@ require(plyr)
 require(reshape2)
 require(data.table)
 
-setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
+
 
 # Packrat -----------------------------------------------------------------
 
@@ -731,7 +733,7 @@ SYB.df <- postAgg.df
 save(x = SYB.df, file = "./Data/Processed/SYB.RData")
 load(file = "./Data/Processed/SYB.RData")
 
-myvars <- names(SYB.df) %in% fsiVar[-1:-2]
+myvars <- names(SYB.df) %in% names(fsi.df)[-1:-2]
 SYB.df <- SYB.df[!myvars]
 
 # Merge the FSI dataset ---------------------------------------------------
