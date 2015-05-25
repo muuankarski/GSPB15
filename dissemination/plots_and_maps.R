@@ -227,12 +227,13 @@ export_plot(manual_text = "Male employment in agriculture, share of male employm
 ## ------------------------------------------------------------------------
 # Children in employment, total
 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
-# ## Export the plot
-# export_plot(manual_text = "Children in employment, total", placement = "b")
+## Info
+plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Children in employment, total", placement = "b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -844,7 +845,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+export_plot(manual_text = "Dietary energy supply, top 20 (2000-02 vs. 2009-11)",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -856,7 +857,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+export_plot(manual_text = "Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -864,9 +865,6 @@ export_plot(manual_text = "Percentage of children under 5 years of age who are s
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.SUP.1.5")
-# data into numeric
-sybdata.df$AV3YPoFI.DISS <- as.factor(sybdata.df$AV3YPoFI.DISS)
-sybdata.df$AV3YPoFI.DISS <- as.numeric(levels(sybdata.df$AV3YPoFI.DISS))[sybdata.df$AV3YPoFI.DISS]
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=8) )
 ## Export the plot

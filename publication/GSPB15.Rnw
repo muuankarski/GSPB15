@@ -325,9 +325,9 @@ chart_spread2(title="Labour",
             RightTextCode="C.P1.LABO.1.2",   
             LeftChartCode="C.P1.LABO.1.3",   
             RightChartCode="C.P1.LABO.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P1.LABO.1.5", 
             MapCode="M.P1.LABO.1.6",
-            notes="Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
+            notes="BOTTOM CHART CHILD EMPLOYMENT ONLY FEW COUNTRIES HOW TO DISPLAY!! Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
             )         
 @
 
@@ -482,11 +482,11 @@ chart_spread2(title="Utilization",
 chart_spread2(title="Food supply",
             LeftTextCode="",  
             RightTextCode="issues",   
-            LeftChartCode="issues",   
-            RightChartCode="issues",  
-            BottomChartCode="issues", 
-            MapCode="issues",
-            notes="Issues relate to different regional aggregation used in FSI indicators (SOFI)"
+            LeftChartCode="C.P3.SUP.1.3",   
+            RightChartCode="C.P3.SUP.1.4",  
+            BottomChartCode="C.P3.SUP.1.5", 
+            MapCode="M.P3.SUP.1.6",
+            notes="<Protein and fat supply in crops primary equivalent (2000-09), world> for the top right"
             )
 @
 
