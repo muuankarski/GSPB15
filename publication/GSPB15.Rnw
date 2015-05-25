@@ -411,32 +411,34 @@ chart_spread2(title="Access",
             LeftTextCode="Text here",  
             RightTextCode="C.P2.ACCESS.1.2",   
             LeftChartCode="C.P2.ACCESS.1.3",   
-            RightChartCode="issues",  
-            BottomChartCode="issues", 
+            RightChartCode="C.P2.ACCESS.1.4",  
+            BottomChartCode="C.P2.ACCESS.1.5", 
             MapCode="M.P2.ACCESS.1.6",
-            notes="VARIABLES FOR Prevalence of undernourishment, 3 year averages AND Prevalence of food inadequacy, 3 year averages missing from the SYB DB"
+            notes="Both <Prevalence of undernourishment, 3 year averages> AND <Prevalence of food inadequacy, 3 year averages> Should we think of other ways to "
             )
 @
 
 <<Stability, eval=TRUE,results='asis'>>=
 chart_spread2(title="Stability",                
-            LeftTextCode="NOT IMPLEMENTED YET. INDICATORS SHOULD BE THERE...",  
+            LeftTextCode="Text here",  
             RightTextCode="not_defined",   
-            LeftChartCode="not_defined",   
-            RightChartCode="not_defined",  
-            BottomChartCode="not_defined", 
-            MapCode="not_defined"         
+            LeftChartCode="C.P2.STB.1.3",   
+            RightChartCode="C.P2.STB.1.4",  
+            BottomChartCode="C.P2.STB.1.5", 
+            MapCode="M.P2.STB.1.6",
+            notes="Should we put something for the top right corner??"
             )
 @
 
 <<Utilization, eval=TRUE,results='asis'>>=
 chart_spread2(title="Utilization",                
-            LeftTextCode="NOT IMPLEMENTED YET. INDICATORS SHOULD BE THERE...",  
+            LeftTextCode="Text here",  
             RightTextCode="not_defined",   
-            LeftChartCode="not_defined",   
-            RightChartCode="not_defined",  
-            BottomChartCode="not_defined", 
-            MapCode="not_defined"         
+            LeftChartCode="C.P2.UT.1.3",   
+            RightChartCode="C.P2.UT.1.4",  
+            BottomChartCode="C.P2.UT.1.5", 
+            MapCode="M.P2.UT.1.6",
+            notes="VAR <Percentage of children under 5 years of age who are underweight> is not used, though EXISTS. <Access to improved sanitation facilities> does not exists in the database"
             )
 @
 %
@@ -478,17 +480,18 @@ chart_spread2(title="Utilization",
 
 <<Food supply, eval=TRUE,results='asis'>>=
 chart_spread2(title="Food supply",
-            LeftTextCode="We are waiting for the updated FSI figures",  
-            RightTextCode="not_defined",   
-            LeftChartCode="not_defined",   
-            RightChartCode="not_defined",  
-            BottomChartCode="not_defined", 
-            MapCode="not_defined"         
+            LeftTextCode="",  
+            RightTextCode="issues",   
+            LeftChartCode="issues",   
+            RightChartCode="issues",  
+            BottomChartCode="issues", 
+            MapCode="issues",
+            notes="Issues relate to different regional aggregation used in FSI indicators (SOFI)"
             )
 @
 
 <<Growth in crop production, eval=TRUE,results='asis'>>=
-chart_spread2(title="Growth in crop production",
+chart_spread(title="Growth in crop production",
             LeftTextCode="Text here!",  
             RightTextCode="issues",   
             LeftChartCode="C.P3.CRPRO.1.3",   
@@ -500,7 +503,7 @@ chart_spread2(title="Growth in crop production",
 @
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
-chart_spread2(title="Trends in the crop sector",                
+chart_spread(title="Trends in the crop sector",                
             LeftTextCode="Text here",  
             RightTextCode="issues",   
             LeftChartCode="C.P3.CRTRE.1.3",   

@@ -2,6 +2,8 @@
 ## This script generates the Global Statistical Pocketbook 2015
 ###########################################################################
 
+setwd("~/btsync/fao_sync/pocketbooks/GSPB15")
+
 # Set up packrat ----------------------------------------------------------
 
 # require(devtools)

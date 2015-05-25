@@ -449,10 +449,15 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # ----------------------------------------------------------------------- #
 # Land area
 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P2.LAND.1.2")
+## Info
+
+# Have to still think about this. The example is apparently the one in big book on page 76
+
+# plotInfo <- plot_info(plotName = "C.P2.AV.1.2")
 # 
 # ## Plot
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+# 
 # assign(plotInfo$plotName,
 #        plot_syb(x = plotInfo$xAxis,
 #                 y = plotInfo$yAxis,
@@ -552,17 +557,36 @@ assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
 ## Export the plot
 export_plot(manual_text = "Domestic food price level index",placement="l")
 
+
+# ----------------------------------------------------------------------- #
+# Prevalence of undernourishment, 3 year averages
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+
+# data into numeric
+sybdata.df$AV3YPOU.DISS <- as.factor(sybdata.df$AV3YPOU.DISS)
+sybdata.df$AV3YPOU.DISS <- as.numeric(levels(sybdata.df$AV3YPOU.DISS))[sybdata.df$AV3YPOU.DISS]
+
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Prevalence of undernourishment, 3 year averages",placement="r")
+
+
 # ----------------------------------------------------------------------- #
 # Prevalence of food inadequacy, 3 year averages
 
-# FSI variable: "AV3YPoFI.DISS"
-
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=3) )
-# ## Export the plot
-# export_plot(manual_text = "This is LAND", placement = "r")
+## Info
+plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.5")
+# data into numeric
+sybdata.df$AV3YPoFI.DISS <- as.factor(sybdata.df$AV3YPoFI.DISS)
+sybdata.df$AV3YPoFI.DISS <- as.numeric(levels(sybdata.df$AV3YPoFI.DISS))[sybdata.df$AV3YPoFI.DISS]
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=8) )
+## Export the plot
+export_plot(manual_text = "Prevalence of food inadequacy, 3 year averages", placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -599,14 +623,62 @@ export_map()
 ###########################################################################
 
 
-
 # Cereal import dependency ratio
 # Percent of arable land equipped for irrigation
-# Value of food imports over total merchandise exports
-# Political stability and absence of violence/terrorism
-# Domestic food price volatility 
+### Value of food imports over total merchandise exports
+### Political stability and absence of violence/terrorism
+### Domestic food price volatility 
 # Per capita food production variability
-# Per capita food supply variability
+### Per capita food supply variability
+
+# Per capita food supply variability 
+
+
+# ----------------------------------------------------------------------- #
+# Per capita food supply variability 
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+## Export the plot
+export_plot(manual_text = "Per capita food supply variability ",placement="l")
+
+
+# ----------------------------------------------------------------------- #
+# Domestic food price level index volatility 
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+## Export the plot
+export_plot(manual_text = "Domestic food price level index",placement="l")
+
+
+# ----------------------------------------------------------------------- #
+# Value of food imports over total merchandise exports, 3 year averages 
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.STB.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Value of food imports over total merchandise exports, 3 year averages", placement = "b")
+
+
+##### -------------------------------------------------------
+# MAPS
+
+# Political stability and absence of violence/terrorism
+
+## Map info
+mapInfo <- map_info(mapName = "M.P2.STB.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
+
 
 
 ###########################################################################
@@ -625,17 +697,75 @@ export_map()
 ###########################################################################
 
 
-# Access to improved water sources
+### Access to improved water sources
 # Access to improved sanitation facilities
-# Percentage of children under 5 years of age affected by wasting
-# Percentage of children under 5 years of age who are stunted
+### Percentage of children under 5 years of age affected by wasting
+### Percentage of children under 5 years of age who are stunted
 # Percentage of children under 5 years of age who are underweight 
 # Percentage of adults who are underweight 
 # Prevalence of anaemia among pregnant women
-# Prevalence of anaemia among children under 5 years of age
+### Prevalence of anaemia among children under 5 years of age
 # Prevalence of vitamin A deficiency in the population
 # Prevalence of iodine deficiency
 
+#Percentage of children under 5 years of age affected by wasting
+
+
+# ----------------------------------------------------------------------- #
+# Percentage of children under 5 years of age who are stunted
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+
+# ----------------------------------------------------------------------- #
+# Percentage of children under 5 years of age who are stunted
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
+#plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+
+# ----------------------------------------------------------------------- #
+# Percentage of children under 5 years of age affected by wasting
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.UT.1.4")
+#plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Percentage of children under 5 years of age affected by wasting",placement="r")
+
+# ----------------------------------------------------------------------- #
+# Access to improved water source and to improved sanitation facilities 
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.UT.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Access to improved water source and to improved sanitation facilities", placement = "b")
+
+
+##### -------------------------------------------------------
+# MAPS
+
+# Percentage of anaemia among children <5 years of age
+
+## Map info
+mapInfo <- map_info(mapName = "M.P2.UT.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
 
 
 
@@ -702,6 +832,59 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # 4. Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)
 # 5. Line graph: DES (kcal/cap/day), by region, 2000-2011
 # 6. Map: DES (kcal/cap/day), 2009-11
+
+
+# ----------------------------------------------------------------------- #
+# Dietary energy supply, top 20 (2000-02 vs. 2009-11)
+
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.SUP.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+
+
+# ----------------------------------------------------------------------- #
+# Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.SUP.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+
+
+# ----------------------------------------------------------------------- #
+# DES (kcal/cap/day)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P3.SUP.1.5")
+# data into numeric
+sybdata.df$AV3YPoFI.DISS <- as.factor(sybdata.df$AV3YPoFI.DISS)
+sybdata.df$AV3YPoFI.DISS <- as.numeric(levels(sybdata.df$AV3YPoFI.DISS))[sybdata.df$AV3YPoFI.DISS]
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=8) )
+## Export the plot
+export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
+
+
+##### -------------------------------------------------------
+# MAPS
+
+# Average dietary energy supply adequacy, 3 year averages (percent)   NOT: 6. Map: DES (kcal/cap/day), 2009-11
+
+## Map info
+mapInfo <- map_info(mapName = "M.P3.SUP.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
+
 
 
 ###########################################################################
