@@ -1,6 +1,0 @@
-PART,ORDER,INDICATOR1,INDICATOR2,INDICATOR3,SERIES_NAME_SHORT,MULTIPLIER,DIGITS
-Setting,1,OA.TPBS.POP.PPL.NO,,,Total population (mln),million,1
-Setting,2,OA.TPR.POP.PPL.NO,,,Rural population (mln),million,1
-Setting,3,NY.GNP.PCAP.CD,,,"GDP per capita, PPP (const. 2011 I$)",,1
-Setting,4,SH.DYN.MORT,,,"Mortality rate, under-5 (per 1 000 live births)",,1
-Setting,5,SP.DYN.LE00.IN,,,Life expectancy at birth (years),,1
