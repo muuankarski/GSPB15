@@ -321,7 +321,7 @@ chart_spread2(title="Economy",
 
 <<labour, eval=TRUE, results='asis'>>=
 chart_spread2(title="Labour",                
-            LeftTextCode="In developing regions, employment growth is driven mostly by demographic changes. Many workers do not enter into formal wage employment but are instead self-employed or participate in unpaid family work, such as in agriculture, especially subsistence farming. As a large share of the working poor are involved in agriculture, developments in this sector have a major impact on welfare. Nearly eight out of ten working poor with less than US\\$1.25/day live in rural areas. This means that most jobs in rural areas do not ensure sufficient levels of income for workers to afford adequate food for themselves and their families.",  
+            LeftTextCode="A strong labour market is the foundation of sustained well-being and economic growth, inclusion and social cohesion. Therefore access to safe, productive and remunerated work is paramount. Yet many workers, especially the most vulnerable, do not enter into formal wage employment but are instead self-employed or participate in unpaid family work, such as in agriculture. This is especially the case with subsistence farming. As a large share of the working poor are involved in agriculture, developments in this sector have a major impact on welfare.", 
             RightTextCode="C.P1.LABO.1.2",   
             LeftChartCode="C.P1.LABO.1.3",   
             RightChartCode="C.P1.LABO.1.4",  
