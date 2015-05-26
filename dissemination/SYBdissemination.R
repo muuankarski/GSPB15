@@ -318,17 +318,19 @@ sourcesOutput <- paste0(path_to_latex,"Sources/")
 
 # Texts -----------------------------------------------------------
 
-textsOutput <- paste0(path_to_latex,"Text/")
+# Text now written directly into GSPB15.Rnw
 
-# Extract texts from the dissemination file
-text.df <- diss.df[diss.df[["OBJECT_TYPE"]] == "TEXT",]
-
-# Extract the text from the TEXT column in dissemination file and write into .tex file
-for (r in 1:nrow(text.df)){
-  file_name <- text.df[r,"OBJECT_NAME"]
-  content <- text.df[r,"TEXT"]
-  writeLines(content, con = paste0(textsOutput,file_name,".tex"), sep = "\n", useBytes = FALSE)
-}
+# textsOutput <- paste0(path_to_latex,"Text/")
+# 
+# # Extract texts from the dissemination file
+# text.df <- diss.df[diss.df[["OBJECT_TYPE"]] == "TEXT",]
+# 
+# # Extract the text from the TEXT column in dissemination file and write into .tex file
+# for (r in 1:nrow(text.df)){
+#   file_name <- text.df[r,"OBJECT_NAME"]
+#   content <- text.df[r,"TEXT"]
+#   writeLines(content, con = paste0(textsOutput,file_name,".tex"), sep = "\n", useBytes = FALSE)
+# }
 
 
 ###########################################################################

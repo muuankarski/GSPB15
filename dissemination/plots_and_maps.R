@@ -874,7 +874,7 @@ export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
 ##### -------------------------------------------------------
 # MAPS
 
-# Average dietary energy supply adequacy, 3 year averages (percent)   NOT: 6. Map: DES (kcal/cap/day), 2009-11
+# DES (kcal/cap/day), 2009-11
 
 ## Map info
 mapInfo <- map_info(mapName = "M.P3.SUP.1.6", data = sybMaps.df, mapArea = "Territory")

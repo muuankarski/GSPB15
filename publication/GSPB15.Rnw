@@ -510,7 +510,7 @@ chart_spread(title="Trends in the crop sector",
             RightChartCode="C.P3.CRTRE.1.4",  
             BottomChartCode="C.P3.CRTRE.1.5", 
             MapCode="M.P3.CRTRE.1.6",
-            notes="What type of chart was planned for this:  (Chart: top five items produced in MRY vs. 2000)"
+            notes="CHECK THOSE UNITS IN THE MAP!!!!! What type of chart was planned for this:  (Chart: top five items produced in MRY vs. 2000)"
             )
 @
 
