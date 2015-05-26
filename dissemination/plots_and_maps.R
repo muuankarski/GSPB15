@@ -94,7 +94,7 @@ export_plot(manual_text = "Life expectancy at birth, countries with the lowest v
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=3) )
 ## Export the plot
 export_plot(manual_text = "Total economically active population", placement = "b")
 
@@ -163,7 +163,7 @@ export_plot(manual_text = "Annual value added in agriculture growth", placement=
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "Annual value added in agriculture growth", placement="b")
 
@@ -543,7 +543,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
 export_plot(manual_text = "Depth of food decifit, 3 year averages",placement="tr")
 
@@ -554,7 +554,7 @@ export_plot(manual_text = "Depth of food decifit, 3 year averages",placement="tr
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
 export_plot(manual_text = "Domestic food price level index",placement="l")
 
@@ -585,7 +585,7 @@ plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.5")
 sybdata.df$AV3YPoFI.DISS <- as.factor(sybdata.df$AV3YPoFI.DISS)
 sybdata.df$AV3YPoFI.DISS <- as.numeric(levels(sybdata.df$AV3YPoFI.DISS))[sybdata.df$AV3YPoFI.DISS]
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=8) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=8) )
 ## Export the plot
 export_plot(manual_text = "Prevalence of food inadequacy, 3 year averages", placement = "b")
 
@@ -641,7 +641,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
 export_plot(manual_text = "Per capita food supply variability ",placement="l")
 
@@ -652,7 +652,7 @@ export_plot(manual_text = "Per capita food supply variability ",placement="l")
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
 export_plot(manual_text = "Domestic food price level index",placement="l")
 
@@ -995,7 +995,7 @@ export_plot(manual_text="Top 20 Wheat producing countries per capita (Rice (padd
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.CRTRE.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "Cereals yield (hg/ha)", placement="b")
 
@@ -1204,7 +1204,7 @@ export_plot(manual_text="Top food exporting countries in 2011 (UPDATE DATA)",pla
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.TRADE.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "Exports of cereals", placement="b")
 

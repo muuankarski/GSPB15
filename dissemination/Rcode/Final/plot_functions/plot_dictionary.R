@@ -41,21 +41,21 @@ plot_dictionary = function(x, y, group, type, data, x_lab, y_lab,
                                 values = col_pallete) +
              # ---- label by group within the plot
              # -- the begin label
-             geom_text(data=data[data$Year == min(data$Year) + 1,], # latest year maybe missing
-                        aes_string(label = group, col=group), 
-                            hjust=.5, # horizontal depends on the length of label
-                            vjust=-.5, # vertical, bit above now
-                            size=4,
-                            lineheight = 0.7) + 
-             # -- the end label
-             geom_text(data=data[data$Year == max(data$Year) - 1,], # latest year maybe missing
-                        aes_string(x = x, label = group, col=group), 
-                            hjust=.5, # horizontal depends on the length of label
-                            vjust=-.5, # vertical, bit above now
-                            size=4,
-                            lineheight = 0.7) + 
-             # ---------
-             theme(legend.position = "none") +
+             # geom_text(data=data[data$Year == min(data$Year) + 1,], # latest year maybe missing
+             #            aes_string(label = group, col=group), 
+             #                hjust=.5, # horizontal depends on the length of label
+             #                vjust=-.5, # vertical, bit above now
+             #                size=4,
+             #                lineheight = 0.7) + 
+             # # -- the end label
+             # geom_text(data=data[data$Year == max(data$Year) - 1,], # latest year maybe missing
+             #            aes_string(x = x, label = group, col=group), 
+             #                hjust=.5, # horizontal depends on the length of label
+             #                vjust=-.5, # vertical, bit above now
+             #                size=4,
+             #                lineheight = 0.7) + 
+             # # ---------
+             # theme(legend.position = "none") +
              scale_x_continuous(breaks = breaks, limits=c(min(data$Year)-2,max(data$Year)+2)) +
              #scale_y_continuous(limits=c(0,max(data$value)*1.1)) +
              xlab(x_lab) + ylab(y_lab)
