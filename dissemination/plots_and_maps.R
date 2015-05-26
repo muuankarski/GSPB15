@@ -63,7 +63,7 @@ plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
 ## Create the plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 1, n_colors=2) )
 # Export plot
-export_plot(manual_text = "World rural and urban population", placement = "tr")
+export_plot(placement = "tr")
 
 
 ## ------------------------------------------------------------------------
@@ -74,7 +74,7 @@ plotInfo <- plot_info(plotName = "C.P1.OVER.1.3")
 ## Create the plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Annual population growth over the last ten years", placement="l")
+export_plot(placement="l")
 
 
 ## ------------------------------------------------------------------------
@@ -85,7 +85,7 @@ plotInfo <- plot_info(plotName = "C.P1.OVER.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Life expectancy at birth, countries with the lowest values in 2013", placement="r")
+export_plot(placement="r")
 
 
 ## ------------------------------------------------------------------------
@@ -96,7 +96,7 @@ plotInfo <- plot_info(plotName = "C.P1.OVER.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Total economically active population", placement = "b")
+export_plot(placement = "b")
 
 
 # MAPS -------------------------------------------------------------------
@@ -104,6 +104,7 @@ export_plot(manual_text = "Total economically active population", placement = "b
 
 ## Map info
 mapInfo <- map_info(mapName = "M.P1.OVER.1.6", data = sybMaps.df, mapArea = "Territory")
+mapInfo$mapData$OA.TPR.POP.PPL.SHP <- mapInfo$mapData$OA.TPR.POP.PPL.SHP/10000 # to get percents.....
 ## Create the map
 assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
@@ -133,7 +134,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Value added in agriculture, industry, and services as shares of GDP", placement = "tr")
+export_plot(placement = "tr")
 
 
 ## ------------------------------------------------------------------------
@@ -144,7 +145,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Agriculture value added per worker, countries with the highest values in 2013", placement="l")
+export_plot(placement="l")
 
 # C.P1.ECON.1.4 -----------------------------------------------------------
 # Annual value added in agriculture growth
@@ -154,7 +155,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Annual value added in agriculture growth", placement="r")
+export_plot(placement="r")
 
 
 # C.P1.ECON.1.5 -----------------------------------------------------------
@@ -165,7 +166,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Annual value added in agriculture growth", placement="b")
+export_plot(placement="b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -202,7 +203,7 @@ plotInfo <- plot_info(plotName = "C.P1.LABO.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Labour force participation rate by gender, ages 15+", placement = "tr")
+export_plot(placement = "tr")
 
 ## ------------------------------------------------------------------------
 # Female employment in agriculture, share of female employment
@@ -212,7 +213,7 @@ plotInfo <- plot_info(plotName = "C.P1.LABO.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Female employment in agriculture, share of female employment", placement = "l")
+export_plot(placement = "l")
 
 ## ------------------------------------------------------------------------
 # Male employment in agriculture, share of male employment
@@ -222,18 +223,18 @@ plotInfo <- plot_info(plotName = "C.P1.LABO.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Male employment in agriculture, share of male employment", placement = "r")
+export_plot(placement = "r")
 
 ## ------------------------------------------------------------------------
 # Children in employment, total
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
-plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+#plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Children in employment, total", placement = "b")
+export_plot(placement = "b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -270,7 +271,7 @@ plotInfo <- plot_info(plotName = "C.P1.INPU.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "tr")
+export_plot(placement = "tr")
 
 ## ------------------------------------------------------------------------
 # Fertilizer consumption in nutrients per ha of arable land - REGIONS
@@ -280,7 +281,7 @@ plotInfo <- plot_info(plotName = "C.P1.INPU.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Nitrogen fertilizers consumption in nutrients per ha of arable land", placement = "r")
+export_plot(placement = "r")
 
 
 # ## Info
@@ -299,7 +300,7 @@ plotInfo <- plot_info(plotName = "C.P1.INPU.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Phosphate fertilizers consumption in nutrients per ha of arable land", placement = "r")
+export_plot(placement = "r")
 
 ## ------------------------------------------------------------------------
 # Fertilizer consumption in nutrients per ha of arable land - WORLD & YEARS
@@ -309,7 +310,7 @@ plotInfo <- plot_info(plotName = "C.P1.INPU.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "b")
+export_plot(placement = "b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -486,7 +487,7 @@ plotInfo <- plot_info(plotName = "C.P2.AV.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Energy supply derived from cereals, roots and tubers",placement="l")
+export_plot(placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -497,7 +498,7 @@ plotInfo <- plot_info(plotName = "C.P2.AV.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Protein supply quantity, grand total, 3 year averages",placement="r")
+export_plot(placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -506,9 +507,9 @@ export_plot(manual_text = "Protein supply quantity, grand total, 3 year averages
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.AV.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Protein of animal origin, 3 year averages", placement = "b")
+export_plot(placement = "b")
 
 
 # MAPS -----------------------------------------------------
@@ -545,7 +546,7 @@ plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
-export_plot(manual_text = "Depth of food decifit, 3 year averages",placement="tr")
+export_plot(placement="tr")
 
 
 # ----------------------------------------------------------------------- #
@@ -556,7 +557,7 @@ plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
-export_plot(manual_text = "Domestic food price level index",placement="l")
+export_plot(placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -573,7 +574,7 @@ sybdata.df$AV3YPOU.DISS <- as.numeric(levels(sybdata.df$AV3YPOU.DISS))[sybdata.d
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Prevalence of undernourishment, 3 year averages",placement="r")
+export_plot(placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -587,7 +588,7 @@ sybdata.df$AV3YPoFI.DISS <- as.numeric(levels(sybdata.df$AV3YPoFI.DISS))[sybdata
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=8) )
 ## Export the plot
-export_plot(manual_text = "Prevalence of food inadequacy, 3 year averages", placement = "b")
+export_plot(placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -632,7 +633,6 @@ export_map()
 # Per capita food production variability
 ### Per capita food supply variability
 
-# Per capita food supply variability 
 
 
 # ----------------------------------------------------------------------- #
@@ -643,7 +643,7 @@ plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
-export_plot(manual_text = "Per capita food supply variability ",placement="l")
+export_plot(placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -654,7 +654,7 @@ plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
 ## Export the plot
-export_plot(manual_text = "Domestic food price level index",placement="l")
+export_plot(placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -665,7 +665,7 @@ plotInfo <- plot_info(plotName = "C.P2.STB.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Value of food imports over total merchandise exports, 3 year averages", placement = "b")
+export_plot(placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -712,16 +712,15 @@ export_map()
 #Percentage of children under 5 years of age affected by wasting
 
 
-# ----------------------------------------------------------------------- #
-# Percentage of children under 5 years of age who are stunted
-
-## Info
-plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
-plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
-## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
-## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+# # ----------------------------------------------------------------------- #
+# # Percentage of children under 5 years of age who are stunted
+# 
+# ## Info
+# plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
+# ## Plot
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+# ## Export the plot
+# export_plot(placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age who are stunted
@@ -732,7 +731,7 @@ plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age who are stunted",placement="l")
+export_plot(placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
@@ -743,7 +742,7 @@ plotInfo <- plot_info(plotName = "C.P2.UT.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age affected by wasting",placement="r")
+export_plot(placement="r")
 
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
@@ -753,7 +752,7 @@ plotInfo <- plot_info(plotName = "C.P2.UT.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Access to improved water source and to improved sanitation facilities", placement = "b")
+export_plot(placement = "b")
 
 
 ##### -------------------------------------------------------
