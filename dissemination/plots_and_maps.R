@@ -94,7 +94,7 @@ export_plot(placement="r")
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=3) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(placement = "b")
 
@@ -544,7 +544,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(placement="tr")
 
@@ -555,7 +555,7 @@ export_plot(placement="tr")
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(placement="l")
 
@@ -641,7 +641,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(placement="l")
 
@@ -652,7 +652,7 @@ export_plot(placement="l")
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(placement="l")
 
@@ -844,7 +844,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Dietary energy supply, top 20 (2000-02 vs. 2009-11)",placement="l")
+export_plot(placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -856,7 +856,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)",placement="r")
+export_plot(placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -865,7 +865,7 @@ export_plot(manual_text = "Dietary energy supply, bottom 20 (2000-02 vs. 2009-11
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.SUP.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=8) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
 
@@ -1175,7 +1175,7 @@ export_map()
 
 
 # -----------------------------------------------------------
-# Top food importing countries in 2011
+# Top food importing countries in 2012
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.TRADE.1.3")
@@ -1183,7 +1183,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top food importing countries in 2011 (UPDATE DATA)",placement="l")
+export_plot(placement="l")
 
 
 # -----------------------------------------------------------
@@ -1195,7 +1195,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top food exporting countries in 2011 (UPDATE DATA)",placement="r")
+export_plot(placement="r")
 
 # -----------------------------------------------------------
 # Exports of cereals (2000 to 2011)
@@ -1346,7 +1346,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
 ## Export the plot
 export_plot(manual_text = "Total water withdrawal per capita, highest 20",placement="l")
 
@@ -1442,7 +1442,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "production of select forest product", placement = "tr")
 
@@ -1476,7 +1476,7 @@ export_plot(manual_text = "Top and bottom 10 importers of forest products",place
 # ## Info
 # plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
 # ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=5) )
+# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
 # ## Export the plot
 # export_plot(manual_text = "Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)", placement = "b")
 
@@ -1547,7 +1547,7 @@ export_plot(manual_text = "Land use total emissions, highest 20 in 2012",placeme
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.CC.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "3_1", n_colors=5) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "3_1", n_colors=6) )
 ## Export the plot
 export_plot(manual_text = "Emissions by subsectors", placement = "b")
 

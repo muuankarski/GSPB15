@@ -82,7 +82,7 @@ M49countries <-
 
 ## Load the indicators we want to show
 indicators.df <- 
-  read.csv(file = "./database//Data/Processed/Indicators.csv", 
+  read.csv(file = "./dissemination/country_profile_indicators.csv", 
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 ## Create the new .tex file
 fileOut <- paste("./publication/Tables/CountryProfiles.tex", sep = "")
