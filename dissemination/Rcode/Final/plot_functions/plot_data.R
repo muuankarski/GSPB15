@@ -108,6 +108,20 @@ plot_data = function(x, y, group, subset, type, data,
                              id.var = c(y, "Year", "Area"))
              assign("group", "variable", envir = env)
            }
+           if (group == "pooled") {
+             complete_data = na.omit(subset(data, subset = eval(subset),
+                                            select = c(x, y, group)))
+             top_maxYear = subset(complete_data, 
+                                  subset = complete_data[, group] == 
+                                    max(complete_data[, group]))
+             top_maxYear = head(arrange(top_maxYear, 
+                                        desc(top_maxYear[, x])), n = nCnty)
+             new_data = subset(complete_data, subset = complete_data[, y] %in% 
+                                 top_maxYear[, y])
+             new_data[, y] = factor(new_data[, y],
+                                    levels = rev(top_maxYear[, y]))
+             new_data[, group] = factor(new_data[, group])
+           } 
 
          },
          "bot_dot" = {

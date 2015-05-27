@@ -1343,22 +1343,36 @@ export_map()
 # ----------------------------------------------------------------------- #
 # Total water withdrawal per capita, highest 20
 
+# What I do is terrible, but transparent at least.
+# So for each country, I will compute the mean of 2003 to 2013 and 
+# give that mean as a 2014 value
+
+df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWTOT.MC.SH = mean(AQ.WAT.WWTOT.MC.SH, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$AQ.WAT.WWTOT.MC.SH[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$AQ.WAT.WWTOT.MC.SH
+}
+
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
 ## Export the plot
-export_plot(manual_text = "Total water withdrawal per capita, highest 20",placement="l")
+export_plot(manual_text = "Total water withdrawal per capita, highest 20 (1999 to 2013)",placement="l")
 
 # ----------------------------------------------------------------------- #
 # Freshwater withdrawal by agricultural sector, share of total, highest 20
+
+df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWAGR.MC.SH = mean(AQ.WAT.WWAGR.MC.SH, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$AQ.WAT.WWAGR.MC.SH[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$AQ.WAT.WWAGR.MC.SH
+}
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share of total, highest 20",placement="r")
+export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share of total, highest 20 (1999 to 2013)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Saline soils ????
@@ -1413,12 +1427,63 @@ export_map()
 # ----------------------------------------------------------------------- #
 # Top 20 biofuel producing countries
 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P4.LAND.1.3")
-# ## Plot
-# 
-# ## Export the plot
-# export_plot(manual_text = "This is LAND",placement="l")
+## Info
+
+## Plot
+
+## Info
+plotInfo <- plot_info(plotName = "C.P4.ENER.1.3")
+## Plot
+
+g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.TP.GP.TJ.NO))
+g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.AP.GP.TJ.NO))
+
+
+df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(BP.TP.GP.TJ.NO = mean(BP.TP.GP.TJ.NO, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$BP.TP.GP.TJ.NO[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$BP.TP.GP.TJ.NO
+}
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "About energy..",placement="l")
+
+
+## Info
+plotInfo <- plot_info(plotName = "C.P4.ENER.1.4")
+## Plot
+
+df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(BP.AP.GP.TJ.NO = mean(BP.AP.GP.TJ.NO, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$BP.AP.GP.TJ.NO[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$BP.AP.GP.TJ.NO
+}
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "About energy..",placement="l")
+
+
+# -----------------------------------------------------------
+# Exports of cereals (2000 to 2011)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P4.ENER.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(manual_text = "Biodiesel production", placement="b")
+
+##### -------------------------------------------------------
+# MAPS
+
+# 6. Map: Cereal producing countries
+
+## Map info
+mapInfo <- map_info(mapName = "M.P4.ENER.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
+
+
 
 
 ###########################################################################
