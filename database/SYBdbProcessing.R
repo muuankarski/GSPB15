@@ -75,10 +75,10 @@ load("./Data/Processed/FAOcountryProfile.RData")
 # Construction and metadata files -----------------------------------------
 
 con.df <- ReadConstruction(file = "Construction2015.csv", 
-                           encoding = "UTF-8", nrows = 657)
+                           encoding = "UTF-8", nrows = 665)
 save(x = con.df, file = "./Data/Processed/Construction.RData")
 meta.lst <- ReadMetadata(file = "Metadata2015.csv", 
-                         encoding = "UTF-8", nrows = 657)
+                         encoding = "UTF-8", nrows = 665)
 save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
 # con.df <- ReadConstruction(file = "./Data/old/Construction04-2014.csv", 
@@ -113,8 +113,8 @@ dwnldQL <- FALSE # Production - Livestock primary
 dwnldQP <- FALSE # Production - Livestock processed
 dwnldQV <- FALSE # Production - Value of agricultural production
 dwnldQI <- FALSE # Production indices
-dwnldTP <- TRUE # Trade - Crops and livestock products
-dwnldTI <- TRUE # Trade - Trade indices
+dwnldTP <- FALSE # Trade - Crops and livestock products
+dwnldTI <- FALSE # Trade - Trade indices
 dwnldFO <- FALSE # Forestry
 dwnldGHG <- FALSE # Greenhouse gases
 dwnldFB <- FALSE # Food balance sheets
@@ -424,7 +424,7 @@ if (dwnldTP) {
   save(x = FAOtp.df, file = paste0("./Data/Processed/FAOtp", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/FAOtp2015-04-15.RData")
+  load(file = "./Data/Processed/FAOtp2015-05-27.RData")
 }
 
 # FAOSTAT, Trade - Trade indices ------------------------------------------
@@ -443,7 +443,7 @@ if (dwnldTI) {
   save(x = FAOti.df, file = paste0("./Data/Processed/FAOti", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/FAOti2015-04-15.RData")
+  load(file = "./Data/Processed/FAOti2015-05-27.RData")
 }
 
 # FAOSTAT, Forestry -------------------------------------------------------
@@ -548,6 +548,17 @@ load("./Data/Processed/BiofuelProduction.RData")
 load("./Data/Processed/Fishery.RData")
 load("./Data/Processed/UNPopManualData.RData")
 
+
+
+
+load("./database/Data/Processed/wbManualData.RData")
+load("./database/Data/Processed/AquastatManualData.RData")
+load("./database/Data/Processed/UNPopManualData.RData")
+
+
+load("./database/Data/Processed/Fishery.RData")
+load("./database/Data/Processed/BiofuelProduction.RData")
+load("./database/Data/Processed/GlobalForestResourceAssessment.RData")
 
 # load("./Data/Processed/AquastatManualData_old.RData")
 # o <- AquastatManualData.df
@@ -739,7 +750,7 @@ rm(fsi.df)
 
 
 ### FOR SOME REASON SOME VARS END UP WIITH .x
-# names(SYB.df)[grep("FAO_TABLE_NAME", names(SYB.df))]
+# names(SYB.df)[grep(".x", names(SYB.df))]
 
 ### HACK BEGINS #############
 

@@ -660,3 +660,6 @@ TP.EXVAL.FOODWF.USD.NO,Exports of food incl. fish (US$),Food exports,,US$,Value 
 TP.EXVAL.FOODWF.USD.SH,Exports of food incl. fish (constant 2005 US$),Food exports,,constant 2005 US$,Value of exports of food including fish in constant 2005 US$.,,"FAO, Statistics Division",processed,,,,,,,
 TP.IMVAL.FOODWF.USD.NO,Imports of food incl. fish (US$),Food imports,,US$,Value of imports of food including fish in current US$.,,"FAO, Statistics Division",processed,,,,,,trade,
 TP.IMVAL.FOODWF.USD.SH,Imports of food incl. fish (constant 2005 US$),Food imports,,constant 2005 US$,Value of imports of food including fish in constant 2005 US$.,,"FAO, Statistics Division",processed,,,,,,,
+GFRA.TOT.ONRF.HA.NO,Other naturally regenerated forest,Forest,thousand,ha,www.fao.org/forestry/fra2010 ,,"FAO, Statistics Division",processed,,,,,,forestry,
+GFRA.TOT.PF.HA.NO,Primary forest,Forest,thousand,ha,,,"FAO, Statistics Division",processed,,,,,,forestry,
+GFRA.TOT.PLF.HA.NO,Planted forest,Forest,thousand,ha,,,"FAO, Statistics Division",processed,,,,,,forestry,
