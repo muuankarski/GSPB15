@@ -26,8 +26,9 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
              col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]] 
     ) +
      centerYear() + 
-     geom_vline(xintercept = 2015, linetype = "dashed") #+
-     #scale_x_continuous(breaks=c(1960, 1980, 2000, 2020))
+     scale_x_continuous(breaks=c(1985, 1995, 2005, 2015))
+     #geom_vline(xintercept = 2015, linetype = "dashed") #+
+     
   }
 
     if (plot_type == "1b"){

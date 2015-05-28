@@ -71,6 +71,12 @@ export_plot(placement = "tr")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.3")
+
+df2015 <- filter(sybdata.df, Year %in% c(2004:2014)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(OA.TPBS.POP.PPL.GR10 = mean(OA.TPBS.POP.PPL.GR10, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$OA.TPBS.POP.PPL.GR10[sybdata.df$Year == 2015 & sybdata.df$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$OA.TPBS.POP.PPL.GR10
+}
+
 ## Create the plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
@@ -82,6 +88,7 @@ export_plot(placement="l")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
@@ -482,10 +489,13 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # ----------------------------------------------------------------------- #
 # Energy supply derived from cereals, roots and tubers
 
+
+
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.AV.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(placement="l")
 
@@ -495,8 +505,9 @@ export_plot(placement="l")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.AV.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(placement="r")
 
@@ -554,8 +565,9 @@ export_plot(placement="tr")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )## Export the plot
 ## Export the plot
 export_plot(placement="l")
 
@@ -634,14 +646,24 @@ export_map()
 ### Per capita food supply variability
 
 
+# ----------------------------------------------------------------------- #
+# Food gross per capita production index number (2004-2006 = 100)
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.STB.1.2")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+## Export the plot
+export_plot(placement="tr")
 
 # ----------------------------------------------------------------------- #
 # Per capita food supply variability 
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(placement="l")
 
@@ -651,9 +673,9 @@ export_plot(placement="l")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
-## Export the plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )## Export the plot
 export_plot(placement="l")
 
 
@@ -727,22 +749,28 @@ export_map()
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
-#plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+df2015 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.STNT.ZS, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$SH.STA.STNT.ZS[sybdata.df$Year == 2015 & sybdata.df$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
+}
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text="Percentage of children 5 years of age who are stunted, highest 20 (2006 - 2012)" ,placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.4")
-#plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+df2015 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.WAST.ZS, na.rm=TRUE))
+for (i in unique(sybdata.df$FAOST_CODE)){
+  sybdata.df$SH.STA.WAST.ZS[sybdata.df$Year == 2015 & sybdata.df$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
+}
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text = "Percentage of children under 5 years of age affected by wasting, highest 20 (2006 - 2012)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
@@ -750,9 +778,10 @@ export_plot(placement="r")
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(placement = "b")
+
 
 
 ##### -------------------------------------------------------
@@ -1434,10 +1463,9 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.3")
 ## Plot
+#BP.TP.GP.TJ.NO
 
-g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.TP.GP.TJ.NO))
-g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.AP.GP.TJ.NO))
-
+# g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.TP.GP.TJ.NO))
 
 df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(BP.TP.GP.TJ.NO = mean(BP.TP.GP.TJ.NO, na.rm=TRUE))
 for (i in unique(sybdata.df$FAOST_CODE)){
@@ -1538,12 +1566,12 @@ export_plot(manual_text = "Top and bottom 10 importers of forest products",place
 
 # DATA MISSING!!
 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
-# ## Export the plot
-# export_plot(manual_text = "Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)", placement = "b")
+## Info
+plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+## Export the plot
+export_plot(placement = "b")
 
 # MAPS  ----------------------------------------------------------------- #
 # Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)
