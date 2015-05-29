@@ -344,10 +344,10 @@ chart_spread2(title="Inputs",
 <<investments, eval=TRUE, results='asis'>>=
 chart_spread2(title="Investment",                
             LeftTextCode="Text here!!",  
-            RightTextCode="issues",   
-            LeftChartCode="issues",   
+            RightTextCode="C.P1.INV.1.2",   
+            LeftChartCode="C.P1.INV.1.3",   
             RightChartCode="issues",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P1.INV.1.5", 
             MapCode="M.P1.INV.1.6",
             notes=""
             )         

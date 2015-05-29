@@ -349,22 +349,34 @@ export_map()
 # ## ------------------------------------------------------------------------
 # # ODA received in agriculture, forestry and fishing sectors, share of total ODA
 # 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
-# ## Export the plot
-# export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "tr")
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
+# Feed in the data
+if (!("oda_share_agriculture" %in% names(sybdata.df)) & !("share_of_agriculture_forestry_fishing" %in% names(sybdata.df))) {
+  load("./database/Data/Processed/invest1.RData")
+  sybdata.df <- merge(sybdata.df,invest1,by=c("Year","FAOST_CODE"), all.x=TRUE)
+}
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 1973-2013", placement = "tr")
 # 
 # ## ------------------------------------------------------------------------
 # # Top ten countries, credit to agriculture as a share of total credit
 # 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
-# ## Export the plot
-# export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "l")
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
+
+# Feed in the data
+if (!("remittances" %in% names(sybdata.df))){
+  load("./database/Data/Processed/invest3.RData")
+  sybdata.df <- merge(sybdata.df,invest3,by=c("Year","FAOST_CODE"), all.x=TRUE)
+}
+
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+## Export the plot
+export_plot(manual_text = "Top 20 countries in Agricultural remittance (AFF = Agriculture, Forestry and Fishing)", placement = "l")
 # 
 # ## ------------------------------------------------------------------------
 # 
@@ -378,14 +390,18 @@ export_map()
 # export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "r")
 # 
 # ## ------------------------------------------------------------------------
-# # ODA received in agriculture, forestry and fishing sectors, share of total ODA
-# 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P1.INV.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
-# ## Export the plot
-# export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "b")
+# ODA received in agriculture, forestry and fishing sectors, share of total ODA
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INV.1.5")
+## Plot
+if (!("Bilateral" %in% names(sybdata.df)) & !("Multilateral" %in% names(sybdata.df))) {
+  load("./database/Data/Processed/invest2.RData")
+  sybdata.df <- merge(sybdata.df,invest2,by=c("Year","FAOST_CODE"), all.x=TRUE)
+}
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=2) )
+## Export the plot
+export_plot(manual_text = "ODA to Agriculture and related sectors, by bilateral/multilateral flow, 1973-2013", placement = "b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -1473,7 +1489,7 @@ for (i in unique(sybdata.df$FAOST_CODE)){
 }
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "About energy..",placement="l")
+export_plot(manual_text = "Total renewable energy fix this title!!",placement="l")
 
 
 ## Info
@@ -1486,7 +1502,7 @@ for (i in unique(sybdata.df$FAOST_CODE)){
 }
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "About energy..",placement="l")
+export_plot(manual_text = "Pooled energy fix title",placement="l")
 
 
 # -----------------------------------------------------------
