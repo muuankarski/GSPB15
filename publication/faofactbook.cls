@@ -214,9 +214,9 @@ left=1cm, right=1cm, twoside}{geometry}
   \BottomChart{To Be Done}}{%
   \clearpage\ifodd\c@page\hbox{}\newpage\fi
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
-  \hspace{0.07\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
+  \hspace{0.05\textwidth}%
+  \raisebox{-\height}{\strut\parbox{0.40\textwidth}{\@RightText}}\par\medskip
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@LeftChart}}%
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
@@ -243,9 +243,9 @@ left=1cm, right=1cm, twoside}{geometry}
   \BottomLeftChart{To Be Done}}{%
   \clearpage\ifodd\c@page\hbox{}\newpage\fi
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@LeftText}}%
-  \hspace{0.09\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.45\textwidth}{\@RightText}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
+  \hspace{0.05\textwidth}%
+  \raisebox{-\height}{\strut\parbox{0.40\textwidth}{\@RightText}}\par\medskip
   \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@LeftChart}}%
   \hspace{0.09\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@RightChart}}\par\medskip

@@ -305,8 +305,7 @@ chart_spread2(title="Overview",
             LeftChartCode="C.P1.OVER.1.3",   
             RightChartCode="C.P1.OVER.1.4",  
             BottomChartCode="C.P1.OVER.1.5", 
-            MapCode="M.P1.OVER.1.6",
-            notes="Data Updated. Ready for writing!")
+            MapCode="M.P1.OVER.1.6")
 @
 
 <<economy, eval=TRUE, results='asis'>>=
@@ -330,8 +329,7 @@ chart_spread2(title="Labour",
             LeftChartCode="C.P1.LABO.1.3",   
             RightChartCode="C.P1.LABO.1.4",  
             BottomChartCode="C.P1.LABO.1.5", 
-            MapCode="M.P1.LABO.1.6"#,
-            #notes="BOTTOM CHART CHILD EMPLOYMENT ONLY FEW COUNTRIES HOW TO DISPLAY!! Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
+            MapCode="M.P1.LABO.1.6"
             )         
 @
 
@@ -343,7 +341,7 @@ chart_spread2(title="Inputs",
             RightChartCode="C.P1.INPU.1.4",  
             BottomChartCode="C.P1.INPU.1.5", 
             MapCode="M.P1.INPU.1.6",
-            notes="Maps issues remains. Now we have same indicators for each of the charts - Nitrogen and Phosphate in the top-bottom charts??"
+            notes=""
             )         
 @
 
@@ -355,7 +353,7 @@ chart_spread2(title="Investment",
             RightChartCode="issues",  
             BottomChartCode="issues", 
             MapCode="M.P1.INV.1.6",
-            notes="Each of the proposed indicator missing from the SYB DB. Need to think about replacements or way to include them. Maps issues remains."
+            notes=""
             )         
 @
 
@@ -406,7 +404,7 @@ chart_spread2(title="Food Availability",
             RightChartCode="C.P2.AV.1.4",  
             BottomChartCode="C.P2.AV.1.5", 
             MapCode="M.P2.AV.1.6",
-            notes="Indicator: Average dietary energy supply adequacy, 3 year averages: is manually created. have to find the script if this needs to be reproduced." 
+            notes="" 
             )
 @
 
@@ -418,31 +416,31 @@ chart_spread2(title="Access",
             RightChartCode="C.P2.ACCESS.1.4",  
             BottomChartCode="C.P2.ACCESS.1.5", 
             MapCode="M.P2.ACCESS.1.6",
-            notes="Both <Prevalence of undernourishment, 3 year averages> AND <Prevalence of food inadequacy, 3 year averages> Should we think of other ways to "
+            notes=""
             )
 @
 
 <<Stability, eval=TRUE,results='asis'>>=
 chart_spread2(title="Stability",                
             LeftTextCode="Text here",  
-            RightTextCode="not_defined",   
+            RightTextCode="C.P2.STB.1.2",   
             LeftChartCode="C.P2.STB.1.3",   
             RightChartCode="C.P2.STB.1.4",  
             BottomChartCode="C.P2.STB.1.5", 
             MapCode="M.P2.STB.1.6",
-            notes="Should we put something for the top right corner??"
+            notes=""
             )
 @
 
 <<Utilization, eval=TRUE,results='asis'>>=
-chart_spread2(title="Utilization",                
+chart_spread(title="Utilization",                
             LeftTextCode="Text here",  
-            RightTextCode="not_defined",   
+            #RightTextCode="",   
             LeftChartCode="C.P2.UT.1.3",   
             RightChartCode="C.P2.UT.1.4",  
             BottomChartCode="C.P2.UT.1.5", 
             MapCode="M.P2.UT.1.6",
-            notes="VAR <Percentage of children under 5 years of age who are underweight> is not used, though EXISTS. <Access to improved sanitation facilities> does not exists in the database"
+            notes=""
             )
 @
 %
@@ -482,51 +480,51 @@ chart_spread2(title="Utilization",
 \clearpage
 
 
-<<Food supply, eval=TRUE,results='asis'>>=
-chart_spread2(title="Food supply",
+<<Dietary energy supply, eval=TRUE,results='asis'>>=
+chart_spread2(title="Dietary energy supply",
             LeftTextCode="",  
             RightTextCode="issues",   
             LeftChartCode="C.P3.SUP.1.3",   
             RightChartCode="C.P3.SUP.1.4",  
             BottomChartCode="C.P3.SUP.1.5", 
             MapCode="M.P3.SUP.1.6",
-            notes="<Protein and fat supply in crops primary equivalent (2000-09), world> for the top right"
+            notes=""
             )
 @
 
 <<Growth in crop production, eval=TRUE,results='asis'>>=
 chart_spread(title="Growth in crop production",
             LeftTextCode="Text here!",  
-            RightTextCode="issues",   
+            #RightTextCode="issues",   
             LeftChartCode="C.P3.CRPRO.1.3",   
             RightChartCode="C.P3.CRPRO.1.4",  
             BottomChartCode="C.P3.CRPRO.1.5", 
             MapCode="M.P3.CRPRO.1.6",
-            notes="ISSUES is with the `2. Chart: fastest growing items between 2000-MRY` - from where and how to get that data"
+            notes=""
             )
 @
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in the crop sector",                
             LeftTextCode="Text here",  
-            RightTextCode="issues",   
+            #RightTextCode="issues",   
             LeftChartCode="C.P3.CRTRE.1.3",   
             RightChartCode="C.P3.CRTRE.1.4",  
             BottomChartCode="C.P3.CRTRE.1.5", 
             MapCode="M.P3.CRTRE.1.6",
-            notes="What type of chart was planned for this:  (Chart: top five items produced in MRY vs. 2000)"
+            notes=""
             )
 @
 
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
-chart_spread2(title="Trends in the livestock sector",
+chart_spread(title="Trends in the livestock sector",
             LeftTextCode="Text comes here",  
-            RightTextCode="issues",
+            #RightTextCode="issues", 
             LeftChartCode="C.P3.LIVE.1.3",
             RightChartCode="C.P3.LIVE.1.4",
             BottomChartCode="issues",
             MapCode="M.P3.LIVE.1.6",
-            notes="ISSUES: custom charts from SYB13 cannot be reproduced as the scripts are missing... Also, there are no per capita figures available (should be computed. Pie charts are not available in the SYB system)"
+            notes=""
             )
 @
 
@@ -538,15 +536,15 @@ chart_spread2(title="Trends in the fisheries sector",
             RightChartCode="C.P3.FISH.1.4",  
             BottomChartCode="issues", 
             MapCode="M.P3.FISH.1.6",
-            notes="FOR BOTTOM PLOT State of the world’s fishery stocks (see chart 79 in SYB2013) HAVE TO BE SCRAPED FOR DATA"
+            notes=""
             )
 @
 
 
 <<Trends in agricultural trade, eval=TRUE,results='asis'>>=
-chart_spread2(title="Trends in agricultural trade",
+chart_spread(title="Trends in agricultural trade",
             LeftTextCode="Most of the food consumed worldwide is grown locally. Where there is not enough local production to meet demand, trade has been instrumental in filling the gap. The scale of food and agricultural trade today is unprecedented. In real terms, the value of international flows has increased around fivefold over the past 50 years, reflecting global trends in the overall volume of trade. However, this expansion has been unevenly distributed across regions. High income countries have generally outpaced developing regions, although several of the latter have comparative advantages in food and agricultural production.",  
-            RightTextCode="issues",   
+            #RightTextCode="issues",   
             LeftChartCode="C.P3.TRADE.1.3",    
             RightChartCode="C.P3.TRADE.1.4",  
             BottomChartCode="C.P3.TRADE.1.5", 
@@ -611,7 +609,7 @@ chart_spread2(title="Water",
             RightChartCode="C.P4.WATER.1.4",  
             BottomChartCode="issues", 
             MapCode="M.P4.WATER.1.6",
-            notes="There are some issues with the water data as can be seen from each of the graphs. SALINE SOILS for the bottom chart has not been defined in metadata. Any leads welcome"
+            notes=""
             )
 @
 
@@ -619,11 +617,11 @@ chart_spread2(title="Water",
 chart_spread2(title="Energy",                
             LeftTextCode="Text here",  
             RightTextCode="not_defined",
-            LeftChartCode="not_defined",
-            RightChartCode="not_defined",
-            BottomChartCode="not_defined",
-            MapCode="not_defined",
-            notes="DATA NOT PREPARED YET"
+            LeftChartCode="C.P4.ENER.1.3",
+            RightChartCode="C.P4.ENER.1.4",
+            BottomChartCode="C.P4.ENER.1.5",
+            MapCode="M.P4.ENER.1.6",
+            notes=""
             )
 @
 
@@ -633,9 +631,9 @@ chart_spread2(title="Forestry",
             RightTextCode="C.P4.FOR.1.2",   
             LeftChartCode="C.P4.FOR.1.3",   
             RightChartCode="C.P4.FOR.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P4.FOR.1.5", 
             MapCode="M.P4.FOR.1.6",
-            notes="Forest characteristics NOT YET SCRAPED FROM FRA REPORT"
+            notes=""
             )
 @
 
@@ -672,12 +670,12 @@ chart_spread2(title="Climate change",
 \parindent=0pt
 \parskip=\medskipamount
 \hangafter=-2
-%\input{./Tables/CountryProfiles.tex}
+\input{./Tables/CountryProfiles.tex}
 
 %%% METADATA
 \newpart{white}
 \part{}
-% \section{Definitions}
+\section{Definitions}
 \phantomsection
 \addcontentsline{toc}{section}{Definitions}
 \input{./Metadata.tex}

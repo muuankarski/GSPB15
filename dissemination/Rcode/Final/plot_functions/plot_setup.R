@@ -26,8 +26,9 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
              col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]] 
     ) +
      centerYear() + 
-     geom_vline(xintercept = 2013, linetype = "dashed") +
-     scale_x_continuous(breaks=c(1960, 1980, 2000, 2020))
+     scale_x_continuous(breaks=c(1985, 1995, 2005, 2015))
+     #geom_vline(xintercept = 2015, linetype = "dashed") #+
+     
   }
 
     if (plot_type == "1b"){
@@ -128,7 +129,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
 
 
 # Export the plot
-export_plot <- function(manual_text =  "Add something here!", placement) { 
+export_plot <- function(placement,manual_text="nothing") { 
   
   if (placement %in% c("l","r")) {
     plotWidth <- 3.2
@@ -153,7 +154,9 @@ export_plot <- function(manual_text =  "Add something here!", placement) {
   ## Embed font
   embed_fonts(paste(plotsOutput, plotInfo$plotName, ".pdf", sep = ""))
   ## Caption
-  captions(objectName = plotInfo$plotName, output = captionsOutput, manual = manual_text)
+  if (manual_text=="nothing") manual_value <- NULL
+  if (manual_text!="nothing") manual_value <- manual_text
+  captions(objectName = plotInfo$plotName, output = captionsOutput, manual = manual_value)
   
 }
   

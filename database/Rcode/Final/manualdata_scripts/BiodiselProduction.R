@@ -5,7 +5,11 @@
 ## sent by Amy on 11/07/2014
 ###########################################################################
 
+setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
+
+
 # BP.AP.GP.MT.NO ----------------------------------------------------------
+# Alcohol production (metric tonnes)
 
 gap.df <- 
   read.csv(file = "./Data/Raw/AlcoholProduction.csv",
@@ -19,6 +23,7 @@ gap.df <- gap.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(gap.df) <- c("FAOST_CODE", "Year", "BP.AP.GP.MT.NO")
 
 # BP.AP.CNEU.MT.NO --------------------------------------------------------
+# Alcohol - consumption for non-energy uses
 
 acneu.df <- 
   read.csv(file = "./Data/Raw/AlcoholConsumptionForNonEnergyUses.csv",
@@ -32,6 +37,7 @@ acneu.df <- acneu.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(acneu.df) <- c("FAOST_CODE", "Year", "BP.AP.CNEU.MT.NO")
 
 # BP.AP.GP.MT.NO - BP.AP.CNEU.MT.NO ---------------------------------------
+# Alcohol production (metric tonnes) - Alcohol - consumption for non-energy uses
 
 gap.df <- 
   merge(gap.df, acneu.df, by = c("FAOST_CODE", "Year"), all = TRUE)
@@ -45,6 +51,7 @@ gap.df[, "BP.AP.GP.TJ.NO"] <- gap.df[, "BP.AP.GP.MT.NO"] * 27
 gap.df <- gap.df[, c("FAOST_CODE", "Year", "BP.AP.GP.TJ.NO")]
 
 # BP.BP.GP.MT.NO ----------------------------------------------------------
+# BagasseProduction
 
 gbp.df <- 
   read.csv(file = "./Data/Raw/BagasseProduction.csv",
@@ -58,6 +65,7 @@ gbp.df <- gbp.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(gbp.df) <- c("FAOST_CODE", "Year", "BP.BP.GP.MT.NO")
 
 # BP.BP.CNEU.MT.NO --------------------------------------------------------
+# BagasseConsumptionForNonEnergyUses
 
 bcneu.df <- 
   read.csv(file = "./Data/Raw/BagasseConsumptionForNonEnergyUses.csv",
@@ -71,6 +79,7 @@ bcneu.df <- bcneu.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(bcneu.df) <- c("FAOST_CODE", "Year", "BP.BP.CNEU.MT.NO")
 
 # BP.BP.GP.MT.NO - BP.BP.CNEU.MT.NO ---------------------------------------
+# BagasseProduction - BagasseConsumptionForNonEnergyUses
 
 gbp.df <- 
   merge(gbp.df, bcneu.df, by = c("FAOST_CODE", "Year"), all = TRUE)
@@ -113,6 +122,7 @@ gbgp.df <- gbgp.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(gbgp.df) <- c("FAOST_CODE", "Year", "BP.BGP.GP.TJ.NO")
 
 # BP.VWP.GP.MT.NO ---------------------------------------------------------
+# Vegetal waste - production
 
 gvp.df <- 
   read.csv(file = "./Data/Raw/VegetalProduction.csv",
@@ -126,6 +136,7 @@ gvp.df <- gvp.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(gvp.df) <- c("FAOST_CODE", "Year", "BP.VWP.GP.MT.NO")
 
 # BP.VWP.CNEU.MT.NO -------------------------------------------------------
+# Vegetal Waste - Consumption for non-energy uses	2010	Metric tons,  thousand
 
 vwcneu.df <- 
   read.csv(file = "./Data/Raw/VegetalConsumptionForNonEnergyUses.csv",
@@ -139,6 +150,7 @@ vwcneu.df <- vwcneu.df[, c("FAOST_CODE", "Year", "Quantity")]
 colnames(vwcneu.df) <- c("FAOST_CODE", "Year", "BP.VWP.CNEU.MT.NO")
 
 # BP.VWP.GP.MT.NO - BP.VWP.CNEU.MT.NO -------------------------------------
+# Vegetal waste - production ---- Vegetal Waste - Consumption for non-energy uses	2010	Metric tons,  thousand
 
 gvp.df <- 
   merge(gvp.df, vwcneu.df, by = c("FAOST_CODE", "Year"), all = TRUE)

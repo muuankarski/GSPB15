@@ -19,8 +19,8 @@ setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
 # R version ---------------------------------------------------------------
 
 rVersion <- R.Version()
-if (rVersion$major != 3 | rVersion$minor != 1.3) {
-  stop("The script is developed under the 3.1.3 R version.")
+if (rVersion$major != 3 | rVersion$minor != 2) {
+  stop("The script is developed under the 3.2.0 R version.")
 }
 rm(rVersion)
 
@@ -75,10 +75,10 @@ load("./Data/Processed/FAOcountryProfile.RData")
 # Construction and metadata files -----------------------------------------
 
 con.df <- ReadConstruction(file = "Construction2015.csv", 
-                           encoding = "UTF-8", nrows = 657)
+                           encoding = "UTF-8", nrows = 665)
 save(x = con.df, file = "./Data/Processed/Construction.RData")
 meta.lst <- ReadMetadata(file = "Metadata2015.csv", 
-                         encoding = "UTF-8", nrows = 657)
+                         encoding = "UTF-8", nrows = 665)
 save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
 # con.df <- ReadConstruction(file = "./Data/old/Construction04-2014.csv", 
@@ -89,9 +89,7 @@ save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 # save(x = meta.lst, file = "./Data/Processed/Metadata.RData")
 
 
-# Parameters --------------------------------------------------------------
 
-downloadWB <- FALSE; CheckLogical(downloadWB)
 
 ###########################################################################
 ## Data collection
@@ -121,30 +119,9 @@ dwnldFO <- FALSE # Forestry
 dwnldGHG <- FALSE # Greenhouse gases
 dwnldFB <- FALSE # Food balance sheets
 
-# 
-# faostatData.df <- meta.lst[["FAOSTAT"]]
-# dwnldOA <- FALSE # Population
-# dwnldRL <- FALSE # Resources, Resources - Land
-# dwnldRF <- FALSE # Resources - Fertilizers
-# dwnldRP <- FALSE # Resources - Pesticides
-# dwnldCS <- FALSE # Investments - Capital stock
-# dwnldRM <- FALSE # Investments - Machinery
-# dwnldIG <- FALSE # Government expenditures
-# dwnldA <- FALSE # ASTI
-# dwnldQC <- FALSE # Production - Crops
-# dwnldQA <- FALSE # Production - Live animals
-# dwnldQD <- FALSE # Production - Crops processed
-# dwnldQL <- FALSE # Production - Livestock primary
-# dwnldQP <- FALSE # Production - Livestock processed
-# dwnldQV <- FALSE # Production - Value of agricultural production
-# dwnldQI <- FALSE # Production indices
-# dwnldTP <- FALSE # Trade - Crops and livestock products
-# dwnldTI <- FALSE # Trade - Trade indices
-# dwnldFO <- FALSE # Forestry
-# dwnldGHG <- FALSE # Greenhouse gases
-# dwnldFB <- FALSE # Food balance sheets
+# Download variables from WORLD BANK, parameters -----------------------------
 
-
+downloadWB <- FALSE; CheckLogical(downloadWB)
 
 # FAOSTAT, Population - Annual population ---------------------------------
 
@@ -447,7 +424,7 @@ if (dwnldTP) {
   save(x = FAOtp.df, file = paste0("./Data/Processed/FAOtp", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/FAOtp2015-04-15.RData")
+  load(file = "./Data/Processed/FAOtp2015-05-27.RData")
 }
 
 # FAOSTAT, Trade - Trade indices ------------------------------------------
@@ -466,7 +443,7 @@ if (dwnldTI) {
   save(x = FAOti.df, file = paste0("./Data/Processed/FAOti", Sys.Date(), ".RData"))
 } else {
   ## ...open list
-  load(file = "./Data/Processed/FAOti2015-04-15.RData")
+  load(file = "./Data/Processed/FAOti2015-05-27.RData")
 }
 
 # FAOSTAT, Forestry -------------------------------------------------------
@@ -572,6 +549,13 @@ load("./Data/Processed/Fishery.RData")
 load("./Data/Processed/UNPopManualData.RData")
 
 
+# load("./database/Data/Processed/wbManualData.RData")
+# load("./database/Data/Processed/AquastatManualData.RData")
+# load("./database/Data/Processed/UNPopManualData.RData")
+# load("./database/Data/Processed/Fishery.RData")
+# load("./database/Data/Processed/BiofuelProduction.RData")
+# load("./database/Data/Processed/GlobalForestResourceAssessment.RData")
+
 # load("./Data/Processed/AquastatManualData_old.RData")
 # o <- AquastatManualData.df
 # load("./Data/Processed/AquastatManualData.RData")
@@ -672,8 +656,13 @@ rm(list = c("preConstr.df", "postConstr.lst"))
 
 # Adjustment in scaling ---------------------------------------------------
 
-manScalVars <- subset(con.df, select = c("STS_ID", "SCALING"), subset = !is.na(SCALING))
-#manScalVars <- con.df[!(is.na(con.df[["SCALING"]])), c("STS_ID", "SCALING")] # Markus fix
+# either of these - some issues prevail
+
+#manScalVars <- subset(con.df, select = c("STS_ID", "SCALING"), subset = !is.na(SCALING))
+manScalVars <- con.df[!(is.na(con.df[["SCALING"]])), c("STS_ID", "SCALING")] # Markus fix
+
+# Removed var QA.STCK.PIG.HD.SHW  100 "Pigs, share of world" because it broked the manual scaling..
+manScalVars <- manScalVars[-61,]
 
 for (i in 1:NROW(manScalVars)) {
   preAgg.df[, manScalVars[i, "STS_ID"]] <- preAgg.df[, manScalVars[i, "STS_ID"]] * manScalVars[i, "SCALING"]
@@ -730,11 +719,9 @@ postAgg.df <- CheckValues(dataset = postAgg.df, columns = colnames(postAgg.df)[
   -grep("FAOST_CODE|Year|Area|POU_DISTR|FAO_TABLE_NAME", colnames(postAgg.df))])
 
 SYB.df <- postAgg.df
-save(x = SYB.df, file = "./Data/Processed/SYB.RData")
-load(file = "./Data/Processed/SYB.RData")
+save(x = SYB.df, file = "./Data/Processed/SYB_pre_fsi.RData")
+load(file = "./Data/Processed/SYB_pre_fsi.RData")
 
-myvars <- names(SYB.df) %in% names(fsi.df)[-1:-2]
-SYB.df <- SYB.df[!myvars]
 
 # Merge the FSI dataset ---------------------------------------------------
 
@@ -756,6 +743,33 @@ load(file = "./Data/Processed/fsi.RData")
 # fsi.df <- fsi.df[, fsiVar]
 SYB.df <- merge(SYB.df, fsi.df, all = FALSE, by = c("FAOST_CODE", "Year"))
 rm(fsi.df)
+
+
+### FOR SOME REASON SOME VARS END UP WIITH .x
+# names(SYB.df)[grep(".x", names(SYB.df))]
+
+### HACK BEGINS #############
+
+SYB.df$SH.DYN.MORT.y <- NULL
+names(SYB.df)[names(SYB.df)=="SH.DYN.MORT.x"] <- "SH.DYN.MORT"
+
+SYB.df$RL.AREA.ARBL.HA.NO.y <- NULL
+names(SYB.df)[names(SYB.df)=="RL.AREA.ARBL.HA.NO.x"] <- "RL.AREA.ARBL.HA.NO"
+
+SYB.df$QC.PRD.CRLS.TN.NO.y <- NULL
+names(SYB.df)[names(SYB.df)=="QC.PRD.CRLS.TN.NO.x"] <- "QC.PRD.CRLS.TN.NO"
+
+SYB.df$QV.NPV.FOOD.ID.NO.y <- NULL
+names(SYB.df)[names(SYB.df)=="QV.NPV.FOOD.ID.NO.x"] <- "QV.NPV.FOOD.ID.NO"
+
+SYB.df$Area.y <- NULL
+names(SYB.df)[names(SYB.df)=="Area.x"] <- "Area"
+
+SYB.df$FAO_TABLE_NAME.y <- NULL
+names(SYB.df)[names(SYB.df)=="FAO_TABLE_NAME.x"] <- "FAO_TABLE_NAME"
+
+### HACK ENDS ###########
+
 save(x = SYB.df, file = "./Data/Processed/SYB.RData")
 
 ## Merge metadata and construction file

@@ -2,8 +2,14 @@
 ## Title: This script process the Global Forest Resources Assessment data
 ## Created by: Filippo Gheri
 ## Created: 07/07/2014
-## Updated: 07/07/2014
+## Updated: 28/05/2015 - by Markus
 ###########################################################################
+
+# Note by Markus - data does not come all the way to SYB.df 
+# Trying to resolve at what stage it is left out
+## -> Did not do anything as the problem was that thse vars were not defined in metadata/contruction
+
+# setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
 
 gfra.df <- 
   read.csv(file = "./Data/Raw/ForestCharacteristics.csv", 
