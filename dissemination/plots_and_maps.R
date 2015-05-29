@@ -354,7 +354,8 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
 # Feed in the data
 if (!("oda_share_agriculture" %in% names(sybdata.df)) & !("share_of_agriculture_forestry_fishing" %in% names(sybdata.df))) {
   load("./database/Data/Processed/invest1.RData")
-  sybdata.df <- merge(sybdata.df,invest1,by=c("Year","FAOST_CODE"), all.x=TRUE)
+  sybdata.df <- merge(sybdata.df,invest1,by=c("Year","FAOST_CODE"), all=TRUE)
+  sybdata.df <- full_join(sybdata.df,invest1)
 }
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
