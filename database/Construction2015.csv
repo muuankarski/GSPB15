@@ -663,3 +663,8 @@ TP.IMVAL.FOODWF.USD.SH,TP.IMVAL.FOODWF.USD.NO,MUV,,share,,,sum,0,0,,trade
 GFRA.TOT.ONRF.HA.NO,,,,manual,,,sum,0,0,,"forestry, faostat"
 GFRA.TOT.PF.HA.NO,,,,manual,,,sum,0,0,,"forestry, faostat"
 GFRA.TOT.PLF.HA.NO,,,,manual,,,sum,0,0,,"forestry, faostat"
+oda_share_agriculture,,,,manual,,,sum,0,0,,"investments, faostat"
+share_of_agriculture_forestry_fishing,,,,manual,,,sum,0,0,,"investments, faostat"
+remittances,,,,manual,,,sum,0,0,,"investments, faostat"
+Bilateral,,,,manual,,,sum,0,0,,"investments, faostat"
+Multilateral,,,,manual,,,sum,0,0,,"investments, faostat"

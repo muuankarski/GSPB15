@@ -124,6 +124,14 @@ load("./database/FAOcountryProfile.RData")
 
 load(file = "./database/Data/Processed/SYB.RData")
 sybdata.df <- SYB.df; rm(SYB.df)
+# # Add new rows/years to data to allow merging
+# new_row <- sybdata.df[1,]
+# 
+# df[nrow(df) + 1, names(new.row)] <- new.row
+# 
+# sybdata.df[1:5]
+# unique(sybdata.df$FAOST_CODE)
+
 ## NOTE (FILIPPO): I still need to address the issue of Sudan
 sybMaps.df <- sybdata.df
 names(sybMaps.df)[names(sybMaps.df)=="FAOST_CODE"] <- "FAO_CODE"

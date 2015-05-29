@@ -1,64 +1,64 @@
 PART,ORDER,INDICATOR1,INDICATOR2,INDICATOR3,SERIES_NAME_SHORT,MULTIPLIER,DIGITS
-The setting,1,OA.TPBS.POP.PPL.NO,,,Total population (mln),,1
-The setting,2,OA.TPBS.POP.PPL.GR10,,,Average total population growth (%),,1
+The setting,1,OA.TPR.POP.PPL.SHP,,,Total population (mln),,1
+The setting,2,OA.TPR.POP.PPL.SHP,,,Average total population growth (%),,1
 The setting,3,OA.TPR.POP.PPL.SHP,,,Rural population (% total population),,1
-The setting,4,,,,Public agricultural expenditure (% total pub. expenditure),,1
-The setting,5,RL.AREA.AGR.HA.NO,,,Area Harvested (ha),,1
-The setting,6,,,,Cropping Intensity Ratio (%),,2
-The setting,7,AQ.WAT.WATPCP.MC.NO,,,Water resources (m3person),,1
-The setting,8,AQ.WAT.SHIRR.HA.SH,,,Area equipped for irrigation (%),,1
-The setting,9,AQ.WAT.EQIRR.HA.NO,,,Area Irrigated (ha),,1
-The setting,10,SL.AGR.EMPL.ZS,,,Employment in agriculture (%),,1
-The setting,11,SL.AGR.EMPL.FE.ZS,,,"Employment in agriculture, female (%)",,1
-The setting,12,RF.FERT.NI.TN.NO,,,Total Fertilizers N/P/K (tonnes/ha),,1
-The setting,13,RF.FERT.NI.TN.NO,,,Nitrogen (tonnes/ha),,1
-The setting,14,,,,Energy use intensity in agriculture (mj/I$),,1
-The setting,15,,,,"Shares of farms, <2 ha (%)",,1
-The setting,16,SI.POV.RUHC,,,Poverty headcount ratios for farm household populations (%),,1
-The setting,17,,,,Average Farm Size (ha),,1
-The setting,18,,,,Agricultural production operated by the smallest 75 percent of family farms (%),,1
-The setting,19,,,,Agricultural land operated by the smallest 75 percent of family farms (%),,1
-The setting,20,,,,"Intensity of fertilizer use, by farm size (PPP dollars)",,1
-The setting,21,,,,"Land productivity, by farm size (Constant 2009 PPP dollars)",,1
-The setting,22,EA.PRD.AGRI.KD,,,Agr. value added per worker (const. 2000 US$),,1
-Hunger dimensions,23,NY.GNP.PCAP.CD,,,GDP /per capita,,0
-Hunger dimensions,24,POU_CPMDER,,,Prevalence of undernourished,,1
-Hunger dimensions,25,SH.STA.MALN.ZS,,,Children <5 year underweight (%),,1
-Hunger dimensions,26,AV3YADESA.DISS,,,Dietary energy supply (kcal/pc/day),,1
-Hunger dimensions,27,QV.NPV.CRLS.ID.NO,,,Cereal-excluding beer production index (2004-06=100),,1
-Hunger dimensions,28,Vegetable production (tonnes),,,Vegetable oils production index (2004-06=100),,1
-Hunger dimensions,29,QL.PRD.MILK.TN.NO,,,Milk - Excluding Butter index (2004-06=100),,0
-Hunger dimensions,30,OA.TPM.POP.PPL.SHP,,,Root and tuber production index (2004-06=100),,0
-Hunger dimensions,31,OA.TPM.POP.PPL.SHP,,,Vegetable production index (2004-06=100),,0
-Hunger dimensions,32,OA.TPM.POP.PPL.SHP,,,Sugar production index (2004-06=100),,0
-Hunger dimensions,33,OA.TPM.POP.PPL.SHP,,,Fruit production index (2004-06=100),,0
-Hunger dimensions,34,OA.TPM.POP.PPL.SHP,,,Total meat production index (2004-06=100),,1
-Hunger dimensions,35,OA.TPM.POP.PPL.SHP,,,Animal product-excluding meat production index (2004-06=100),,1
-Hunger dimensions,36,OA.TPM.POP.PPL.SHP,,,"Share of energy supply from cereals, roots and tubers (%)",,1
-Hunger dimensions,37,OA.TPM.POP.PPL.SHP,,,Change in food CPI,,1
-Hunger dimensions,38,OA.TPM.POP.PPL.SHP,,,No access to sanitation facilities (% pop.),,1
-Hunger dimensions,39,OA.TPM.POP.PPL.SHP,,,No access to improved water sources (% pop.),,1
-Hunger dimensions,40,OA.TPM.POP.PPL.SHP,,,Domestic food price volatility,,1
-Hunger dimensions,41,OA.TPM.POP.PPL.SHP,,,"Pop. affected by droughts, floods, extr. temp. (%)",,1
-Food Supply,42,OA.TPM.POP.PPL.SHP,,,Growth value of food production (%),,1
-Food Supply,43,OA.TPM.POP.PPL.SHP,,,Value added from agriculture (% GDP),,1
-Food Supply,44,OA.TPM.POP.PPL.SHP,,,Net pc food production index (2004-06=100),,1
-Food Supply,45,OA.TPM.POP.PPL.SHP,,,Net pc crop production index (2004-06=100),,1
-Food Supply,46,OA.TPM.POP.PPL.SHP,,,Net pc livestock production index (2004-06=100),,1
-Food Supply,47,OA.TPM.POP.PPL.SHP,,,Food exports (mln US$),,1
-Food Supply,48,OA.TPM.POP.PPL.SHP,,,Food imports (mln US$),,1
-Food Supply,49,OA.TPM.POP.PPL.SHP,,,Cereal Imports Dependency Ratio,,1
-Food Supply,50,OA.TPM.POP.PPL.SHP,,,Value of food imports over total merchandise exports (%),,1
-Food Supply,51,OA.TPM.POP.PPL.SHP,,,Net trade of cereals (mln US$),,1
-Food Supply,52,OA.TPM.POP.PPL.SHP,,,Net trade of meat (mln US$),,1
-Food Supply,53,OA.TPM.POP.PPL.SHP,,,Net trade of fruit and veg. (mln US$),,1
-Food Supply,54,OA.TPM.POP.PPL.SHP,,,Net trade of dairy products (mln const. 2005 US$),,1
-Sustainability dimensions,55,OA.TPM.POP.PPL.SHP,,,Forest area (%),,1
-Sustainability dimensions,56,OA.TPM.POP.PPL.SHP,,,Freshwater withdrawn by agriculture (%),,1
-Sustainability dimensions,57,OA.TPM.POP.PPL.SHP,,,Terrestrial protected areas (%),,1
-Sustainability dimensions,58,OA.TPM.POP.PPL.SHP,,,Organic area (%),,1
-Sustainability dimensions,59,OA.TPM.POP.PPL.SHP,,,Share of renewable water resources (%),,1
-Sustainability dimensions,60,OA.TPM.POP.PPL.SHP,,,Biofuel production (thousand kt of oil eq.),,1
-Sustainability dimensions,61,OA.TPM.POP.PPL.SHP,,,Wood pellets prod. (thousand tonnes),,1
-Sustainability dimensions,62,OA.TPM.POP.PPL.SHP,,,"GHG emissions (AFOLU), emissions in CO2eq (gigagrams)",,1
-Sustainability dimensions,63,OA.TPM.POP.PPL.SHP,,,GHG emissions (AFOLU)/GHG (all sectors),,1
+The setting,4,OA.TPR.POP.PPL.SHP,,,Public agricultural expenditure (% total pub. expenditure),,1
+The setting,5,OA.TPR.POP.PPL.SHP,,,Area Harvested (ha),,1
+The setting,6,OA.TPR.POP.PPL.SHP,,,Cropping Intensity Ratio (%),,2
+The setting,7,OA.TPR.POP.PPL.SHP,,,Water resources (m3person),,1
+The setting,8,OA.TPR.POP.PPL.SHP,,,Area equipped for irrigation (%),,1
+The setting,9,OA.TPR.POP.PPL.SHP,,,Area Irrigated (ha),,1
+The setting,10,OA.TPR.POP.PPL.SHP,,,Employment in agriculture (%),,1
+The setting,11,OA.TPR.POP.PPL.SHP,,,"Employment in agriculture, female (%)",,1
+The setting,12,OA.TPR.POP.PPL.SHP,,,Total Fertilizers N/P/K (tonnes/ha),,1
+The setting,13,OA.TPR.POP.PPL.SHP,,,Nitrogen (tonnes/ha),,1
+The setting,14,OA.TPR.POP.PPL.SHP,,,Energy use intensity in agriculture (mj/I$),,1
+The setting,15,OA.TPR.POP.PPL.SHP,,,"Shares of farms, <2 ha (%)",,1
+The setting,16,OA.TPR.POP.PPL.SHP,,,Poverty headcount ratios for farm household populations (%),,1
+The setting,17,OA.TPR.POP.PPL.SHP,,,Average Farm Size (ha),,1
+The setting,18,OA.TPR.POP.PPL.SHP,,,Agricultural production operated by the smallest 75 percent of family farms (%),,1
+The setting,19,OA.TPR.POP.PPL.SHP,,,Agricultural land operated by the smallest 75 percent of family farms (%),,1
+The setting,20,OA.TPR.POP.PPL.SHP,,,"Intensity of fertilizer use, by farm size (PPP dollars)",,1
+The setting,21,OA.TPR.POP.PPL.SHP,,,"Land productivity, by farm size (Constant 2009 PPP dollars)",,1
+The setting,22,OA.TPR.POP.PPL.SHP,,,Agr. value added per worker (const. 2000 US$),,1
+Hunger dimensions,23,OA.TPR.POP.PPL.SHP,,,GDP /per capita,,0
+Hunger dimensions,24,OA.TPR.POP.PPL.SHP,,,Prevalence of undernourished,,1
+Hunger dimensions,25,OA.TPR.POP.PPL.SHP,,,Children <5 year underweight (%),,1
+Hunger dimensions,26,OA.TPR.POP.PPL.SHP,,,Dietary energy supply (kcal/pc/day),,1
+Hunger dimensions,27,OA.TPR.POP.PPL.SHP,,,Cereal-excluding beer production index (2004-06=100),,1
+Hunger dimensions,28,OA.TPR.POP.PPL.SHP,,,Vegetable oils production index (2004-06=100),,1
+Hunger dimensions,29,OA.TPR.POP.PPL.SHP,,,Milk - Excluding Butter index (2004-06=100),,0
+Hunger dimensions,30,OA.TPR.POP.PPL.SHP,,,Root and tuber production index (2004-06=100),,0
+Hunger dimensions,31,OA.TPR.POP.PPL.SHP,,,Vegetable production index (2004-06=100),,0
+Hunger dimensions,32,OA.TPR.POP.PPL.SHP,,,Sugar production index (2004-06=100),,0
+Hunger dimensions,33,OA.TPR.POP.PPL.SHP,,,Fruit production index (2004-06=100),,0
+Hunger dimensions,34,OA.TPR.POP.PPL.SHP,,,Total meat production index (2004-06=100),,1
+Hunger dimensions,35,OA.TPR.POP.PPL.SHP,,,Animal product-excluding meat production index (2004-06=100),,1
+Hunger dimensions,36,OA.TPR.POP.PPL.SHP,,,"Share of energy supply from cereals, roots and tubers (%)",,1
+Hunger dimensions,37,OA.TPR.POP.PPL.SHP,,,Change in food CPI,,1
+Hunger dimensions,38,OA.TPR.POP.PPL.SHP,,,No access to sanitation facilities (% pop.),,1
+Hunger dimensions,39,OA.TPR.POP.PPL.SHP,,,No access to improved water sources (% pop.),,1
+Hunger dimensions,40,OA.TPR.POP.PPL.SHP,,,Domestic food price volatility,,1
+Hunger dimensions,41,OA.TPR.POP.PPL.SHP,,,"Pop. affected by droughts, floods, extr. temp. (%)",,1
+Food Supply,42,OA.TPR.POP.PPL.SHP,,,Growth value of food production (%),,1
+Food Supply,43,OA.TPR.POP.PPL.SHP,,,Value added from agriculture (% GDP),,1
+Food Supply,44,OA.TPR.POP.PPL.SHP,,,Net pc food production index (2004-06=100),,1
+Food Supply,45,OA.TPR.POP.PPL.SHP,,,Net pc crop production index (2004-06=100),,1
+Food Supply,46,OA.TPR.POP.PPL.SHP,,,Net pc livestock production index (2004-06=100),,1
+Food Supply,47,OA.TPR.POP.PPL.SHP,,,Food exports (mln US$),,1
+Food Supply,48,OA.TPR.POP.PPL.SHP,,,Food imports (mln US$),,1
+Food Supply,49,OA.TPR.POP.PPL.SHP,,,Cereal Imports Dependency Ratio,,1
+Food Supply,50,OA.TPR.POP.PPL.SHP,,,Value of food imports over total merchandise exports (%),,1
+Food Supply,51,OA.TPR.POP.PPL.SHP,,,Net trade of cereals (mln US$),,1
+Food Supply,52,OA.TPR.POP.PPL.SHP,,,Net trade of meat (mln US$),,1
+Food Supply,53,OA.TPR.POP.PPL.SHP,,,Net trade of fruit and veg. (mln US$),,1
+Food Supply,54,OA.TPR.POP.PPL.SHP,,,Net trade of dairy products (mln const. 2005 US$),,1
+Sustainability dimensions,55,OA.TPR.POP.PPL.SHP,,,Forest area (%),,1
+Sustainability dimensions,56,OA.TPR.POP.PPL.SHP,,,Freshwater withdrawn by agriculture (%),,1
+Sustainability dimensions,57,OA.TPR.POP.PPL.SHP,,,Terrestrial protected areas (%),,1
+Sustainability dimensions,58,OA.TPR.POP.PPL.SHP,,,Organic area (%),,1
+Sustainability dimensions,59,OA.TPR.POP.PPL.SHP,,,Share of renewable water resources (%),,1
+Sustainability dimensions,60,OA.TPR.POP.PPL.SHP,,,Biofuel production (thousand kt of oil eq.),,1
+Sustainability dimensions,61,OA.TPR.POP.PPL.SHP,,,Wood pellets prod. (thousand tonnes),,1
+Sustainability dimensions,62,OA.TPR.POP.PPL.SHP,,,"GHG emissions (AFOLU), emissions in CO2eq (gigagrams)",,1
+Sustainability dimensions,63,OA.TPR.POP.PPL.SHP,,,GHG emissions (AFOLU)/GHG (all sectors),,1
