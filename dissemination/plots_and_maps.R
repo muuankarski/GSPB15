@@ -1473,7 +1473,7 @@ for (i in unique(sybdata.df$FAOST_CODE)){
 }
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "About energy..",placement="l")
+export_plot(manual_text = "Total renewable energy fix this title!!",placement="l")
 
 
 ## Info
@@ -1486,7 +1486,7 @@ for (i in unique(sybdata.df$FAOST_CODE)){
 }
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "About energy..",placement="l")
+export_plot(manual_text = "Pooled energy fix title",placement="l")
 
 
 # -----------------------------------------------------------
