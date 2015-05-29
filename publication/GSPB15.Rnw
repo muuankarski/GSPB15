@@ -311,7 +311,7 @@ chart_spread2(title="Overview",
 
 <<economy, eval=TRUE, results='asis'>>=
 chart_spread2(title="Economy",                
-            LeftTextCode="While some sectors have been hard hit, agriculture has demonstrated resilience during the recent economic downturn. Changes in the wider economy, including growing global integration, affect the performance of the agriculture sector.  Higher overall economic growth also raises consumers’ incomes and hence food demand. Changing interest rates influence capital investments, land values and storage levels, while inflation affects input prices, revenues and credit costs.  Fluctuations in exchange rates have an important bearing on international competitiveness and trade flows.",  
+            LeftTextCode="While some sectors have been hard hit, agriculture has demonstrated resilience during the recent economic downturn.  Changes in the wider economy, including growing global integration, affect the performance of the agriculture sector.  Higher overall economic growth also raises consumers’ incomes and hence food demand. Changing interest rates influence capital investments, land values and storage levels, while inflation affects input prices, revenues and credit costs. Fluctuations in exchange rates have an important bearing on international competitiveness and trade flows.",  
             RightTextCode="C.P1.ECON.1.2",   
             LeftChartCode="C.P1.ECON.1.3",   
             RightChartCode="C.P1.ECON.1.4",  
@@ -321,19 +321,23 @@ chart_spread2(title="Economy",
 
 <<labour, eval=TRUE, results='asis'>>=
 chart_spread2(title="Labour",                
+<<<<<<< HEAD
             LeftTextCode="A strong labour market is the foundation of sustained well-being and economic growth, inclusion and social cohesion. Therefore access to safe, productive and remunerated work is essential. Yet many workers, especially the most vulnerable, do not enter into formal wage employment but are instead self-employed or participate in unpaid family work, such as in agriculture. This is especially the case with subsistence farming. As a large share of the working poor are involved in agriculture, developments in this sector have a major impact on welfare.",  
+=======
+            LeftTextCode="A strong labour market is the foundation for sustained well-being and economic growth, inclusion and social cohesion. Therefore access to safe, productive and remunerated work is essential. Yet many workers, especially the most vulnerable, do not enter into formal wage employment but are instead self-employed or participate in unpaid family work, such as in agriculture. This is especially the case with subsistence farming. As a large share of the working poor are involved in agriculture, developments in this sector have a major impact on welfare.", 
+>>>>>>> 5e32d6d73cd190708bb69f5920d83a6f590bde5f
             RightTextCode="C.P1.LABO.1.2",   
             LeftChartCode="C.P1.LABO.1.3",   
             RightChartCode="C.P1.LABO.1.4",  
             BottomChartCode="C.P1.LABO.1.5", 
-            MapCode="M.P1.LABO.1.6",
-            notes="BOTTOM CHART CHILD EMPLOYMENT ONLY FEW COUNTRIES HOW TO DISPLAY!! Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
+            MapCode="M.P1.LABO.1.6"#,
+            #notes="BOTTOM CHART CHILD EMPLOYMENT ONLY FEW COUNTRIES HOW TO DISPLAY!! Maps should have average from last five years, but currently only showing the latest. Applies to all maps"
             )         
 @
 
 <<Inputs, eval=TRUE, results='asis'>>=
 chart_spread2(title="Inputs",
-            LeftTextCode="Adequate access to inputs, including land, pesticides and fertilizers, is vital for agricultural productivity growth. Throughout Asia and in parts of Latin America, expanding seed and fertilizer use has been accompanied by investments in irrigation, rural roads, marketing infrastructure and financial services, paving the way for dynamic commercial input markets. In other regions, such as sub-Saharan Africa, the uptake of agricultural inputs is relatively low because it is often cheaper to expand cropland to have higher production.",  
+            LeftTextCode="Adequate access to inputs, including land, pesticides and fertilizers, is vital for agricultural production and growth. Throughout Asia and in parts of Latin America, expanding seed and fertilizer use has been accompanied by investments in irrigation, rural roads, marketing infrastructure and financial services, paving the way for dynamic commercial input markets. In other regions, such as sub-Saharan Africa, the uptake of agricultural inputs is relatively low because it is often cheaper to expand cropland to have higher production.",  
             RightTextCode="C.P1.INPU.1.2",   
             LeftChartCode="C.P1.INPU.1.3",   
             RightChartCode="C.P1.INPU.1.4",  
@@ -345,7 +349,7 @@ chart_spread2(title="Inputs",
 
 <<investments, eval=TRUE, results='asis'>>=
 chart_spread2(title="Investment",                
-            LeftTextCode="Text here!!",  
+            LeftTextCode="Investing in agriculture is one of the most effective strategies for reducing poverty and hunger, and promoting sustainability. The regions of the world where hunger and extreme poverty are most widespread today – South Asia and sub-Saharan Africa – have seen flat or declining rates of investment per worker in agriculture over the past thirty years. Farmers tend to be the largest investors in developing country agriculture, and therefore their investment decisions are paramount for any strategy aimed at improving agricultural investment.",  
             RightTextCode="issues",   
             LeftChartCode="issues",   
             RightChartCode="issues",  
@@ -668,7 +672,7 @@ chart_spread2(title="Climate change",
 \parindent=0pt
 \parskip=\medskipamount
 \hangafter=-2
-\input{./Tables/CountryProfiles.tex}
+%\input{./Tables/CountryProfiles.tex}
 
 %%% METADATA
 \newpart{white}
