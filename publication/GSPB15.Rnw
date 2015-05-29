@@ -346,7 +346,7 @@ chart_spread2(title="Investment",
             LeftTextCode="Investing in agriculture is one of the most effective strategies for reducing poverty and hunger, and promoting sustainability. The regions of the world where hunger and extreme poverty are most widespread today – South Asia and sub-Saharan Africa – have seen flat or declining rates of investment per worker in agriculture over the past thirty years. Farmers tend to be the largest investors in developing country agriculture, and therefore their investment decisions are paramount for any strategy aimed at improving agricultural investment.",  
             RightTextCode="C.P1.INV.1.2",   
             LeftChartCode="C.P1.INV.1.3",   
-            RightChartCode="issues",  
+            RightChartCode="not_defined",  
             BottomChartCode="C.P1.INV.1.5", 
             MapCode="M.P1.INV.1.6",
             notes=""
@@ -395,7 +395,7 @@ chart_spread2(title="Investment",
 <<Availability, eval=TRUE,results='asis'>>=
 chart_spread2(title="Food Availability",                
             LeftTextCode="Text comes here",  
-            RightTextCode="issues",   
+            RightTextCode="C.P2.AV.1.2",   
             LeftChartCode="C.P2.AV.1.3",   
             RightChartCode="C.P2.AV.1.4",  
             BottomChartCode="C.P2.AV.1.5", 
@@ -431,7 +431,7 @@ chart_spread2(title="Stability",
 <<Utilization, eval=TRUE,results='asis'>>=
 chart_spread(title="Utilization",                
             LeftTextCode="Text here",  
-            #RightTextCode="",   
+            RightTextCode="MT.P2.UT.1.2",   
             LeftChartCode="C.P2.UT.1.3",   
             RightChartCode="C.P2.UT.1.4",  
             BottomChartCode="C.P2.UT.1.5", 
@@ -479,11 +479,11 @@ chart_spread(title="Utilization",
 <<Dietary energy supply, eval=TRUE,results='asis'>>=
 chart_spread2(title="Dietary energy supply",
             LeftTextCode="",  
-            RightTextCode="issues",   
-            LeftChartCode="C.P3.SUP.1.3",   
-            RightChartCode="C.P3.SUP.1.4",  
-            BottomChartCode="C.P3.SUP.1.5", 
-            MapCode="M.P3.SUP.1.6",
+            RightTextCode="C.P3.DES.1.2",   
+            LeftChartCode="C.P3.DES.1.3",   
+            RightChartCode="C.P3.DES.1.4",  
+            BottomChartCode="C.P3.DES.1.5", 
+            MapCode="M.P3.DES.1.6",
             notes=""
             )
 @
@@ -598,7 +598,7 @@ chart_spread2(title="Land",
 @
 
 <<Water, eval=TRUE,results='asis'>>=
-chart_spread2(title="Water",                
+chart_spread(title="Water",                
             LeftTextCode="Water is key to human life and agricultural activity. It is essential for food security, stable ecosystems and nutrition. Yet global demand for water has risen sharply over the last century and even more so in recent years. And is increasingly evident that the current use of water resources and services they provide is unsustainable. Already very small proportion of the planet’s water is available for human use. The impact of water stress and water scarcity is likely to grow further, particularly with climate change.",  
             RightTextCode="MT.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
@@ -612,7 +612,7 @@ chart_spread2(title="Water",
 <<Energy, eval=TRUE,results='asis'>>=
 chart_spread2(title="Energy",                
             LeftTextCode="Text here",  
-            RightTextCode="not_defined",
+            RightTextCode="C.P4.ENER.1.2",
             LeftChartCode="C.P4.ENER.1.3",
             RightChartCode="C.P4.ENER.1.4",
             BottomChartCode="C.P4.ENER.1.5",
@@ -666,7 +666,7 @@ chart_spread2(title="Climate change",
 \parindent=0pt
 \parskip=\medskipamount
 \hangafter=-2
-\input{./Tables/CountryProfiles.tex}
+%\input{./Tables/CountryProfiles.tex}
 
 %%% METADATA
 \newpart{white}

@@ -354,11 +354,11 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
 # Feed in the data
 if (!("oda_share_agriculture" %in% names(sybdata.df)) & !("share_of_agriculture_forestry_fishing" %in% names(sybdata.df))) {
   load("./database/Data/Processed/invest1.RData")
-  sybdata.df <- merge(sybdata.df,invest1,by=c("Year","FAOST_CODE"), all=TRUE)
   sybdata.df <- full_join(sybdata.df,invest1)
 }
+plotInfo$legendLabels <- c(" agriculture and related sectors","agriculture, forestry & fishing")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=2) )
 ## Export the plot
 export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 1973-2013", placement = "tr")
 # 
@@ -371,7 +371,7 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
 # Feed in the data
 if (!("remittances" %in% names(sybdata.df))){
   load("./database/Data/Processed/invest3.RData")
-  sybdata.df <- merge(sybdata.df,invest3,by=c("Year","FAOST_CODE"), all.x=TRUE)
+  sybdata.df <- full_join(sybdata.df,invest3)
 }
 
 ## Plot
@@ -398,9 +398,9 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.5")
 ## Plot
 if (!("Bilateral" %in% names(sybdata.df)) & !("Multilateral" %in% names(sybdata.df))) {
   load("./database/Data/Processed/invest2.RData")
-  sybdata.df <- merge(sybdata.df,invest2,by=c("Year","FAOST_CODE"), all.x=TRUE)
+  sybdata.df <- full_join(sybdata.df,invest2)
 }
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(manual_text = "ODA to Agriculture and related sectors, by bilateral/multilateral flow, 1973-2013", placement = "b")
 
@@ -479,29 +479,11 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 
 # Have to still think about this. The example is apparently the one in big book on page 76
 
-# plotInfo <- plot_info(plotName = "C.P2.AV.1.2")
-# 
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
-# 
-# assign(plotInfo$plotName,
-#        plot_syb(x = plotInfo$xAxis,
-#                 y = plotInfo$yAxis,
-#                 group = plotInfo$group,
-#                 type = plotInfo$plotType,
-#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-#                                     Area %in% c(plotInfo$plotArea)")),
-#                 data = sybdata.df,
-#                 scale = plotInfo$scaling,
-#                 x_lab = plotInfo$xPlotLab,
-#                 y_lab = plotInfo$yPlotLab,
-#                 legend_lab = subset(meta.lst$FULL,
-#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
-#        )
-# )
-# ## Export the plot
-# export_plot(manual_text = "This is LAND", placement = "tr")
+plotInfo <- plot_info(plotName = "C.P2.AV.1.2")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
+# Export
+export_plot(placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Energy supply derived from cereals, roots and tubers
@@ -572,7 +554,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
 ## Export the plot
 export_plot(placement="tr")
 
@@ -669,7 +651,7 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
 ## Export the plot
 export_plot(placement="tr")
 
@@ -867,7 +849,7 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 #             /_/   |,___.-`',    /`'---`
 #           /___/`       /____/
 #     
-## Food supply
+## Dietary Energy Supply
 ###########################################################################
 
 # Lets wait fore the FSI indicators!!!!
@@ -880,12 +862,39 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # 6. Map: DES (kcal/cap/day), 2009-11
 
 
+plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
+load("../ICN2PB14/Data/Processed/Metadata.RData")
+labels <- subset(meta.lst$FULL,
+                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
+labels[1] <- "Cereals\n(excl. beer)"
+labels[3] <- "Sugar and\nsweeteners"
+labels[4] <- "Milk\n(excl. butter)"
+labels[6] <- "Veg. oils and\nanimal fats"
+## Plot
+load("../ICN2PB14/Data/Processed/icn2.RData")
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = icn2.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = labels,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 7)[["Sub"]]) +
+         guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3))
+       )
+export_plot(manual_text="Share of DES (2009-2011)",placement="tr")
+load(file = "./database/Data/Processed/Metadata.RData")
+meta.df <- meta.lst$FULL
 # ----------------------------------------------------------------------- #
 # Dietary energy supply, top 20 (2000-02 vs. 2009-11)
 
-
 ## Info
-plotInfo <- plot_info(plotName = "C.P3.SUP.1.3")
+plotInfo <- plot_info(plotName = "C.P3.DES.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
@@ -897,7 +906,7 @@ export_plot(placement="l")
 # Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P3.SUP.1.4")
+plotInfo <- plot_info(plotName = "C.P3.DES.1.4")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
@@ -909,7 +918,7 @@ export_plot(placement="r")
 # DES (kcal/cap/day)
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P3.SUP.1.5")
+plotInfo <- plot_info(plotName = "C.P3.DES.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
@@ -922,7 +931,7 @@ export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
 # DES (kcal/cap/day), 2009-11
 
 ## Map info
-mapInfo <- map_info(mapName = "M.P3.SUP.1.6", data = sybMaps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P3.DES.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
@@ -1460,15 +1469,14 @@ export_map()
 # WAITING FOR THE DATA
 
 # ----------------------------------------------------------------------- #
-# Land area
-# 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P4.ENER.1.2")
-# ## Plot
-# 
-# 
-# ## Export the plot
-# export_plot(manual_text = "This is ENER", placement = "tr")
+#Land area
+
+## Info
+plotInfo <- plot_info(plotName = "C.P4.ENER.1.2")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
+## Export the plot
+export_plot(placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Top 20 biofuel producing countries
@@ -1581,12 +1589,11 @@ export_plot(manual_text = "Top and bottom 10 importers of forest products",place
 # ----------------------------------------------------------------------- #
 # Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)
 
-# DATA MISSING!!
-
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
+plotInfo$legendLabels <- c("primary forest","planted forest","other naturally regenerated forest")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=3) )
 ## Export the plot
 export_plot(placement = "b")
 

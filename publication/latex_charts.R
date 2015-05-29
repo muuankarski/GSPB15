@@ -23,11 +23,14 @@ chart_spread <- function(title="title",
   
   cat(paste0("\\LeftText{",LeftTextCode,"} \n"))
 
-  cat(paste0("\\RightText{\\IfFileExists{./Tables/",RightTextCode,".tex}  
-	               {\\begin{table} \n
-	               \\input{./Captions/Caption_",RightTextCode,".tex} \n
-	               \\input{./Tables/",RightTextCode,".tex} \n
-	               \\end{table}}} \n \n"))
+#   cat(paste0("\\RightText{\\IfFileExists{./Tables/",RightTextCode,".tex}  
+# 	               {\\begin{table} \n
+# 	               \\input{./Captions/Caption_",RightTextCode,".tex} \n
+# 	               \\input{./Tables/",RightTextCode,".tex} \n
+# 	               \\end{table}}} \n \n"))
+#   
+  cat(paste0("\\RightText{\\input{./Tables/",RightTextCode,".tex}} \n"))
+  
    
 	cat(paste0("\\LeftChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",LeftChartCode,".tex} \n",

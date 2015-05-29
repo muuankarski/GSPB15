@@ -5,6 +5,7 @@
 #######################################################################################################
 library(gdata)
 library(tidyr)
+library(stringr)
 
 d1 <- read.xls("./database/Data/Raw/InvestmentDataforStatPocketbook_28May2015.xlsx", sheet=1)
 d1 <- d1[1:41,1:3]
@@ -20,6 +21,9 @@ save(invest1, file="./database/Data/Processed/invest1.RData")
 d2 <- read.xls("./database/Data/Raw/InvestmentDataforStatPocketbook_28May2015.xlsx", sheet=2, skip=1)
 d2 <- d2[1:41,1:3]
 names(d2) <- c("Year","Bilateral","Multilateral")
+d2$Bilateral <- as.character(d2$Bilateral)
+d2$Bilateral <- str_replace_all(d2$Bilateral, ",", "")
+d2$Bilateral <- as.factor(d2$Bilateral)
 d2$Bilateral <- as.numeric(levels(d2$Bilateral))[d2$Bilateral]
 d2$Year <- as.character(d2$Year)
 d2$Year[d2$Year == "2013*"] <- "2013"
