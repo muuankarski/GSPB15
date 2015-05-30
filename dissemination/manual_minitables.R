@@ -21,7 +21,54 @@ print.xtable(xtable(tbl, caption = "Countries with highest share of children und
              file = "./publication/Tables/MT.P2.UT.1.2.tex")
 
 
-######
+######  Chart: fastest growing items between 2000-MRY
+
+# dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")
+# save(dat, file="~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+load("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+d <- dat[dat$CountryCode == 5000,] # World
+d <- d[d$Element == "Production",]
+d <- d[d$Year >= 2000,]
+library(tidyr)
+d$Year <- paste0("X",d$Year)
+dw <- spread(d,
+             Year,
+             Value)
+dw$relative_change <- dw$X2013/dw$X2000*100
+rc <- arrange(dw, -relative_change)[1:5,c("Item","relative_change")]
+names(rc) <- c("","%")
+
+print.xtable(xtable(rc, caption = "fastest growing items based on production quantities (2000 to 2013)", digits = c(0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
+
+
+
+######  Chart:top five items produced in MRY vs. 2000
+
+# dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")
+# save(dat, file="~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+load("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+d <- dat[dat$CountryCode == 5000,] # World
+d <- d[d$Element == "Production",]
+d <- d[d$Year == 2013,]
+dd <- d[ with(d, !grepl("Total", Item)), ]
+v2013 <- arrange(dd, -Value)[1:5,c("Item","Value")]
+# Year 2000 equivalent
+d <- dat[dat$CountryCode == 5000,] # World
+d <- d[d$Element == "Production",]
+d <- d[d$Year == 2000,]
+d <- d[d$Item %in% c("Sugar cane", "Maize", "Rice, paddy", "Wheat", "Potatoes"),]
+v2000 <- d[c("Item","Value")]
+gg <- merge(v2000,v2013,by="Item")
+gg$Value.x <- gg$Value.x/1000
+gg$Value.y <- gg$Value.y/1000
+names(gg) <- c("","2000", "2013")
+
+print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)"), digits = c(0,0,0,0), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
+
+
+
 
 dat <- sybdata.df[sybdata.df$Year %in% c(2006:2012) & sybdata.df$FAOST_CODE == 5000,c()]
 

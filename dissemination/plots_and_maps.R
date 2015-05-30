@@ -550,7 +550,6 @@ export_map()
 
 # ----------------------------------------------------------------------- #
 # Depth of food decifit, 3 year averages
-
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.2")
 ## Plot
