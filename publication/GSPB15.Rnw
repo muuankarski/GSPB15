@@ -479,7 +479,7 @@ chart_spread(title="Utilization",
 
 <<Dietary energy supply, eval=TRUE,results='asis'>>=
 chart_spread2(title="Dietary energy supply",
-            LeftTextCode="",  
+            LeftTextCode="The dietary energy supply (DES) is the food available for human consumption, expressed in kilocalories per person per day. At the country level, it is calculated as the food remaining for human use after taking out all non-food utilization, including exports, industrial use, animal feed, seed, wastage and changes in stocks. In 1961 the average global calorie availability was as low as 2 196 kcal/cap/day; by 2011, it had reached 2 870 kcal/cap/day, and was centered more around a narrow base of staple grains as well as meat and dairy products.",  
             RightTextCode="C.P3.DES.1.2",   
             LeftChartCode="C.P3.DES.1.3",   
             RightChartCode="C.P3.DES.1.4",  
@@ -491,7 +491,7 @@ chart_spread2(title="Dietary energy supply",
 
 <<Growth in crop production, eval=TRUE,results='asis'>>=
 chart_spread(title="Growth in crop production",
-            LeftTextCode="Text here!",  
+            LeftTextCode="The majority of people in developing countries live in rural areas, and most of them depend on agriculture for their livelihoods. Over the past 50 years, growth in crop production has been driven largely by higher yields per unit of land, and crop intensification. Trends are not uniform across regions, however. Most of the growth in wheat and rice production in Asia and Northern Africa has been from gains in yield, while expansion of harvested land has led to production growth of maize in Latin America and in sub-Saharan Africa.",  
             RightTextCode="MT.P3.CRPRO.1.2",   
             LeftChartCode="C.P3.CRPRO.1.3",   
             RightChartCode="C.P3.CRPRO.1.4",  
@@ -503,7 +503,7 @@ chart_spread(title="Growth in crop production",
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in the crop sector",                
-            LeftTextCode="Text here",  
+            LeftTextCode="Cereals, which include wheat, rice, barley, maize, rye, oats and millet, make up the majority of the production of the crop sector. They continue to be the most important food source for human consumption. Yet external factors, such as rising incomes and urbanization, are causing diets to shift towards diets that are higher in protein, fats and sugar. In addition, livestock and biofuel production have and will most likely grow at a faster rate than crop production. This is causing a shift away from crops, like wheat and rice, towards coarse grains and oilseeds to meet demands for food, feed and biofuel.",  
             RightTextCode="MT.P3.CRTRE.1.2",   
             LeftChartCode="C.P3.CRTRE.1.3",   
             RightChartCode="C.P3.CRTRE.1.4",  
@@ -515,7 +515,7 @@ chart_spread(title="Trends in the crop sector",
 
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in the livestock sector",
-            LeftTextCode="Text comes here",  
+            LeftTextCode="The world food economy is being increasingly driven by the shift of diets towards animal-based products such as meat, milk and dairy. As a result, agriculture is being affected, not only through growth of livestock production, but also through linkages to other sectors that supply feeding stuffs, such as crops and fisheries. Globally livestock production is the largest user of agricultural land and therefore also leaves a significant imprint on the environment.",  
             #RightTextCode="issues", 
             LeftChartCode="C.P3.LIVE.1.3",
             RightChartCode="C.P3.LIVE.1.4",
@@ -526,7 +526,7 @@ chart_spread(title="Trends in the livestock sector",
 @
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
-chart_spread2(title="Trends in the fisheries sector",
+chart_spread2(title="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",
             LeftTextCode="Text here",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
@@ -540,7 +540,7 @@ chart_spread2(title="Trends in the fisheries sector",
 
 <<Trends in agricultural trade, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in agricultural trade",
-            LeftTextCode="Most of the food consumed worldwide is grown locally. Where there is not enough local production to meet demand, trade has been instrumental in filling the gap. The scale of food and agricultural trade today is unprecedented. In real terms, the value of international flows has increased around fivefold over the past 50 years, reflecting global trends in the overall volume of trade. However, this expansion has been unevenly distributed across regions. High income countries have generally outpaced developing regions, although several of the latter have comparative advantages in food and agricultural production.",  
+            LeftTextCode="Most of the food consumed worldwide is grown locally. Where there is not enough local production to meet demand, trade has been instrumental in filling the gap. The scale of food and agricultural trade today is unprecedented. In real terms, the value of international flows has increased around fivefold over the past 50 years, reflecting global trends in the overall volume of trade. However, this expansion has been unevenly distributed across regions. High-income countries have generally outpaced developing regions, although several of the latter have comparative advantages in food and agricultural production.",  
             #RightTextCode="issues",   
             LeftChartCode="C.P3.TRADE.1.3",    
             RightChartCode="C.P3.TRADE.1.4",  
