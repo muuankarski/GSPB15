@@ -111,7 +111,7 @@ export_plot(placement = "b")
 
 ## Map info
 mapInfo <- map_info(mapName = "M.P1.OVER.1.6", data = sybMaps.df, mapArea = "Territory")
-mapInfo$mapData$OA.TPR.POP.PPL.SHP <- mapInfo$mapData$OA.TPR.POP.PPL.SHP/10000 # to get percents.....
+#mapInfo$mapData$OA.TPR.POP.PPL.SHP <- mapInfo$mapData$OA.TPR.POP.PPL.SHP/10000 # to get percents.....
 ## Create the map
 assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
@@ -239,7 +239,7 @@ export_plot(placement = "r")
 plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
 #plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(placement = "b")
 
@@ -1198,6 +1198,28 @@ export_plot(manual_text = "20 countries with highest value of aquaculture produc
 # 5. State of the world’s fishery stocks (see chart 79 in SYB2013)
 # Has
 
+plotInfo <- plot_info(plotName = "C.P3.FISH.1.5")
+
+categ = c("Under or\nmoderately\nexploited", "Fully\nexploited", "Recovering,\ndepleted\nor overexploited")
+tmpData = data.frame(X = factor(rep(categ, times = 2), levels = categ),
+                     variable = factor(rep(c(1974, 2009), each = 3)),
+                     value = c(39.23077, 50.76923, 10, 12.65823, 57.46835, 29.87342))
+
+## create the plot
+assign(plotInfo$plotName,
+ggplot(data = tmpData, aes_string(x = "variable", y = as.character("value"))) +
+  geom_bar(aes_string(col = "X", fill = "X"), stat="Identity",position = "stack", width = 0.6) +
+  scale_fill_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
+  scale_color_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
+  guides(fill = guide_legend(reverse = TRUE), color = guide_legend(reverse = TRUE)) +
+  #   guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
+  theme(legend.position = "right", legend.direction = "vertical") +
+  ylab("percent")
+)
+
+## export the plot
+export_plot(manual_text = "State of the world's fishery stocks (1974 and 2009)", placement="b")
+
 
 ##### -------------------------------------------------------
 # MAPS
@@ -1401,9 +1423,9 @@ export_map()
 # So for each country, I will compute the mean of 2003 to 2013 and 
 # give that mean as a 2014 value
 
-df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWTOT.MC.SH = mean(AQ.WAT.WWTOT.MC.SH, na.rm=TRUE))
+df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWIND.MC.SH = mean(AQ.WAT.WWIND.MC.SH, na.rm=TRUE))
 for (i in unique(sybdata.df$FAOST_CODE)){
-  sybdata.df$AQ.WAT.WWTOT.MC.SH[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$AQ.WAT.WWTOT.MC.SH
+  sybdata.df$AQ.WAT.WWIND.MC.SH[sybdata.df$Year == 2014 & sybdata.df$FAOST_CODE == i] <- df2014[df2014$FAOST_CODE == i,]$AQ.WAT.WWIND.MC.SH
 }
 
 ## Info
@@ -1411,7 +1433,7 @@ plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
 ## Export the plot
-export_plot(manual_text = "Total water withdrawal per capita, highest 20 (1999 to 2013)",placement="l")
+export_plot(manual_text = "Freshwater withdrawal by industrial sector, share of total, highest 20 (1999 to 2013)",placement="l")
 
 # ----------------------------------------------------------------------- #
 # Freshwater withdrawal by agricultural sector, share of total, highest 20
@@ -1429,14 +1451,55 @@ assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share of total, highest 20 (1999 to 2013)",placement="r")
 
 # ----------------------------------------------------------------------- #
-# Saline soils ????
+# Let's produce a table here with top 10 countries with water resources per capita, 2000 vs. MRY
 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P4.LAND.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
-# ## Export the plot
-# export_plot(manual_text = "Saline soils ????", placement = "b")
+plotInfo <- plot_info(plotName = "C.P4.WATER.1.5")
+
+if (!("AQ.WAT.WATPCP.MC.NO.2" %in% names(sybdata.df))) {
+  
+  water <- sybdata.df[c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
+  water2000 <- sybdata.df[sybdata.df$Year == 2000, c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
+  water2010 <- sybdata.df[sybdata.df$Year == 2010, c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
+  water2000 <- water2000[!is.na(water2000$AQ.WAT.WATPCP.MC.NO),]
+  water2010 <- water2010[!is.na(water2010$AQ.WAT.WATPCP.MC.NO),]
+  top_10 <- head(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),10)
+  top_00 <- water2000[water2000$FAOST_CODE %in% top_10$FAOST_CODE,]
+  
+  names(top_10)[names(top_10)=="AQ.WAT.WATPCP.MC.NO"] <- "AQ.WAT.WATPCP.MC.NO.2"
+  names(top_00)[names(top_00)=="AQ.WAT.WATPCP.MC.NO"] <- "AQ.WAT.WATPCP.MC.NO.2"
+  
+  topdata <- rbind(top_10,top_00)
+  
+  sybdata.df <- merge(sybdata.df,topdata,by=c("FAOST_CODE","Year"), all.x=TRUE)
+}
+
+plot.data <- sybdata.df[!is.na(sybdata.df$AQ.WAT.WATPCP.MC.NO.2),]
+
+# order.data <- plot.data[plot.data$Year == 2010,]
+# order.data <- arrange(order.data, -AQ.WAT.WATPCP.MC.NO.2)
+# plot.data$SHORT_NAME <- factor(plot.data$SHORT_NAME, levels=order.data$SHORT_NAME)
+
+#cat(paste(shQuote(unique(plot.data$SHORT_NAME), type="cmd"), collapse=", "))
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+              y = plotInfo$yAxis,
+              group = plotInfo$group,
+              type = plotInfo$plotType,
+              subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+              data = plot.data,
+              scale = plotInfo$scaling,
+              x_lab = plotInfo$xPlotLab,
+              y_lab = plotInfo$yPlotLab,
+              #                 legend_lab = subset(meta.lst$FULL,
+              #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+              col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+              ) 
+)
+## Export the plot
+export_plot(manual_text = "top 10 countries with water resources per capita, 2000 and 2010",placement="b")
+
 
 
 # MAPS -----------------------------------------------------------

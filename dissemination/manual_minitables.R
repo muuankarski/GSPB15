@@ -3,6 +3,10 @@
 library(dplyr)
 library(xtable)
 library(lazyeval)
+library(tidyr)
+library(stringr)
+library(scales)
+library(ggplot2)
 
 rrr <- function(varname) {
   filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
@@ -38,7 +42,7 @@ dw$relative_change <- dw$X2013/dw$X2000*100
 rc <- arrange(dw, -relative_change)[1:5,c("Item","relative_change")]
 names(rc) <- c("","%")
 
-print.xtable(xtable(rc, caption = "fastest growing items based on production quantities (2000 to 2013)", digits = c(0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(rc, caption = "fastest growing items based on production quantities (2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
 
 
@@ -64,111 +68,87 @@ gg$Value.x <- gg$Value.x/1000
 gg$Value.y <- gg$Value.y/1000
 names(gg) <- c("","2000", "2013")
 
-print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)"), digits = c(0,0,0,0), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
 
 
 
+######  Chart:top five live animals stock in 2013 vs. 2000
 
-dat <- sybdata.df[sybdata.df$Year %in% c(2006:2012) & sybdata.df$FAOST_CODE == 5000,c()]
+# dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.csv")
+# save(dat, file="~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+d <- dat[dat$CountryCode == 5000,] # World
+#d <- d[d$Element == "Production",]
+d <- d[d$Year == 2013,]
+dd <- d
+dd <- d[ with(d, !grepl("Total", Item)), ]
+v2013 <- arrange(dd, -Value)[1:5,c("Item","Value")]
+# cat(paste(shQuote(v2013$Item, type="cmd"), collapse=", "))
+# Year 2000 equivalent
+d <- dat[dat$CountryCode == 5000,] # World
+d <- d[d$Year == 2000,]
+d <- d[d$Item %in% c("Cattle", "Sheep", "Goats", "Pigs", "Buffaloes"),]
+v2000 <- d[c("Item","Value")]
+gg <- merge(v2000,v2013,by="Item")
+gg$Value.x <- gg$Value.x/1000
+gg$Value.y <- gg$Value.y/1000
+gg <- arrange(gg, -Value.y)
+names(gg) <- c("","2000", "2013")
 
-
-rrr <- function(varname) {
-  filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
-}
-
-
-filter(sybdata.df, Year %in% c(2006:2012), FAOST_CODE == 5000) %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
-
-var <- "SH.STA.MALN.ZS"
-tbl <- rrr(var)
-tbl <- arrange(tbl, -value)[1:5,]
-names(tbl) <- c("FAOST_CODE",var)
-tbl <- left_join(tbl,sybdata.df[c("Year","FAOST_CODE",var)])
-tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
-tbl <- tbl[c(4,3,2)]
-names(tbl) <- c("","Year","%")
-
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 yards of age who are underweight (percent) (2006 to 2012)", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
-             file = "./publication/Tables/MT.P2.UT.1.2.tex")
-
-
-
-
-
+print.xtable(xtable(gg, caption = "Top five live animal stock in 2013 vs. 2000 (thousand heads)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P3.LIVE.1.2.tex")
 
 
+## Trends in agricultural trade
 
+dat <- read.csv("~/fao_temp/pocketbook_temp/food_export_import.csv")
+d <- dat[!(dat$AreaCode %in% 5000),] # World
+d <- d[d$ItemName == "Food and Animals",]
+dd <- d[c("AreaName","ElementName","Value")]
+dw <- spread(dd, key = ElementName, value = Value)
+names(dw) <- str_replace_all(names(dw), " ", ".")
+dw[[2]] <- dw[[2]]/1000000
+dw[[3]] <- dw[[3]]/1000000
+dw <- arrange(dw, -Import.Value)
+names(dw) <- c("","Export value", "Import Value")
 
-
-
-
-
-
-
-
-dat <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.MALN.ZS, na.rm=TRUE))
-tbl <- arrange(dat, -value)[1:5,]
-tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
-tbl <- tbl[c(3,2)]
-names(tbl) <- c("", "%")
-
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 yards of age who are underweight (percent)", digits = 1), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
-             file = "./publication/Tables/MT.P2.UT.1.2.tex")
+print.xtable(xtable(dw, caption = "Exports and Imports of food (million US\\$ 2012)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P3.TRADE.1.3.tex")
 
 
 
+## Piechart for livestock
 
-\footnotesize
-\begin{center}
-\begin{tabular}{lrr}
-\toprule
-& XX-XX & XX-XX\\
-\midrule
-World & XX & XX\\
-Developing
-countries & XX & XX\\
-Africa & XX & XX\\
-Asia & XX & XX\\
-Latin Am. and the Carib. & XX & XX\\
-Oceania & XX & XX\\
-Developed
-countries & $<$XX & $<$XX\\
-\toprule
-\end{tabular}
-\end{center}
+load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+d <- dat[dat$CountryCode %in% c(5100,5200,5300,5400,5500),] # World
+d <- d[d$Item == "Pigs",]
+d <- d[d$Year %in% c(2000,2013),]
+d <- d  %>% group_by(Year) %>% mutate(sum = sum(Value)) 
+d$share <- round(d$Value/d$sum*100,0)
+d$Country <- str_replace_all(d$Country, "\\ \\+\\ \\(Total\\)","")
 
-\scriptsize
-\begin{center}
-\begin{tabular}{lrr}
-\toprule
-& Year & \%\\
-\midrule
-Kuwait & 2002 & 2460\\
-the United Arab Emirates & 2005 & 2208\\
-Saudi Arabia & 2006 & 867.9\\
-Libya & 2000 & 512\\
-Qatar & 2005 & 451.7\\
-\toprule
-\end{tabular}
-\end{center}
+colPart3 <- plot_colors(part = 3, 12)
 
 
-\footnotesize
-\begin{center}
-\begin{tabular}{lrr}
-\toprule
-& 1990-92 & 2012-14\\
-\midrule
-World & 18.7 & 11.3\\
-Developing
-countries & 23.4 & 13.5\\
-Africa & 27.7 & 20.5\\
-Asia & 23.7 & 12.7\\
-Latin Am. and the Carib. & 15.3 & 6.1\\
-Oceania & 15.7 & 14\\
-Developed
-countries & $<$5.0 & $<$5.0\\
-\toprule
-\end{tabular}
-\end{center}
+d <- d %>% group_by(Year) %>% mutate(pos = cumsum(share)- share/2)
+
+p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + facet_wrap(~Year)
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "top")
+p <- p + theme(text = element_text(size=11))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.size = unit(3, "mm"))
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
+

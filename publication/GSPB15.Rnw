@@ -390,6 +390,17 @@ chart_spread2(title="Investment",
 \rowcolors{1}{part2!10}{white}
 \clearpage
 
+<<Undernourishmend, eval=TRUE,results='asis'>>=
+chart_spread2(title="Undernourishment",                
+            LeftTextCode="Undernourishment refers to food intake that is insufficient to meet dietary energy requirement for an active and healthy life. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Approximately 216 million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            RightTextCode="not_defined",   
+            LeftChartCode="not_defined",   
+            RightChartCode="not_defined",  
+            BottomChartCode="not_defined", 
+            MapCode="not_defined",
+            notes="" 
+            )
+@
 
 
 <<Availability, eval=TRUE,results='asis'>>=
@@ -516,22 +527,22 @@ chart_spread(title="Trends in the crop sector",
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in the livestock sector",
             LeftTextCode="The world food economy is being increasingly driven by the shift of diets towards animal-based products such as meat, milk and dairy. As a result, agriculture is being affected, not only through growth of livestock production, but also through linkages to other sectors that supply feeding stuffs, such as crops and fisheries. Globally livestock production is the largest user of agricultural land and therefore also leaves a significant imprint on the environment.",  
-            #RightTextCode="issues", 
+            RightTextCode="MT.P3.LIVE.1.2", 
             LeftChartCode="C.P3.LIVE.1.3",
             RightChartCode="C.P3.LIVE.1.4",
-            BottomChartCode="issues",
+            BottomChartCode="C.P3.LIVE.1.5",
             MapCode="M.P3.LIVE.1.6",
             notes=""
             )
 @
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
-chart_spread2(title="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",
-            LeftTextCode="Text here",  
+chart_spread2(title="Trends in fisheries sector",
+            LeftTextCode="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
             RightChartCode="C.P3.FISH.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P3.FISH.1.5", 
             MapCode="M.P3.FISH.1.6",
             notes=""
             )
@@ -541,7 +552,7 @@ chart_spread2(title="Fish is an important component in people’s diets, providi
 <<Trends in agricultural trade, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in agricultural trade",
             LeftTextCode="Most of the food consumed worldwide is grown locally. Where there is not enough local production to meet demand, trade has been instrumental in filling the gap. The scale of food and agricultural trade today is unprecedented. In real terms, the value of international flows has increased around fivefold over the past 50 years, reflecting global trends in the overall volume of trade. However, this expansion has been unevenly distributed across regions. High-income countries have generally outpaced developing regions, although several of the latter have comparative advantages in food and agricultural production.",  
-            #RightTextCode="issues",   
+            RightTextCode="MT.P3.TRADE.1.3",   
             LeftChartCode="C.P3.TRADE.1.3",    
             RightChartCode="C.P3.TRADE.1.4",  
             BottomChartCode="C.P3.TRADE.1.5", 
@@ -604,7 +615,7 @@ chart_spread(title="Water",
             RightTextCode="MT.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
             RightChartCode="C.P4.WATER.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P4.WATER.1.5", 
             MapCode="M.P4.WATER.1.6",
             notes=""
             )
