@@ -20,29 +20,6 @@
 %\usepackage[document]{ragged2e}
 
 
-% First page background graphics
-\usepackage{eso-pic}
-\newcommand\taustaeka{%
-\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\vfill
-\centering
-\includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{./cover/front_cover.pdf}%
-\vfill
-}}}
-
-
-\newcommand\taustatoka{%
-\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\vfill
-\centering
-\includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{./cover/back_cover.pdf}%
-\vfill
-}}}
-
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -70,6 +47,31 @@ keepaspectratio]{./cover/back_cover.pdf}%
 
 %\usepackage{titlesec}
 % \titleformat*{\section}{\Large\bfseries}
+
+
+% First page background graphics
+\usepackage{eso-pic}
+\newcommand\taustaeka{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{./cover/front_cover.pdf}%
+\vfill
+}}}
+
+
+\newcommand\taustatoka{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{./cover/back_cover.pdf}%
+\vfill
+}}}
+
 
 
 \begin{document}
@@ -380,7 +382,7 @@ chart_spread2(title="Investment",
             LeftTextCode="Investing in agriculture is one of the most effective strategies for reducing poverty and hunger, and promoting sustainability. The regions of the world where hunger and extreme poverty are most widespread today – South Asia and sub-Saharan Africa – have seen flat or declining rates of investment per worker in agriculture over the past thirty years. Farmers tend to be the largest investors in developing country agriculture, and therefore their investment decisions are paramount for any strategy aimed at improving agricultural investment.",  
             RightTextCode="C.P1.INV.1.2",   
             LeftChartCode="C.P1.INV.1.3",   
-            RightChartCode="not_defined",  
+            RightChartCode="C.P1.INV.1.4",  
             BottomChartCode="C.P1.INV.1.5", 
             MapCode="M.P1.INV.1.6",
             notes=""
@@ -733,7 +735,7 @@ chart_spread2(title="Climate change",
 
 \ifprint\else
 \begin{picture}(0,0)
-\put(-113,-470){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+\put(-113,-472){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
 %\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
 \end{picture}
 

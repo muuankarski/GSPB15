@@ -364,9 +364,54 @@ export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 197
 # 
 # ## ------------------------------------------------------------------------
 # # Top ten countries, credit to agriculture as a share of total credit
+
+gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
+gg <- gg[gg$ElementName == "Value US$",] 
+gg <- gg[gg$ItemName == "Total Credit",] 
+
+df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+df2016$Year <- 2000
+df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+df2017$Year <- 2012
+
+tmp <- rbind(df2016,df2017)
+names(tmp) <- c("FAOST_CODE","credit_to_agriculture","Year")
+
+sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"), all.x=TRUE)
+
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+## Plot
+## Plot
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                #                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                #                                     Area %in% c(plotInfo$plotArea) &
+                #                                     FAOST_CODE %in% c(FAOcountryProfile[FAOcountryProfile[, 'SOFI_MACRO_REG'] == 'Asia' & !is.na(FAOcountryProfile[, 'SOFI_MACRO_REG']), 'FAOST_CODE'])")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]))
+C.P1.INV.1.3 <- C.P1.INV.1.3 + 
+  scale_fill_manual(labels = c("1999-2001", "2010-12"),
+                    values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+  scale_color_manual(labels = c("1999-2001", "2010-12"),
+                     values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+## Export the plot
+export_plot(placement = "l")
+# 
+# ## ------------------------------------------------------------------------
+# ## ------------------------------------------------------------------------
+# # Top ten countries, credit to agriculture as a share of total credit
+# 
+## Info
+plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
 # # Feed in the data
@@ -379,17 +424,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(placement = "l")
-# 
-# ## ------------------------------------------------------------------------
-# 
-# # Top ten countries, total credit, current US$
-# 
-# ## Info
-# plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
-# ## Export the plot
-# export_plot(manual_text = "Fertilizer consumption in nutrients per ha of arable land", placement = "r")
+
 # 
 # ## ------------------------------------------------------------------------
 # ODA received in agriculture, forestry and fishing sectors, share of total ODA
