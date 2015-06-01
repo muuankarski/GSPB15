@@ -367,17 +367,18 @@ export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 197
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
-# Feed in the data
-if (!("remittances" %in% names(sybdata.df))){
-  load("./database/Data/Processed/invest3.RData")
-  sybdata.df <- full_join(sybdata.df,invest3)
-}
+# # Feed in the data
+# if (!("remittances" %in% names(sybdata.df))){
+#   load("./database/Data/Processed/invest3.RData")
+#   sybdata.df <- full_join(sybdata.df,invest3)
+# }
 
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Top 20 countries in Agricultural remittance (AFF = Agriculture, Forestry and Fishing)", placement = "l")
+export_plot(placement = "l")
 # 
 # ## ------------------------------------------------------------------------
 # 
@@ -453,6 +454,212 @@ col.main2 <- colPart2[["Main"]][1]
 col.main2 <- colPart2[["Main"]][2]
 source("./dissemination/Rcode/Final/theme_functions/theme.R")
 source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
+
+
+###########################################################################
+#
+#    _(9(9)__        __/^\/^\__
+#   /o o   \/_     __\_\_/\_/_/_
+#   \___,   \/_   _\.'       './_      _/\_
+#   `---`\  \/_ _\/           \/_   _|.'_/
+#             \  \/_\/      /      \/_  |/ /
+#              \  `-'      |        ';_:' /
+#              /|          \      \     .'
+#             /_/   |,___.-`',    /`'---`
+#           /___/`       /____/
+#     
+## Undernourishment
+###########################################################################
+
+
+# tää on ihan hirvee sotku.......
+
+
+# C.P1.IAF.1.3 ------------------------------------------------------------
+
+load("../ICN2PB14/Data/Processed/icn2.RData")
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.IAF.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                                     Area %in% c(plotInfo$plotArea) &
+#                                     FAOST_CODE %in% c(FAOcountryProfile[FAOcountryProfile[, 'SOFI_MACRO_REG'] == 'Asia' & !is.na(FAOcountryProfile[, 'SOFI_MACRO_REG']), 'FAOST_CODE'])")),
+                data = icn2.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]))
+C.P1.IAF.1.3 <- C.P1.IAF.1.3 + 
+  scale_fill_manual(labels = c("1990-92", "2012-14"),
+                    values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+  scale_color_manual(labels = c("1990-92", "2012-14"),
+                     values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------- #
+# Land area
+
+## Info
+
+# C.P1.IAF.1.3 ------------------------------------------------------------
+
+## Info
+plotInfo <- plot_info(plotName = "C.P1.IAF.1.3")
+plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
+## Plot
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea) &
+                                    FAOST_CODE %in% c(FAOcountryProfile[FAOcountryProfile[, 'SOFI_MACRO_REG'] == 'Asia' & !is.na(FAOcountryProfile[, 'SOFI_MACRO_REG']), 'FAOST_CODE'])")),
+                data = icn2.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]))
+C.P1.IAF.1.3 <- C.P1.IAF.1.3 + 
+  scale_fill_manual(labels = c("1990-92", "2012-14"),
+                    values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+  scale_color_manual(labels = c("1990-92", "2012-14"),
+                     values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Have to still think about this. The example is apparently the one in big book on page 76
+
+plotInfo <- plot_info(plotName = "C.P2.UNU.1.3")
+
+df2015 <- filter(sybdata.df, Year %in% c(1992:1994)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(AV3YNOU, na.rm=TRUE))
+# df2015$Year <- "1992-94"
+df2016 <- filter(sybdata.df, Year %in% c(2012:2014)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(AV3YNOU, na.rm=TRUE))
+# df2016$Year <- "2012-14"
+# temp <- rbind(df2015,df2016)
+# names(temp)[names(temp)=="value"] <- "AV3YNOU"
+# 
+temp <- sybdata.df
+
+for (i in unique(temp$FAOST_CODE)){
+  temp$AV3YNOU[temp$Year == 2015 & temp$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
+}
+for (i in unique(temp$FAOST_CODE)){
+  temp$AV3YNOU[temp$Year == 2016 & temp$FAOST_CODE == i] <- df2016[df2016$FAOST_CODE == i,]$value
+}
+plot.data <- temp[temp$FAOST_CODE %in% unique(fao_world@data[fao_world@data$RAP == TRUE,]$FAOST_CODE),]
+#plot.data <- plot.data[plot.data$Year == 2016:2017,]
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                                 legend_lab = subset(meta.lst$FULL,
+                                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + 
+         scale_fill_manual(labels = c("1990-92", "2012-14"),
+                           values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         scale_color_manual(labels = c("1990-92", "2012-14"),
+                            values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+)
+# Export
+export_plot(manual_text= "Asian countries with the highest number of people undernourished in 2012-14 (1990-92 and 2012-14)", placement = "l")
+
+
+
+plotInfo <- plot_info(plotName = "C.P2.UNU.1.4")
+
+plot.data <- temp[temp$FAOST_CODE %in% unique(fao_world@data[fao_world@data$RAF == TRUE,]$FAOST_CODE),]
+#plot.data <- plot.data[plot.data$Year == 2016:2017,]
+
+assign(plotInfo$plotName,
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + 
+         scale_fill_manual(labels = c("1990-92", "2012-14"),
+                           values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         scale_color_manual(labels = c("1990-92", "2012-14"),
+                            values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+)
+# Export
+export_plot(manual_text= "AFrican countries with the highest number of people undernourished in 2012-14 (1990-92 and 2012-14)", placement = "r")
+
+
+# ----------------------------------------------------------------------- #
+# Protein of animal origin, 3 year averages
+
+## Info
+plotInfo <- plot_info(plotName = "C.P2.UNU.1.5")
+## Plot
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+## Export the plot
+export_plot(manual_text = "Number of people undernourished (1990-92 to 2012-14)", placement = "b")
+
+
+# MAPS -----------------------------------------------------
+# Food net per capita production value, 3 year averages 
+
+## Map info
+mapInfo <- map_info(mapName = "M.P2.UNU.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map()
+
 
 
 
