@@ -47,6 +47,28 @@ print.xtable(xtable(rc, caption = "fastest growing items based on production qua
 
 
 
+
+dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+dat <- dat[dat$FAOST_CODE %in% c(5001,5852,5851,5100,5853,5205,5500),] # World
+dat <- dat[dat$Year %in% c(1991,2015),]
+library(tidyr)
+dat$Year <- paste0("X",dat$Year)
+dat <- dat[c("Year","FAO_TABLE_NAME","FS.OA.POU.PCT3D1")]
+dw <- spread(dat,
+             Year,
+             FS.OA.POU.PCT3D1)
+dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
+dw$X2015[dw$X2015 == "20"] <- "20.0"
+names(dw) <- c("","1990-92","2014-16")
+
+dw <- dw[c(7,3,4,1,2,5,6),]
+
+print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P2.UNU.1.2.tex")
+
+
+
+
 ######  Chart:top five items produced in MRY vs. 2000
 
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")

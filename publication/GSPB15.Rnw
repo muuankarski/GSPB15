@@ -72,7 +72,14 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \vfill
 }}}
 
+\usepackage{xcolor}
 
+%% Tango color scheme
+\definecolor{Part1}{HTML}{1d5979}
+\definecolor{Part2}{HTML}{e07317}
+\definecolor{Part3}{HTML}{96212d}
+\definecolor{Part4}{HTML}{35802d}
+\definecolor{Part5}{HTML}{588fd2}
 
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
@@ -175,6 +182,8 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 \bigskip
 
 \large
+
+
 
 
 At the first International Conference on Nutrition, held in 1992, global leaders pledged to “act in solidarity to ensure that freedom from hunger becomes a reality.”
@@ -432,8 +441,8 @@ chart_spread(title="Undernourishment",
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
             RightChartCode="C.P2.UNU.1.4",  
-            BottomChartCode="not_defined", 
-            MapCode="not_defined",
+            BottomChartCode="C.P2.UNU.1.5", 
+            MapCode="M.P2.UNU.1.6",
             notes="" 
             )
 @

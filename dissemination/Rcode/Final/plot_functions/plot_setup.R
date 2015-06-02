@@ -232,14 +232,17 @@ meta_plot_map <- function() {
 }
 
 
-export_map <- function(manual_text = "Default map caption") {
+export_map <- function(manual_text = "nothing") {
   exp_map(output = mapsOutput, mapName = mapInfo$mapName, # this one comes from complementary scripts
           width = mapWidth, height = mapHeight)
   ## embed font
   embed_fonts(paste(mapsOutput, mapInfo$mapName, ".pdf", sep = ""))
   
   ## caption
-  captions(objectName = mapInfo$mapName, output = captionsOutput)
+  ## Caption
+  if (manual_text=="nothing") manual_value <- NULL
+  if (manual_text!="nothing") manual_value <- manual_text
+  captions(objectName = mapInfo$mapName, output = captionsOutput, manual = manual_value)
   ## source
   sources(output = sourcesOutput, objectName = mapInfo$mapName, manual = manual_text)
 }
