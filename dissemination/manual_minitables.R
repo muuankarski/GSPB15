@@ -183,50 +183,8 @@ p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
 ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
 
 
-
-
-load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
-d <- dat[dat$CountryCode %in% c(5100,5200,5300,5400,5500),] # World
-d <- d[d$Item == "Pigs",]
-d <- d[d$Year %in% c(2000,2013),]
-d <- d  %>% group_by(Year) %>% mutate(sum = sum(Value)) 
-d$share <- round(d$Value/d$sum*100,0)
-d$Country <- str_replace_all(d$Country, "\\ \\+\\ \\(Total\\)","")
-
-colPart3 <- plot_colors(part = 3, 12)
-
-
-d <- d %>% group_by(Year) %>% mutate(pos = cumsum(share)- share/2)
-
-p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum))
-p <- p + geom_bar(position="fill", stat="identity") 
-p <- p + facet_wrap(~Year)
-p <- p + coord_polar("y")
-p <- p + theme_minimal()
-p <- p + theme(legend.position = "top")
-p <- p + theme(text = element_text(size=11))
-p <- p + theme(axis.text = element_blank())
-p <- p + theme(axis.title = element_blank())
-p <- p + theme(axis.ticks = element_blank())
-p <- p + theme(panel.grid.minor = element_blank())
-p <- p + theme(panel.grid.major = element_blank())
-p <- p + scale_fill_manual(values=rev(colPart3$Sub))
-p <- p + theme(legend.title = element_blank())
-p <- p + theme(legend.key.size = unit(3, "mm"))
-p <- p + labs(x=NULL, y=NULL)
-p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
-ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
-
-## DES pie chart
-
-plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
+# DES pie chart
 load("../ICN2PB14/Data/Processed/Metadata.RData")
-labels <- subset(meta.lst$FULL,
-                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
-labels[1] <- "Cereals\n(excl. beer)"
-labels[3] <- "Sugar and\nsweeteners"
-labels[4] <- "Milk\n(excl. butter)"
-labels[6] <- "Veg. oils and\nanimal fats"
 ## Plot
 despie <- icn2.df[icn2.df$Year %in% c(2009:2011), c("FAOST_CODE","Year","FAO_TABLE_NAME","FBS.SDES.CRLS.PCT3D","FBS.SDES.SR.PCT3D","FBS.SDES.SS.PCT3D","FBS.SDES.MO.PCT3D","FBS.SDES.VOAF.PCT3D","FBS.SDES.MEB.PCT3D")]
 despie <- despie[despie$FAOST_CODE %in% "5000",]
