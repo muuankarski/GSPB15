@@ -79,7 +79,6 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \definecolor{Part2}{HTML}{e07317}
 \definecolor{Part3}{HTML}{96212d}
 \definecolor{Part4}{HTML}{35802d}
-\definecolor{Part5}{HTML}{588fd2}
 
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
@@ -181,6 +180,8 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 \bigskip
 \bigskip
 
+\large
+
 This year, 2015, is a pivotal year. We are looking back on the progress we have made on the development agenda. And we are looking forward on what we must still accomplish. 
 
 This is the end of a 25 year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of the progress that has been made. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. And that 72 of the 129 countries monitored for progress have reached the MDG target, 29 of which have also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
@@ -191,25 +192,26 @@ Having clear indicators to measure progress towards these international goals is
 
 This publication presents selected key indicators related to agriculture and food security that stakeholders can use to prioritise their actions. It is divided into two main sections, one thematic and one country-specific. It presents a variety of dimensions of agriculture and food security along four main focus areas:
 
-{\color{Part1} The setting} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
+{\textbf{\color{Part1} The setting}} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
 
-{\color{Part2} Hunger dimensions} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
+{\textbf{\color{Part2} Hunger dimensions}} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
 
-{\color{Part3} Food supply} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
+{\textbf{\color{Part3} Food supply}} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
 
-{\color{Part4} Environment} examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
+{\textbf{\color{Part4} Environment}} examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
 
 This Pocketbook is part of the FAO Statistical Yearbook suite of products and is just one of the tools that can be used as building blocks for monitoring progress and formulating policy. It includes data from FAOSTAT as well as from other partners within the organization and in the international community. 
 
 FAO is deeply committed to helping countries strengthen their statistical systems to improve the timeliness and quality of their data. And it will continue to do so through the SDG process.
 
 \bigskip
-\newline\hspace*{\fill}
+\hspace*{\fill}
         Pietro Gennari
 \hspace*{\fill}\newline
-\newline\hspace*{\fill}
-        Chief Statistician and Director, Statistics Division
-\hspace*{\fill}\newline
+
+\hspace*{\fill}
+        \textit{Chief Statistician and Director, Statistics Division}
+\hspace*{\fill}
 
 
 
