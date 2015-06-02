@@ -49,6 +49,31 @@
 % \titleformat*{\section}{\Large\bfseries}
 
 
+% First page background graphics
+\usepackage{eso-pic}
+\newcommand\taustaeka{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{./cover/front_cover.pdf}%
+\vfill
+}}}
+
+
+\newcommand\taustatoka{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,%
+keepaspectratio]{./cover/back_cover.pdf}%
+\vfill
+}}}
+
+
+
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
 % \SweaveOpts{concordance=TRUE}
@@ -58,13 +83,18 @@
 
 %% Cover (just in the web version)
 \ifprint\addtocounter{page}{1}\else
-\begin{picture}(0,0)
-\put(-28,-502){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
-\end{picture}
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\clearpage
+% \begin{picture}(0,0)
+% \put(-28,-502){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/front_cover_2015.png}}
+% \end{picture}
+% \input{./Tables/CountryProfiles.tex}
+
+% \newpage
+
+\AddToShipoutPicture*{\taustaeka}
+
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
 \newpage
 \thispagestyle{empty}
 \mbox{}
@@ -84,16 +114,14 @@
 
 %% Disclamer
 \ifprint
-\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./GSPB15disclamerPage.pdf}
+\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./I4691E_disclaimer.pdf}
 \else
-\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./GSPB15disclamerPage.pdf}
+\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./I4691E_disclaimer.pdf}
 \fi
 
 
 
-%% Prelims
-\tableofcontents
-% \clearpage % commented because of the font size issue
+
 
 
 % Asetetaan koko raportin laajuiset parametrit knitr:lle
@@ -171,13 +199,18 @@ This Pocketbook is part of the FAO Statistical Yearbook suite of products and is
 
 FAO is deeply committed to helping countries strengthen their statistical systems to improve the timeliness and quality of their data. And it will continue to do so through the SDG process.
 
-
 \bigskip
+\newline\hspace*{\fill}
+        Pietro Gennari
+\hspace*{\fill}\newline
+\newline\hspace*{\fill}
+        Chief Statistician and Director, Statistics Division
+\hspace*{\fill}\newline
 
-{\centering
-Pietro Gennari
-Chief Statistician and Director, Statistics Division
-}
+
+
+
+
 
 
 
@@ -194,17 +227,20 @@ Chief Statistician and Director, Statistics Division
 % #           /___/`       /____/
 % ###########################################################################
 
+%% Prelims
+\tableofcontents
+% \clearpage % commented because of the font size issue
 
 
 
 
+% \clearpage
 
-\clearpage
 
+% \thispagestyle{empty}
+% \mbox{}
 
-\thispagestyle{empty}
-\mbox{}
-\newpage
+% \newpage
 
 % ###########################################################################
 % #
@@ -219,28 +255,28 @@ Chief Statistician and Director, Statistics Division
 % #           /___/`       /____/
 % ###########################################################################
 
-\section{Introduction}
+% \section{Introduction}
 
-\bigskip
-\bigskip
+% \bigskip
+% \bigskip
 
-Overcoming malnutrition in all of its forms – caloric undernourishment, micronutrient deficiencies and obesity – requires a combination of interventions in different areas that guarantee the availability of and access to healthy diets. Among the key areas, interventions are required in food systems, public health systems and the provision of safe water and sanitation. This pocketbook not only focuses on indicators of food security and nutritional outcomes but also on the determinants that contribute to healthy lives. 
+% Overcoming malnutrition in all of its forms – caloric undernourishment, micronutrient deficiencies and obesity – requires a combination of interventions in different areas that guarantee the availability of and access to healthy diets. Among the key areas, interventions are required in food systems, public health systems and the provision of safe water and sanitation. This pocketbook not only focuses on indicators of food security and nutritional outcomes but also on the determinants that contribute to healthy lives. 
 
-The pocketbook is structured in two sections: 
-\begin{itemize}
-\item Thematic spreads related to food security and nutrition, including detailed food consumption data collected from national household budget surveys,
-\item Comprehensive country and regional profiles with indicators categorized by anthropometry, nutritional deficiencies, supplementation, dietary energy supplies, preceded by their "setting".
-\end{itemize}
+% The pocketbook is structured in two sections: 
+% \begin{itemize}
+% \item Thematic spreads related to food security and nutrition, including detailed food consumption data collected from national household budget surveys,
+% \item Comprehensive country and regional profiles with indicators categorized by anthropometry, nutritional deficiencies, supplementation, dietary energy supplies, preceded by their "setting".
+% \end{itemize}
 
-\textit{The setting} provides demographic indicators as well as health status indicators based on mortality patterns and the provision of safe water and sanitation. 
+% \textit{The setting} provides demographic indicators as well as health status indicators based on mortality patterns and the provision of safe water and sanitation. 
 
-\textit{Anthropometry} indicators provide information not only on the prevalence of acute and chronic forms of under-nutrition but also on the prevalence of obesity. Their co-existence is often referred to as the double burden of malnutrition. 
+% \textit{Anthropometry} indicators provide information not only on the prevalence of acute and chronic forms of under-nutrition but also on the prevalence of obesity. Their co-existence is often referred to as the double burden of malnutrition. 
 
-\textit{Nutritional deficiency} indicators reveal food security issues at the national level based on the adequacy of energy supplies; they also reveal the prevalence of micronutrient deficiencies, often referred to as “hidden hunger”. Combined with anthropometric measurements, they allow for the identification of the triple burden of malnutrition (under-nutrition, obesity and hidden hunger). Regarding hidden hunger, indicators concerning iodine and vitamin A have been selected.
+% \textit{Nutritional deficiency} indicators reveal food security issues at the national level based on the adequacy of energy supplies; they also reveal the prevalence of micronutrient deficiencies, often referred to as “hidden hunger”. Combined with anthropometric measurements, they allow for the identification of the triple burden of malnutrition (under-nutrition, obesity and hidden hunger). Regarding hidden hunger, indicators concerning iodine and vitamin A have been selected.
 
-\textit{Dietary} indicators are based on national food supplies and inform on the overall quality of diets. Focus is also on the importance of diets during the first 1\,000 days of an infant’s life, with indicators selected on the quality of breastfeeding, dietary diversity and meal frequency. 
+% \textit{Dietary} indicators are based on national food supplies and inform on the overall quality of diets. Focus is also on the importance of diets during the first 1\,000 days of an infant’s life, with indicators selected on the quality of breastfeeding, dietary diversity and meal frequency. 
 
-The choice of indicators was guided by the following criteria: relevance to health, food security and nutrition, comparability over time, and availability, in particular for low-income countries. But the criteria were relaxed for several indicators given their importance and the lack of available substitutes. It is hoped that the presence of data gaps will bring about greater efforts to collect the necessary information because only with timely and reliable data can interventions be designed and targeted towards those in most need. Wherever available, disaggregated data by gender have been provided. Such data are indeed key to mainstreaming gender in policies and programmes.
+% The choice of indicators was guided by the following criteria: relevance to health, food security and nutrition, comparability over time, and availability, in particular for low-income countries. But the criteria were relaxed for several indicators given their importance and the lack of available substitutes. It is hoped that the presence of data gaps will bring about greater efforts to collect the necessary information because only with timely and reliable data can interventions be designed and targeted towards those in most need. Wherever available, disaggregated data by gender have been provided. Such data are indeed key to mainstreaming gender in policies and programmes.
 
 % ###########################################################################
 % #
@@ -357,7 +393,7 @@ chart_spread2(title="Investment",
             LeftTextCode="Investing in agriculture is one of the most effective strategies for reducing poverty and hunger, and promoting sustainability. The regions of the world where hunger and extreme poverty are most widespread today – South Asia and sub-Saharan Africa – have seen flat or declining rates of investment per worker in agriculture over the past thirty years. Farmers tend to be the largest investors in developing country agriculture, and therefore their investment decisions are paramount for any strategy aimed at improving agricultural investment.",  
             RightTextCode="C.P1.INV.1.2",   
             LeftChartCode="C.P1.INV.1.3",   
-            RightChartCode="not_defined",  
+            RightChartCode="C.P1.INV.1.4",  
             BottomChartCode="C.P1.INV.1.5", 
             MapCode="M.P1.INV.1.6",
             notes=""
@@ -401,6 +437,17 @@ chart_spread2(title="Investment",
 \rowcolors{1}{part2!10}{white}
 \clearpage
 
+<<Undernourishmend, eval=TRUE,results='asis'>>=
+chart_spread(title="Undernourishment",                
+            LeftTextCode="Undernourishment refers to food intake that is insufficient to meet dietary energy requirement for an active and healthy life. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Approximately 216 million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            RightTextCode="MT.P2.UNU.1.2",   
+            LeftChartCode="C.P2.UNU.1.3",   
+            RightChartCode="C.P2.UNU.1.4",  
+            BottomChartCode="not_defined", 
+            MapCode="not_defined",
+            notes="" 
+            )
+@
 
 
 <<Availability, eval=TRUE,results='asis'>>=
@@ -527,22 +574,22 @@ chart_spread(title="Trends in the crop sector",
 <<Trends in the livestock sector, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in the livestock sector",
             LeftTextCode="The world food economy is being increasingly driven by the shift of diets towards animal-based products such as meat, milk and dairy. As a result, agriculture is being affected, not only through growth of livestock production, but also through linkages to other sectors that supply feeding stuffs, such as crops and fisheries. Globally livestock production is the largest user of agricultural land and therefore also leaves a significant imprint on the environment.",  
-            #RightTextCode="issues", 
+            RightTextCode="MT.P3.LIVE.1.2", 
             LeftChartCode="C.P3.LIVE.1.3",
             RightChartCode="C.P3.LIVE.1.4",
-            BottomChartCode="issues",
+            BottomChartCode="C.P3.LIVE.1.5",
             MapCode="M.P3.LIVE.1.6",
             notes=""
             )
 @
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
-chart_spread2(title="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",
-            LeftTextCode="Text here",  
+chart_spread2(title="Trends in fisheries sector",
+            LeftTextCode="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
             RightChartCode="C.P3.FISH.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P3.FISH.1.5", 
             MapCode="M.P3.FISH.1.6",
             notes=""
             )
@@ -552,7 +599,7 @@ chart_spread2(title="Fish is an important component in people’s diets, providi
 <<Trends in agricultural trade, eval=TRUE,results='asis'>>=
 chart_spread(title="Trends in agricultural trade",
             LeftTextCode="Most of the food consumed worldwide is grown locally. Where there is not enough local production to meet demand, trade has been instrumental in filling the gap. The scale of food and agricultural trade today is unprecedented. In real terms, the value of international flows has increased around fivefold over the past 50 years, reflecting global trends in the overall volume of trade. However, this expansion has been unevenly distributed across regions. High-income countries have generally outpaced developing regions, although several of the latter have comparative advantages in food and agricultural production.",  
-            #RightTextCode="issues",   
+            RightTextCode="MT.P3.TRADE.1.3",   
             LeftChartCode="C.P3.TRADE.1.3",    
             RightChartCode="C.P3.TRADE.1.4",  
             BottomChartCode="C.P3.TRADE.1.5", 
@@ -615,7 +662,7 @@ chart_spread(title="Water",
             RightTextCode="MT.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
             RightChartCode="C.P4.WATER.1.4",  
-            BottomChartCode="issues", 
+            BottomChartCode="C.P4.WATER.1.5", 
             MapCode="M.P4.WATER.1.6",
             notes=""
             )
@@ -690,12 +737,25 @@ chart_spread2(title="Climate change",
 \clearpage
 
 \newpage
+
 \thispagestyle{empty}
+\AddToShipoutPicture*{\taustatoka}
+
 \mbox{}
+
+
 \ifprint\else
 \begin{picture}(0,0)
-\put(-58,-429){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/cover.jpg}}
+\put(-113,-472){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+%\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
 \end{picture}
+
+\newpage
+
+\thispagestyle{empty}
+
+\newpage
+
 \fi
 
 \end{document}
