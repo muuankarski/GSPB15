@@ -8,9 +8,17 @@ library(stringr)
 library(scales)
 library(ggplot2)
 
+
+#################################################
+## PART 2
+
+
 rrr <- function(varname) {
-  filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
+  filter(dat, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
 }
+dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+dat$FAOST_CODE <- as.factor(dat$FAOST_CODE)
+dat$FAOST_CODE <- as.numeric(levels(dat$FAOST_CODE))[dat$FAOST_CODE]
 
 var <- "SH.STA.MALN.ZS"
 tbl <- rrr(var)
@@ -174,3 +182,86 @@ p <- p + labs(x=NULL, y=NULL)
 p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
 ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
 
+
+
+
+load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+d <- dat[dat$CountryCode %in% c(5100,5200,5300,5400,5500),] # World
+d <- d[d$Item == "Pigs",]
+d <- d[d$Year %in% c(2000,2013),]
+d <- d  %>% group_by(Year) %>% mutate(sum = sum(Value)) 
+d$share <- round(d$Value/d$sum*100,0)
+d$Country <- str_replace_all(d$Country, "\\ \\+\\ \\(Total\\)","")
+
+colPart3 <- plot_colors(part = 3, 12)
+
+
+d <- d %>% group_by(Year) %>% mutate(pos = cumsum(share)- share/2)
+
+p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + facet_wrap(~Year)
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "top")
+p <- p + theme(text = element_text(size=11))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.size = unit(3, "mm"))
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
+
+## DES pie chart
+
+plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
+load("../ICN2PB14/Data/Processed/Metadata.RData")
+labels <- subset(meta.lst$FULL,
+                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
+labels[1] <- "Cereals\n(excl. beer)"
+labels[3] <- "Sugar and\nsweeteners"
+labels[4] <- "Milk\n(excl. butter)"
+labels[6] <- "Veg. oils and\nanimal fats"
+## Plot
+despie <- icn2.df[icn2.df$Year %in% c(2009:2011), c("FAOST_CODE","Year","FAO_TABLE_NAME","FBS.SDES.CRLS.PCT3D","FBS.SDES.SR.PCT3D","FBS.SDES.SS.PCT3D","FBS.SDES.MO.PCT3D","FBS.SDES.VOAF.PCT3D","FBS.SDES.MEB.PCT3D")]
+despie <- despie[despie$FAOST_CODE %in% "5000",]
+
+dw <- gather(despie,
+             "var",
+             "value",
+             4:9)
+d <- dw %>% group_by(var) %>% dplyr::summarise(mean = mean(value))
+d <- d  %>% mutate(sum = sum(mean)) 
+
+d$var <- as.character(d$var)
+d$var[d$var == "FBS.SDES.CRLS.PCT3D"] <- "Cereals\n(excl. beer)"
+d$var[d$var == "FBS.SDES.SR.PCT3D"] <- "Starchy roots"
+d$var[d$var == "FBS.SDES.SS.PCT3D"] <- "Sugar and\nsweeteners"
+d$var[d$var == "FBS.SDES.MO.PCT3D"] <- "Meat and offals"
+d$var[d$var == "FBS.SDES.VOAF.PCT3D"] <- "VMilk\n(excl. butter)"
+d$var[d$var == "FBS.SDES.MEB.PCT3D"] <- "Veg. oils and\nanimal fats"
+
+p <- ggplot(d, aes(x=sum/2, y = mean, fill = var, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "right")
+p <- p + theme(text = element_text(size=11))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.height = unit(7, "mm"))
+p <- p + theme(legend.key.width = unit(3, "mm"))
+p <- p + theme(panel.grid=element_blank(), panel.border=element_blank())
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.DES.1.2.pdf", width=  3, height = 2.5, family = "PT Sans")

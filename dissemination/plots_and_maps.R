@@ -1054,7 +1054,23 @@ export_plot(manual_text = "Per capita food production variability (constant 2004
 plotInfo <- plot_info(plotName = "C.P2.STB.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+       )
 ## Export the plot
 export_plot(placement="l")
 
@@ -1066,8 +1082,25 @@ export_plot(placement="l")
 plotInfo <- plot_info(plotName = "C.P2.STB.1.4")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )## Export the plot
-export_plot(placement="l")
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+)
+
+export_plot(placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1076,7 +1109,24 @@ export_plot(placement="l")
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.STB.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) 
+       
+       )
 ## Export the plot
 export_plot(placement = "b")
 
@@ -1086,8 +1136,11 @@ export_plot(placement = "b")
 
 # Political stability and absence of violence/terrorism
 
+sybMaps.df2 <- merge(sybMaps.df,dat[c("Year","FAOST_CODE","G.GD.PSAVT.IN")],by.x=c("Year","FAO_CODE"),by.y=c("Year","FAOST_CODE"),all.x=TRUE)
 ## Map info
 mapInfo <- map_info(mapName = "M.P2.STB.1.6", data = sybMaps.df, mapArea = "Territory")
+mapInfo$mapData$FAO_CODE[mapInfo$mapData$FAO_CODE == 351] <- 41
+
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
@@ -1144,8 +1197,33 @@ df2015 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>
 for (i in unique(sybdata.df$FAOST_CODE)){
   sybdata.df$SH.STA.STNT.ZS[sybdata.df$Year == 2015 & sybdata.df$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
 }
+
+# df2015 <- filter(plot.data, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.STNT.ZS, na.rm=TRUE))
+# for (i in unique(plot.data$FAOST_CODE)){
+#   plot.data$SH.STA.STNT.ZS[plot.data$Year == 2015 & plot.data$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
+# }
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                #data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 1)[["Sub"]]
+       )
+       
+       
+       )
 ## Export the plot
 export_plot(manual_text="Percentage of children 5 years of age who are stunted, highest 20 (2006 - 2012)" ,placement="l")
 
@@ -1158,8 +1236,31 @@ df2015 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>
 for (i in unique(sybdata.df$FAOST_CODE)){
   sybdata.df$SH.STA.WAST.ZS[sybdata.df$Year == 2015 & sybdata.df$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
 }
+
+# df2015 <- filter(plot.data, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.WAST.ZS, na.rm=TRUE))
+# for (i in unique(plot.data$FAOST_CODE)){
+#   plot.data$SH.STA.WAST.ZS[plot.data$Year == 2015 & plot.data$FAOST_CODE == i] <- df2015[df2015$FAOST_CODE == i,]$value
+# }
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, 
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                #data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+)
+
 ## Export the plot
 export_plot(manual_text = "Percentage of children under 5 years of age affected by wasting, highest 20 (2006 - 2012)",placement="r")
 
@@ -1169,7 +1270,25 @@ export_plot(manual_text = "Percentage of children under 5 years of age affected 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+       )
+       
+       )
+
 ## Export the plot
 export_plot(placement = "b")
 
@@ -1252,36 +1371,36 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # 4. Dietary energy supply, bottom 20 (2000-02 vs. 2009-11)
 # 5. Line graph: DES (kcal/cap/day), by region, 2000-2011
 # 6. Map: DES (kcal/cap/day), 2009-11
-
-
-plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
-load("../ICN2PB14/Data/Processed/Metadata.RData")
-labels <- subset(meta.lst$FULL,
-                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
-labels[1] <- "Cereals\n(excl. beer)"
-labels[3] <- "Sugar and\nsweeteners"
-labels[4] <- "Milk\n(excl. butter)"
-labels[6] <- "Veg. oils and\nanimal fats"
-## Plot
-load("../ICN2PB14/Data/Processed/icn2.RData")
-assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                    Area %in% c(plotInfo$plotArea)")),
-                data = icn2.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = labels,
-                col_pallete = plot_colors(part = plotInfo$plotPart, 7)[["Sub"]]) +
-         guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3))
-       )
-export_plot(manual_text="Share of DES (2009-2011)",placement="tr")
-load(file = "./database/Data/Processed/Metadata.RData")
-meta.df <- meta.lst$FULL
+# 
+# 
+# plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
+# load("../ICN2PB14/Data/Processed/Metadata.RData")
+# labels <- subset(meta.lst$FULL,
+#                  subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
+# labels[1] <- "Cereals\n(excl. beer)"
+# labels[3] <- "Sugar and\nsweeteners"
+# labels[4] <- "Milk\n(excl. butter)"
+# labels[6] <- "Veg. oils and\nanimal fats"
+# ## Plot
+# load("../ICN2PB14/Data/Processed/icn2.RData")
+# assign(plotInfo$plotName,
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                                     Area %in% c(plotInfo$plotArea)")),
+#                 data = icn2.df,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 legend_lab = labels,
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 7)[["Sub"]]) +
+#          guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3))
+#        )
+# export_plot(manual_text="Share of DES (2009-2011)",placement="tr")
+# load(file = "./database/Data/Processed/Metadata.RData")
+# meta.df <- meta.lst$FULL
 # ----------------------------------------------------------------------- #
 # Dietary energy supply, top 20 (2000-02 vs. 2009-11)
 
