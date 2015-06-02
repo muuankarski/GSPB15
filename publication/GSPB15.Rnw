@@ -181,22 +181,28 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 \bigskip
 \bigskip
 
-\large
+This year, 2015, is a pivotal year. We are looking back on the progress we have made on the development agenda. And we are looking forward on what we must still accomplish. 
 
+This is the end of a 25 year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of the progress that has been made. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. And that 72 of the 129 countries monitored for progress have reached the MDG target, 29 of which have also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
 
+This year also marks the beginning of the new post-2015 Sustainable Development Agenda. Again the international community will unite around new priorities for the future.
 
+Having clear indicators to measure progress towards these international goals is paramount. Therefore timely and robust statistics are the fundamental tool in this process. And the better the data, the better the policies that can be designed. And the better the data, the easier it is to measure the impact of policies or to hold stakeholders accountable for the pledges they make. 
 
-At the first International Conference on Nutrition, held in 1992, global leaders pledged to “act in solidarity to ensure that freedom from hunger becomes a reality.”
+This publication presents selected key indicators related to agriculture and food security that stakeholders can use to prioritise their actions. It is divided into two main sections, one thematic and one country-specific. It presents a variety of dimensions of agriculture and food security along four main focus areas:
 
-Although great progress has been made in reducing the prevalence of hunger, over 800 million people are still unable to meet their daily calorie needs for living healthy lives. About one in nine people go to bed daily on an empty stomach. In cases where food is available, often the quality of the food does not meet micronutrient (vitamin and mineral) needs. More than two billion people continue to suffer from nutritional deficiencies such as vitamin A, iron, zinc and iodine. While the world is grappling with issues of undernutrition, there is also the growing problem of obesity, which now affects around 500 million people. Many countries are facing a triple burden of malnutrition, where undernourishment, micronutrient deficiency and obesity exist in the same community and household. 
+{\color{Part1} The setting} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
 
-ICN2 presents another opportunity for the global community to make a commitment and take action to address this global menace. The two outcome documents of ICN2 - the Rome Declaration and the Framework for Action - will provide the basis for renewed commitment and focused action for addressing malnutrition within the coming decade. Experiences from the Millennium Development Goals indicate that, with a united commitment, we can achieve significant results. We must now move forward with the same determination as we address new global challenges through the Sustainable Development Goals.
+{\color{Part2} Hunger dimensions} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
 
-Having clear indicators to measure progress is very important. Statistics are a fundamental tool in this process, necessary to identify problems and monitor progress. The better the data, the better policies can be designed to improve nutrition worldwide. Without good data, it is impossible to evaluate or determine the impact of policies, or hold stakeholders accountable for pledges they make. For statistics to effectively inform food and agriculture policies, they need to be accessible and clear to policymakers at global, regional and country levels. This publication presents selected key indicators related to food and nutrition outcomes that stakeholders can use to prioritise their actions.  
+{\color{Part3} Food supply} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
 
-This food and nutrition pocketbook was produced jointly by the FAO Statistics and Nutrition Divisions. It is part of the FAO Statistical Yearbook suite of products and is one of the tools that can be used as building blocks for evidence-based policy making. It includes data from FAOSTAT as well as from other partners in the organization and in the international community. 
+{\color{Part4} Environment} examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
 
-There are still gaps in the information. We hope that ICN2 will  provide the  forum for discussion on ways to improve the data to better monitor nutrition.
+This Pocketbook is part of the FAO Statistical Yearbook suite of products and is just one of the tools that can be used as building blocks for monitoring progress and formulating policy. It includes data from FAOSTAT as well as from other partners within the organization and in the international community. 
+
+FAO is deeply committed to helping countries strengthen their statistical systems to improve the timeliness and quality of their data. And it will continue to do so through the SDG process.
+
 \bigskip
 \newline\hspace*{\fill}
         Pietro Gennari
