@@ -59,9 +59,45 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # World rural and urban population
 
 ## Info
+
+# Longer time series
+dat <- getFAOtoSYB(domainCode = "OA", 
+                   elementCode = 551,
+                   itemCode = 3010)
+dat1 <- dat$aggregates
+dat <- getFAOtoSYB(domainCode = "OA", 
+                   elementCode = 561,
+                   itemCode = 3010)
+dat2 <- dat$aggregates
+dat <- join(dat1,dat2)
+dat <- dat[dat$FAOST_CODE == 5000,]
+dat$Area <- "M49world"
+
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
+plotInfo$yAxis <- c(names(dat)[3],names(dat)[4])
+
 ## Create the plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 1, n_colors=2) )
+assign(plotInfo$plotName, 
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = dat,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #legend_lab = subset(meta.lst$FULL,
+                #                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                legend_lab <- c("Urban population","Rural population"),
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]] 
+       ) +
+         centerYear() + 
+         scale_x_continuous(breaks=c(1965, 1985, 2005, 2015 ,2025)) +
+         geom_vline(xintercept = 2015, linetype = "dashed")
+)
+
 # Export plot
 export_plot(placement = "tr")
 
@@ -1682,8 +1718,52 @@ export_map()
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.2")
+
+if (!("per_capita_catch" %in% names(sybdata.df))){
+  
+  library(gdata)
+  dat <- read.xls("./database/Data/Raw/FISH_percapita_production2015.xlsx")
+  dat[[1]] <- as.character(dat[[1]])
+  dat[1,] <- c("Year",1990:2013)
+  names(dat) <- dat[1,]
+  dat <- dat[-1,]
+  dl <- gather(dat, 
+               "Year1",
+               "capture",
+               2:25)
+  dl <- spread(dl, Year, capture)
+  names(dl) <- c("Year","per_capita_aquaculture","per_capita_catch")
+  dl[[2]] <- factor(dl[[2]])
+  dl[[3]] <- factor(dl[[3]])
+  dl[[1]] <- as.numeric(levels(dl[[1]]))[dl[[1]]]
+  dl[[2]] <- as.numeric(levels(dl[[2]]))[dl[[2]]]
+  dl[[3]] <- as.numeric(levels(dl[[3]]))[dl[[3]]]
+  dl$FAOST_CODE <- 5000
+  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
 ## Create the plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "1b", n_colors=2) )
+
+
+assign(plotInfo$plotName,
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                legend_lab <- c("From capture fisheries","From aquaculture"),
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]] 
+       )  + labs(y="kg/cap")
+       
+       )
+
 # Export plot
 export_plot(manual_text = "Aquaculture vs. capture production", placement = "tr")
 
@@ -1712,25 +1792,36 @@ export_plot(manual_text = "20 countries with highest value of aquaculture produc
 
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.5")
 
-categ = c("Under or\nmoderately\nexploited", "Fully\nexploited", "Recovering,\ndepleted\nor overexploited")
-tmpData = data.frame(X = factor(rep(categ, times = 2), levels = categ),
-                     variable = factor(rep(c(1974, 2009), each = 3)),
-                     value = c(39.23077, 50.76923, 10, 12.65823, 57.46835, 29.87342))
+library(gdata)
+dat <- read.xls("./database/Data/Raw/FISH_overfishing_etc2015.xlsx")
+dat <- gather(dat, 
+                  "X",
+                  "value",
+                    2:4)
+
+dat$X <- as.character(dat$X)
+dat$X[dat$X == "Underfished"] <- "Under or\nmoderately\nexploited"
+dat$X[dat$X == "Fully.fished"] <- "Fully\nexploited"
+dat$X[dat$X == "Overfihsed"] <- "Recovering,\ndepleted\nor overexploited"
+
+dat$X <- factor(dat$X, levels= c("Under or\nmoderately\nexploited",
+                                "Fully\nexploited",
+                                "Recovering,\ndepleted\nor overexploited"))
 
 ## create the plot
 assign(plotInfo$plotName,
-ggplot(data = tmpData, aes_string(x = "variable", y = as.character("value"))) +
-  geom_bar(aes_string(col = "X", fill = "X"), stat="Identity",position = "stack", width = 0.6) +
+ggplot(data = dat, aes_string(x = "Year", y = as.character("value"))) +
+  geom_area(aes_string(col = "X", fill = "X"), stat="Identity",position = "stack", width = 0.6) +
   scale_fill_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
   scale_color_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
   guides(fill = guide_legend(reverse = TRUE), color = guide_legend(reverse = TRUE)) +
   #   guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
-  theme(legend.position = "right", legend.direction = "vertical") +
+  theme(legend.position = "top", legend.direction = "horizontal") +
   ylab("percent")
 )
 
 ## export the plot
-export_plot(manual_text = "State of the world's fishery stocks (1974 and 2009)", placement="b")
+export_plot(manual_text = "State of the world's fishery stocks (1974 - 2011)", placement="b")
 
 
 ##### -------------------------------------------------------
@@ -1743,7 +1834,7 @@ mapInfo <- map_info(mapName = "M.P3.FISH.1.6", data = sybMaps.df, mapArea = "Ter
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Aquaculture producing countries in 2012 (tonnes)")
 
 
 ###########################################################################
