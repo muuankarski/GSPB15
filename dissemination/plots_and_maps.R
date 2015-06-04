@@ -671,7 +671,7 @@ assign(plotInfo$plotName,
                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
 )
 # Export
-export_plot(manual_text= "AFrican countries with the highest number of people undernourished in 2012-14 (1990-92 and 2012-14)", placement = "r")
+export_plot(manual_text= "African countries with the highest number of people undernourished in 2012-14 (1990-92 and 2012-14)", placement = "r")
 
 
 # ----------------------------------------------------------------------- #
