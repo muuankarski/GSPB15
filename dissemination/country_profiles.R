@@ -297,10 +297,6 @@ for (name in names(CountryProfile.df)) {
 }
 
 
-
-
-
-
 # TeX file ----------------------------------------------------------------
 
 ## Years to be shown in the country profile
