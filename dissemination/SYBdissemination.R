@@ -4,6 +4,11 @@
 
 setwd("~/btsync/fao_sync/pocketbooks/GSPB15")
 
+
+# Linux options
+# options(scipen=999) # disable scientific number formatting
+
+
 # Set up packrat ----------------------------------------------------------
 
 # require(devtools)
@@ -69,8 +74,6 @@ library(mapproj)
 # load from ethercalc
 
 #download.file("https://ethercalc.org/5btva8ngeh.csv", destfile = "./dissemination/DisseminationGSPB15_web.csv", method = "curl")
-
-
 diss.df <- 
   read.csv(file = "./dissemination/DisseminationGPock2.csv", 
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
@@ -129,8 +132,8 @@ sybdata.df <- SYB.df; rm(SYB.df)
 ##############################################################
 ## Pppulation threshold
 #############################################################
-pop_threshold <- 50000 # 
-sybdata.df <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO >= pop_threshold,]
+# pop_threshold <- 50000 # 
+# sybdata.df <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO >= pop_threshold,]
 
 
 
