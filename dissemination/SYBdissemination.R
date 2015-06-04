@@ -6,7 +6,7 @@ setwd("~/btsync/fao_sync/pocketbooks/GSPB15")
 
 
 # Linux options
-# options(scipen=999) # disable scientific number formatting
+options(scipen=999) # disable scientific number formatting
 
 
 # Set up packrat ----------------------------------------------------------

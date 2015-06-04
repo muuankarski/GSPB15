@@ -99,7 +99,7 @@ chart_spread2 <- function(title="title",
   cat(paste0("\\RightText{\\begin{chart} \n 
              \\input{./Captions/Caption_",RightTextCode,".tex} \n",
              
-             "\\IfFileExists{./Plots/",RightTextCode,".pdf}{\\includegraphics[width = 4cm, height = 3cm]{{./Plots/",RightTextCode,"}.pdf}}{} \n",
+             "\\IfFileExists{./Plots/",RightTextCode,".pdf}{\\includegraphics[width = 4cm, height = 3cm]{{./Plots/",RightTextCode,"}.pdf}}{} \n \n",
              footnoteLeftText,
              "\\end{chart}} \n"))
   

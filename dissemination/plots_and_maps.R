@@ -689,7 +689,6 @@ export_plot(manual_text= "African countries with the highest number of people un
 
 
 
-
 # plot.data <- plot.data[plot.data$Area == "M49macroReg",]
 # arrange(as.data.frame(table(plot.data$FAO_TABLE_NAME)),-Freq)
 # ----------------------------------------------------------------------- #
