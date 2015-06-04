@@ -72,7 +72,13 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \vfill
 }}}
 
+\usepackage{xcolor}
 
+%% Tango color scheme
+\definecolor{Part1}{HTML}{1d5979}
+\definecolor{Part2}{HTML}{e07317}
+\definecolor{Part3}{HTML}{96212d}
+\definecolor{Part4}{HTML}{35802d}
 
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
@@ -102,26 +108,60 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \fi
 
 
-\LARGE{Generated at} \\ 
+
+
+
+
+% ###########################################################################
+% #
+% #    _(9(9)__        __/^\/^\__
+% #   /o o   \/_     __\_\_/\_/_/_
+% #   \___,   \/_   _\.'       './_      _/\_
+% #   `---`\  \/_ _\/           \/_   _|.'_/
+% #             \  \/_\/      /      \/_  |/ /
+% #              \  `-'      |        ';_:' /
+% #              /|          \      \     .'
+% #             /_/   |,___.-`',    /`'---`
+% #           /___/`       /____/
+% ###########################################################################
+
+
+\onecolumn
+% \pagenumbering{roman}
+\thispagestyle{empty}
+
+\vspace*{100pt}
+\begin{center}
+\Huge{FAO Statistical Pocketbook}
+\end{center}
+
+\vspace*{10pt}
+\begin{center}
+\Huge{2015}
+\end{center}
+
+\vfill
+\begin{center}
+Food and Agriculture Organization of the United Nations, Rome, 2015
+\end{center}
+
+\Huge{Generated at} \\ 
 \Sexpr{Sys.time()}
 
-%% Title Page
-\input{titlePage.tex}
+\newpage
 
-
-
-
-
-%% Disclamer
-\ifprint
-\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./I4691E_disclaimer.pdf}
-\else
-\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./I4691E_disclaimer.pdf}
-\fi
-
-
-
-
+% ###########################################################################
+% #
+% #    _(9(9)__        __/^\/^\__
+% #   /o o   \/_     __\_\_/\_/_/_
+% #   \___,   \/_   _\.'       './_      _/\_
+% #   `---`\  \/_ _\/           \/_   _|.'_/
+% #             \  \/_\/      /      \/_  |/ /
+% #              \  `-'      |        ';_:' /
+% #              /|          \      \     .'
+% #             /_/   |,___.-`',    /`'---`
+% #           /___/`       /____/
+% ###########################################################################
 
 
 % Asetetaan koko raportin laajuiset parametrit knitr:lle
@@ -130,6 +170,14 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
                     dev="pdf"))
 @
 
+
+%% Disclamer
+\thispagestyle{empty}
+\ifprint
+\includepdf[width=\paperwidth,height=\paperheight, offset=-30 -100]{./I4691E_disclaimer.pdf}
+\else
+\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./I4691E_disclaimer.pdf}
+\fi
 
 
 %% List of countries
@@ -144,9 +192,9 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 %\listoftables
 
 %% To be commented if we want to show the List of countries
-\thispagestyle{empty}
-\mbox{}
-\clearpage
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
 
 %% New part - Introduction
 \newpart{white}
@@ -169,13 +217,13 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 % #           /___/`       /____/
 % ###########################################################################
 
-\section{Foreword}
+\Large{Foreword}
 
+\bigskip
 \bigskip
 \bigskip
 
 \large
-
 
 This year, 2015, is a pivotal year. We are looking back on the progress we have made on the development agenda. And we are looking forward on what we must still accomplish. 
 
@@ -187,29 +235,28 @@ Having clear indicators to measure progress towards these international goals is
 
 This publication presents selected key indicators related to agriculture and food security that stakeholders can use to prioritise their actions. It is divided into two main sections, one thematic and one country-specific. It presents a variety of dimensions of agriculture and food security along four main focus areas:
 
-The setting measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
+{\textbf{\color{Part1} The setting}} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
 
-Hunger dimensions gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
+{\textbf{\color{Part2} Hunger dimensions}} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
 
-Food supply evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
+{\textbf{\color{Part3} Food supply}} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
 
-Environment examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
+{\textbf{\color{Part4} Environment}} examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
 
 This Pocketbook is part of the FAO Statistical Yearbook suite of products and is just one of the tools that can be used as building blocks for monitoring progress and formulating policy. It includes data from FAOSTAT as well as from other partners within the organization and in the international community. 
 
 FAO is deeply committed to helping countries strengthen their statistical systems to improve the timeliness and quality of their data. And it will continue to do so through the SDG process.
 
 \bigskip
-\newline\hspace*{\fill}
+\bigskip
+
+\hspace*{\fill}
         Pietro Gennari
 \hspace*{\fill}\newline
-\newline\hspace*{\fill}
-        Chief Statistician and Director, Statistics Division
-\hspace*{\fill}\newline
 
-
-
-
+\hspace*{\fill}
+        \textit{Chief Statistician and Director, Statistics Division}
+\hspace*{\fill}
 
 
 
@@ -348,6 +395,7 @@ source('latex_charts.R')
 <<Overview, eval=TRUE, results='asis'>>=
 chart_spread2(title="Overview",                
             LeftTextCode="A combination of declining mortality rates, prolonged life expectancy and younger populations in regions with high fertility contributes to population growth in the world. While growth rates have been slowing since the late 1960s, the world’s population has nevertheless doubled since then, to over 7 billion people. Population growth is generally highest where income levels are low. This is especially true in cities. Since 2008, there have been more people living in cities than in rural areas.",  
+            footnoteLeft="Data after 2010 are projections.",   
             RightTextCode="C.P1.OVER.1.2",   
             LeftChartCode="C.P1.OVER.1.3",   
             RightChartCode="C.P1.OVER.1.4",  
@@ -443,8 +491,8 @@ chart_spread(title="Undernourishment",
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
             RightChartCode="C.P2.UNU.1.4",  
-            BottomChartCode="not_defined", 
-            MapCode="not_defined",
+            BottomChartCode="C.P2.UNU.1.5", 
+            MapCode="M.P2.UNU.1.6",
             notes="" 
             )
 @

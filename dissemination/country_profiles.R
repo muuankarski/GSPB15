@@ -25,8 +25,6 @@ library(scales)
 library(ggplot2)
 
 
-
-
 if (!("area_harvested" %in% names(sybdata.df))) {
   
   ## Area harvested
@@ -118,6 +116,81 @@ if (!("total_fertilizers_tonnes_per_ha" %in% names(sybdata.df))) {
 if (!("aqua_culture_share" %in% names(sybdata.df))) {
   
   sybdata.df$aqua_culture_share <- sybdata.df$FI.PRD.AQ.TN.NO / (sybdata.df$FI.PRD.AQ.TN.NO + sybdata.df$FI.PRD.CAPT.TN.NO) *100
+}
+
+# Fish net trade
+
+if (!("net_fish_trade" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
+  drops <- names(dat)[grepl("^Symbol", names(dat))]
+  dat <- dat[,!(names(dat) %in% drops)]
+  dl <- gather(dat, 
+               "Year",
+               "net_fish_trade",
+               6:28)
+  dl <- dl[c(-3,-4,-5)]
+  dl$Year <- str_replace_all(dl$Year, "X","")
+  dl$Year <- factor(dl$Year)
+  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
+  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
+  dl$UN_CODE <- NULL
+  dl$Country <- NULL
+  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
+  }
+
+
+## FISHFISHFISH
+
+# Add note on “Food” – Amy will check whether food trade and food production include fish. If not, add end note, indicating the exclusion of fish from food – After the dissemination of pocketbook, ESS/FIPS will seek the way to include fish into FAO “food” statistics
+
+# "Second, I want to keep fish production comparable with other food component as much as possible. It is not possible to provide value of fish production. 
+# However, at least, it will be preferable to normalize to the base period 2004-06. In the other words, taking average production quantity of 2004-06 as 100. 
+# This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
+
+if (!("normalised_of_fish_production" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
+  drops <- names(dat)[grepl("^Symbol", names(dat))]
+  dat <- dat[,!(names(dat) %in% drops)]
+  dl <- gather(dat, 
+               "Year",
+               "net_fish_trade",
+               6:28)
+  dl <- dl[c(-3,-4,-5)]
+  dl$Year <- str_replace_all(dl$Year, "X","")
+  dl$Year <- factor(dl$Year)
+  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
+  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
+  dl$UN_CODE <- NULL
+  dl$Country <- NULL
+  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
+}
+
+
+# New production indices computed by Amanda
+
+if (!("Sugar.raw" %in% names(sybdata.df))) {
+
+  dat <- read.csv("~/fao_temp/pocketbook_temp/production_indices/Production_Indices_E_All_Data_(Norm).csv")
+  
+  dat <- dat[dat$Item %in% c("Roots and Tubers,Total",
+                             "Vegetables and Fruit Primary",
+                             "Sugar, raw",
+                             "Oilcrops Primary",
+                             "Meat indigenous, total",
+                             "Milk,Total") &
+               dat$Element == "Net Production Index Number (2004-2006 = 100)",
+             c("Country.Code","Year","Value","Item")]
+  
+  names(dat) <- c("FAOST_CODE","Year","value","Item")
+  dat <- spread(dat, # data
+               Item, # class-var
+               value) # amount
+  names(dat) <- str_replace_all(names(dat), " ", ".")
+  names(dat) <- str_replace_all(names(dat), ",", ".")
+  names(dat) <- str_replace_all(names(dat), "\\.\\.", ".")
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
 }
 
 

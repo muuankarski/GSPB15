@@ -8,9 +8,17 @@ library(stringr)
 library(scales)
 library(ggplot2)
 
+
+#################################################
+## PART 2
+
+
 rrr <- function(varname) {
-  filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
+  filter(dat, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
 }
+dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+dat$FAOST_CODE <- as.factor(dat$FAOST_CODE)
+dat$FAOST_CODE <- as.numeric(levels(dat$FAOST_CODE))[dat$FAOST_CODE]
 
 var <- "SH.STA.MALN.ZS"
 tbl <- rrr(var)
@@ -44,6 +52,28 @@ names(rc) <- c("","%")
 
 print.xtable(xtable(rc, caption = "fastest growing items based on production quantities (2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
+
+
+
+
+dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+dat <- dat[dat$FAOST_CODE %in% c(5001,5852,5851,5100,5853,5205,5500),] # World
+dat <- dat[dat$Year %in% c(1991,2015),]
+library(tidyr)
+dat$Year <- paste0("X",dat$Year)
+dat <- dat[c("Year","FAO_TABLE_NAME","FS.OA.POU.PCT3D1")]
+dw <- spread(dat,
+             Year,
+             FS.OA.POU.PCT3D1)
+dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
+dw$X2015[dw$X2015 == "20"] <- "20.0"
+names(dw) <- c("","1990-92","2014-16")
+
+dw <- dw[c(7,3,4,1,2,5,6),]
+
+print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P2.UNU.1.2.tex")
+
 
 
 
@@ -152,3 +182,44 @@ p <- p + labs(x=NULL, y=NULL)
 p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
 ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
 
+
+# DES pie chart
+load("../ICN2PB14/Data/Processed/Metadata.RData")
+## Plot
+despie <- icn2.df[icn2.df$Year %in% c(2009:2011), c("FAOST_CODE","Year","FAO_TABLE_NAME","FBS.SDES.CRLS.PCT3D","FBS.SDES.SR.PCT3D","FBS.SDES.SS.PCT3D","FBS.SDES.MO.PCT3D","FBS.SDES.VOAF.PCT3D","FBS.SDES.MEB.PCT3D")]
+despie <- despie[despie$FAOST_CODE %in% "5000",]
+
+dw <- gather(despie,
+             "var",
+             "value",
+             4:9)
+d <- dw %>% group_by(var) %>% dplyr::summarise(mean = mean(value))
+d <- d  %>% mutate(sum = sum(mean)) 
+
+d$var <- as.character(d$var)
+d$var[d$var == "FBS.SDES.CRLS.PCT3D"] <- "Cereals\n(excl. beer)"
+d$var[d$var == "FBS.SDES.SR.PCT3D"] <- "Starchy roots"
+d$var[d$var == "FBS.SDES.SS.PCT3D"] <- "Sugar and\nsweeteners"
+d$var[d$var == "FBS.SDES.MO.PCT3D"] <- "Meat and offals"
+d$var[d$var == "FBS.SDES.VOAF.PCT3D"] <- "VMilk\n(excl. butter)"
+d$var[d$var == "FBS.SDES.MEB.PCT3D"] <- "Veg. oils and\nanimal fats"
+
+p <- ggplot(d, aes(x=sum/2, y = mean, fill = var, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "right")
+p <- p + theme(text = element_text(size=11))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.height = unit(7, "mm"))
+p <- p + theme(legend.key.width = unit(3, "mm"))
+p <- p + theme(panel.grid=element_blank(), panel.border=element_blank())
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.DES.1.2.pdf", width=  3, height = 2.5, family = "PT Sans")

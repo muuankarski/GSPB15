@@ -124,6 +124,17 @@ load("./database/FAOcountryProfile.RData")
 
 load(file = "./database/Data/Processed/SYB.RData")
 sybdata.df <- SYB.df; rm(SYB.df)
+
+##############################################################
+##############################################################
+## Pppulation threshold
+#############################################################
+pop_threshold <- 50000 # 
+sybdata.df <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO >= pop_threshold,]
+
+
+
+
 # # Add new rows/years to data to allow merging
 # new_row <- sybdata.df[1,]
 # 
@@ -188,7 +199,9 @@ sybdata.df[sybdata.df[, "SHORT_NAME"] == "Papua New Guinea" &
 sybdata.df[sybdata.df[, "SHORT_NAME"] == "American Samoa" & 
             !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "American\nSamoa"
 sybdata.df[sybdata.df[, "SHORT_NAME"] == "Western Sahara" & 
-            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "Western\nSahara"
+           !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "Western\nSahara"
+
+
 
 ## Chinas
 sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(357), "Area"] <- "China 357"
@@ -201,6 +214,9 @@ sybdata.df[sybdata.df[, "SHORT_NAME"] == "Occupied Palestinian Territory" &
             !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "West Bank and\nGaza Strip"
 sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" & 
             !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-  "West Bank and Gaza Strip"
+
+
+
 
 
 # Plots -------------------------------------------------------------
