@@ -489,7 +489,7 @@ chart_spread2(title="Investment",
 
 <<Undernourishmend, eval=TRUE,results='asis'>>=
 chart_spread(title="Undernourishment",                
-            LeftTextCode="Undernourishment refers to food intake that is insufficient to meet dietary energy requirement for an active and healthy life. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Approximately 216 million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            LeftTextCode="Undernourishment is a state, lasting for at least one year, of inability to acquire enough food, defined as a level of food intake insufficient to meet dietary energy requirements. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Two hundred and sixteen million million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
             RightChartCode="C.P2.UNU.1.4",  
@@ -526,7 +526,7 @@ chart_spread2(title="Access",
 
 <<Stability, eval=TRUE,results='asis'>>=
 chart_spread2(title="Stability",                
-            LeftTextCode="Over the last ten years, food and agricultural markets have entered an unexpectedly turbulent phase, characterized by large supply shortfalls, price swings and increased uncertainty about the world’s ability to feed itself. Political and economic uncertainties, coupled with extreme weather conditions, can have direct and adverse impacts on food security. The poorer the household, the stronger the impact of external shocks, as poor households spend a proportionally higher share of their incomes on food.",  
+            LeftTextCode="Over the last ten years, food and agricultural markets have entered an unexpectedly turbulent phase, characterized by large supply shortfalls, price swings. Political and economic uncertainties, coupled with extreme weather conditions, can have direct and adverse impacts on food security. The poorer the household, the stronger the impact of external shocks, as poor households spend a proportionally higher share of their incomes on food.",  
             RightTextCode="C.P2.STB.1.2",   
             LeftChartCode="C.P2.STB.1.3",   
             RightChartCode="C.P2.STB.1.4",  
@@ -587,7 +587,7 @@ chart_spread(title="Utilization",
 
 <<Dietary energy supply, eval=TRUE,results='asis'>>=
 chart_spread2(title="Dietary energy supply",
-            LeftTextCode="The dietary energy supply (DES) is the food available for human consumption, expressed in kilocalories per person per day. At the country level, it is calculated as the food remaining for human use after taking out all non-food utilization, including exports, industrial use, animal feed, seed, wastage and changes in stocks. In 1961 the average global calorie availability was as low as 2 196 kcal/cap/day; by 2011, it had reached 2 870 kcal/cap/day, and was centered more around a narrow base of staple grains as well as meat and dairy products.",  
+            LeftTextCode="The dietary energy supply (DES) is the food available for human consumption, expressed in kilocalories per person per day. At the country level, it is calculated as a measure of food available for human use after taking out all non-food utilization, including exports, industrial use, animal feed, seed, wastage and changes in stocks. In 1961 the average global calorie availability was as low as 2 196 kcal/cap/day; by 2011, it had reached 2 870 kcal/cap/day, and was centered more around a narrow base of staple grains as well as meat and dairy products.",  
             RightTextCode="C.P3.DES.1.2",   
             LeftChartCode="C.P3.DES.1.3",   
             RightChartCode="C.P3.DES.1.4",  
