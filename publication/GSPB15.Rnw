@@ -225,27 +225,29 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 
 \large
 
-This year, 2015, is a pivotal year. We are looking back on the progress we have made on the development agenda. And we are looking forward on what we must still accomplish. 
+This year, 2015, is a pivotal one as we look back on the progress we have made on the development agenda, and forward on what we must still accomplish. 
 
-This is the end of a 25 year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of the progress that has been made. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. And that 72 of the 129 countries monitored for progress have reached the MDG target, 29 of which have also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
+This is the end of a 15-year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of what we can learn from that effort. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. Indeed, 72 of the 129 countries monitored for progress have reached that MDG target, while 29 of them also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
 
 This year also marks the beginning of the new post-2015 Sustainable Development Agenda. Again the international community will unite around new priorities for the future.
 
-Having clear indicators to measure progress towards these international goals is paramount. Therefore timely and robust statistics are the fundamental tool in this process. And the better the data, the better the policies that can be designed. And the better the data, the easier it is to measure the impact of policies or to hold stakeholders accountable for the pledges they make. 
+Clear indicators to measure progress towards these international goals is of paramount importance. Timely and robust statistics are the fundamental tool in monitoring the myriad efforts being made, both with an eye to early detection of problems and the recognition of success. The better the data, the better the policies that can be designed. And the better the data, the easier it is to measure the impact of policies or to hold stakeholders accountable for the pledges they make. 
 
-This publication presents selected key indicators related to agriculture and food security that stakeholders can use to prioritise their actions. It is divided into two main sections, one thematic and one country-specific. It presents a variety of dimensions of agriculture and food security along four main focus areas:
+This publication presents selected key indicators related to agriculture and food security that stakeholders can use to prioritize their actions. It is divided into two main sections, one thematic and one country-specific. It presents a variety of dimensions of agriculture and food security along four main focus areas:
 
-{\textbf{\color{Part1} The setting}} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system from demographic and macroeconomic change.
 
-{\textbf{\color{Part2} Hunger dimensions}} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that give rise to hunger and shape undernourishment.
+{\textbf{\color{Part1} The setting}} measures the state of the agricultural resource base by assessing the supply of land, labour, capital and inputs, and examining the pressure on the world food system stemming from demographic and macroeconomic change.
 
-{\textbf{\color{Part3} Food supply}} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s needs for food, feed and other demands.
+{\textbf{\color{Part2} Hunger dimensions}} gauges the state of food insecurity and malnutrition, and highlights the four dimensions – availability, access, stability and utilization – that determine the scale of hunger and the shape of undernourishment.
 
-{\textbf{\color{Part4} Environment}} examines the sustainability of agriculture in the context of the pressure it exerts on the environment, including the interaction of agriculture with climate change.
+{\textbf{\color{Part3} Food supply}} evaluates the past and present productive capacity of world agriculture, together with the role of trade, in meeting the world’s demand for food, feed and other products.
+
+{\textbf{\color{Part4} Environment}} examines the sustainability of agriculture in the context of the pressure it exerts on its ecological surroundings, including the interaction of agriculture with climate change.
 
 This Pocketbook is part of the FAO Statistical Yearbook suite of products and is just one of the tools that can be used as building blocks for monitoring progress and formulating policy. It includes data from FAOSTAT as well as from other partners within the organization and in the international community. 
 
 FAO is deeply committed to helping countries strengthen their statistical systems to improve the timeliness and quality of their data. And it will continue to do so through the SDG process.
+
 
 \bigskip
 \bigskip
