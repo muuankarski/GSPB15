@@ -194,6 +194,23 @@ if (!("Sugar.raw" %in% names(sybdata.df))) {
 }
 
 
+# Energy intensity cropland
+
+if (!("energy.intensity.cropland" %in% names(sybdata.df))) {
+  
+  library(gdata)
+  # reading the data
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=6)
+  names(dat)[names(dat)=="X.2012"] <- "energy.intensity.cropland"
+  names(dat)[names(dat)=="AreaCode"] <- "FAOST_CODE"
+  dat <- dat[c("FAOST_CODE","energy.intensity.cropland")]
+  dat$Year <- 2014
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
+
+
+
 # Countries ---------------------------------------------------------------
 
 M49countries <- 
@@ -332,7 +349,7 @@ for (i in 1:nrow(M49countries)) {
       if (length(y1) == 1) {
         if (!is.na(y1)) {
           if (is.numeric(y1)) {
-            chunk1 = format(round(y1, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ",")
+            chunk1 = format(round(y1, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ",")
           } else {
             chunk1 = y1
           }
@@ -340,7 +357,7 @@ for (i in 1:nrow(M49countries)) {
           lya = na.locf(tmp[tmp[, "Year"] %in% c((year1-2):(year1+3)), subindicators.df[j, "INDICATOR1"]], na.rm = FALSE)[6]
           if (!is.na(lya)) {
             if (is.numeric(lya)) {
-              chunk1 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ","), "}")
+              chunk1 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ","), "}")
             } else {
               chunk1 = paste0("\\textit{", lya, "}")
             }
@@ -355,7 +372,7 @@ for (i in 1:nrow(M49countries)) {
       if (length(y2) == 1) {
         if (!is.na(y2)) {
           if (is.numeric(y2)) {
-            chunk2 = format(round(y2, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ",")
+            chunk2 = format(round(y2, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ",")
           } else {
             chunk2 = y2
           }
@@ -363,7 +380,7 @@ for (i in 1:nrow(M49countries)) {
           lya = na.locf(tmp[tmp[, "Year"] %in% c((year2-7):(year2+3)), subindicators.df[j, "INDICATOR1"]], na.rm = FALSE)[11]
           if (!is.na(lya)) {
             if (is.numeric(lya)) {
-              chunk2 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ","), "}")
+              chunk2 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ","), "}")
             } else {
               chunk2 = paste0("\\textit{", lya, "}")
             }
@@ -378,7 +395,7 @@ for (i in 1:nrow(M49countries)) {
       if (length(y3) == 1) {
         if (!is.na(y3)) {
           if (is.numeric(y3)) {
-            chunk3 = format(round(y3, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ",")
+            chunk3 = format(round(y3, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ",")
           } else {
             chunk3 = y3
           }
@@ -386,7 +403,7 @@ for (i in 1:nrow(M49countries)) {
           lya = na.locf(tmp[tmp[, "Year"] %in% c((year3-9):(year3+2)), subindicators.df[j, "INDICATOR1"]], na.rm = FALSE)[12]
           if (!is.na(lya)) {
             if (is.numeric(lya)) {
-              chunk3 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 1, big.mark = ","), "}")
+              chunk3 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ","), "}")
             } else {
               chunk3 = paste0("\\textit{", lya, "}")
             }
