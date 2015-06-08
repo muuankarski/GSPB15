@@ -75,7 +75,6 @@ dat$Area <- "M49world"
 
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
 plotInfo$yAxis <- c(names(dat)[3],names(dat)[4])
-
 ## Create the plot
 assign(plotInfo$plotName, 
        plot_syb(x = plotInfo$xAxis,
@@ -90,7 +89,7 @@ assign(plotInfo$plotName,
                 y_lab = plotInfo$yPlotLab,
                 #legend_lab = subset(meta.lst$FULL,
                 #                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                legend_lab <- c("Urban population","Rural population"),
+                legend_lab <- c("Rural population","Urban population"),
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]] 
        ) +
          centerYear() + 
@@ -161,7 +160,6 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
        )
-
        )
 ## Export the plot
 export_plot(placement = "b")
@@ -321,11 +319,27 @@ export_plot(placement = "r")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
-tmp <- sybdata.df[sybdata.df$FAOST_CODE == 16, c("FAOST_CODE","Year","SL.AGR.EMPL.FE.ZS","SL.AGR.EMPL.MA.ZS")]
+plotInfo$legendLabels <- c(" Female employment in agriculture","Male employment in agriculture")
+if (!("male_share_agr_empl" %in% names(sybdata.df))) {
+  
+  dat <- read.csv("./database/Data/Raw/female_male_amployment.csv")
+  dat$ElementName <- as.character(dat$ElementName)
+  dat <- dat[c("AreaCode","Year","ElementName","Value")] 
+  dat <- na.omit(dat)
+  dat <- spread(dat , ElementName, Value)
+  names(dat) <- str_replace_all(names(dat), " ", ".")
+  dat$female_share <- dat$Female.economically.active.population.in.Agr / dat$Female.economically.active.population * 100
+  dat$male_share <- dat$Male.economically.active.population.in.Agr / dat$Male.economically.active.population * 100
+  dat <- dat[c("AreaCode","Year","male_share","female_share")]
+  names(dat) <- c("FAOST_CODE","Year","male_share_agr_empl","female_share_agr_empl")
+  dat$Year <- as.numeric(dat$Year)
+  dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)
+  sybdata.df <- merge(sybdata.df,dat,bt=c("FAOST_CODE","Year"), all.x=TRUE)
+}
 
 #plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=2) )
 ## Export the plot
 export_plot(placement = "b")
 
@@ -451,24 +465,28 @@ export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 197
 # ## ------------------------------------------------------------------------
 # # Top ten countries, credit to agriculture as a share of total credit
 
-gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
-gg <- gg[gg$ElementName == "Value US$",] 
-gg <- gg[gg$ItemName == "Total Credit",] 
-
-df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
-df2016$Year <- 2000
-df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
-df2017$Year <- 2012
-
-tmp <- rbind(df2016,df2017)
-names(tmp) <- c("FAOST_CODE","credit_to_agriculture","Year")
-
-sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"), all.x=TRUE)
-
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
+
+if (!("credit_to_agriculture" %in% names(sybdata.df))) {
+  gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
+  gg <- gg[gg$ElementName == "Value US$",] 
+  gg <- gg[gg$ItemName == "Total Credit",] 
+  
+  df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+  df2016$Year <- 2000
+  df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+  df2017$Year <- 2012
+  
+  tmp <- rbind(df2016,df2017)
+  names(tmp) <- c("FAOST_CODE","credit_to_agriculture","Year")
+  
+  sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"), all.x=TRUE)  
+}
+
+
 ## Plot
 ## Plot
 assign(plotInfo$plotName,
@@ -712,10 +730,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]
-       ) + scale_x_continuous(breaks = c(1991, 2001, 2006, 2013, 2015),
-                              labels = c("1990-92", "2000-02", "2005-07", "2012-14", "2014-16")) +
-         labs(y="million") +
-         theme(axis.text.x = element_text(angle = 45))
+       )
        
 )
 ## Export the plot
@@ -911,7 +926,7 @@ assign(mapInfo$mapName,
                 scale = mapInfo$mapScaling,
                 style = classIntAlg,
                 col = mapInfo$mapColors,
-                # manualBreaks = c(0, 5, 15, 25, 35, 100),
+                manualBreaks = c(0, 100, 150, 200, 300, 2302),
                 #                 countryCodeTransp = transpCountries[, "FAO_CODE"],
                 subset = eval(parse(text = "Year %in% c(mapInfo$mapYear) &
                                   Area %in% c(mapInfo$mapArea)"))
@@ -1035,9 +1050,6 @@ export_plot(manual_text="Prevalence of undernourishment (percent) (3 year averag
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.ACCESS.1.5")
-# data into numeric
-plot.data$FS.OA.POFI.PCT3D1 <- as.factor(plot.data$FS.OA.POFI.PCT3D1)
-plot.data$FS.OA.POFI.PCT3D1 <- as.numeric(levels(plot.data$FS.OA.POFI.PCT3D1))[plot.data$FS.OA.POFI.PCT3D1]
 ## Plot
 assign(plotInfo$plotName, 
        plot_syb(x = plotInfo$xAxis,
@@ -1053,9 +1065,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
-       ) + scale_x_continuous(breaks = c(1991, 2001, 2004, 2010, 2015),
-                              labels = c("1990-92", "2000-02", "2003-05", "2009-11", "2014-16")) +
-         theme(axis.text.x = element_text(angle = 45))
+       ) 
 )
 ## Export the plot
 export_plot(placement = "b")
@@ -1222,13 +1232,32 @@ export_plot(placement = "b")
 
 # Political stability and absence of violence/terrorism
 
-sybMaps.df2 <- merge(sybMaps.df,dat[c("Year","FAOST_CODE","G.GD.PSAVT.IN")],by.x=c("Year","FAO_CODE"),by.y=c("Year","FAOST_CODE"),all.x=TRUE)
+if (!("G.GD.PSAVT.IN" %in% names(sybMaps.df))) {
+  sybMaps.df <- merge(sybMaps.df,dat[c("Year","FAOST_CODE","G.GD.PSAVT.IN")],by.x=c("Year","FAO_CODE"),by.y=c("Year","FAOST_CODE"),all.x=TRUE)
+}
+
 ## Map info
 mapInfo <- map_info(mapName = "M.P2.STB.1.6", data = sybMaps.df, mapArea = "Territory")
 mapInfo$mapData$FAO_CODE[mapInfo$mapData$FAO_CODE == 351] <- 41
 
 ## Create the map
-assign(mapInfo$mapName, meta_plot_map() )
+assign(mapInfo$mapName, 
+       
+       plot_map(shpFile = shpLocation,
+                var = mapInfo$mapVariable,
+                data = mapInfo$mapData,
+                countryCode = mapCountryCode,
+                missCol = NAdataColor,
+                scale = mapInfo$mapScaling,
+                style = classIntAlg,
+                col = mapInfo$mapColors,
+                manualBreaks = c(-2.89, -1.3, 0, 0.4, 1, 1.92),
+                #                 countryCodeTransp = transpCountries[, "FAO_CODE"],
+                subset = eval(parse(text = "Year %in% c(mapInfo$mapYear) &
+                                  Area %in% c(mapInfo$mapArea)"))
+       ) 
+       )
+
 ## export the map
 export_map()
 
@@ -1577,11 +1606,39 @@ export_plot(manual_text="Top 20 food producing countries (based on food net per 
 
  # THIS HAS TO CHANGE!!!
 ## Info
+if (!("change_QC.YIELD.CRLS.HG.NO" %in% names(sybdata.df))) {
+
+  tmp <- sybdata.df[sybdata.df$FAOST_CODE %in% 5000,c("FAOST_CODE","Year","Area","QC.PRD.CRLS.TN.NO", # Cereals production (tonnes)
+                                                      "QC.RHRV.CRLS.HA.NO", # Cereals harvested area (ha)
+                                                      "QC.YIELD.CRLS.HG.NO")] # Cereals yield (hg/ha)
+  tmp <- tmp[!is.na(tmp$Area),]
+  tmp <- tmp[!is.na(tmp$QC.PRD.CRLS.TN.NO),]
+  tmp <- tmp[tmp$Year %in% c(2000,2013),]
+  tmp <- gather(tmp, 
+                variable,
+                value,
+                4:6)
+  tmp <- spread(tmp,
+                Year,
+                value)
+  tmp$change <- tmp[[5]]/tmp[[4]]*100-100
+  tmp <- tmp[c("FAOST_CODE","variable","change")]
+  tmp$variable <- as.character(tmp$variable)
+  tmp$variable <- paste0("change_",tmp$variable)
+  tmp <- spread(tmp,
+                variable,
+                change)
+  tmp$Year <- 2013
+  sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
 plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.5")
+plotInfo$legendLabels <- c("Production","Harvested area","Yield")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Growth in cereals production (production, harvested area, yield), world, 2000-12",placement="b")
+export_plot(manual_text = "Growth in cereals production (production, harvested area, yield), world, 2000-13",placement="b")
 
 ##### -------------------------------------------------------
 # MAPS
@@ -2191,6 +2248,31 @@ export_map()
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.2")
+
+if (!("total_pellets" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/REN21_Global wood pellet production_2014 03 07.xlsx", sheet=2, skip=3)
+  dat <- dat[1:7,]
+  dat <- gather(dat,
+                Year,
+                total_pellets, 
+                2:15)
+  dat[[2]] <- as.character(dat[[2]])
+  dat[[2]] <- str_replace_all(dat[[2]], "X", "")
+  dat[[2]] <- factor(dat[[2]])
+  dat[[2]] <- as.numeric(levels(dat[[2]]))[dat[[2]]]
+  #
+  dat[[3]] <- as.character(dat[[3]])
+  dat[[3]] <- str_replace_all(dat[[3]], ",", "")
+  dat[[3]] <- factor(dat[[3]])
+  dat[[3]] <- as.numeric(levels(dat[[3]]))[dat[[3]]]
+  dat <- dat[dat$X == "TOTAL",]
+  dat$Year[is.na(dat$Year)] <- 2013
+  dat$FAOST_CODE <- 5000
+  dat$X <- NULL
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+  }
+
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
 ## Export the plot
@@ -2206,34 +2288,53 @@ export_plot(placement = "tr")
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.3")
 ## Plot
-#BP.TP.GP.TJ.NO
 
-# g <- sybdata.df %>% group_by(Year) %>% dplyr::summarise(n = n_distinct(BP.TP.GP.TJ.NO))
+if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
+  d <- dat %>% group_by(FAO.Country.code) %>% dplyr::summarise(sum = sum(Value))
+  names(d) <- c("FAOST_CODE","total_energy_in_argiculture")
+  d$Year <- 2012
+  d$FAOST_CODE <- as.numeric(levels(d$FAOST_CODE))[d$FAOST_CODE]
+  d$FAOST_CODE[d$FAOST_CODE == 41] <- 351
+  sybdata.df <- merge(sybdata.df,d,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
 
-df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(BP.TP.GP.TJ.NO = mean(BP.TP.GP.TJ.NO, na.rm=TRUE))
-df2014$Year <- 2014
-names(df2014) <- c("FAOST_CODE","new_var","Year") 
-sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
-sybdata.df$BP.TP.GP.TJ.NO <- ifelse(sybdata.df$Year == 2014, sybdata.df$new_var, sybdata.df$BP.TP.GP.TJ.NO)
-sybdata.df$new_var <- NULL
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Total renewable energy fix this title!!",placement="l")
+export_plot(placement="l")
 
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.4")
 ## Plot
 
-df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(BP.AP.GP.TJ.NO = mean(BP.AP.GP.TJ.NO, na.rm=TRUE))
-df2014$Year <- 2014
-names(df2014) <- c("FAOST_CODE","new_var","Year") 
-sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
-sybdata.df$BP.AP.GP.TJ.NO <- ifelse(sybdata.df$Year == 2014, sybdata.df$new_var, sybdata.df$BP.AP.GP.TJ.NO)
-sybdata.df$new_var <- NULL
+if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
+  library(gdata)
+  codes_vs_names <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
+  codes_vs_names <- codes_vs_names[c("FAO.Country.code","Country")]
+  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO.Country.code","Country")]),]
+  names(codes_vs_names) <- c("FAOST_CODE","Country")
+  codes_vs_names$Country <- as.character(codes_vs_names$Country)
+  codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
+  # reading the data
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=2, skip=2)
+  dat[[2]] <- as.numeric(dat[[2]])
+  dat[[1]] <- as.character(dat[[1]])
+  d <- dat[1:2]
+  names(d) <- c("Country","total_bioenergy_consumption")
+  d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
+  d2$Country <- NULL
+  d2$Year <- 2012
+  d2 <- d2[!is.na(d2$total_bioenergy_consumption),]
+  # China
+  d2$FAOST_CODE[d2$FAOST_CODE == 41] <- 351
+  sybdata.df <- merge(sybdata.df,d2,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Pooled energy fix title",placement="l")
+export_plot(placement="r")
 
 
 # -----------------------------------------------------------
@@ -2241,10 +2342,54 @@ export_plot(manual_text = "Pooled energy fix title",placement="l")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.5")
+
+
+if (!("biogases" %in% names(sybdata.df))) {
+  library(gdata)
+  # reading the data
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=4, skip=2)
+  dat <- gather(dat,
+                "Year",
+                "value",
+                2:15)
+  dat$Year <- as.character(dat$Year)
+  dat$Year <- str_replace_all(dat$Year, "X", "")
+  dat$Year <- as.factor(dat$Year)
+  dat$Year <- as.numeric(levels(dat$Year))[dat$Year]
+  dat$Row.Labels <- as.character(dat$Row.Labels)
+  dat <- spread(dat, Row.Labels, value)
+  names(dat) <- tolower(names(dat))
+  names(dat) <- str_replace_all(names(dat), " ", ".")
+  dat$grand.total <- NULL
+  names(dat)[names(dat)=="year"] <- "Year"
+  dat$FAOST_CODE <- 5000
+  dat$Year[is.na(dat$Year)] <- 2013
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
+plotInfo$legendLabels <- c("Biodiesel","Biogases","Biogasoline","Other liquid biofuels")
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = plotInfo$legendLabels,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]
+       )
+       
+       
+       )
 ## Export the plot
-export_plot(manual_text = "Biodiesel production", placement="b")
+export_plot(placement="b")
 
 ##### -------------------------------------------------------
 # MAPS

@@ -1,51 +1,51 @@
-PART,ORDER,INDICATOR1,INDICATOR2,INDICATOR3,SERIES_NAME_SHORT,MULTIPLIER,DIGITS,
-The setting,1,OA.TPBS.POP.PPL.NO,,,Total population (mln),,1,
-The setting,2,OA.TPR.POP.PPL.NO,,,Rural population (% total population),,1,
-The setting,3,IG.AFFH.STOCGG.USD.SH,,,Govt expenditure on ag (% total outlays),,1,
-The setting,4,area_harvested,,,Area Harvested (million ha),1000000,0,
-The setting,5,cropping_intensity_ratio,,,Cropping Intensity Ratio (%),,1,
-The setting,6,AQ.WAT.WATPCP.MC.NO,,,Water resources (1000 m3person),1000,0,
-The setting,7,AQ.WAT.EQIRR.HA.NO,,,Area equipped for irrigation (1000 ha),1000,0,
-The setting,8,AQ.WAT.SHIRR.HA.SH,,,Area Irrigated (%),,1,
-The setting,9,SL.AGR.EMPL.ZS,,,Employment in agriculture (%),,1,
-The setting,10,SL.AGR.EMPL.FE.ZS,,,"Employment in agriculture, female (%)",,1,
-The setting,11,total_fertilizers_tonnes_per_ha,,,Total Fertilizers N/P/K (kg/ha),0.001,1,
-The setting,12,RF.FERT.NI.TN.SH,,,Nitrogen (tonnes/ha),,1,
-The setting,13,missing,,,Energy use intensity in agriculture (mj/I$),,1,how to compute
-The setting,14,EA.PRD.AGRI.KD,,,"Agr. value added per worker (const. 2000, 1000 US$)",1000,1,
-Hunger dimensions,15,DES,,,Dietary energy supply (kcal/pc/day),,0,
-Hunger dimensions,16,ADESA,,,Average dietary energy supply adequacy (%),,0,
-Hunger dimensions,17,share_of_des_cereals_roots_tubers,,,"Dietary energy supply, cereals, roots and tubers (%)",,0,
-Hunger dimensions,18,POU_2013,,,Prevalence of undernourishment,,0,
-Hunger dimensions,19,NY.GDP.PCAP.PP.KD,,,"GDP per capita (US$, PPP)",,0,
-Hunger dimensions,20,DFPLIV.IN.NO,,,Domestic food price volatility,,0,
-Hunger dimensions,21,FB.CIDR.CRLS.TN.IMP,,,Cereal import dependency ratio,,0,
-Hunger dimensions,22,SH.STA.MALN.ZS,,,"Underweight, children under-5 (%)",,0,
-Hunger dimensions,23,SH.H2O.SAFE.ZS,,,Improved water source (%),,0,
-Food Supply,24,QV.NPV.FOOD.BASE.0406,,,Average value of food production (%),1000000,0,
-Food Supply,25,NV.AGR.TOTL.ZS,,,Value added from agriculture (% GDP),,0,
-Food Supply,26,QI.NPCPIN.FOOD.IN.NO,,,Net pc food prod index (2004-06=100),,0,
-Food Supply,27,QI.NPCPIN.CRPS.IN.NO,,,Net pc crop prod index (2004-06=100),,0,
-Food Supply,28,QI.NPIN.CRLS.IN.NO,,,  Cereal prod index (2004-06=100),,0,
-Food Supply,29,Oilcrops.Primary,,,  Veg oils prod  index (2004-06=100),,0,
-Food Supply,30,Roots.and.Tubers.Total,,,  Root and tuber prod index (2004-06=100) ,,0,
-Food Supply,31,Vegetables.and.Fruit.Primary,,,  Fruit and veg prod index (2004-06=100) ,,0,
-Food Supply,32,Sugar.raw,,,  Sugar prod index (2004-06=100) ,,0,
-Food Supply,33,QI.NPCPIN.LVSTCK.IN.NO,,,Net pc livestock prod index (2004-06=100),,0,
-Food Supply,34,Milk.Total,,,  Milk prod index (2004-06=100),,0,
-Food Supply,35,Meat.indigenous.total,,,  Meat prod index (2004-06=100) ,,0,
-Food Supply,36,TP.EXVAL.FOOD.USD.NO,,,Food exports (mln US$) ,1000000,0,
-Food Supply,37,TP.IMVAL.FOOD.USD.NO,,,Food imports (mln US$) ,1000000,0,
-Food Supply,38,TP.NETVAL.CRLSPREP.USD.NO,,,Net trade of cereals (mln US$),1000000,0,
-Food Supply,39,TP.NETVAL.FV.USD.NO,,,Net trade of fruit and veg. (mln US$),1000000,0,
-Food Supply,40,TP.NETVAL.MEATPREP.USD.NO,,,Net trade of meat (mln US$),1000000,0,
-Food Supply,41,TP.NETVAL.MILKEQ.USD.NO,,,Net trade of dairy products (mln US$),1000000,0,
-Food Supply,42,net_fish_trade,,,Net trade of fish (mln US$),1000,0,
-Environment,43,RL.AREA.FOR.HA.SH,,,Forest area (%),,0,
-Environment,44,AQ.WAT.WWAGR.MC.SH,,,Freshwater withdrawn by agriculture (%),,0,
-Environment,45,ER.LND.PTLD.ZS,,,Terrestrial protected areas (%),,0,
-Environment,46,RL.AREA.AGRORG.HA.SH,,,Organic area (%),,0,
-Environment,47,missing,,,Share of renewable water resources (%),,0,
-Environment,48,BP.TP.GP.TJ.NO,,,Biofuel production (thousand kt of oil eq.),1000,0,
-Environment,49,FO.WP.PQ.TN.NO,,,Wood pellets prod. (thousand tonnes),,0,
-Environment,50,GHG.AFOLU.TOT.ECO2EQ.NO,,,"GHG emissions (CO2eq, gigagrams)",1000,0,
+PART,ORDER,INDICATOR1,INDICATOR2,INDICATOR3,SERIES_NAME_SHORT,MULTIPLIER,DIGITS
+The setting,1,OA.TPBS.POP.PPL.NO,,,Total population (mln),,1
+The setting,2,OA.TPR.POP.PPL.NO,,,Rural population (% total population),,1
+The setting,3,IG.AFFH.STOCGG.USD.SH,,,Govt expenditure on ag (% total outlays),,1
+The setting,4,area_harvested,,,Area Harvested (million ha),1000000,0
+The setting,5,cropping_intensity_ratio,,,Cropping Intensity Ratio (%),,1
+The setting,6,AQ.WAT.WATPCP.MC.NO,,,Water resources (1000 m3person),1000,0
+The setting,7,AQ.WAT.EQIRR.HA.NO,,,Area equipped for irrigation (1000 ha),1000,0
+The setting,8,AQ.WAT.SHIRR.HA.SH,,,Area Irrigated (%),,1
+The setting,9,SL.AGR.EMPL.ZS,,,Employment in agriculture (%),,1
+The setting,10,SL.AGR.EMPL.FE.ZS,,,"Employment in agriculture, female (%)",,1
+The setting,11,total_fertilizers_tonnes_per_ha,,,Total Fertilizers N/P/K (kg/ha),0.001,1
+The setting,12,RF.FERT.NI.TN.SH,,,Nitrogen (tonnes/ha),,1
+The setting,13,energy.intensity.cropland,,,Energy use intensity in agriculture (mj/I$),,1
+The setting,14,EA.PRD.AGRI.KD,,,"Agr. value added per worker (const. 2000, 1000 US$)",1000,1
+Hunger dimensions,15,DES,,,Dietary energy supply (kcal/pc/day),,0
+Hunger dimensions,16,ADESA,,,Average dietary energy supply adequacy (%),,0
+Hunger dimensions,17,share_of_des_cereals_roots_tubers,,,"Dietary energy supply, cereals, roots and tubers (%)",,0
+Hunger dimensions,18,POU_2013,,,Prevalence of undernourishment,,0
+Hunger dimensions,19,NY.GDP.PCAP.PP.KD,,,"GDP per capita (US$, PPP)",,0
+Hunger dimensions,20,DFPLIV.IN.NO,,,Domestic food price volatility,,0
+Hunger dimensions,21,FB.CIDR.CRLS.TN.IMP,,,Cereal import dependency ratio,,0
+Hunger dimensions,22,SH.STA.MALN.ZS,,,"Underweight, children under-5 (%)",,0
+Hunger dimensions,23,SH.H2O.SAFE.ZS,,,Improved water source (%),,0
+Food Supply,24,QV.NPV.FOOD.BASE.0406,,,Average value of food production (%),1000000,0
+Food Supply,25,NV.AGR.TOTL.ZS,,,Value added from agriculture (% GDP),,0
+Food Supply,26,QI.NPIN.FOOD.IN.NO,,,Net food prod index (2004-06=100),,0
+Food Supply,27,QI.NPIN.CRPS.IN.NO,,,Net crop prod index (2004-06=100),,0
+Food Supply,28,QI.NPIN.CRLS.IN.NO,,,Cereal prod index (2004-06=100),,0
+Food Supply,29,Oilcrops.Primary,,,Veg oils prod  index (2004-06=100),,0
+Food Supply,30,Roots.and.Tubers.Total,,,Root and tuber prod index (2004-06=100) ,,0
+Food Supply,31,Vegetables.and.Fruit.Primary,,,Fruit and veg prod index (2004-06=100) ,,0
+Food Supply,32,Sugar.raw,,,Sugar prod index (2004-06=100) ,,0
+Food Supply,33,QI.NPIN.LVSTCK.IN.NO,,,Net livestock prod index (2004-06=100),,0
+Food Supply,34,Milk.Total,,,Milk prod index (2004-06=100),,0
+Food Supply,35,Meat.indigenous.total,,,Meat prod index (2004-06=100) ,,0
+Food Supply,36,TP.EXVAL.FOOD.USD.NO,,,Food exports (mln US$) ,1000000,0
+Food Supply,37,TP.IMVAL.FOOD.USD.NO,,,Food imports (mln US$) ,1000000,0
+Food Supply,38,TP.NETVAL.CRLSPREP.USD.NO,,,Net trade of cereals (mln US$),1000000,0
+Food Supply,39,TP.NETVAL.FV.USD.NO,,,Net trade of fruit and veg. (mln US$),1000000,0
+Food Supply,40,TP.NETVAL.MEATPREP.USD.NO,,,Net trade of meat (mln US$),1000000,0
+Food Supply,41,TP.NETVAL.MILKEQ.USD.NO,,,Net trade of dairy products (mln US$),1000000,0
+Food Supply,42,net_fish_trade,,,Net trade of fish (mln US$),1000,0
+Environment,43,RL.AREA.FOR.HA.SH,,,Forest area (%),,0
+Environment,44,AQ.WAT.WWAGR.MC.SH,,,Freshwater withdrawn by agriculture (%),,0
+Environment,45,ER.LND.PTLD.ZS,,,Terrestrial protected areas (%),,0
+Environment,46,RL.AREA.AGRORG.HA.SH,,,Organic area (%),,0
+Environment,47,missing,,,Share of renewable water resources (%),,0
+Environment,48,BP.TP.GP.TJ.NO,,,Biofuel production (thousand kt of oil eq.),1000,0
+Environment,49,FO.WP.PQ.TN.NO,,,Wood pellets prod. (thousand tonnes),,0
+Environment,50,GHG.AFOLU.TOT.ECO2EQ.NO,,,"GHG emissions (CO2eq, gigagrams)",1000,0

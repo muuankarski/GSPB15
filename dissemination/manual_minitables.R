@@ -12,6 +12,28 @@ library(ggplot2)
 #################################################
 ## PART 2
 
+# Undernourishment
+# manually added "\setlength{\tabcolsep}{4pt}" before tabular in raw table!!!!!!!!!
+
+dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+dat <- dat[dat$FAOST_CODE %in% c(5001,5852,5851,5100,5853,5205,5500),] # World
+dat <- dat[dat$Year %in% c(1991,2015),]
+library(tidyr)
+dat$Year <- paste0("X",dat$Year)
+dat <- dat[c("Year","FAO_TABLE_NAME","FS.OA.POU.PCT3D1")]
+dw <- spread(dat,
+             Year,
+             FS.OA.POU.PCT3D1)
+dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
+dw$X2015[dw$X2015 == "20"] <- "20.0"
+names(dw) <- c("","1990-92","2014-16")
+
+dw <- dw[c(7,3,4,1,2,5,6),]
+
+print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+             file = "./publication/Tables/MT.P2.UNU.1.2.tex")
+
+
 
 rrr <- function(varname) {
   filter(dat, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
@@ -29,7 +51,7 @@ tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
 tbl <- tbl[c(4,3,2)]
 names(tbl) <- c("","Year","%")
 
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 yards of age who are underweight (percent) (2006 to 2012)", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 years of age who are underweight (percent) (2006 to 2012)", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UT.1.2.tex")
 
 
@@ -54,28 +76,8 @@ print.xtable(xtable(rc, caption = "fastest growing items based on production qua
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
 
 
-
-
-dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
-dat <- dat[dat$FAOST_CODE %in% c(5001,5852,5851,5100,5853,5205,5500),] # World
-dat <- dat[dat$Year %in% c(1991,2015),]
-library(tidyr)
-dat$Year <- paste0("X",dat$Year)
-dat <- dat[c("Year","FAO_TABLE_NAME","FS.OA.POU.PCT3D1")]
-dw <- spread(dat,
-             Year,
-             FS.OA.POU.PCT3D1)
-dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
-dw$X2015[dw$X2015 == "20"] <- "20.0"
-names(dw) <- c("","1990-92","2014-16")
-
-dw <- dw[c(7,3,4,1,2,5,6),]
-
-print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
-             file = "./publication/Tables/MT.P2.UNU.1.2.tex")
-
-
-
+##########################################################################
+##########################################################################
 
 ######  Chart:top five items produced in MRY vs. 2000
 
@@ -97,12 +99,18 @@ gg <- merge(v2000,v2013,by="Item")
 gg$Value.x <- gg$Value.x/1000
 gg$Value.y <- gg$Value.y/1000
 names(gg) <- c("","2000", "2013")
+gg[[2]] <- round(gg[[2]],0)
+gg[[3]] <- round(gg[[3]],0)
+gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
+gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
+
 
 print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
 
 
-
+##########################################################################
+##########################################################################
 ######  Chart:top five live animals stock in 2013 vs. 2000
 
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.csv")
@@ -125,11 +133,16 @@ gg$Value.x <- gg$Value.x/1000
 gg$Value.y <- gg$Value.y/1000
 gg <- arrange(gg, -Value.y)
 names(gg) <- c("","2000", "2013")
+gg[[2]] <- round(gg[[2]],0)
+gg[[3]] <- round(gg[[3]],0)
+gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
+gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
 print.xtable(xtable(gg, caption = "Top five live animal stock in 2013 vs. 2000 (thousand heads)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.LIVE.1.2.tex")
 
-
+##########################################################################
+##########################################################################
 ## Trends in agricultural trade
 
 dat <- read.csv("~/fao_temp/pocketbook_temp/food_export_import.csv")
@@ -146,6 +159,16 @@ names(dw) <- c("","Export value", "Import Value")
 print.xtable(xtable(dw, caption = "Exports and Imports of food (million US\\$ 2012)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.TRADE.1.3.tex")
 
+
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+######## Pie charts
 
 
 ## Piechart for livestock
@@ -169,7 +192,7 @@ p <- p + facet_wrap(~Year)
 p <- p + coord_polar("y")
 p <- p + theme_minimal()
 p <- p + theme(legend.position = "top")
-p <- p + theme(text = element_text(size=11))
+p <- p + theme(text = element_text(size=11, family="PT Sans"))
 p <- p + theme(axis.text = element_blank())
 p <- p + theme(axis.title = element_blank())
 p <- p + theme(axis.ticks = element_blank())
@@ -180,11 +203,11 @@ p <- p + theme(legend.title = element_blank())
 p <- p + theme(legend.key.size = unit(3, "mm"))
 p <- p + labs(x=NULL, y=NULL)
 p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
-ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3, family = "PT Sans")
-
+ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3)
+embed_fonts("./publication/Plots/C.P3.LIVE.1.5.pdf")
 
 # DES pie chart
-load("../ICN2PB14/Data/Processed/Metadata.RData")
+load("../ICN2PB14/Data/Processed/icn2.RData")
 ## Plot
 despie <- icn2.df[icn2.df$Year %in% c(2009:2011), c("FAOST_CODE","Year","FAO_TABLE_NAME","FBS.SDES.CRLS.PCT3D","FBS.SDES.SR.PCT3D","FBS.SDES.SS.PCT3D","FBS.SDES.MO.PCT3D","FBS.SDES.VOAF.PCT3D","FBS.SDES.MEB.PCT3D")]
 despie <- despie[despie$FAOST_CODE %in% "5000",]
@@ -209,7 +232,7 @@ p <- p + geom_bar(position="fill", stat="identity")
 p <- p + coord_polar("y")
 p <- p + theme_minimal()
 p <- p + theme(legend.position = "right")
-p <- p + theme(text = element_text(size=11))
+p <- p + theme(text = element_text(size=11, family="PT Sans"))
 p <- p + theme(axis.text = element_blank())
 p <- p + theme(axis.title = element_blank())
 p <- p + theme(axis.ticks = element_blank())
@@ -222,4 +245,5 @@ p <- p + theme(legend.key.width = unit(3, "mm"))
 p <- p + theme(panel.grid=element_blank(), panel.border=element_blank())
 p <- p + labs(x=NULL, y=NULL)
 p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
-ggsave(p, filename = "./publication/Plots/C.P3.DES.1.2.pdf", width=  3, height = 2.5, family = "PT Sans")
+ggsave(p, filename = "./publication/Plots/C.P3.DES.1.2.pdf", width=  3, height = 2.5)
+embed_fonts("./publication/Plots/C.P3.DES.1.2.pdf")
