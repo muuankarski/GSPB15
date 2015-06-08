@@ -148,7 +148,7 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
 # However, at least, it will be preferable to normalize to the base period 2004-06. In the other words, taking average production quantity of 2004-06 as 100. 
 # This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
 
-if (!("normalised_of_fish_production" %in% names(sybdata.df))) {
+if (!("net_fish_trade" %in% names(sybdata.df))) {
   library(gdata)
   dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
   drops <- names(dat)[grepl("^Symbol", names(dat))]
@@ -274,14 +274,14 @@ M49countries[M49countries[, "FAOST_CODE"] == 299, "SHORT_NAME"] <-
 M49countries <- 
   M49countries[!M49countries[, "FAOST_CODE"] %in% c(41,128,96,357,214),]
 ## Add aggregates NOT
-# M49countries <- 
-#   rbind(data.frame(FAOST_CODE = c(5001,5852,5100,5853,5205,5500,5851),
-#                    SHORT_NAME = c("World", "Developing regions", 
-#                                       "Africa", "Asia", 
-#                                       "Latin America and the Caribbean",
-#                                       "Oceania", "Developed countries"),
-#                    stringsAsFactors = FALSE),
-#         M49countries)
+M49countries <- 
+  rbind(data.frame(FAOST_CODE = c(5000,5800,5100,5300,5205,5500,5700),
+                   SHORT_NAME = c("World", "Developing regions", 
+                                      "Africa", "Asia", 
+                                      "Latin America and the Caribbean",
+                                      "Oceania", "Developed countries"),
+                   stringsAsFactors = FALSE),
+        M49countries)
 
 
 
