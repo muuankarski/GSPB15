@@ -12,7 +12,7 @@ setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
 # Alcohol production (metric tonnes)
 
 gap.df <- 
-  read.csv(file = "./Data/Raw/AlcoholProduction.csv",
+  read.csv(file = "./database/Data/Raw/AlcoholProduction.csv",
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 gap.df <- 
   gap.df[, c("Country.or.Area.Code", "Year", "Quantity")]
@@ -54,7 +54,7 @@ gap.df <- gap.df[, c("FAOST_CODE", "Year", "BP.AP.GP.TJ.NO")]
 # BagasseProduction
 
 gbp.df <- 
-  read.csv(file = "./Data/Raw/BagasseProduction.csv",
+  read.csv(file = "./database/Data/Raw/BagasseProduction.csv",
            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
 gbp.df <- 
   gbp.df[, c("Country.or.Area.Code", "Year", "Quantity")]
