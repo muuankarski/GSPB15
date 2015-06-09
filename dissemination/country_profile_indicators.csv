@@ -34,18 +34,19 @@ Food Supply,32,Sugar.raw,,,Sugar prod index (2004-06=100) ,,0
 Food Supply,33,QI.NPIN.LVSTCK.IN.NO,,,Net livestock prod index (2004-06=100),,0
 Food Supply,34,Milk.Total,,,Milk prod index (2004-06=100),,0
 Food Supply,35,Meat.indigenous.total,,,Meat prod index (2004-06=100) ,,0
-Food Supply,36,TP.EXVAL.FOOD.USD.NO,,,Food exports (mln US$) ,1000000,0
-Food Supply,37,TP.IMVAL.FOOD.USD.NO,,,Food imports (mln US$) ,1000000,0
-Food Supply,38,TP.NETVAL.CRLSPREP.USD.NO,,,Net trade of cereals (mln US$),1000000,0
-Food Supply,39,TP.NETVAL.FV.USD.NO,,,Net trade of fruit and veg. (mln US$),1000000,0
-Food Supply,40,TP.NETVAL.MEATPREP.USD.NO,,,Net trade of meat (mln US$),1000000,0
-Food Supply,41,TP.NETVAL.MILKEQ.USD.NO,,,Net trade of dairy products (mln US$),1000000,0
-Food Supply,42,net_fish_trade,,,Net trade of fish (mln US$),1000,0
-Environment,43,RL.AREA.FOR.HA.SH,,,Forest area (%),,0
-Environment,44,AQ.WAT.WWAGR.MC.SH,,,Freshwater withdrawn by agriculture (%),,0
-Environment,45,ER.LND.PTLD.ZS,,,Terrestrial protected areas (%),,0
-Environment,46,RL.AREA.AGRORG.HA.SH,,,Organic area (%),,0
-Environment,47,missing,,,Share of renewable water resources (%),,0
-Environment,48,BP.TP.GP.TJ.NO,,,Biofuel production (thousand kt of oil eq.),1000,0
-Environment,49,FO.WP.PQ.TN.NO,,,Wood pellets prod. (thousand tonnes),,0
-Environment,50,GHG.AFOLU.TOT.ECO2EQ.NO,,,"GHG emissions (CO2eq, gigagrams)",1000,0
+Food Supply,36,production_quantity_index,,,Fish prod index (2004-06=100) ,,0
+Food Supply,37,TP.EXVAL.FOOD.USD.NO,,,Food exports (mln US$) ,1000000,0
+Food Supply,38,TP.IMVAL.FOOD.USD.NO,,,Food imports (mln US$) ,1000000,0
+Food Supply,39,TP.NETVAL.CRLSPREP.USD.NO,,,Net trade of cereals (mln US$),1000000,0
+Food Supply,40,TP.NETVAL.FV.USD.NO,,,Net trade of fruit and veg. (mln US$),1000000,0
+Food Supply,41,TP.NETVAL.MEATPREP.USD.NO,,,Net trade of meat (mln US$),1000000,0
+Food Supply,42,TP.NETVAL.MILKEQ.USD.NO,,,Net trade of dairy products (mln US$),1000000,0
+Food Supply,43,net_fish_trade,,,Net trade of fish (mln US$),1000,0
+Environment,44,RL.AREA.FOR.HA.SH,,,Forest area (%),,0
+Environment,45,AQ.WAT.WWAGR.MC.SH,,,Freshwater withdrawn by agriculture (%),,0
+Environment,46,ER.LND.PTLD.ZS,,,Terrestrial protected areas (%),,0
+Environment,47,RL.AREA.AGRORG.HA.SH,,,Organic area (%),,0
+Environment,48,missing,,,Share of renewable water resources (%),,0
+Environment,49,BP.TP.GP.TJ.NO,,,Biofuel production (thousand kt of oil eq.),1000,0
+Environment,50,FO.WP.PQ.TN.NO,,,Wood pellets prod. (thousand tonnes),,0
+Environment,51,GHG.AFOLU.TOT.ECO2EQ.NO,,,"GHG emissions (CO2eq, gigagrams)",1000,0
