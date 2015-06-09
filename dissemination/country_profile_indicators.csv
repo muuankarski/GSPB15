@@ -11,7 +11,7 @@ The setting,9,SL.AGR.EMPL.ZS,,,Employment in agriculture (%),,1
 The setting,10,SL.AGR.EMPL.FE.ZS,,,"Employment in agriculture, female (%)",,1
 The setting,11,total_fertilizers_tonnes_per_ha,,,Total Fertilizers N/P/K (kg/ha),0.001,1
 The setting,12,RF.FERT.NI.TN.SH,,,Nitrogen (tonnes/ha),,1
-The setting,13,energy.intensity.cropland,,,Energy use intensity in agriculture (mj/I$),,1
+The setting,13,energy.for.power.irrigation,,,Energy consumption for power irrigation (min kWh),,0
 The setting,14,EA.PRD.AGRI.KD,,,"Agr. value added per worker (const. 2000, 1000 US$)",1000,1
 Hunger dimensions,15,DES,,,Dietary energy supply (kcal/pc/day),,0
 Hunger dimensions,16,ADESA,,,Average dietary energy supply adequacy (%),,0

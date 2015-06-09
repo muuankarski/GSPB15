@@ -196,17 +196,30 @@ if (!("Sugar.raw" %in% names(sybdata.df))) {
 
 # Energy intensity cropland
 
-if (!("energy.intensity.cropland" %in% names(sybdata.df))) {
-  
+# if (!("energy.intensity.cropland" %in% names(sybdata.df))) {
+#   
+#   library(gdata)
+#   # reading the data
+#   dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=6)
+#   names(dat)[names(dat)=="X.2012"] <- "energy.intensity.cropland"
+#   names(dat)[names(dat)=="AreaCode"] <- "FAOST_CODE"
+#   dat <- dat[c("FAOST_CODE","energy.intensity.cropland")]
+#   dat$Year <- 2014
+#   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+# }
+# 
+
+if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   library(gdata)
-  # reading the data
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=6)
-  names(dat)[names(dat)=="X.2012"] <- "energy.intensity.cropland"
-  names(dat)[names(dat)=="AreaCode"] <- "FAOST_CODE"
-  dat <- dat[c("FAOST_CODE","energy.intensity.cropland")]
-  dat$Year <- 2014
+  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
+  dat <- dat[c("AreaCode","Year","Value")]
+  names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
+  dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)
+  dat$Year <- as.numeric(dat$Year)
+  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
+
 
 
 
