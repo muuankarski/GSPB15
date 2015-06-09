@@ -2211,7 +2211,7 @@ assign(plotInfo$plotName,
               ) 
 )
 ## Export the plot
-export_plot(manual_text = "top 10 countries with water resources per capita, 2000 and 2010",placement="b")
+export_plot(manual_text = "top 10 countries with renewable water resources per capita, 2000 and 2010",placement="b")
 
 
 
@@ -2396,12 +2396,42 @@ export_plot(placement="b")
 
 # 6. Map: Cereal producing countries
 
+if (!("energy.for.power.irrigation" %in% names(sybMaps.df))) {
+  library(gdata)
+  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
+  dat <- dat[c("AreaCode","Year","Value")]
+  names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
+  
+  sybMaps.df <- merge(sybMaps.df,dat,by.x=c("Year","FAO_CODE"),by.y=c("Year","FAOST_CODE"),all.x=TRUE)
+}
+
+
 ## Map info
 mapInfo <- map_info(mapName = "M.P4.ENER.1.6", data = sybMaps.df, mapArea = "Territory")
+#mapInfo$mapData$FAO_CODE[mapInfo$mapData$FAO_CODE == 351] <- 41
+
 ## Create the map
-assign(mapInfo$mapName, meta_plot_map() )
+assign(mapInfo$mapName, 
+       
+       plot_map(shpFile = shpLocation,
+                var = mapInfo$mapVariable,
+                data = mapInfo$mapData,
+                countryCode = mapCountryCode,
+                missCol = NAdataColor,
+                scale = mapInfo$mapScaling,
+                style = classIntAlg,
+                col = mapInfo$mapColors,
+                #manualBreaks = c(-2.89, -1.3, 0, 0.4, 1, 1.92),
+                #                 countryCodeTransp = transpCountries[, "FAO_CODE"],
+                subset = eval(parse(text = "Year %in% c(mapInfo$mapYear) &
+                                  Area %in% c(mapInfo$mapArea)"))
+       ) 
+)
+
 ## export the map
 export_map()
+
+
 
 
 
@@ -2495,10 +2525,11 @@ export_map()
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.CC.1.2")
+#plotInfo$plotYears <- c(2010,2011,2012)
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Greenhouse gas emissions in agriculture",placement="tr")
+export_plot(placement="tr")
 
 # ----------------------------------------------------------------------- #
 # Greehouse gas emissions, highest in 2012
@@ -2510,7 +2541,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Greehouse gas emissions, highest in 2012",placement="l")
+export_plot(manual_text = "Greehouse gas emissions in agriculture, highest in 2012",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -2533,7 +2564,7 @@ plotInfo <- plot_info(plotName = "C.P4.CC.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = "3_1", n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Emissions by subsectors", placement = "b")
+export_plot(manual_text = "Emissions by subsectors in 2012", placement = "b")
 
 # MAPS ----------------------------------------------------------------- #
 # Total greenhouse gas emissions

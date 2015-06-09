@@ -8,7 +8,7 @@ pdflatex GSPB15.tex
 #pdftk GSPB15.pdf cat 60-61 output tables.pdf
 #pdftk GSPB15.pdf cat 53-end output tables_all.pdf
 pdftk GSPB15.pdf cat 1-50 output spreads.pdf
-pdftk GSPB15.pdf cat 127 output table.pdf
+pdftk GSPB15.pdf cat 134 output table.pdf
 convert -density 200 table.pdf table.jpg
 
 
