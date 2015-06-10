@@ -169,15 +169,14 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
 
 
 if (!("production_quantity_index" %in% names(sybdata.df))) {
-  library(gdata)
   dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO")]
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   dat$Year <- paste0("X",dat$Year)
   dat <- spread(dat, Year, FI.PRD.CAPT.TN.NO)
   dat$mean <- rowMeans(dat[c("X2004","X2005","X2006")],na.rm = TRUE)
-  dat[2:45] <- apply(dat[2:45], 2, function(x) x/dat$mean*100)
+  dat[2:(ncol(dat)-1)] <- apply(dat[2:(ncol(dat)-1)], 2, function(x) x/dat$mean*100)
   dat$mean <- NULL
-  dl <- gather(dat, "Year", "production_quantity_index"  ,2:45)
+  dl <- gather(dat, "Year", "production_quantity_index"  ,2:ncol(dat))
   dl$Year <- str_replace_all(dl$Year, "X","")
   dl$Year <- factor(dl$Year)
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
