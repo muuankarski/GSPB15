@@ -2,6 +2,16 @@
 ## GSYB15: Plots and maps for GSPB2015
 ###########################################################################
 
+# Countries with highest share of children under 5 yards of age who are underweight (percent)
+library(dplyr)
+library(xtable)
+library(lazyeval)
+library(tidyr)
+library(stringr)
+library(scales)
+library(ggplot2)
+
+
 # %
 # %                         .^^^\ ../~/\       .==...==.
 # %                        .^\ /\  \    ^-------^^ O    O,
@@ -214,11 +224,6 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.3")
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(placement="l")
-
-tmp <- sybdata.df
-ggplot(tmp, aes(x=Year,y=EA.PRD.AGRI.KD,group=FAOST_CODE)) +
-  geom_point() + geom_line() + 
-  geom_text(data=tmp[tmp$Year == 2013,],aes(x=Year,y=EA.PRD.AGRI.KD,label=FAO_TABLE_NAME))
 
 
 # C.P1.ECON.1.4 -----------------------------------------------------------
@@ -474,7 +479,8 @@ if (!("credit_to_agriculture" %in% names(sybdata.df))) {
   gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
   gg <- gg[gg$ElementName == "Value US$",] 
   gg <- gg[gg$ItemName == "Total Credit",] 
-  
+  # into millions
+  gg$Value <- gg$Value / 1000000
   df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
   df2016$Year <- 2000
   df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
@@ -501,7 +507,9 @@ assign(plotInfo$plotName,
                 scale = plotInfo$scaling,
                 x_lab = plotInfo$xPlotLab,
                 y_lab = plotInfo$yPlotLab,
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]))
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) + scale_y_continuous(labels=french) +
+         labs(y="million US$")
+       )
 C.P1.INV.1.3 <- C.P1.INV.1.3 + 
   scale_fill_manual(labels = c("1999-2001", "2010-12"),
                     values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
@@ -518,13 +526,9 @@ export_plot(placement = "l")
 plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
-# # Feed in the data
-# if (!("remittances" %in% names(sybdata.df))){
-#   load("./database/Data/Processed/invest3.RData")
-#   sybdata.df <- full_join(sybdata.df,invest3)
-# }
-
 ## Plot
+# convert into thousand dollars
+
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 export_plot(placement = "l")
@@ -540,7 +544,25 @@ if (!("Bilateral" %in% names(sybdata.df)) & !("Multilateral" %in% names(sybdata.
   load("./database/Data/Processed/invest2.RData")
   sybdata.df <- full_join(sybdata.df,invest2)
 }
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +   labs(y="million US$")
+       
+       
+       )
 ## Export the plot
 export_plot(manual_text = "ODA to Agriculture and related sectors, by bilateral/multilateral flow, 1973-2013", placement = "b")
 
@@ -730,7 +752,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]
-       )
+       ) + labs(y="million people")
        
 )
 ## Export the plot
@@ -770,7 +792,7 @@ assign(mapInfo$mapName,
        
        )
 ## export the map
-export_map(manual_text = "Prevalence of undernourishment (2014-16)")
+export_map(manual_text = "Prevalence of undernourishment (percent, 2014-16)")
 
 
 
@@ -1379,6 +1401,7 @@ export_plot(manual_text = "Percentage of children under 5 years of age affected 
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.5")
+plotInfo$legendLabels <- c("Water source","Sanitation facilities")
 ## Plot
 assign(plotInfo$plotName, 
        
@@ -1392,8 +1415,7 @@ assign(plotInfo$plotName,
                 scale = plotInfo$scaling,
                 x_lab = plotInfo$xPlotLab,
                 y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                legend_lab = plotInfo$legendLabels,
                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
        )
        
@@ -1552,6 +1574,18 @@ export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
 # DES (kcal/cap/day), 2009-11
 
 ## Map info
+
+if (!("FS.DA.ADESA.PCT3D" %in% names(sybMaps.df))) {
+  
+  dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+  dat <- dat[c("FAOST_CODE","Year","FS.DA.ADESA.PCT3D")]
+  dat <- dat[!is.na(dat$FS.DA.ADESA.PCT3D),]
+  sybMaps.df <- merge(sybMaps.df,dat,by.x=c("FAO_CODE","Year"),by.y=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
+
+
+
 mapInfo <- map_info(mapName = "M.P3.DES.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
@@ -1604,7 +1638,6 @@ export_plot(manual_text="Top 20 food producing countries (based on food net per 
 # 5. Bar chart: Growth in cereals production (production, harvested area, yield), world, 2000-MRY
 
 
- # THIS HAS TO CHANGE!!!
 ## Info
 if (!("change_QC.YIELD.CRLS.HG.NO" %in% names(sybdata.df))) {
 
@@ -1613,21 +1646,22 @@ if (!("change_QC.YIELD.CRLS.HG.NO" %in% names(sybdata.df))) {
                                                       "QC.YIELD.CRLS.HG.NO")] # Cereals yield (hg/ha)
   tmp <- tmp[!is.na(tmp$Area),]
   tmp <- tmp[!is.na(tmp$QC.PRD.CRLS.TN.NO),]
-  tmp <- tmp[tmp$Year %in% c(2000,2013),]
-  tmp <- gather(tmp, 
+  tmp <- tmp[tmp$Year >= 2000,]
+  tmp <- gather(tmp,
                 variable,
                 value,
                 4:6)
-  tmp <- spread(tmp,
-                Year,
-                value)
-  tmp$change <- tmp[[5]]/tmp[[4]]*100-100
-  tmp <- tmp[c("FAOST_CODE","variable","change")]
+  # Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
+  d <- ddply(tmp,"variable",transform,
+             Growth=c(NA,exp(diff(log(value)))-1))
+  dd <- d %>% group_by(variable) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm = TRUE)*100)
+  dd$FAOST_CODE <- 5000
+  tmp <- dd
   tmp$variable <- as.character(tmp$variable)
   tmp$variable <- paste0("change_",tmp$variable)
   tmp <- spread(tmp,
                 variable,
-                change)
+                mean_growth)
   tmp$Year <- 2013
   sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
@@ -1638,7 +1672,7 @@ plotInfo$legendLabels <- c("Production","Harvested area","Yield")
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Growth in cereals production (production, harvested area, yield), world, 2000-13",placement="b")
+export_plot(manual_text = "Growth in cereals production (production, harvested area, yield) (mean annual growth 2000-13)",placement="b")
 
 ##### -------------------------------------------------------
 # MAPS
@@ -1766,19 +1800,60 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.LIVE.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+# into millions tonnes
+sybdata.df$QL.PRD.MILK.TN.NO <- sybdata.df$QL.PRD.MILK.TN.NO / 1000000
+#
+assign(plotInfo$plotName,  
+       
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + labs(y="milllion tonnes")
+       
+       )
 ## Export the plot
-export_plot(manual_text = "(Per capita) TOTAL milk production, top 10 and bottom 10", placement="l")
+export_plot(manual_text = "Total milk production, top 10 and bottom 10", placement="l")
 
 # -----------------------------------------------------------
 # Per capita egg production, top 10 and bottom 10
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.LIVE.1.4")
-## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+# into millions tonnes
+sybdata.df$QL.PRD.EGG.TN.NO <- sybdata.df$QL.PRD.EGG.TN.NO / 1000000
+#
+assign(plotInfo$plotName,  
+       
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + labs(y="milllion tonnes")
+       
+)
 ## Export the plot
-export_plot(manual_text = "(Per capita) TOTAL egg production, top 10 and bottom 10", placement="r")
+export_plot(manual_text = "Total egg production, top 10 and bottom 10", placement="r")
 
 
 # -----------------------------------------------------------
@@ -1877,10 +1952,30 @@ export_plot(manual_text = "Aquaculture vs. capture production", placement = "tr"
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.3")
+# into millions tonnes
+sybdata.df$FI.PRD.CAPT.TN.NO <- sybdata.df$FI.PRD.CAPT.TN.NO / 1000000
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + labs(y="million tonnes")
+       
+       
+       )
 ## Export the plot
-export_plot(manual_text = "20 countries with highest value of capture production", placement="l")
+export_plot(manual_text = "20 countries with highest value of capture production (2012)", placement="l")
 
 # -----------------------------------------------------------
 # 20 countries with highest value of aquaculture production
@@ -1888,9 +1983,29 @@ export_plot(manual_text = "20 countries with highest value of capture production
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.4")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+sybdata.df$FI.PRD.AQ.TN.NO <- sybdata.df$FI.PRD.AQ.TN.NO / 1000000
+## Plot
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + labs(y="million tonnes")
+       
+       
+)
 ## Export the plot
-export_plot(manual_text = "20 countries with highest value of aquaculture production", placement="r")
+export_plot(manual_text = "20 countries with highest value of aquaculture production (2012)", placement="r")
 
 # 5. State of the world’s fishery stocks (see chart 79 in SYB2013)
 # Has
@@ -1934,17 +2049,15 @@ export_plot(manual_text = "State of the world's fishery stocks (1974 - 2011)", p
 
 # 6. Map: Aquaculture producing countries, MRY (see map 48, WDI)
 
-
 if (!("production_quantity_index" %in% names(sybMaps.df))) {
-  library(gdata)
   dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO")]
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   dat$Year <- paste0("X",dat$Year)
   dat <- spread(dat, Year, FI.PRD.CAPT.TN.NO)
   dat$mean <- rowMeans(dat[c("X2004","X2005","X2006")],na.rm = TRUE)
-  dat[2:45] <- apply(dat[2:45], 2, function(x) x/dat$mean*100)
+  dat[2:(ncol(dat)-1)] <- apply(dat[2:(ncol(dat)-1)], 2, function(x) x/dat$mean*100)
   dat$mean <- NULL
-  dl <- gather(dat, "Year", "production_quantity_index"  ,2:45)
+  dl <- gather(dat, "Year", "production_quantity_index"  ,2:ncol(dat))
   dl$Year <- str_replace_all(dl$Year, "X","")
   dl$Year <- factor(dl$Year)
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
@@ -1954,16 +2067,13 @@ if (!("production_quantity_index" %in% names(sybMaps.df))) {
 }
 
 
-DOES NOT WORK SOME DATA ISSUES!!
-
-
 ## Map info
 mapInfo <- map_info(mapName = "M.P3.FISH.1.6", data = sybMaps.df, mapArea = "Territory")
-
+mapInfo$mapData <- mapInfo$mapData[!is.infinite(mapInfo$mapData$production_quantity_index),]
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map(manual_text="Aquaculture producing countries in 2012 (tonnes)")
+export_map()
 
 
 ###########################################################################

@@ -1,7 +1,7 @@
 #######################################################################
 # Plot plotting!
-
-
+library(scales)
+french = function(x) format(x, big.mark = " ")
 
 meta_plot_plot <- function(plot_type=1, n_colors=2) {
 
@@ -75,7 +75,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
 	#                 legend_lab = subset(meta.lst$FULL,
 	#                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
 		        col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]]
-		        ) 
+		        ) + scale_y_continuous(labels=french)
  
     
   }
@@ -126,7 +126,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
                         legend_lab = subset(meta.lst$FULL,
                                            subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                         col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]]
-                        )
+                        ) + scale_y_continuous(labels=french)
 
   }
   if (plot_type == "3ml"){
