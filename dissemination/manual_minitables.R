@@ -33,7 +33,7 @@ dw <- dw[c(7,3,4,1,2,5,6),]
 print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UNU.1.2.tex")
 
-
+## "Countries with highest share of children under 5 years of age who are underweight
 
 rrr <- function(varname) {
   filter(dat, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
@@ -65,14 +65,16 @@ d <- d[d$Element == "Production",]
 d <- d[d$Year >= 2000,]
 library(tidyr)
 d$Year <- paste0("X",d$Year)
-dw <- spread(d,
-             Year,
-             Value)
-dw$relative_change <- dw$X2013/dw$X2000*100
-rc <- arrange(dw, -relative_change)[1:5,c("Item","relative_change")]
+d <- d[c("Item","Year","Value")]
+library(plyr)
+# Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
+d <- ddply(d,"Item",transform,
+           Growth=c(NA,exp(diff(log(Value)))-1))
+dd <- d %>% group_by(Item) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm = TRUE)*100)
+rc <- arrange(dd, -mean_growth)[1:5,c("Item","mean_growth")]
 names(rc) <- c("","%")
 
-print.xtable(xtable(rc, caption = "fastest growing items based on production quantities (2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(rc, caption = "Fastest growing items based on production quantities (mean annual growth rate 2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
 
 
@@ -98,12 +100,12 @@ v2000 <- d[c("Item","Value")]
 gg <- merge(v2000,v2013,by="Item")
 gg$Value.x <- gg$Value.x/1000
 gg$Value.y <- gg$Value.y/1000
+gg <- arrange(gg, -gg$Value.y)
 names(gg) <- c("","2000", "2013")
 gg[[2]] <- round(gg[[2]],0)
 gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
-
 
 print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
