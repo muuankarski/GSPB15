@@ -1504,35 +1504,51 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 # 5. Line graph: DES (kcal/cap/day), by region, 2000-2011
 # 6. Map: DES (kcal/cap/day), 2009-11
 # 
-# 
-# plotInfo <- plot_info(plotName = "C.P3.DES.1.2")
-# load("../ICN2PB14/Data/Processed/Metadata.RData")
-# labels <- subset(meta.lst$FULL,
-#                  subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"]
-# labels[1] <- "Cereals\n(excl. beer)"
-# labels[3] <- "Sugar and\nsweeteners"
-# labels[4] <- "Milk\n(excl. butter)"
-# labels[6] <- "Veg. oils and\nanimal fats"
-# ## Plot
-# load("../ICN2PB14/Data/Processed/icn2.RData")
-# assign(plotInfo$plotName,
-#        plot_syb(x = plotInfo$xAxis,
-#                 y = plotInfo$yAxis,
-#                 group = plotInfo$group,
-#                 type = plotInfo$plotType,
-#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-#                                     Area %in% c(plotInfo$plotArea)")),
-#                 data = icn2.df,
-#                 scale = plotInfo$scaling,
-#                 x_lab = plotInfo$xPlotLab,
-#                 y_lab = plotInfo$yPlotLab,
-#                 legend_lab = labels,
-#                 col_pallete = plot_colors(part = plotInfo$plotPart, 7)[["Sub"]]) +
-#          guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3))
-#        )
-# export_plot(manual_text="Share of DES (2009-2011)",placement="tr")
-# load(file = "./database/Data/Processed/Metadata.RData")
-# meta.df <- meta.lst$FULL
+
+# DES pie chart
+load("../ICN2PB14/Data/Processed/icn2.RData")
+## Plot
+despie <- icn2.df[icn2.df$Year %in% c(2009:2011), c("FAOST_CODE","Year","FAO_TABLE_NAME","FBS.SDES.CRLS.PCT3D","FBS.SDES.SR.PCT3D","FBS.SDES.SS.PCT3D","FBS.SDES.MO.PCT3D","FBS.SDES.VOAF.PCT3D","FBS.SDES.MEB.PCT3D")]
+despie <- despie[despie$FAOST_CODE %in% "5000",]
+
+dw <- gather(despie,
+             "var",
+             "value",
+             4:9)
+d <- dw %>% group_by(var) %>% dplyr::summarise(mean = mean(value))
+d <- d  %>% mutate(sum = sum(mean)) 
+
+d$var <- as.character(d$var)
+d$var[d$var == "FBS.SDES.CRLS.PCT3D"] <- "Cereals\n(excl. beer)"
+d$var[d$var == "FBS.SDES.SR.PCT3D"] <- "Starchy roots"
+d$var[d$var == "FBS.SDES.SS.PCT3D"] <- "Sugar and\nsweeteners"
+d$var[d$var == "FBS.SDES.MO.PCT3D"] <- "Meat and offals"
+d$var[d$var == "FBS.SDES.VOAF.PCT3D"] <- "VMilk\n(excl. butter)"
+d$var[d$var == "FBS.SDES.MEB.PCT3D"] <- "Veg. oils and\nanimal fats"
+
+p <- ggplot(d, aes(x=sum/2, y = mean, fill = var, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "right")
+p <- p + theme(text = element_text(size=11, family="PT Sans"))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.height = unit(7, "mm"))
+p <- p + theme(legend.key.width = unit(3, "mm"))
+p <- p + theme(panel.grid=element_blank(), panel.border=element_blank())
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.DES.1.2.pdf", width=  3, height = 2.5)
+embed_fonts("./publication/Plots/C.P3.DES.1.2.pdf")
+
+
+
 # ----------------------------------------------------------------------- #
 # Dietary energy supply, top 20 (2000-02 vs. 2009-11)
 
@@ -1859,12 +1875,41 @@ export_plot(manual_text = "Total egg production, top 10 and bottom 10", placemen
 # -----------------------------------------------------------
 # Proportional pie charts on pig production, by region, 2000 vs. MRY
 
-## Info
-# plotInfo <- plot_info(plotName = "C.P3.LIVE.1.5")
-# ## Plot
-# assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
-# ## Export the plot
-# export_plot(manual_text = "(Per capita) TOTAL egg production, top 10 and bottom 10", placement="r")
+## Piechart for livestock
+
+load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+d <- dat[dat$CountryCode %in% c(5100,5200,5300,5400,5500),] # World
+d <- d[d$Item == "Pigs",]
+d <- d[d$Year %in% c(2000,2013),]
+d <- d  %>% group_by(Year) %>% mutate(sum = sum(Value)) 
+d$share <- round(d$Value/d$sum*100,0)
+d$Country <- str_replace_all(d$Country, "\\ \\+\\ \\(Total\\)","")
+
+colPart3 <- plot_colors(part = 3, 12)
+
+
+d <- d %>% group_by(Year) %>% mutate(pos = cumsum(share)- share/2)
+
+p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum))
+p <- p + geom_bar(position="fill", stat="identity") 
+p <- p + facet_wrap(~Year)
+p <- p + coord_polar("y")
+p <- p + theme_minimal()
+p <- p + theme(legend.position = "top")
+p <- p + theme(text = element_text(size=11, family="PT Sans"))
+p <- p + theme(axis.text = element_blank())
+p <- p + theme(axis.title = element_blank())
+p <- p + theme(axis.ticks = element_blank())
+p <- p + theme(panel.grid.minor = element_blank())
+p <- p + theme(panel.grid.major = element_blank())
+p <- p + scale_fill_manual(values=rev(colPart3$Sub))
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.key.size = unit(3, "mm"))
+p <- p + labs(x=NULL, y=NULL)
+p <- p + theme(plot.margin=unit(c(0,0,0,0),"mm"))
+ggsave(p, filename = "./publication/Plots/C.P3.LIVE.1.5.pdf", width=  6, height = 3)
+embed_fonts("./publication/Plots/C.P3.LIVE.1.5.pdf")
+
 
 ##### -------------------------------------------------------
 # MAPS
@@ -2353,11 +2398,22 @@ export_plot(manual_text = "top 10 countries with renewable water resources per c
 # Freshwater resources withdrawn by agriculture
 
 ## Map info
+
+
+if (!("pooled.freshwater" %in% names(sybMaps.df))) {
+  
+  water <- sybMaps.df[c("FAO_CODE","Year","AQ.WAT.RFRWAGR.MC.SH")]
+  water <- water[!is.na(water$AQ.WAT.RFRWAGR.MC.SH),]
+  d <- water %>% group_by(FAO_CODE) %>% dplyr::summarise(pooled.freshwater = mean(AQ.WAT.RFRWAGR.MC.SH, na.rm = TRUE))
+  d$Year <- 2014
+  sybMaps.df <- merge(sybMaps.df,d,by=c("FAO_CODE","Year"), all.x=TRUE)
+}
+
 mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013)")
 
 
 ###########################################################################
@@ -2661,7 +2717,7 @@ export_map()
 plotInfo <- plot_info(plotName = "C.P4.CC.1.2")
 #plotInfo$plotYears <- c(2010,2011,2012)
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
 ## Export the plot
 export_plot(placement="tr")
 

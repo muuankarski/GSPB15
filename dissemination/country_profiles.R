@@ -93,25 +93,7 @@ if (!("total_fertilizers_tonnes_per_ha" %in% names(sybdata.df))) {
   sybdata.df$total_fertilizers_tonnes_per_ha <- sybdata.df$total_fertilizers_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
 }
 
-## Crops processed
 
-# if (!("total_fertilizers_tonnes_per_ha" %in% names(sybdata.df))) {
-#   
-#   ## 
-#   dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Indices_E_All_Data.csv")
-#   
-#   dat <- dat[dat$Item %in% c("Phosphate Fertilizers (P205 total nutrients)",
-#                              "Potash Fertilizers (K20 total nutrients)",
-#                              "itrogen Fertilizers (N total nutrients)") &
-#                dat$Element == "Consumption in nutrients" &
-#                dat$Unit == "tonnes of nutrients",
-#              c("Country.Code","Year","Value")]
-#   
-#   names(dat) <- c("FAOST_CODE","Year","total_fertilizers_tonnes")
-#   
-#   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
-#   sybdata.df$total_fertilizers_tonnes_per_ha <- sybdata.df$total_fertilizers_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
-# }
 
 if (!("aqua_culture_share" %in% names(sybdata.df))) {
   
@@ -237,8 +219,6 @@ if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
-
-
 
 
 

@@ -10,7 +10,9 @@ pdflatex GSPB15.tex
 pdftk GSPB15.pdf cat 1-50 output spreads.pdf
 pdftk GSPB15.pdf cat 134 output table.pdf
 convert -density 200 table.pdf table.jpg
+pdftk GSPB15.pdf cat 179 output table2.pdf
+convert -density 200 table2.pdf table2.jpg
 
 
 # upload the output pdf to kapsi
-scp GSPB15.pdf spreads.pdf table.jpg comment_charts.html comment_tables.html output muuankarski@kapsi.fi:public_html/fao/GSPB15
+scp GSPB15.pdf spreads.pdf table.jpg table2.jpg comment_charts.html comment_tables.html output muuankarski@kapsi.fi:public_html/fao/GSPB15
