@@ -524,14 +524,20 @@ export_plot(placement = "l")
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
-plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
-## Plot
-# convert into thousand dollars
+if (!("agri_orientation_index" %in% names(sybdata.df))) {
+  library(gdata)
+  gg <- read.xls("~/fao_temp/pocketbook_temp/investments/Lowest and Top 20 AOI GEA_final_Stat Pocketbook.xlsx")
+  gg <- gg[c(3,5)]
+  gg$Year <- 2010
+  names(gg)[names(gg)=="AOI.average..2008.2012."] <- "agri_orientation_index"
+  names(gg)[names(gg)=="countrycode"] <- "FAOST_CODE"
+  sybdata.df <- merge(sybdata.df,gg,by=c("FAOST_CODE","Year"), all.x=TRUE)  
+}
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement = "l")
+export_plot(manual_text="Countries in terms of Agri Orientation Index (mean 2008-12)",placement = "l")
 
 # 
 # ## ------------------------------------------------------------------------
