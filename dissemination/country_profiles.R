@@ -25,6 +25,54 @@ library(scales)
 library(ggplot2)
 
 
+# merge latest FSI data from Filippo
+
+if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
+  
+  dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
+  dat$FAOST_CODE <- as.factor(dat$FAOST_CODE)
+  dat$FAOST_CODE <- as.numeric(levels(dat$FAOST_CODE))[dat$FAOST_CODE]
+  # SOFI to M49 conversions
+  # Asia
+  dat$FAOST_CODE[dat$FAOST_CODE == 5853] <- 5300
+  dat$FAOST_CODE[dat$FAOST_CODE == 5001] <- 5000
+  
+  # Add Area var from sybdata.df
+  tmp <- sybdata.df[!duplicated(dat[c("FAOST_CODE")]),]
+  dat <- merge(dat,tmp[c("FAOST_CODE","Area")],by="FAOST_CODE")
+  dat <- merge(dat,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")],by="FAOST_CODE", all.x=TRUE)
+  # M49LatinAmericaAndCaribbean
+  dat$Area[dat$FAOST_CODE == 5205] <- "M49macroReg"
+  # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "<0.1"] <- 0.01
+  # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "ns"] <- 0
+  dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
+  dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
+  dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
+  dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
+  dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
+  dat$FS.OA.POFI.PCT3D1 <- as.factor(dat$FS.OA.POFI.PCT3D1)
+  dat$FS.OA.POFI.PCT3D1 <- as.numeric(levels(dat$FS.OA.POFI.PCT3D1))[dat$FS.OA.POFI.PCT3D1]
+  
+  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
+  vars_to_exclude <- names(sybdata.df)[names(sybdata.df) %in% names(dat)][c(-1:-4,-14)]
+  myvars <- names(sybdata.df) %in% vars_to_exclude
+  sybdata.df <- sybdata.df[!myvars]
+
+#   x1 <- sybdata.df[c("FAOST_CODE","Year")]
+#   x2 <- dat[c("FAOST_CODE","Year")]
+#   
+#   x1 <- x1[!duplicated(x1[c("FAOST_CODE","Year")]),]
+#   x2 <- x2[!duplicated(x2[c("FAOST_CODE","Year")]),]
+  
+#   unique(dat$FAOST_CODE)[!(unique(dat$FAOST_CODE) %in% unique(sybdata.df$FAOST_CODE))]
+#   unique(sybdata.df$FAOST_CODE)[!(unique(sybdata.df$FAOST_CODE) %in% unique(dat$FAOST_CODE))]
+  
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year","Area","FAO_TABLE_NAME","SHORT_NAME"),all.x=TRUE)
+}
+
+
+
+
 if (!("area_harvested" %in% names(sybdata.df))) {
   
   ## Area harvested
@@ -73,24 +121,33 @@ if (!("share_of_des_cereals_roots_tubers" %in% names(sybdata.df))) {
 
 ## Fertilisers
 
-if (!("total_fertilizers_tonnes_per_ha" %in% names(sybdata.df))) {
+if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
   
   ## 
-  dat <- read.csv("~/fao_temp/pocketbook_temp/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).csv")
+  dat <- read.csv("~/fao_temp/pocketbook_temp/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).csv", stringsAsFactors = FALSE)
   
   dat <- dat[dat$Item %in% c("Phosphate Fertilizers (P205 total nutrients)",
                              "Potash Fertilizers (K20 total nutrients)",
-                             "itrogen Fertilizers (N total nutrients)") &
+                             "Nitrogen Fertilizers (N total nutrients)") &
                dat$Element == "Consumption in nutrients" &
                dat$Unit == "tonnes of nutrients",
              c("Country.Code","Year","Value","Item")]
   
   names(dat) <- c("FAOST_CODE","Year","value","Item")
-
-  dat2 <- dat %>% group_by(FAOST_CODE,Year) %>% dplyr::summarise(total_fertilizers_tonnes = sum(value, na.rm=TRUE))
+  dat$Item[dat$Item == "Phosphate Fertilizers (P205 total nutrients)"] <- "phosphate_tonnes"
+  dat$Item[dat$Item == "Potash Fertilizers (K20 total nutrients)"] <- "potash_tonnes"
+  dat$Item[dat$Item == "Nitrogen Fertilizers (N total nutrients)"] <- "nitrogen_tonnes"
   
-  sybdata.df <- merge(sybdata.df,dat2,by=c("FAOST_CODE","Year"), all.x=TRUE)
-  sybdata.df$total_fertilizers_tonnes_per_ha <- sybdata.df$total_fertilizers_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
+  dat <- spread(dat, Item, value)
+  
+  for (i in 1:ncol(dat)) {
+    dat[[i]] <- as.numeric(dat[[i]])
+  }
+  
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
+  sybdata.df$phosphate_tonnes_per_ha <- sybdata.df$phosphate_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
+  sybdata.df$potash_tonnes_per_ha <- sybdata.df$potash_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
+  sybdata.df$nitrogen_tonnes_per_ha <- sybdata.df$nitrogen_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
 }
 
 
@@ -208,6 +265,19 @@ if (!("Sugar.raw" %in% names(sybdata.df))) {
 #   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 # }
 # 
+
+if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
+  dat <- dat[c("AreaCode","Year","Value")]
+  names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
+  dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)
+  dat$Year <- as.numeric(dat$Year)
+  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
+## bioenergy
 
 if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   library(gdata)
@@ -352,7 +422,10 @@ for (i in 1:nrow(M49countries)) {
   for (part in 1:length(unique(indicators.df[, "PART"]))) {
 #     cat("\t\\multicolumn{4}{l}{\\textcolor{",paste0("part", part),"}{\\textbf{\\large{", unique(indicators.df$PART)[part], "}}}} \\\\ \n",
 #         file = fileOut, append = TRUE, sep = "")
-    cat("\t\\multicolumn{4}{l}{\\textcolor{FAOblue}{\\textbf{\\large{", unique(indicators.df$PART)[part], "}}}} \\\\ \n",
+    if (part %in% c(4,5)) {
+      cat("\t\\multicolumn{4}{l}{\\textbf{\\normalsize{", unique(indicators.df$PART)[part], "}}} \\\\ \n",
+        file = fileOut, append = TRUE, sep = "")
+      } else cat("\t\\multicolumn{4}{l}{\\textcolor{FAOblue}{\\textbf{\\large{", unique(indicators.df$PART)[part], "}}}} \\\\ \n",
         file = fileOut, append = TRUE, sep = "")
     subindicators.df = indicators.df[indicators.df[, "PART"] == unique(indicators.df$PART)[part], ]
     for (j in 1:nrow(subindicators.df)) {
