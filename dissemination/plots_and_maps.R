@@ -524,20 +524,35 @@ export_plot(placement = "l")
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
+plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
-if (!("agri_orientation_index" %in% names(sybdata.df))) {
-  library(gdata)
-  gg <- read.xls("~/fao_temp/pocketbook_temp/investments/Lowest and Top 20 AOI GEA_final_Stat Pocketbook.xlsx")
-  gg <- gg[c(3,5)]
-  gg$Year <- 2010
-  names(gg)[names(gg)=="AOI.average..2008.2012."] <- "agri_orientation_index"
-  names(gg)[names(gg)=="countrycode"] <- "FAOST_CODE"
-  sybdata.df <- merge(sybdata.df,gg,by=c("FAOST_CODE","Year"), all.x=TRUE)  
+if (!("credit_to_agriculture" %in% names(sybdata.df))) {
+  gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
+  gg <- gg[gg$ElementName == "Value US$",] 
+  gg <- gg[gg$ItemName == "Total Credit",] 
+  # into millions
+  gg$Value <- gg$Value / 1000000
+  df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+  df2016$Year <- 2000
+  df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
+  df2017$Year <- 2012
+  
+  tmp <- rbind(df2016,df2017)
+  names(tmp) <- c("FAOST_CODE","credit_to_agriculture","Year")
+  
+  sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"), all.x=TRUE)  
 }
+
+
+
+
+
+## Plot
+# convert into thousand dollars
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Countries in terms of Agri Orientation Index (mean 2008-12)",placement = "l")
+export_plot(placement = "l")
 
 # 
 # ## ------------------------------------------------------------------------
