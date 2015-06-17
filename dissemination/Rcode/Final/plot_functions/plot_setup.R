@@ -143,7 +143,7 @@ meta_plot_plot <- function(plot_type=1, n_colors=2) {
                   y_lab = plotInfo$yPlotLab,
                   legend_lab = plotInfo$legendLabels,
                   col_pallete = plot_colors(part = plotInfo$plotPart, n_colors)[["Sub"]]
-    )
+    ) + scale_y_continuous(labels=french)
     
   }
   

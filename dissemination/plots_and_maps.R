@@ -2668,17 +2668,59 @@ export_map()
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.2")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=6) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                #y_lab = expression("    thousand gigagrams CO"[2] * "eq"),
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+       ) +
+         theme(axis.text.x = element_blank()) + 
+         guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
+         labs(y="million m3")
+       
+       )
 ## Export the plot
-export_plot(manual_text = "production of select forest product", placement = "tr")
+export_plot(manual_text = "Production of selected forest product", placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Top and bottom 10 exporters of forest products
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.3")
+
+sybdata.df$FO.EXVAL.TOT.USD.NO.million <- sybdata.df$FO.EXVAL.TOT.USD.NO / 1000000
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         labs(y="billion US$") +
+         theme(axis.text.x =element_text(angle = 45))
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Top and bottom 10 exporters of forest products",placement="l")
 
@@ -2688,8 +2730,27 @@ export_plot(manual_text = "Top and bottom 10 exporters of forest products",place
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.4")
+sybdata.df$FO.IMVAL.TOT.USD.NO.million <- sybdata.df$FO.IMVAL.TOT.USD.NO / 1000000
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         labs(y="billion US$") +
+         theme(axis.text.x =element_text(angle = 45))
+)
 ## Export the plot
 export_plot(manual_text = "Top and bottom 10 importers of forest products",placement="r")
 
