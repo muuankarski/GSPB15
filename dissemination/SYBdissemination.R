@@ -128,13 +128,6 @@ load("./database/FAOcountryProfile.RData")
 load(file = "./database/Data/Processed/SYB.RData")
 sybdata.df <- SYB.df; rm(SYB.df)
 
-##############################################################
-##############################################################
-## Pppulation threshold
-#############################################################
-# pop_threshold <- 50000 # 
-# sybdata.df <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO >= pop_threshold,]
-
 
 
 
@@ -203,6 +196,9 @@ sybdata.df[sybdata.df[, "SHORT_NAME"] == "American Samoa" &
             !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "American\nSamoa"
 sybdata.df[sybdata.df[, "SHORT_NAME"] == "Western Sahara" & 
            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "Western\nSahara"
+# REMOVE Western Sahara
+sybdata.df <- sybdata.df[sybdata.df$FAOST_CODE != 205, ]
+
 
 
 
@@ -219,8 +215,17 @@ sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" &
             !is.na(sybdata.df[, "FAO_TABLE_NAME"]), "FAO_TABLE_NAME"] <-  "West Bank and Gaza Strip"
 
 
+##############################################################
+##############################################################
+## Pppulation threshold
+#############################################################
+pop_threshold <- 50000 # 
+small_countries <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO <= pop_threshold,c("FAOST_CODE","Year","SHORT_NAME")]
+small_countries <- small_countries[!duplicated(small_countries[c("FAOST_CODE")]),]
+small_countries_FAOST_CODE <- unique(small_countries$FAOST_CODE)
+small_countries_FAOST_CODE <- small_countries_FAOST_CODE[!is.na(small_countries_FAOST_CODE)]
 
-
+sybdata.df <- sybdata.df[!(sybdata.df$FAOST_CODE %in% small_countries_FAOST_CODE), ]
 
 # Plots -------------------------------------------------------------
 

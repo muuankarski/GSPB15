@@ -125,13 +125,12 @@ sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
 sybdata.df$BOA.TPBS.POP.PPL.GR10 <- ifelse(sybdata.df$Year == 2015, sybdata.df$new_var, sybdata.df$OA.TPBS.POP.PPL.GR10)
 sybdata.df$new_var <- NULL
 sybdata_temp <- sybdata.df
-# REMOVE Western Sahara
-sybdata.df <- sybdata.df[sybdata.df[, "SHORT_NAME"] != "Western\nSahara", ]
+
 
 ## Create the plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text= "Population, average annual growth (2004-2014)", placement="l")
 sybdata.df <- sybdata_temp
 
 
@@ -524,35 +523,21 @@ export_plot(placement = "l")
 # 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
-plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 
-if (!("credit_to_agriculture" %in% names(sybdata.df))) {
-  gg <- read.csv("./database/Data/Raw/credit_to_agriculture.csv")
-  gg <- gg[gg$ElementName == "Value US$",] 
-  gg <- gg[gg$ItemName == "Total Credit",] 
-  # into millions
-  gg$Value <- gg$Value / 1000000
-  df2016 <- filter(gg, Year %in% c(1999:2001)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
-  df2016$Year <- 2000
-  df2017 <- filter(gg, Year %in% c(2010:2012)) %>% group_by(AreaCode) %>% dplyr::summarise(value = mean(Value, na.rm=TRUE))
-  df2017$Year <- 2012
-  
-  tmp <- rbind(df2016,df2017)
-  names(tmp) <- c("FAOST_CODE","credit_to_agriculture","Year")
-  
-  sybdata.df <- merge(sybdata.df,tmp,by=c("FAOST_CODE","Year"), all.x=TRUE)  
+if (!("agri_orientation_index" %in% names(sybdata.df))) {
+  library(gdata)
+  gg <- read.xls("~/fao_temp/pocketbook_temp/investments/Lowest and Top 20 AOI GEA_final_Stat Pocketbook.xlsx")
+  gg <- gg[c(3,5)]
+  gg$Year <- 2010
+  names(gg)[names(gg)=="AOI.average..2008.2012."] <- "agri_orientation_index"
+  names(gg)[names(gg)=="countrycode"] <- "FAOST_CODE"
+  sybdata.df <- merge(sybdata.df,gg,by=c("FAOST_CODE","Year"), all.x=TRUE)  
 }
-
-
-
-
-
-## Plot
-# convert into thousand dollars
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement = "l")
+export_plot(manual_text="Countries in terms of Agri Orientation Index (mean 2008-12)",placement = "l")
+
 
 # 
 # ## ------------------------------------------------------------------------
@@ -2501,15 +2486,24 @@ plotInfo <- plot_info(plotName = "C.P4.ENER.1.3")
 ## Plot
 
 if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
-  d <- dat %>% group_by(FAO.Country.code) %>% dplyr::summarise(sum = sum(Value))
-  names(d) <- c("FAOST_CODE","total_energy_in_argiculture")
-  d$Year <- 2012
-  d$FAOST_CODE <- as.numeric(levels(d$FAOST_CODE))[d$FAOST_CODE]
-  d$FAOST_CODE[d$FAOST_CODE == 41] <- 351
-  sybdata.df <- merge(sybdata.df,d,by=c("FAOST_CODE","Year"),all.x=TRUE)
-}
+  codes_vs_names <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
+  codes_vs_names <- codes_vs_names[c("FAO.Country.code","Country")]
+  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO.Country.code","Country")]),]
+  names(codes_vs_names) <- c("FAOST_CODE","Country")
+  codes_vs_names$Country <- as.character(codes_vs_names$Country)
+  codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
+  # reading the data
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=2, skip=2, stringsAsFactors=TRUE)
+  d <- dat[1:2]
+  names(d) <- c("Country","total_energy_in_argiculture")
+  d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
+  d2$Country <- NULL
+  d2$Year <- 2012
+  d2 <- d2[!is.na(d2$total_energy_in_argiculture),]
+  # China
+  d2$FAOST_CODE[d2$FAOST_CODE == 41] <- 351
+  sybdata.df <- merge(sybdata.df,d2,by=c("FAOST_CODE","Year"),all.x=TRUE)
+  }
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
@@ -2529,10 +2523,9 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
   codes_vs_names$Country <- as.character(codes_vs_names$Country)
   codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
   # reading the data
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=2, skip=2)
-  dat[[2]] <- as.numeric(dat[[2]])
-  dat[[1]] <- as.character(dat[[1]])
-  d <- dat[1:2]
+  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=3, skip=1, stringsAsFactors=TRUE)
+  dat <- dat[-1,]
+  d <- dat[c(1,8)]
   names(d) <- c("Country","total_bioenergy_consumption")
   d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
   d2$Country <- NULL
