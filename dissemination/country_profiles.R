@@ -42,7 +42,7 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   dat <- merge(dat,tmp[c("FAOST_CODE","Area")],by="FAOST_CODE")
   dat <- merge(dat,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")],by="FAOST_CODE", all.x=TRUE)
   # M49LatinAmericaAndCaribbean
-  dat$Area[dat$FAOST_CODE == 5205] <- "M49macroReg"
+  #dat$Area[dat$FAOST_CODE == 5205] <- "M49macroReg"
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "<0.1"] <- 0.01
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "ns"] <- 0
   dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
@@ -58,16 +58,12 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   myvars <- names(sybdata.df) %in% vars_to_exclude
   sybdata.df <- sybdata.df[!myvars]
 
-#   x1 <- sybdata.df[c("FAOST_CODE","Year")]
-#   x2 <- dat[c("FAOST_CODE","Year")]
-#   
-#   x1 <- x1[!duplicated(x1[c("FAOST_CODE","Year")]),]
-#   x2 <- x2[!duplicated(x2[c("FAOST_CODE","Year")]),]
+  vars_to_exclude <- c("FAO_TABLE_NAME","SHORT_NAME","Area")
+  myvars <- names(dat) %in% vars_to_exclude
+  dat <- dat[!myvars]
   
-#   unique(dat$FAOST_CODE)[!(unique(dat$FAOST_CODE) %in% unique(sybdata.df$FAOST_CODE))]
-#   unique(sybdata.df$FAOST_CODE)[!(unique(sybdata.df$FAOST_CODE) %in% unique(dat$FAOST_CODE))]
   
-  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year","Area","FAO_TABLE_NAME","SHORT_NAME"),all.x=TRUE)
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
 
@@ -356,11 +352,11 @@ M49countries <-
   M49countries[!M49countries[, "FAOST_CODE"] %in% c(41,128,96,357,214),]
 ## Add aggregates NOT
 M49countries <- 
-  rbind(data.frame(FAOST_CODE = c(5000,5800,5100,5300,5205,5500,5700),
-                   SHORT_NAME = c("World", "Developing regions", 
+  rbind(data.frame(FAOST_CODE = c(5000,5100,5300,5205,5500),
+                   SHORT_NAME = c("World",
                                       "Africa", "Asia", 
                                       "Latin America and the Caribbean",
-                                      "Oceania", "Developed countries"),
+                                      "Oceania"),
                    stringsAsFactors = FALSE),
         M49countries)
 
