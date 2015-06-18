@@ -211,7 +211,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=3) )
 ## Export the plot
-export_plot(placement = "tr")
+export_plot(manual_text = "Value added in agriculture, industry and services, share of GDP (2013)", placement = "tr")
 
 
 ## ------------------------------------------------------------------------
@@ -220,7 +220,27 @@ export_plot(placement = "tr")
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.3")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+tmp <- sybdata.df[sybdata.df$FAOST_CODE != 198,]
+
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = tmp,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french)
+       
+       )
+rm(tmp)
 ## Export the plot
 export_plot(placement="l")
 
@@ -256,7 +276,7 @@ mapInfo <- map_info(mapName = "M.P1.ECON.1.6", data = sybMaps.df, mapArea = "Ter
 ## Create the map
 assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Value added in agriculture, share of GDP (percent, 2010 to 2013*)")
 
 ###########################################################################
 #
@@ -359,6 +379,18 @@ assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
 export_map()
 
+
+mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Territory")
+## Create the map
+assign(mapInfo$mapName, meta_plot_map() )
+## export the map
+export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013)")
+
+
+
+
+
+
 ###########################################################################
 #
 #    _(9(9)__        __/^\/^\__
@@ -389,8 +421,27 @@ export_plot(placement = "tr")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INPU.1.3")
+tmp <- sybdata.df[sybdata.df$FAOST_CODE != 200,] # singapore
+tmp <- tmp[tmp$FAOST_CODE != 179,]
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = tmp,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french)
+       
+       )
 ## Export the plot
 export_plot(placement = "r")
 
@@ -406,10 +457,32 @@ export_plot(placement = "r")
 
 # Fertilizer consumption in nutrients per ha of arable land - COUNTRIES
 
+
+
+
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.INPU.1.4")
+tmp <- sybdata.df[sybdata.df$FAOST_CODE != 156,] # New Zeraland
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = tmp,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french)
+       
+       
+       )
 ## Export the plot
 export_plot(placement = "r")
 
@@ -458,13 +531,32 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.2")
 # Feed in the data
 if (!("oda_share_agriculture" %in% names(sybdata.df)) & !("share_of_agriculture_forestry_fishing" %in% names(sybdata.df))) {
   load("./database/Data/Processed/invest1.RData")
+  invest1 <- invest1[invest1$Year >= 1995,]
   sybdata.df <- full_join(sybdata.df,invest1)
 }
 plotInfo$legendLabels <- c(" Agriculture, narrow","Agriculture, broad")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = plotInfo$legendLabels,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         coord_cartesian(xlim=c(1995,2013))
+       
+       
+       )
 ## Export the plot
-export_plot(manual_text = "Share of ODA to Agriculture and related sectors*, 1973-2013", placement = "tr")
+export_plot(manual_text = "Aid flows to agriculture, share of total aid (1995-2013)", placement = "tr")
 # 
 # ## ------------------------------------------------------------------------
 # # Top ten countries, credit to agriculture as a share of total credit
@@ -515,7 +607,7 @@ C.P1.INV.1.3 <- C.P1.INV.1.3 +
   scale_color_manual(labels = c("1999-2001", "2010-12"),
                      values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
 ## Export the plot
-export_plot(placement = "l")
+export_plot(manual_text="Total credit to agriculture, top 20 countries in 2014 (2000 and 2012)",placement = "l")
 # 
 # ## ------------------------------------------------------------------------
 # ## ------------------------------------------------------------------------
@@ -536,7 +628,7 @@ if (!("agri_orientation_index" %in% names(sybdata.df))) {
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Countries in terms of Agri Orientation Index (mean 2008-12)",placement = "l")
+export_plot(manual_text="Agri-Orientation Index, highest and lowest values (average 2008-2012)",placement = "l")
 
 
 # 
@@ -548,6 +640,7 @@ plotInfo <- plot_info(plotName = "C.P1.INV.1.5")
 ## Plot
 if (!("Bilateral" %in% names(sybdata.df)) & !("Multilateral" %in% names(sybdata.df))) {
   load("./database/Data/Processed/invest2.RData")
+  invest2 <- invest2[invest2$Year >= 1995,]
   sybdata.df <- full_join(sybdata.df,invest2)
 }
 assign(plotInfo$plotName, 
@@ -565,12 +658,12 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_y_continuous(labels=french) +   labs(y="million US$")
+       ) + scale_y_continuous(labels=french) +   labs(y="million constant US$")
        
        
        )
 ## Export the plot
-export_plot(manual_text = "ODA to Agriculture and related sectors, by bilateral/multilateral flow, 1973-2013", placement = "b")
+export_plot(manual_text = "Aid flows to agriculture, broad (1995-2013)", placement = "b")
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -582,7 +675,8 @@ mapInfo <- map_info(mapName = "M.P1.INV.1.6", data = sybMaps.df, mapArea = "Terr
 ## Create the map
 assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Share of government expenditure on agriculture, share of total outlays (percent,
+2008 to 2012*)")
 
 
 # %                         .^^^\ ../~/\       .==...==.
@@ -696,10 +790,10 @@ assign(plotInfo$plotName,
                              values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
          scale_color_manual(labels = c("1990-92", "2014-16"),
                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(y="million")
+         labs(y="million people")
 )
 # Export
-export_plot(manual_text= "Asian countries with the highest number of people undernourished in 2014-16 (1990-92 and 2014-16)", placement = "l")
+export_plot(manual_text= "Asian countries with the highest number of undernourished in 2014-16", placement = "l")
 
 
 # C.P1.UNU.1.3 ------------------------------------------------------------
@@ -728,10 +822,10 @@ assign(plotInfo$plotName,
                              values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
          scale_color_manual(labels = c("1990-92", "2014-16"),
                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(y="million")
+         labs(y="million people")
 )
 # Export
-export_plot(manual_text= "African countries with the highest number of people undernourished in 2014-16 (1990-92 and 2014-16)", placement = "l")
+export_plot(manual_text= "African countries with the highest number of undernourished in 2014-16", placement = "l")
 
 
 
@@ -762,7 +856,7 @@ assign(plotInfo$plotName,
        
 )
 ## Export the plot
-export_plot(manual_text = "Number of people undernourished (1990-92 to 2014-16)", placement = "b")
+export_plot(manual_text = "Number of people undernourished", placement = "b")
 
 
 # MAPS -----------------------------------------------------
@@ -859,7 +953,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text="Energy supply derived from cereals, roots and tubers",placement="l")
 
 
 
@@ -890,7 +984,7 @@ assign(plotInfo$plotName,
        )
        )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text="Average protein supply, 3 year averages",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -928,7 +1022,7 @@ assign(plotInfo$plotName,
          theme(axis.text.x = element_text(angle = 45))
        )
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text="Average supply of protein of animal origin",placement = "b")
 
 
 # MAPS -----------------------------------------------------
@@ -962,7 +1056,7 @@ assign(mapInfo$mapName,
        
 )
 ## export the map
-export_map(manual_text="Average value of food production (constant 2004-2006 I$ per person) (3 year averages, 2011-13)")
+export_map(manual_text="Average value of food production, constant 2004-2006 I$ per person (3 year average, 2011-13)")
 
 
 ###########################################################################
@@ -1008,7 +1102,7 @@ assign(plotInfo$plotName,
          theme(axis.text.x = element_text(angle = 45))
 )       
 ## Export the plot
-export_plot(placement="tr")
+export_plot(manual_text="Depth of food decifit, kcal/capita/day (3 year averages)",placement="tr")
 
 
 # ----------------------------------------------------------------------- #
@@ -1037,7 +1131,7 @@ assign(plotInfo$plotName,
        )
 
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text="Domestic food price level index (2000 to 2014*)",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1070,7 +1164,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text="Prevalence of undernourishment (percent) (3 year averages, 1999-2001 and 2013-15)", placement="r")
+export_plot(manual_text="Prevalence of undernourishment, highest 20 in 2013-15 (3 year averages)", placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1096,7 +1190,7 @@ assign(plotInfo$plotName,
        ) 
 )
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text="GDP per capita, PPP, constant 2011 international $",placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -1110,7 +1204,7 @@ mapInfo <- map_info(mapName = "M.P2.ACCESS.1.6", data = sybMaps.df, mapArea = "T
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Road density, per 100 square km of land area (2007 to 2011*)")
 
 # ----------------------------------------------------------------------- #
 # ALTERNATIVE MAP TO ROAD DENSITY
@@ -1169,7 +1263,7 @@ assign(plotInfo$plotName,
          theme(axis.text.x = element_text(angle = 45))
 )   
 ## Export the plot
-export_plot(manual_text = "Per capita food production variability (constant 2004-2006 thousand int$ per capita)",placement="tr")
+export_plot(manual_text = "Per capita food production variability, constant 2004-2006 thousand international $",placement="tr")
 
 # ----------------------------------------------------------------------- #
 # Per capita food supply variability 
@@ -1196,7 +1290,7 @@ assign(plotInfo$plotName,
        )
        )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text="Per capita food supply variability, kcal/capita/day",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1224,7 +1318,7 @@ assign(plotInfo$plotName,
        )
 )
 
-export_plot(placement="r")
+export_plot(manual_text="Domestic food price volatility, index",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1252,7 +1346,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text=" Value of food imports  as a share of total merchandise exports (3 year averages)",placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -1287,7 +1381,7 @@ assign(mapInfo$mapName,
        )
 
 ## export the map
-export_map()
+export_map(manual_text="Political stability and absence of violence/terrorism, index (2012)")
 
 
 
@@ -1366,7 +1460,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(manual_text="Percentage of children 5 years of age who are stunted, highest 20 (2006 - 2012)" ,placement="l")
+export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2012)" ,placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
@@ -1400,7 +1494,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text = "Percentage of children under 5 years of age affected by wasting, highest 20 (2006 - 2012)",placement="r")
+export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2012)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
@@ -1428,7 +1522,7 @@ assign(plotInfo$plotName,
        )
 
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text="Access to improved water source and sanitation facilities",placement = "b")
 
 
 
@@ -1442,7 +1536,7 @@ mapInfo <- map_info(mapName = "M.P2.UT.1.6", data = sybMaps.df, mapArea = "Terri
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Percentage of anaemia among children under 5, percent (2011)")
 
 
 
@@ -1564,7 +1658,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text=" Dietary energy supply, top 20 countries in 2014", placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1576,7 +1670,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text=" Dietary energy supply, bottom 20 countries in 2014",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1587,7 +1681,7 @@ plotInfo <- plot_info(plotName = "C.P3.DES.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "DES (kcal/cap/day)", placement = "b")
+export_plot(manual_text = " Dietary energy supply, kcal/cap/day", placement = "b")
 
 
 ##### -------------------------------------------------------
@@ -1606,13 +1700,11 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybMaps.df))) {
 }
 
 
-
-
 mapInfo <- map_info(mapName = "M.P3.DES.1.6", data = sybMaps.df, mapArea = "Territory")
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Average dietary energy supply adequacy, percent (2015)")
 
 
 
@@ -1642,7 +1734,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top 20 crop producing countries (based on Crops net per capita production value (per capita constant 2004-2006 I$))",placement="l")
+export_plot(manual_text="Top 20 crop producing countries in 2012 based on net per capita crop production value",placement="l")
 
 
 # -----------------------------------------------------------
@@ -1654,7 +1746,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top 20 food producing countries (based on food net per capita production value (per capita constant 2004-2006 I$))",placement="r")
+export_plot(manual_text="Top 20 food producing countries in 2012 based on net food per capita production value",placement="r")
 
 # -----------------------------------------------------------
 # 5. Bar chart: Growth in cereals production (production, harvested area, yield), world, 2000-MRY
@@ -1689,12 +1781,12 @@ if (!("change_QC.YIELD.CRLS.HG.NO" %in% names(sybdata.df))) {
 }
 
 plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.5")
-plotInfo$legendLabels <- c("Production","Harvested area","Yield")
+plotInfo$legendLabels <- c("Production quantity","Harvested area","Yield")
 ## Plot
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=3) )
 ## Export the plot
-export_plot(manual_text = "Growth in cereals production (production, harvested area, yield) (mean annual growth 2000-13)",placement="b")
+export_plot(manual_text = "Average annual growth in cereals production (2000-13)",placement="b")
 
 ##### -------------------------------------------------------
 # MAPS
@@ -1771,7 +1863,7 @@ mapInfo <- map_info(mapName = "M.P3.CRTRE.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text ="Crops, gross per capita production index (2004-06 = 100, 2013)")
 
 
 ###########################################################################

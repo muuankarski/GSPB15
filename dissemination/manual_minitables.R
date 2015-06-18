@@ -30,7 +30,7 @@ names(dw) <- c("","1990-92","2014-16")
 
 dw <- dw[c(7,3,4,1,2,5,6),]
 
-print.xtable(xtable(dw, caption = "Prevalence of undernourishment (percent, 1990-92 and 2014-16)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(dw, caption = " Prevalence of undernourishment (percent)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UNU.1.2.tex")
 
 ## "Countries with highest share of children under 5 years of age who are underweight
@@ -51,7 +51,7 @@ tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
 tbl <- tbl[c(4,3,2)]
 names(tbl) <- c("","Year","%")
 
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 years of age who are underweight (percent) (2006 to 2012)", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 who are underweight, percent", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UT.1.2.tex")
 
 
@@ -74,7 +74,7 @@ dd <- d %>% group_by(Item) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm
 rc <- arrange(dd, -mean_growth)[1:5,c("Item","mean_growth")]
 names(rc) <- c("","%")
 
-print.xtable(xtable(rc, caption = "Fastest growing items based on production quantities (mean annual growth rate 2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
 
 
