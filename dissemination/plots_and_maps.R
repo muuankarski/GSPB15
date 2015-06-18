@@ -253,7 +253,7 @@ plotInfo <- plot_info(plotName = "C.P1.ECON.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text="Value added in agriculture, average annual growth (2003-2013)",placement="r")
 
 
 # C.P1.ECON.1.5 -----------------------------------------------------------
@@ -953,7 +953,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Energy supply derived from cereals, roots and tubers",placement="l")
+export_plot(manual_text="Energy supply derived from cereals, roots and tubers, top 20 countries in 2011",placement="l")
 
 
 
@@ -984,7 +984,7 @@ assign(plotInfo$plotName,
        )
        )
 ## Export the plot
-export_plot(manual_text="Average protein supply, 3 year averages",placement="r")
+export_plot(manual_text="Average protein supply, top 20 countries in 2012",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1131,7 +1131,7 @@ assign(plotInfo$plotName,
        )
 
 ## Export the plot
-export_plot(manual_text="Domestic food price level index (2000 to 2014*)",placement="l")
+export_plot(manual_text="Domestic food price level index, top 20 countries in 2014 (2000 to 2014*)",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1164,7 +1164,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text="Prevalence of undernourishment, highest 20 in 2013-15 (3 year averages)", placement="r")
+export_plot(manual_text="Prevalence of undernourishment, highest 20 countries in 2013-15 (3 year averages)", placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1290,7 +1290,7 @@ assign(plotInfo$plotName,
        )
        )
 ## Export the plot
-export_plot(manual_text="Per capita food supply variability, kcal/capita/day",placement="l")
+export_plot(manual_text="Per capita food supply variability, top 20 countries in 2015, kcal/capita/day",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1318,7 +1318,7 @@ assign(plotInfo$plotName,
        )
 )
 
-export_plot(manual_text="Domestic food price volatility, index",placement="r")
+export_plot(manual_text="Domestic food price volatility index, top 20 countries in 2014",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1704,7 +1704,9 @@ mapInfo <- map_info(mapName = "M.P3.DES.1.6", data = sybMaps.df, mapArea = "Terr
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map(manual_text="Average dietary energy supply adequacy, percent (2015)")
+export_map(manual_text="Average dietary energy supply adequacy, percent (2014-2016)")
+
+
 
 
 
@@ -1828,7 +1830,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top 20 Rice producing countries per capita (Rice (paddy) production per capita (tonne/cap))",placement="l")
+export_plot(manual_text="Top 20 rice producing countries, per capita",placement="l")
 
 
 # -----------------------------------------------------------
@@ -1840,7 +1842,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(manual_text="Top 20 Wheat producing countries per capita (Rice (paddy) production per capita (tonne/cap))",placement="r")
+export_plot(manual_text="Top 20 wheat producing countries, per capita ",placement="r")
 
 # -----------------------------------------------------------
 # 5. Line chart: yield by region, 2000-MRY - This is an issue!
@@ -1850,7 +1852,7 @@ plotInfo <- plot_info(plotName = "C.P3.CRTRE.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Cereals yield (hg/ha)", placement="b")
+export_plot(manual_text = "Cereals, yield", placement="b")
 
 
 ##### -------------------------------------------------------
@@ -1863,7 +1865,7 @@ mapInfo <- map_info(mapName = "M.P3.CRTRE.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map(manual_text ="Crops, gross per capita production index (2004-06 = 100, 2013)")
+export_map(manual_text ="Cereal production, tonnes/cap (2013)")
 
 
 ###########################################################################
@@ -1937,7 +1939,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(manual_text = "Total milk production, top 10 and bottom 10", placement="l")
+export_plot(manual_text = "Total milk production, top and bottom 10 countries (2012)", placement="l")
 
 # -----------------------------------------------------------
 # Per capita egg production, top 10 and bottom 10
@@ -1967,7 +1969,7 @@ assign(plotInfo$plotName,
        
 )
 ## Export the plot
-export_plot(manual_text = "Total egg production, top 10 and bottom 10", placement="r")
+export_plot(manual_text = "Total egg production, top and bottom 10 countries (2012)", placement="r")
 
 
 # -----------------------------------------------------------
@@ -2018,7 +2020,7 @@ mapInfo <- map_info(mapName = "M.P3.LIVE.1.6", data = sybMaps.df, mapArea = "Ter
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Cattle and buffaloes per ha of agricultural area, heads per ha (2012)")
 
 
 ###########################################################################
@@ -2216,7 +2218,7 @@ mapInfo$mapData <- mapInfo$mapData[!is.infinite(mapInfo$mapData$production_quant
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Fish production index (2004-06=100, 2011)")
 
 
 ###########################################################################
@@ -2244,7 +2246,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text="Top food importing countries in 2012",placement="l")
 
 
 # -----------------------------------------------------------
@@ -2256,7 +2258,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text="Top food exporting countries in 2012",placement="r")
 
 # -----------------------------------------------------------
 # Exports of cereals (2000 to 2011)
@@ -2266,7 +2268,7 @@ plotInfo <- plot_info(plotName = "C.P3.TRADE.1.5")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(manual_text = "Exports of cereals", placement="b")
+export_plot(manual_text = "Cereal exports", placement="b")
 
 ##### -------------------------------------------------------
 # MAPS
@@ -2278,7 +2280,7 @@ mapInfo <- map_info(mapName = "M.P3.TRADE.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Import value index (2004-2006 = 100, 2011)")
 
 
 
@@ -2353,7 +2355,7 @@ plotInfo <- plot_info(plotName = "C.P4.LAND.1.3")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Arable land per capita, top 20 countries",placement="l")
+export_plot(manual_text = "Arable land per capita, top 20 countries (2012)",placement="l")
 
 # ----------------------------------------------------------------------- #
 # Arable land per capita, bottom 20 countries
@@ -2362,7 +2364,7 @@ plotInfo <- plot_info(plotName = "C.P4.LAND.1.4")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Arable land per capita, bottom 20 countries",placement="r")
+export_plot(manual_text = "Arable land per capita, bottom 20 countries (2012)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Agricultural area
@@ -2383,7 +2385,7 @@ mapInfo <- map_info(mapName = "M.P4.LAND.1.6", data = sybMaps.df, mapArea = "Ter
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Cropland per capita, ha per cap (2012)")
 
 
 ###########################################################################
@@ -2488,7 +2490,7 @@ assign(plotInfo$plotName,
               ) 
 )
 ## Export the plot
-export_plot(manual_text = "top 10 countries with renewable water resources per capita, 2000 and 2010",placement="b")
+export_plot(manual_text = "Top 10 countries with renewable water resources per capita",placement="b")
 
 
 
@@ -2511,7 +2513,7 @@ mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013)")
+export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013*)")
 
 
 ###########################################################################
@@ -2564,7 +2566,7 @@ if (!("total_pellets" %in% names(sybdata.df))) {
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
 ## Export the plot
-export_plot(placement = "tr")
+export_plot(manual_text="Wood pellet production",placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Top 20 biofuel producing countries
@@ -2599,7 +2601,7 @@ if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="l")
+export_plot(manual_text = "Total energy consumption in agriculture, top 20 countries (2012)",placement="l")
 
 
 ## Info
@@ -2630,7 +2632,7 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(placement="r")
+export_plot(manual_text = "Total bioenergy consumption in agriculture, top 20 countries (2012)", placement="r")
 
 
 # -----------------------------------------------------------
@@ -2685,7 +2687,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(placement="b")
+export_plot(manual_text = "Biodiesel, biogas, biogasoline and other bio-oil consumption ",placement="b")
 
 ##### -------------------------------------------------------
 # MAPS
@@ -2725,11 +2727,7 @@ assign(mapInfo$mapName,
 )
 
 ## export the map
-export_map()
-
-
-
-
+export_map(manual_text = "Energy consumption for power irrigation, million kWh (2011)")
 
 
 ###########################################################################
@@ -2752,6 +2750,13 @@ export_map()
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.2")
+
+sybdata.df$FO.PRD.RP.M3.NO.bill <- sybdata.df$FO.PRD.RP.M3.NO / 1000000
+sybdata.df$FO.PRD.WP.M3.NO.bill <- sybdata.df$FO.PRD.WP.M3.NO / 1000000
+sybdata.df$FO.PRD.PPB.M3.NO.bill <- sybdata.df$FO.PRD.PPB.M3.NO / 1000000
+
+plotInfo$legendLabels <- c(" Recovered paper","Wood pulp","Paper and paperboard")
+
 ## Plot
 assign(plotInfo$plotName, 
        
@@ -2764,18 +2769,19 @@ assign(plotInfo$plotName,
                 data = sybdata.df,
                 scale = plotInfo$scaling,
                 x_lab = plotInfo$xPlotLab,
+                legend_lab = plotInfo$legendLabels,
                 #y_lab = expression("    thousand gigagrams CO"[2] * "eq"),
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                #legend_lab = subset(meta.lst$FULL,
+                #                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
        ) +
-         theme(axis.text.x = element_blank()) + 
+         scale_y_continuous(labels=french) +
          guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
-         labs(y="million m3")
+         labs(y="million tonnes")
        
        )
 ## Export the plot
-export_plot(manual_text = "Production of selected forest product", placement = "tr")
+export_plot(manual_text = "Production of selected forest products", placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Top and bottom 10 exporters of forest products
@@ -2802,12 +2808,13 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) + scale_y_continuous(labels=french) +
+         guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
          labs(y="billion US$") +
          theme(axis.text.x =element_text(angle = 45))
        
        )
 ## Export the plot
-export_plot(manual_text = "Top and bottom 10 exporters of forest products",placement="l")
+export_plot(manual_text = "Top and bottom 10 exporters of forest products (2012)",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -2837,7 +2844,7 @@ assign(plotInfo$plotName,
          theme(axis.text.x =element_text(angle = 45))
 )
 ## Export the plot
-export_plot(manual_text = "Top and bottom 10 importers of forest products",placement="r")
+export_plot(manual_text = "Top and bottom 10 importers of forest products (2012)",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -2845,9 +2852,31 @@ export_plot(manual_text = "Top and bottom 10 importers of forest products",place
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
+
+sybdata.df$GFRA.TOT.PF.HA.NO.mill   <- sybdata.df$GFRA.TOT.PF.HA.NO   / 1000000
+sybdata.df$GFRA.TOT.PLF.HA.NO.mill  <- sybdata.df$GFRA.TOT.PLF.HA.NO  / 1000000
+sybdata.df$GFRA.TOT.ONRF.HA.NO.mill <- sybdata.df$GFRA.TOT.ONRF.HA.NO / 1000000
+
 plotInfo$legendLabels <- c("primary forest","planted forest","other naturally regenerated forest")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=3) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = plotInfo$legendLabels,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         labs(y="million ha")
+       
+       )
 ## Export the plot
 export_plot(placement = "b")
 
@@ -2859,7 +2888,7 @@ mapInfo <- map_info(mapName = "M.P4.FOR.1.6", data = sybMaps.df, mapArea = "Terr
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Forest area as share of total land area, percent (2012)")
 
 
 ###########################################################################
@@ -2886,7 +2915,7 @@ plotInfo <- plot_info(plotName = "C.P4.CC.1.2")
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
 ## Export the plot
-export_plot(placement="tr")
+export_plot(manual_text="Greenhouse gas emissions in agriculture",placement="tr")
 
 # ----------------------------------------------------------------------- #
 # Greehouse gas emissions, highest in 2012
@@ -2898,7 +2927,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Greehouse gas emissions in agriculture, highest in 2012",placement="l")
+export_plot(manual_text = "Greehouse gas emissions in agriculture, highest 20 countries in 2012",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -2911,7 +2940,7 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Land use total emissions, highest 20 in 2012",placement="l")
+export_plot(manual_text = "Land use total emissions, highest 20 countries in 2012",placement="l")
 
 # ----------------------------------------------------------------------- #
 # Emissions by subsectors
@@ -2919,9 +2948,45 @@ export_plot(manual_text = "Land use total emissions, highest 20 in 2012",placeme
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.CC.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "3_1", n_colors=6) )
+plotInfo$legendLabels <- factor(plotInfo$legendLabels, levels=c("All GHG agricultural sectors", "Net forest conversion", "Cultivation histoils and peat fires", "Burning savanna", "Forest"))
+
+# to match the ICN2 output  
+sybdata.df$GHG.TOT.ALL.GG.NO <- sybdata.df$GHG.TOT.ALL.GG.NO/ 1000
+sybdata.df$GL.FL.NFC.NERCO2EQ.NO <- sybdata.df$GL.FL.NFC.NERCO2EQ.NO / 1000
+sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO <- sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO / 1000
+sybdata.df$GHG.BS.TECO2EQ.GG.NO <- sybdata.df$GHG.BS.TECO2EQ.GG.NO / 1000
+sybdata.df$GL.FL.F.NERCO2EQ.NO <- sybdata.df$GL.FL.F.NERCO2EQ.NO / 1000
+
+
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                    Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = expression("    thousand gigagrams CO"[2] * "eq"),
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                legend_lab = plotInfo$legendLabels,
+                col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
+       ) +
+         theme(axis.text.x = element_blank()) + 
+         guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2))
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Emissions by subsectors in 2012", placement = "b")
+
+
+#sybdata.df[sybdata.df$FAOST_CODE == 5000 & sybdata.df$Year == 2012, c("GHG.TOT.ALL.GG.NO","GL.FL.NFC.NERCO2EQ.NO","GLI.CHPF.TOT.ECO2EQ.NO","GHG.BS.TECO2EQ.GG.NO","GL.FL.F.NERCO2EQ.NO")]
+
+
+
 
 # MAPS ----------------------------------------------------------------- #
 # Total greenhouse gas emissions
@@ -2931,5 +2996,5 @@ mapInfo <- map_info(mapName = "M.P4.CC.1.6", data = sybMaps.df, mapArea = "Terri
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Total greenhouse gas emissions from agriculture, forestry and other land use, gigagrams CO2 eq (2012)")
 

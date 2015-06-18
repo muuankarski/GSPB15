@@ -219,13 +219,20 @@ sybdata.df[sybdata.df[, "FAO_TABLE_NAME"] == "Occupied Palestinian Territory" &
 ##############################################################
 ## Pppulation threshold
 #############################################################
-pop_threshold <- 150000 # 
+pop_threshold <- 120000 # 
 small_countries <- sybdata.df[sybdata.df$OA.TPBS.POP.PPL.NO <= pop_threshold,c("FAOST_CODE","Year","SHORT_NAME","OA.TPBS.POP.PPL.NO")]
-small_countries <- small_countries[!duplicated(small_countries[c("FAOST_CODE")]),]
+#small_countries <- small_countries[!duplicated(small_countries[c("FAOST_CODE")]),]
+small_countries <- small_countries[small_countries$Year %in% 2013,]
 small_countries_FAOST_CODE <- unique(small_countries$FAOST_CODE)
 small_countries_FAOST_CODE <- small_countries_FAOST_CODE[!is.na(small_countries_FAOST_CODE)]
-
 sybdata.df <- sybdata.df[!(sybdata.df$FAOST_CODE %in% small_countries_FAOST_CODE), ]
+
+na_countries <- sybdata.df[is.na(sybdata.df$OA.TPBS.POP.PPL.NO),c("FAOST_CODE","Year","SHORT_NAME","OA.TPBS.POP.PPL.NO")]
+na_countries <- na_countries[na_countries$Year %in% 2013,]
+na_countries_FAOST_CODE <- unique(na_countries$FAOST_CODE)
+sybdata.df <- sybdata.df[!(sybdata.df$FAOST_CODE %in% na_countries_FAOST_CODE), ]
+
+
 
 # Plots -------------------------------------------------------------
 

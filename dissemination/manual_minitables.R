@@ -107,7 +107,7 @@ gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
-print.xtable(xtable(gg, caption = "Top five items produced in 2013 vs. 2000 (thousand tonnes)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
 
 
@@ -140,7 +140,7 @@ gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
-print.xtable(xtable(gg, caption = "Top five live animal stock in 2013 vs. 2000 (thousand heads)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(gg, caption = "Live animal production, top 5 in 2013 (thousand heads)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.LIVE.1.2.tex")
 
 ##########################################################################
@@ -158,7 +158,7 @@ dw[[3]] <- dw[[3]]/1000000
 dw <- arrange(dw, -Import.Value)
 names(dw) <- c("","Export value", "Import Value")
 
-print.xtable(xtable(dw, caption = "Exports and Imports of food (million US\\$ 2012)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(dw, caption = " Exports and Imports of food, million US\\$ (2012)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.TRADE.1.3.tex")
 
 
