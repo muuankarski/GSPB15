@@ -781,7 +781,7 @@ chart_spread2(title="Climate change",
 %%% METADATA
 \newpart{white}
 \part{}
-\section{Definitions}
+%\section{Definitions}
 \phantomsection
 \addcontentsline{toc}{section}{Definitions}
 \input{./Metadata.tex}
