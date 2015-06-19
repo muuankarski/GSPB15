@@ -419,7 +419,7 @@ for (i in 1:nrow(M49countries)) {
 #     cat("\t\\multicolumn{4}{l}{\\textcolor{",paste0("part", part),"}{\\textbf{\\large{", unique(indicators.df$PART)[part], "}}}} \\\\ \n",
 #         file = fileOut, append = TRUE, sep = "")
     if (part %in% c(4,5)) {
-      cat("\t\\multicolumn{4}{l}{\\textbf{\\normalsize{", unique(indicators.df$PART)[part], "}}} \\\\ \n",
+      cat("\t\\multicolumn{4}{l}{\\textit{\\normalsize{", unique(indicators.df$PART)[part], "}}} \\\\ \n",
         file = fileOut, append = TRUE, sep = "")
       } else cat("\t\\multicolumn{4}{l}{\\textcolor{FAOblue}{\\textbf{\\large{", unique(indicators.df$PART)[part], "}}}} \\\\ \n",
         file = fileOut, append = TRUE, sep = "")

@@ -250,6 +250,21 @@ export_plot(placement="l")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.4")
+
+## Info
+if (!("growth_NV.AGR.TOTL.KD" %in% names(sybdata.df))) {
+  
+  tmp <- sybdata.df[c("FAOST_CODE","Year","NV.AGR.TOTL.KD")] # Agriculture, value added (constant 2005 US$)
+  tmp <- tmp[!is.na(tmp$NV.AGR.TOTL.KD),]
+  tmp <- tmp[tmp$Year >= 2003 & tmp$Year <= 2013,]
+  tmp <- arrange(tmp, FAOST_CODE,Year)
+  library(plyr)
+  d <- ddply(tmp,"FAOST_CODE",transform,
+        Growth=c(NA,exp(diff(log(NV.AGR.TOTL.KD)))-1))
+  dd <- d %>% group_by(FAOST_CODE) %>% dplyr::summarise(growth_NV.AGR.TOTL.KD = mean(Growth, na.rm = TRUE)*100)
+  dd$Year <- 2013
+  sybdata.df <- merge(sybdata.df,dd,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
 ## Plot
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
@@ -2814,7 +2829,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(manual_text = "Top and bottom 10 exporters of forest products (2012)",placement="l")
+export_plot(manual_text = "Top 20 exporters of forest products (2012)",placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -2844,7 +2859,7 @@ assign(plotInfo$plotName,
          theme(axis.text.x =element_text(angle = 45))
 )
 ## Export the plot
-export_plot(manual_text = "Top and bottom 10 importers of forest products (2012)",placement="r")
+export_plot(manual_text = "Top 20 importers of forest products (2012)",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -2924,8 +2939,31 @@ export_plot(manual_text="Greenhouse gas emissions in agriculture",placement="tr"
 plotInfo <- plot_info(plotName = "C.P4.CC.1.3")
 # Subset the years manually!!
 plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
+
+# to match the ICN2 output  
+sybdata.df$GHG.TOT.ALL.GG.NO.thou <- sybdata.df$GHG.TOT.ALL.GG.NO/ 1000
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         labs(y="thousand gigagrams CO2eq")
+       
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Greehouse gas emissions in agriculture, highest 20 countries in 2012",placement="l")
 
@@ -2937,8 +2975,29 @@ export_plot(manual_text = "Greehouse gas emissions in agriculture, highest 20 co
 plotInfo <- plot_info(plotName = "C.P4.CC.1.4")
 # Subset the years manually!!
 plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
+
+# to match the ICN2 output  
+sybdata.df$GL.LU.TOT.NERCO2EQ.NO.thou <- sybdata.df$GL.LU.TOT.NERCO2EQ.NO/ 1000
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) +
+         labs(y="thousand gigagrams CO2eq")
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Land use total emissions, highest 20 countries in 2012",placement="l")
 
@@ -2948,14 +3007,14 @@ export_plot(manual_text = "Land use total emissions, highest 20 countries in 201
 ## Info
 plotInfo <- plot_info(plotName = "C.P4.CC.1.5")
 ## Plot
-plotInfo$legendLabels <- factor(plotInfo$legendLabels, levels=c("All GHG agricultural sectors", "Net forest conversion", "Cultivation histoils and peat fires", "Burning savanna", "Forest"))
+plotInfo$legendLabels <- c("All GHG agricultural sectors", "Net forest conversion", "Cultivation histoils and peat fires", "Burning savanna", "Forest")
 
 # to match the ICN2 output  
-sybdata.df$GHG.TOT.ALL.GG.NO <- sybdata.df$GHG.TOT.ALL.GG.NO/ 1000
-sybdata.df$GL.FL.NFC.NERCO2EQ.NO <- sybdata.df$GL.FL.NFC.NERCO2EQ.NO / 1000
-sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO <- sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO / 1000
-sybdata.df$GHG.BS.TECO2EQ.GG.NO <- sybdata.df$GHG.BS.TECO2EQ.GG.NO / 1000
-sybdata.df$GL.FL.F.NERCO2EQ.NO <- sybdata.df$GL.FL.F.NERCO2EQ.NO / 1000
+sybdata.df$GHG.TOT.ALL.GG.NO.thou <- sybdata.df$GHG.TOT.ALL.GG.NO/ 1000
+sybdata.df$GL.FL.NFC.NERCO2EQ.NO.thou <- sybdata.df$GL.FL.NFC.NERCO2EQ.NO / 1000
+sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO.thou <- sybdata.df$GLI.CHPF.TOT.ECO2EQ.NO / 1000
+sybdata.df$GHG.BS.TECO2EQ.GG.NO.thou <- sybdata.df$GHG.BS.TECO2EQ.GG.NO / 1000
+sybdata.df$GL.FL.F.NERCO2EQ.NO.thou <- sybdata.df$GL.FL.F.NERCO2EQ.NO / 1000
 
 
 assign(plotInfo$plotName, 
