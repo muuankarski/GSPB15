@@ -683,6 +683,11 @@ export_plot(manual_text = "Aid flows to agriculture, broad (1995-2013)", placeme
 ## ------------------------------------------------------------------------
 # MAPS
 
+df <- merge(mapInfo$mapData,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by.x="FAO_CODE",by.y="FAOST_CODE")
+df <- df[-4]
+df <- arrange(df, -IG.AFFH.STOCGG.USD.SH)
+write.csv(df, file="~/share_of_government_expenditure.csv", row.names=FALSE)
+
 # Share of Government Expenditures on Agriculture (% of Total Outlays)
 
 ## Map info
@@ -2579,9 +2584,26 @@ if (!("total_pellets" %in% names(sybdata.df))) {
   }
 
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=1) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 1)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + theme(legend.position = "none")
+       
+       )
 ## Export the plot
-export_plot(manual_text="Wood pellet production",placement = "tr")
+export_plot(manual_text="Global wood pellet production",placement = "tr")
 
 # ----------------------------------------------------------------------- #
 # Top 20 biofuel producing countries
@@ -2605,6 +2627,7 @@ if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
   dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=2, skip=2, stringsAsFactors=TRUE)
   d <- dat[1:2]
   names(d) <- c("Country","total_energy_in_argiculture")
+  d$total_energy_in_argiculture <- d$total_energy_in_argiculture / 1000 # into PJ
   d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
   d2$Country <- NULL
   d2$Year <- 2012
@@ -2614,7 +2637,24 @@ if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
   sybdata.df <- merge(sybdata.df,d2,by=c("FAOST_CODE","Year"),all.x=TRUE)
   }
 
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 1)[["Sub"]]
+       ) + scale_y_continuous(labels=french) + labs(y="PJ")
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Total energy consumption in agriculture, top 20 countries (2012)",placement="l")
 
@@ -2632,11 +2672,14 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
   codes_vs_names$Country <- as.character(codes_vs_names$Country)
   codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
   # reading the data
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=3, skip=1, stringsAsFactors=TRUE)
-  dat <- dat[-1,]
-  d <- dat[c(1,8)]
+  d <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS_1 AF_fixed.xlsx", sheet=3, skip=1, stringsAsFactors=TRUE)
   names(d) <- c("Country","total_bioenergy_consumption")
+  d$total_bioenergy_consumption <- str_replace_all(d$total_bioenergy_consumption, "%", "")
+  
+  d$total_bioenergy_consumption <- factor(d$total_bioenergy_consumption)
+  d$total_bioenergy_consumption <- as.numeric(levels(d$total_bioenergy_consumption))[d$total_bioenergy_consumption]
   d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
+
   d2$Country <- NULL
   d2$Year <- 2012
   d2 <- d2[!is.na(d2$total_bioenergy_consumption),]
@@ -2647,8 +2690,8 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
 
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
-export_plot(manual_text = "Total bioenergy consumption in agriculture, top 20 countries (2012)", placement="r")
-
+#export_plot(manual_text = "Total bioenergy consumption in agriculture, top 20 countries (2012)", placement="r")
+export_plot(manual_text = "Bioenergy as a % of total renewable energy, top 20 countries (2012)", placement="r")
 
 # -----------------------------------------------------------
 # Exports of cereals (2000 to 2011)
@@ -2660,20 +2703,39 @@ plotInfo <- plot_info(plotName = "C.P4.ENER.1.5")
 if (!("biogases" %in% names(sybdata.df))) {
   library(gdata)
   # reading the data
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=4, skip=2)
+#   dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=4, skip=2)
+#   dat <- gather(dat,
+#                 "Year",
+#                 "value",
+#                 2:15)
+#   dat$Year <- as.character(dat$Year)
+#   dat$Year <- str_replace_all(dat$Year, "X", "")
+#   dat$Year <- as.factor(dat$Year)
+#   dat$Year <- as.numeric(levels(dat$Year))[dat$Year]
+#   dat$Row.Labels <- as.character(dat$Row.Labels)
+#   dat <- spread(dat, Row.Labels, value)
+#   names(dat) <- tolower(names(dat))
+#   names(dat) <- str_replace_all(names(dat), " ", ".")
+#   dat$grand.total <- NULL
+#   names(dat)[names(dat)=="year"] <- "Year"
+#   dat$FAOST_CODE <- 5000
+#   dat$Year[is.na(dat$Year)] <- 2013
+#   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
+  # R cant read the file, have to feed it in by hand
+  
+  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS_1 AF_fixed_sheet.csv", stringsAsFactors = FALSE)
   dat <- gather(dat,
                 "Year",
                 "value",
-                2:15)
+                2:14)
   dat$Year <- as.character(dat$Year)
   dat$Year <- str_replace_all(dat$Year, "X", "")
   dat$Year <- as.factor(dat$Year)
   dat$Year <- as.numeric(levels(dat$Year))[dat$Year]
-  dat$Row.Labels <- as.character(dat$Row.Labels)
-  dat <- spread(dat, Row.Labels, value)
+  dat$X <- as.character(dat$X)
+  dat <- spread(dat, X, value)
   names(dat) <- tolower(names(dat))
   names(dat) <- str_replace_all(names(dat), " ", ".")
-  dat$grand.total <- NULL
   names(dat)[names(dat)=="year"] <- "Year"
   dat$FAOST_CODE <- 5000
   dat$Year[is.na(dat$Year)] <- 2013
@@ -2960,7 +3022,7 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) + scale_y_continuous(labels=french) +
-         labs(y="thousand gigagrams CO2eq")
+         labs(y="Mt CO2eq")
        
        
        )
@@ -2995,7 +3057,7 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) + scale_y_continuous(labels=french) +
-         labs(y="thousand gigagrams CO2eq")
+         labs(y="Mt CO2eq")
        
        )
 ## Export the plot
