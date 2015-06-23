@@ -405,6 +405,9 @@ chart_spread2(title="Overview",
             MapCode="M.P1.OVER.1.6")
 @
 
+
+
+
 <<economy, eval=TRUE, results='asis'>>=
 chart_spread2(title="Economy",                
             LeftTextCode="While some sectors have been hard hit, agriculture has demonstrated resilience during the recent economic downturn.  Changes in the wider economy, including growing global integration, affect the performance of the agriculture sector.  Higher overall economic growth also raises consumers’ incomes and hence food demand. Changing interest rates influence capital investments, land values and storage levels, while inflation affects input prices, revenues and credit costs. Fluctuations in exchange rates have an important bearing on international competitiveness and trade flows.",  
@@ -414,6 +417,9 @@ chart_spread2(title="Economy",
             BottomChartCode="C.P1.ECON.1.5", 
             MapCode="M.P1.ECON.1.6")         
 @
+
+
+
 
 <<labour, eval=TRUE, results='asis'>>=
 chart_spread2(title="Labour",                

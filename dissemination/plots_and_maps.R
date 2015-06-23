@@ -358,13 +358,13 @@ export_plot(placement = "r")
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
-plotInfo$legendLabels <- c(" Female employment in agriculture","Male employment in agriculture")
+plotInfo$legendLabels <- c(" Female employment in agriculture")
 if (!("male_share_agr_empl" %in% names(sybdata.df))) {
   
-  dat <- read.csv("./database/Data/Raw/female_male_amployment.csv")
-  dat$ElementName <- as.character(dat$ElementName)
+  dat <- read.csv("./database/Data/Raw/female_male_amployment.csv", stringsAsFactors = FALSE)
   dat <- dat[c("AreaCode","Year","ElementName","Value")] 
   dat <- na.omit(dat)
+  dat <- dat[!duplicated(dat[c("AreaCode","Year","ElementName")]),]
   dat <- spread(dat , ElementName, Value)
   names(dat) <- str_replace_all(names(dat), " ", ".")
   dat$female_share <- dat$Female.economically.active.population.in.Agr / dat$Female.economically.active.population * 100
@@ -378,9 +378,10 @@ if (!("male_share_agr_empl" %in% names(sybdata.df))) {
 
 #plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "3ml", n_colors=2) )
+assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text="Female employment in agriculture, share of female employment (2000-2014)",placement = "b")
+
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -776,6 +777,9 @@ dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
 dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
 dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
 dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
+
+dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
+
 # C.P1.UNU.1.3 ------------------------------------------------------------
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UNU.1.3")
