@@ -221,6 +221,7 @@ export_plot(manual_text = "Value added in agriculture, industry and services, sh
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.3")
 ## Plot
 tmp <- sybdata.df[sybdata.df$FAOST_CODE != 198,]
+tmp$EA.PRD.AGRI.KD <- tmp$EA.PRD.AGRI.KD / 1000
 
 assign(plotInfo$plotName, 
        
@@ -237,7 +238,8 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_y_continuous(labels=french)
+       ) + scale_y_continuous(labels=french) +
+         labs(y="constant 2000 thousand US$")
        
        )
 rm(tmp)
@@ -341,27 +343,17 @@ export_plot(placement = "r")
 ## ------------------------------------------------------------------------
 # Children in employment, total
 
-# # Longer time series
-# dat <- getFAOtoSYB(domainCode = "OA", 
-#                    elementCode = 551,
-#                    itemCode = 3010)
-# dat1 <- dat$aggregates
-# dat <- getFAOtoSYB(domainCode = "OA", 
-#                    elementCode = 561,
-#                    itemCode = 3010)
-# dat2 <- dat$aggregates
-# dat <- join(dat1,dat2)
-# dat <- dat[dat$FAOST_CODE == 5000,]
-# dat$Area <- "M49world"
+
 
 
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.LABO.1.5")
 plotInfo$legendLabels <- c(" Female employment in agriculture")
-if (!("male_share_agr_empl" %in% names(sybdata.df))) {
+if (!("female_share_agr_empl" %in% names(sybdata.df))) {
   
-  dat <- read.csv("./database/Data/Raw/female_male_amployment.csv", stringsAsFactors = FALSE)
+  
+  dat <- read.csv("./database/Data/Raw/female_male_amployment_macroregions.csv", stringsAsFactors = FALSE)
   dat <- dat[c("AreaCode","Year","ElementName","Value")] 
   dat <- na.omit(dat)
   dat <- dat[!duplicated(dat[c("AreaCode","Year","ElementName")]),]
