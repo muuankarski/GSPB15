@@ -868,7 +868,9 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]
-       ) + labs(y="million people")
+       ) + labs(y="million people") +
+         scale_x_continuous(breaks = c(1991, 2000, 2005, 2010, 2015),
+                            labels = c("1990-92", "1999-2001", "2004-06", "2009-11", "2014-16"))
        
 )
 ## Export the plot
@@ -951,7 +953,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
+) + guides(color = guide_legend(nrow = 3)) +
   scale_x_continuous(breaks = c(1991, 2001, 2006, 2013, 2015),
                        labels = c("1990-92", "2000-02", "2005-07", "2012-14", "2014-16")) +
   theme(axis.text.x = element_text(angle = 45))
@@ -967,7 +969,29 @@ export_plot(placement = "tr")
 plotInfo <- plot_info(plotName = "C.P2.AV.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
+
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_color_manual(labels = c("1999-2001", "2009-2011"),
+                              values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         scale_fill_manual(labels = c("1999-2001", "2009-2011"),
+                           values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
+)
+
+
 ## Export the plot
 export_plot(manual_text="Energy supply derived from cereals, roots and tubers, top 20 countries in 2011",placement="l")
 
@@ -997,7 +1021,10 @@ assign(plotInfo$plotName,
                 legend_lab = subset(meta.lst$FULL,
                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       )
+       ) + scale_color_manual(labels = c("1999-2001", "2009-2011"),
+                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         scale_fill_manual(labels = c("1999-2001", "2009-2011"),
+                            values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
        )
 ## Export the plot
 export_plot(manual_text="Average protein supply, top 20 countries in 2012",placement="r")
@@ -1112,7 +1139,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-       ) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
+       ) + guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
          scale_x_continuous(breaks = c(1991, 2001, 2006, 2013, 2015),
                             labels = c("1990-92", "2000-02", "2005-07", "2012-14", "2014-16")) +
          theme(axis.text.x = element_text(angle = 45))
@@ -1180,7 +1207,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text="Prevalence of undernourishment, highest 20 countries in 2013-15 (3 year averages)", placement="r")
+export_plot(manual_text="Prevalence of undernourishment, highest 20 countries in 2014-16 (3 year averages)", placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1273,9 +1300,9 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-       ) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
-         scale_x_continuous(breaks = c(2002, 2006, 2013),
-                            labels = c("2001-03", "2005-07", "2012-14")) +
+       ) + guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3)) +
+         #scale_x_continuous(breaks = c(2002, 2006, 2013),
+        #                    labels = c("2001-03", "2005-07", "2012-14")) +
          theme(axis.text.x = element_text(angle = 45))
 )   
 ## Export the plot
@@ -1358,7 +1385,10 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) 
+       ) + scale_fill_manual(labels = c("1999-2001", "2009-2011"),
+                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         scale_color_manual(labels = c("1999-2001", "2009-2011"),
+                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
        
        )
 ## Export the plot
@@ -1397,7 +1427,7 @@ assign(mapInfo$mapName,
        )
 
 ## export the map
-export_map(manual_text="Political stability and absence of violence/terrorism, index (2012)")
+export_map(manual_text="Political stability and absence of violence/terrorism, index (2013)")
 
 
 
@@ -1476,7 +1506,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2012)" ,placement="l")
+export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2012*)" ,placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
@@ -1510,7 +1540,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2012)",placement="r")
+export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2012*)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
@@ -1639,7 +1669,7 @@ d$var[d$var == "FBS.SDES.CRLS.PCT3D"] <- "Cereals\n(excl. beer)"
 d$var[d$var == "FBS.SDES.SR.PCT3D"] <- "Starchy roots"
 d$var[d$var == "FBS.SDES.SS.PCT3D"] <- "Sugar and\nsweeteners"
 d$var[d$var == "FBS.SDES.MO.PCT3D"] <- "Meat and offals"
-d$var[d$var == "FBS.SDES.VOAF.PCT3D"] <- "VMilk\n(excl. butter)"
+d$var[d$var == "FBS.SDES.VOAF.PCT3D"] <- "Milk\n(excl. butter)"
 d$var[d$var == "FBS.SDES.MEB.PCT3D"] <- "Veg. oils and\nanimal fats"
 
 p <- ggplot(d, aes(x=sum/2, y = mean, fill = var, width = sum))
@@ -1981,7 +2011,8 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_y_continuous(labels=french) + labs(y="milllion tonnes")
+       ) + scale_y_continuous(labels=french, limits=c(0,32)) + labs(y="milllion tonnes")
+         
        
 )
 ## Export the plot
@@ -2101,7 +2132,7 @@ assign(plotInfo$plotName,
 #                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 legend_lab <- c("From capture fisheries","From aquaculture"),
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]] 
-       )  + labs(y="kg/cap")
+       )  + labs(y="kg/cap") + guides(fill = guide_legend(nrow = 3), color = guide_legend(nrow = 3))
        
        )
 

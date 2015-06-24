@@ -45,7 +45,7 @@ C.P2.STB.1.2,2,Stability,STB,1,,2,,CHART,SQUARE,Year,reg_uni_line,FAO_TABLE_NAME
 C.P2.STB.1.3,2,Stability,STB,1,,2,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Per capita food supply variability (kcal/capita/day),,,,,,2000,2015,,,kcal/cap/day,,FS.DS.PCFSV.KCDD,,,,,,,,,,,
 C.P2.STB.1.4,2,Stability,STB,1,,3,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Domestic food price volatility (index),,,,,,2000,2014,15,,index,,FS.DEA.DFPLIV.IND,,,,,,,,,,,
 C.P2.STB.1.5,2,Stability,STB,1,,4,,CHART,SQUARE,FAO_TABLE_NAME,reg_uni_bar,Year,,,M49world + M49macroReg,Value of food imports over total merchandise exports (percent) (3 year averages),,,,,,2000,2010,,,percent,,T.V.FEFS.PCT3D,,,,,,,,,,,
-M.P2.STB.1.6,2,Stability,STB,1,,5,,MAP,LARGE,,,,,,Territory,Political stability and absence of violence/terrorism (index),,,,,,2012,2012,,,index,,G.GD.PSAVT.IN,,,,,,,,,,,
+M.P2.STB.1.6,2,Stability,STB,1,,5,,MAP,LARGE,,,,,,Territory,Political stability and absence of violence/terrorism (index),,,,,,2013,2013,,,index,,G.GD.PSAVT.IN,,,,,,,,,,,
 C.P2.UT.1.3,2,Utilization,UT,1,,2,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Percentage of children <5 years of age who are stunted ,,,,,,2015,2015,,,percent,,SH.STA.STNT.ZS,,,,,,,,,,,
 C.P2.UT.1.4,2,Utilization,UT,1,,2,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Percentage of children under 5 years of age affected by wasting,,,,,,2015,2015,,,percent,,SH.STA.WAST.ZS,,,,,,,,,,,
 C.P2.UT.1.5,2,Utilization,UT,1,,2,,CHART,SMALL,Year,multi_line,,,,M49world,Access to improved water source and sanitation facilities (percent),,,,,,2000,2012,,,percent,,SH.H2O.SAFE.ZS,SH.STA.ACSN,,,,,,,,,,

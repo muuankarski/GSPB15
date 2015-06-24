@@ -17,12 +17,12 @@ The setting,17,EA.PRD.AGRI.KD,,,Agr value added per worker (constant US$),1000,1
 Hunger dimensions,18,FBS.PCS.PDES.KCD3D,,,Dietary energy supply (kcal/pc/day),,0
 Hunger dimensions,19,FS.DA.ADESA.PCT3D,,,Average dietary energy supply adequacy (%),,0
 Hunger dimensions,20,FBS.PCSS.CSR.PCT3D,,,"Dietary en supp, cereals/roots/tubers (%)",,0
-Hunger dimensions,21,FS.OA.POU.PCT3D1,,,Prevalence of undernourishment (%),,0
+Hunger dimensions,21,FS.OA.POU.PCT3D1,,,Prevalence of undernourishment (%),,1
 Hunger dimensions,22,NY.GDP.PCAP.PP.KD,,,"GDP per capita (US$, PPP)",,0
-Hunger dimensions,23,FS.DEA.DFPLIV.IND,,,Domestic food price volatility (index),,0
-Hunger dimensions,24,FBS.IDR.CRLS.PCT3D,,,Cereal import dependency ratio (%),,0
-Hunger dimensions,25,SH.STA.MALN.ZS,,,"Underweight, children under-5 (%)",,0
-Hunger dimensions,26,SH.H2O.SAFE.ZS,,,Improved water source (% pop),,0
+Hunger dimensions,23,FS.DEA.DFPLIV.IND,,,Domestic food price volatility (index),,1
+Hunger dimensions,24,FBS.IDR.CRLS.PCT3D,,,Cereal import dependency ratio (%),,1
+Hunger dimensions,25,SH.STA.MALN.ZS,,,"Underweight, children under-5 (%)",,1
+Hunger dimensions,26,SH.H2O.SAFE.ZS,,,Improved water source (% pop),,1
 Food Supply,27,QV.NPV.FOOD.ID.NO,,,"Food production value, (2004-2006 mln I$)",1000000,0
 Food Supply,28,NV.AGR.TOTL.ZS,,,"Agriculture, value added (% GDP)",,0
 Food Supply,29,TP.EXVAL.FOOD.USD.NO,,,Food exports (mln US$) ,1000000,0
