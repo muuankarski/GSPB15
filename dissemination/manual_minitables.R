@@ -30,8 +30,17 @@ names(dw) <- c("","1990-92","2014-16")
 
 dw <- dw[c(7,3,4,1,2,5,6),]
 
-print.xtable(xtable(dw, caption = " Prevalence of undernourishment (percent)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+# Chiaras comments
+print.xtable(xtable(dw, caption = " Prevalence of undernourishment (percent)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, 
+             booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UNU.1.2.tex")
+# run this in shell!!! without "system"
+# sed -i 's#\\end{table}#2014-16 estimates are projections.\n\\end{table}#' ./publication/Tables/MT.P2.UNU.1.2.tex
+
+
+
+
+
 
 ## "Countries with highest share of children under 5 years of age who are underweight
 

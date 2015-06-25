@@ -140,6 +140,8 @@ if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
     dat[[i]] <- as.numeric(dat[[i]])
   }
   
+  dat$FAOST_CODE[dat$FAOST_CODE == 41] <- 351
+  
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
   sybdata.df$phosphate_tonnes_per_ha <- sybdata.df$phosphate_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
   sybdata.df$potash_tonnes_per_ha <- sybdata.df$potash_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
@@ -152,27 +154,6 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
   
   sybdata.df$aqua_culture_share <- sybdata.df$FI.PRD.AQ.TN.NO / (sybdata.df$FI.PRD.AQ.TN.NO + sybdata.df$FI.PRD.CAPT.TN.NO) *100
 }
-
-# Fish net trade
-
-if (!("net_fish_trade" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
-  drops <- names(dat)[grepl("^Symbol", names(dat))]
-  dat <- dat[,!(names(dat) %in% drops)]
-  dl <- gather(dat, 
-               "Year",
-               "net_fish_trade",
-               6:28)
-  dl <- dl[c(-3,-4,-5)]
-  dl$Year <- str_replace_all(dl$Year, "X","")
-  dl$Year <- factor(dl$Year)
-  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
-  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
-  dl$UN_CODE <- NULL
-  dl$Country <- NULL
-  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
-  }
 
 
 ## FISHFISHFISH
@@ -197,17 +178,34 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
   dl$Year <- factor(dl$Year)
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
   dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
+  tmp <- dl %>% filter(UN_CODE %in% c(156,344,446)) %>%  group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade))
+  tmp$FAOST_CODE <- 351
+  tmp$UN_CODE <- NA
+  tmp$Country <- "China"
+  dl <- rbind(dl,tmp)
+  dl <- dl[!(dl$UN_CODE %in% c(156,344,446)),]
+  
   dl$UN_CODE <- NULL
   dl$Country <- NULL
+  
+  # Macro aggregates
+#   M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
+#   dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
   sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
 }
 
 
 if (!("production_quantity_index" %in% names(sybdata.df))) {
-  dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO")]
+  
+  dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO","FI.PRD.AQ.TN.NO","capture2013","aquaculture2013")]
+  # because in previous plots these were shown as million tons!!
+  dat$capture2013 <- dat$capture2013 * 1000000
+  dat$aquaculture2013 <- dat$aquaculture2013 * 1000000
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
-  dat$Year <- paste0("X",dat$Year)
-  dat <- spread(dat, Year, FI.PRD.CAPT.TN.NO)
+  dat$total_prod <- rowSums(dat[3:6], na.rm = TRUE)
+  dat <- dat[c("FAOST_CODE","Year","total_prod")]
+  dat$Year <- paste0("X", dat$Year)
+  dat <- spread(dat, Year, total_prod)
   dat$mean <- rowMeans(dat[c("X2004","X2005","X2006")],na.rm = TRUE)
   dat[2:(ncol(dat)-1)] <- apply(dat[2:(ncol(dat)-1)], 2, function(x) x/dat$mean*100)
   dat$mean <- NULL
@@ -215,8 +213,37 @@ if (!("production_quantity_index" %in% names(sybdata.df))) {
   dl$Year <- str_replace_all(dl$Year, "X","")
   dl$Year <- factor(dl$Year)
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
+  dl <- dl[dl$Year <= 2013,]
   dl <- na.omit(dl)
-  dl$Country <- NULL
+  dl <- dl[!is.infinite(dl$production_quantity_index),]
+  #M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
+  #dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
+  
+#   ## Aggregation
+#   M49macroReg.df <-  
+#     Aggregation(data = country.df[country.df[, "FAOST_CODE"] %in% M49macroReg[, "FAOST_CODE"],],
+#                 relationDF = M49macroReg,
+#                 aggVar = con.df[, "STS_ID"],
+#                 aggMethod = con.df[, "AGGREGATION"],
+#                 weightVar = con.df[, "STS_ID_WEIGHT"],
+#                 thresholdProp = con.df[, "THRESHOLD_PROP"],
+#                 #               thresholdCountry = con.df[, "THRESHOLD_COUNTRIES"],
+#                 #               applyRules = TRUE,
+#                 keepUnspecified = FALSE)
+#   ## Specify the area
+#   M49macroReg.df[, "Area"] <- "M49macroReg"
+#   ## Add country names
+#   M49macroRegName = 
+#     subset(na.omit(unique(FAOcountryProfile[, c("UNSD_MACRO_REG", "UNSD_MACRO_REG_CODE")])))
+#   M49macroReg.df = merge(M49macroReg.df, M49macroRegName, all.x = TRUE, 
+#                          by = "UNSD_MACRO_REG_CODE")
+#   colnames(M49macroReg.df)[which(colnames(M49macroReg.df) == 
+#                                    "UNSD_MACRO_REG")] = "FAO_TABLE_NAME"
+#   colnames(M49macroReg.df)[which(colnames(M49macroReg.df) == 
+#                                    "UNSD_MACRO_REG_CODE")] = "FAOST_CODE"
+#   
+  
+  
   sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
 }
 
@@ -273,18 +300,18 @@ if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
-## bioenergy
 
-if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
-  dat <- dat[c("AreaCode","Year","Value")]
-  names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
-  dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)
-  dat$Year <- as.numeric(dat$Year)
-  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
-  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
-}
+## Water indicators for China
+
+water_vars <- names(sybdata.df)[grep("^AQ.", names(sybdata.df))]
+water_vars_plus <- c("Year","FAOST_CODE",water_vars)
+water_vars.df <- sybdata.df[water_vars_plus]
+water_vars.df <- water_vars.df[water_vars.df$FAOST_CODE != 351,]
+water_vars.df$FAOST_CODE[water_vars.df$FAOST_CODE == 357] <- 351
+
+myvars <- names(sybdata.df) %in% water_vars
+sybdata.df <- sybdata.df[!myvars]
+sybdata.df <- merge(sybdata.df,water_vars.df,by=c("FAOST_CODE","Year"), all.x=TRUE)
 
 
 

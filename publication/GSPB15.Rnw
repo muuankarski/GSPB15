@@ -406,8 +406,6 @@ chart_spread2(title="Overview",
 @
 
 
-
-
 <<economy, eval=TRUE, results='asis'>>=
 chart_spread2(title="Economy",                
             LeftTextCode="While some sectors have been hard hit, agriculture has demonstrated resilience during the recent economic downturn.  Changes in the wider economy, including growing global integration, affect the performance of the agriculture sector.  Higher overall economic growth also raises consumers’ incomes and hence food demand. Changing interest rates influence capital investments, land values and storage levels, while inflation affects input prices, revenues and credit costs. Fluctuations in exchange rates have an important bearing on international competitiveness and trade flows.",  
@@ -497,6 +495,7 @@ chart_spread2(title="Investment",
 <<Undernourishmend, eval=TRUE,results='asis'>>=
 chart_spread(title="Undernourishment",                
             LeftTextCode="Undernourishment is a state, lasting for at least one year, of inability to acquire enough food, defined as a level of food intake insufficient to meet dietary energy requirements. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Two hundred and sixteen million million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            footnoteLeft="2014-16 estimates are projections",
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
             RightChartCode="C.P2.UNU.1.4",  
@@ -642,7 +641,7 @@ chart_spread(title="Livestock sector",
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
 chart_spread2(title="Fisheries sector",
-            LeftTextCode="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
+            LeftTextCode="Fish is an important component in people’s diets, providing about 3.1 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
             RightChartCode="C.P3.FISH.1.4",  

@@ -16,12 +16,13 @@ chart_spread <- function(title="title",
   if (!exists("footnoteRight")) footnoteRightText <- "\\vspace{-7pt} \n"
   
   if (exists("footnoteRight")) footnoteLeftText <- paste0("\\footnotesize{",footnoteLeft,"}  \n")
-  if (!exists("footnoteRight")) footnoteLefttText <- "\\vspace{-7pt} \n"
+  if (!exists("footnoteRight")) footnoteLeftText <- "\\vspace{-7pt} \n"
   
   #cat(paste0("\\begin{ChartPage}{ \\Large{",title,"} } \n")) # This fixes the font size but messes the tOC font size
   cat(paste0("\\begin{ChartPage}{ ",title," } \n"))
   
   cat(paste0("\\LeftText{",LeftTextCode,"} \n"))
+  
 
 #   cat(paste0("\\RightText{\\IfFileExists{./Tables/",RightTextCode,".tex}  
 # 	               {\\begin{table} \n
@@ -34,7 +35,6 @@ chart_spread <- function(title="title",
    
 	cat(paste0("\\LeftChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",LeftChartCode,".tex} \n",
-	                footnoteLeftText,
 	               "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
 	               "\\end{chart}} \n"))
 	
@@ -80,7 +80,7 @@ chart_spread2 <- function(title="title",
   if (!exists("footnoteRight")) footnoteRightText <- "\\vspace{-7pt} \n"
   
   if (exists("footnoteRight")) footnoteLeftText <- paste0("\\footnotesize{",footnoteLeft,"}  \n")
-  if (!exists("footnoteRight")) footnoteLefttText <- "\\vspace{-7pt} \n"
+  if (!exists("footnoteRight")) footnoteLeftText <- "\\vspace{-7pt} \n"
   
   #cat(paste0("\\begin{ChartPage}{ \\Large{",title,"} } \n")) # This fixes the font size but messes the tOC font size
   cat(paste0("\\begin{ChartPage}{ ",title," } \n"))
