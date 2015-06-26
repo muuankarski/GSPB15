@@ -536,6 +536,9 @@ for (i in 1:nrow(M49countries)) {
       file = fileOut, append = TRUE)
 }
 
+# sed -i 's#\\end{tabular}#\*We can add a footnote for each table like this..\n\\end{tabular}#' ./publication/Tables/CountryProfiles.tex
+# sed -i 's#{ 2014 }#{ 2014* }#' ./publication/Tables/CountryProfiles.tex
+
 
 # ###########################################################################
 # ## Metadata
