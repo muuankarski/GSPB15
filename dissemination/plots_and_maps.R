@@ -993,7 +993,7 @@ assign(plotInfo$plotName,
 
 
 ## Export the plot
-export_plot(manual_text="Energy supply derived from cereals, roots and tubers, top 20 countries in 2011",placement="l")
+export_plot(manual_text="Energy supply derived from cereals, roots and tubers, top 20 countries in 2009-2011",placement="l")
 
 
 
@@ -1027,7 +1027,7 @@ assign(plotInfo$plotName,
                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]])
        )
 ## Export the plot
-export_plot(manual_text="Average protein supply, top 20 countries in 2012",placement="r")
+export_plot(manual_text="Average protein supply, top 20 countries in 2009-2011",placement="r")
 
 
 # ----------------------------------------------------------------------- #
@@ -1341,7 +1341,7 @@ export_plot(manual_text="Per capita food supply variability, top 20 countries in
 ff <- plot.data[c("SHORT_NAME","Year","FS.DS.PCFSV.KCDD")]
 
 
-FS.DS.PCFSV.KCDD
+#FS.DS.PCFSV.KCDD
 
 # ----------------------------------------------------------------------- #
 # Domestic food price level index volatility 

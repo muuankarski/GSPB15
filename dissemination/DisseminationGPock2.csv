@@ -42,7 +42,7 @@ C.P2.ACCESS.1.4,2,Access,ACCESS,1,,4,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Ter
 C.P2.ACCESS.1.5,2,Access,ACCESS,1,,5,,CHART,SQUARE,Year,reg_uni_line,FAO_TABLE_NAME,,,M49world + M49macroReg,"Gross domestic product per capita, PPP (constant 2011 international $)",,,,,,1991,2013,,,US$,,NY.GDP.PCAP.PP.KD,,,,,,,,,,,
 M.P2.ACCESS.1.6,2,Access,ACCESS,1,,6,,MAP,LARGE,,,,,,Territory,Road density,,,,,,2007,2011,4,,km/100sq.km,,IS.ROD.DNST.K2.DISS,,,,,,,,,,,
 C.P2.STB.1.2,2,Stability,STB,1,,2,,CHART,SQUARE,Year,reg_uni_line,FAO_TABLE_NAME,,,M49world + M49macroReg,Per capita food production variability (constant 2004-2006 thousand int$ per capita),,,,,,2002,2013,12,,index,,FS.DEA.PCFPV.IDD,,,,,,,,,,,
-C.P2.STB.1.3,2,Stability,STB,1,,2,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Per capita food supply variability (kcal/capita/day),,,,,,2000,2015,,,kcal/cap/day,,FS.DS.PCFSV.KCDD,,,,,,,,,,,
+C.P2.STB.1.3,2,Stability,STB,1,,2,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Per capita food supply variability (kcal/capita/day),,,,,,2000,2011,,,kcal/cap/day,,FS.DS.PCFSV.KCDD,,,,,,,,,,,
 C.P2.STB.1.4,2,Stability,STB,1,,3,,CHART,SQUARE,SHORT_NAME,top_dot,Year,,,Territory,Domestic food price volatility (index),,,,,,2000,2014,15,,index,,FS.DEA.DFPLIV.IND,,,,,,,,,,,
 C.P2.STB.1.5,2,Stability,STB,1,,4,,CHART,SQUARE,FAO_TABLE_NAME,reg_uni_bar,Year,,,M49world + M49macroReg,Value of food imports over total merchandise exports (percent) (3 year averages),,,,,,2000,2010,,,percent,,T.V.FEFS.PCT3D,,,,,,,,,,,
 M.P2.STB.1.6,2,Stability,STB,1,,5,,MAP,LARGE,,,,,,Territory,Political stability and absence of violence/terrorism (index),,,,,,2013,2013,,,index,,G.GD.PSAVT.IN,,,,,,,,,,,
