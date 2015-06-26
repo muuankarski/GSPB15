@@ -2564,6 +2564,11 @@ plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
 df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWIND.MC.SH = mean(AQ.WAT.WWIND.MC.SH, na.rm=TRUE))
 df2014$Year <- 2014
 names(df2014) <- c("FAOST_CODE","new_var","Year") 
+# remove NA
+df2014 <- df2014[!is.na(df2014$new_var),]
+# China
+df2014$FAOST_CODE[df2014$FAOST_CODE == 357] <- 351
+#
 sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
 sybdata.df$AQ.WAT.WWIND.MC.SH <- ifelse(sybdata.df$Year == 2014, sybdata.df$new_var, sybdata.df$AQ.WAT.WWIND.MC.SH)
 sybdata.df$new_var <- NULL
@@ -2582,6 +2587,10 @@ plotInfo <- plot_info(plotName = "C.P4.WATER.1.4")
 df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWAGR.MC.SH = mean(AQ.WAT.WWAGR.MC.SH, na.rm=TRUE))
 df2014$Year <- 2014
 names(df2014) <- c("FAOST_CODE","new_var","Year") 
+# remove NA
+df2014 <- df2014[!is.na(df2014$new_var),]
+# China
+df2014$FAOST_CODE[df2014$FAOST_CODE == 357] <- 351
 sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
 sybdata.df$AQ.WAT.WWAGR.MC.SH <- ifelse(sybdata.df$Year == 2014, sybdata.df$new_var, sybdata.df$AQ.WAT.WWAGR.MC.SH)
 sybdata.df$new_var <- NULL
@@ -2808,7 +2817,11 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
   d$total_bioenergy_consumption <- factor(d$total_bioenergy_consumption)
   d$total_bioenergy_consumption <- as.numeric(levels(d$total_bioenergy_consumption))[d$total_bioenergy_consumption]
   d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
-
+  # Alessandros list of "selected countries"
+  d2 <- d2[d2$Country %in% c("Algeria","Indonesia","Nicaragua","United States","Viet Nam","Italy",
+                             "Australia","Germany","People's Republic of China","Brazil","Argentina",
+                             "Dominican Republic","Cambodia","Japan","Kenya","Senegal",
+                             "Turkey","Jamaica","Iraq","United Arab Emirates"),]
   d2$Country <- NULL
   d2$Year <- 2012
   d2 <- d2[!is.na(d2$total_bioenergy_consumption),]
@@ -2820,7 +2833,7 @@ if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
 ## Export the plot
 #export_plot(manual_text = "Total bioenergy consumption in agriculture, top 20 countries (2012)", placement="r")
-export_plot(manual_text = "Bioenergy as a % of total renewable energy, top 20 countries (2012)", placement="r")
+export_plot(manual_text = "Bioenergy as a % of total renewable energy, selected countries (2012)", placement="r")
 
 # -----------------------------------------------------------
 # Exports of cereals (2000 to 2011)
