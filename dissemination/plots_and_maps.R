@@ -1484,7 +1484,7 @@ export_map(manual_text="Political stability and absence of violence/terrorism, i
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.3")
 
-df2014 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.STNT.ZS, na.rm=TRUE))
+df2014 <- filter(sybdata.df, Year %in% c(2006:2014)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.STNT.ZS, na.rm=TRUE))
 df2014$Year <- 2015
 names(df2014) <- c("FAOST_CODE","new_var","Year") 
 sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
@@ -1513,14 +1513,14 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2012*)" ,placement="l")
+export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2014*)" ,placement="l")
 
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P2.UT.1.4")
-df2014 <- filter(sybdata.df, Year %in% c(2006:2012)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.WAST.ZS, na.rm=TRUE))
+df2014 <- filter(sybdata.df, Year %in% c(2006:2014)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(value = mean(SH.STA.WAST.ZS, na.rm=TRUE))
 df2014$Year <- 2015
 names(df2014) <- c("FAOST_CODE","new_var","Year") 
 sybdata.df <- merge(sybdata.df,df2014,by=c("FAOST_CODE","Year"),all.x=TRUE)
@@ -1547,7 +1547,7 @@ assign(plotInfo$plotName,
 )
 
 ## Export the plot
-export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2012*)",placement="r")
+export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2014*)",placement="r")
 
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
@@ -1709,9 +1709,26 @@ embed_fonts("./publication/Plots/C.P3.DES.1.2.pdf")
 plotInfo <- plot_info(plotName = "C.P3.DES.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+       
+       )
 ## Export the plot
-export_plot(manual_text=" Dietary energy supply, top 20 countries in 2014", placement="l")
+export_plot(manual_text=" Dietary energy supply, top 20 countries in 2015", placement="l")
 
 
 # ----------------------------------------------------------------------- #
@@ -1721,9 +1738,28 @@ export_plot(manual_text=" Dietary energy supply, top 20 countries in 2014", plac
 plotInfo <- plot_info(plotName = "C.P3.DES.1.4")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       )
+       
+       
+       )
 ## Export the plot
-export_plot(manual_text=" Dietary energy supply, bottom 20 countries in 2014",placement="r")
+export_plot(manual_text=" Dietary energy supply, bottom 20 countries in 2015",placement="r")
+
 
 
 # ----------------------------------------------------------------------- #
@@ -1732,7 +1768,24 @@ export_plot(manual_text=" Dietary energy supply, bottom 20 countries in 2014",pl
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.DES.1.5")
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = plot.data,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+  #              legend_lab = subset(meta.lst$FULL,
+  #                                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
+       )
+       
+       )
 ## Export the plot
 export_plot(manual_text = " Dietary energy supply, kcal/cap/day", placement = "b")
 
