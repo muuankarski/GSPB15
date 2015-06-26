@@ -45,13 +45,15 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   #dat$Area[dat$FAOST_CODE == 5205] <- "M49macroReg"
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "<0.1"] <- 0.01
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "ns"] <- 0
-  dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
-  dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
-  dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
-  dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
-  dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
-  dat$FS.OA.POFI.PCT3D1 <- as.factor(dat$FS.OA.POFI.PCT3D1)
-  dat$FS.OA.POFI.PCT3D1 <- as.numeric(levels(dat$FS.OA.POFI.PCT3D1))[dat$FS.OA.POFI.PCT3D1]
+  #dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
+  #dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
+  #dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
+  #dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
+  #dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
+  #dat$FS.OA.POFI.PCT3D1 <- as.factor(dat$FS.OA.POFI.PCT3D1)
+  #dat$FS.OA.POFI.PCT3D1 <- as.numeric(levels(dat$FS.OA.POFI.PCT3D1))[dat$FS.OA.POFI.PCT3D1]
+  
+  
   
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   vars_to_exclude <- names(sybdata.df)[names(sybdata.df) %in% names(dat)][c(-1:-4,-14)]
