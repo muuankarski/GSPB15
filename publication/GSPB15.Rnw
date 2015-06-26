@@ -802,7 +802,8 @@ chart_spread2(title="Climate change",
 
 \ifprint\else
 \begin{picture}(0,0)
-\put(-58,-472){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+%\put(-58,-472){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+\put(-58,-432){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover.pdf}}
 %\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
 \end{picture}
 

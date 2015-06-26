@@ -278,10 +278,66 @@ export_plot(manual_text="Value added in agriculture, average annual growth (2003
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.5")
+
+
+sybdata.df$NV.AGR.TOTL.KD_Growth <- NULL
+if (!("NV.AGR.TOTL.KD_Growth" %in% names(sybdata.df))) {
+  
+  ff <- sybdata.df[c("FAOST_CODE","SHORT_NAME","Year","NV.AGR.TOTL.KD")]
+  ff <- ff[!is.na(ff$NV.AGR.TOTL.KD),]
+  ff <- ff[ff$FAOST_CODE >= 5000,]
+  
+  #Exchule Oceania
+  ff <- ff[ff$FAOST_CODE != 5200,]
+  
+  ff <- arrange(ff, FAOST_CODE, Year)
+  
+  # Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
+  d <- ddply(ff,"FAOST_CODE",transform,
+             Growth=c(NA,exp(diff(log(NV.AGR.TOTL.KD)))-1))
+  
+  d$SHORT_NAME <- NULL
+  d$NV.AGR.TOTL.KD <- NULL
+  
+  names(d)[names(d)=="Growth"] <- "NV.AGR.TOTL.KD_Growth"
+  d$NV.AGR.TOTL.KD_Growth <- d$NV.AGR.TOTL.KD_Growth * 100
+
+    
+  sybdata.df <- merge(sybdata.df,d,by=c("FAOST_CODE","Year"),all.x=TRUE)
+}
+
+#plotInfo$legendLabels <- c("Africa","Asia","Europe","Oceania")
+
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=6) )
+assign(plotInfo$plotName, 
+       
+        plot_syb(x = plotInfo$xAxis,
+                     y = plotInfo$yAxis,
+                     group = plotInfo$group,
+                     type = plotInfo$plotType,
+                     subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                     data = sybdata.df,
+                     scale = plotInfo$scaling,
+                     x_lab = plotInfo$xPlotLab,
+                     y_lab = plotInfo$yPlotLab,
+                    # legend_lab = plotInfo$legendLabels,
+                     col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
+       ) + scale_y_continuous(labels=french)
+       
+       
+       )
 ## Export the plot
 export_plot(placement="b")
+
+
+
+
+
+
+
+
+
 
 ## ------------------------------------------------------------------------
 # MAPS
@@ -1333,7 +1389,7 @@ assign(plotInfo$plotName,
        )
        )
 ## Export the plot
-export_plot(manual_text="Per capita food supply variability, top 20 countries in 2015, kcal/capita/day",placement="l")
+export_plot(manual_text="Per capita food supply variability, top 20 countries in 2011, kcal/capita/day",placement="l")
 
 
 # Checking the chart above 
