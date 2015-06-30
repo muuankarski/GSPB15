@@ -328,7 +328,10 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(placement="b")
+
+# This is commented because I had to manually (in Inkscape) remove the 
+# Americas from the legend.. june 30. 2015 - Markus
+# export_plot(placement="b")
 
 
 
@@ -740,7 +743,39 @@ write.csv(df, file="~/share_of_government_expenditure.csv", row.names=FALSE)
 # Share of Government Expenditures on Agriculture (% of Total Outlays)
 
 ## Map info
-mapInfo <- map_info(mapName = "M.P1.INV.1.6", data = sybMaps.df, mapArea = "Territory")
+
+
+
+
+
+
+if (!("IG_23101_6111_mean" %in% names(sybMaps.df))){
+  
+  dat <- getFAOtoSYB(domainCode = "IG", 
+                     elementCode = 6111,
+                     itemCode = 23101)
+  dat <- dat[["entity"]]
+  dat <- filter(dat, Year >= 2008)
+  dat <- filter(dat, Year <= 2012)
+  
+  tmp1 <- dat %>% group_by(FAOST_CODE) %>%  dplyr::summarise(IG_23101_6111_mean = mean(IG_23101_6111, na.rm=TRUE))
+  tmp2 <- dat %>% group_by(FAOST_CODE) %>% mutate(maxyear = max(Year))
+  tmp2 <- tmp2[tmp2$Year == tmp2$maxyear,]
+  tmp2$maxyear <- NULL
+  tmp2$Year <- 2015
+  tmp1$Year <- 2015
+  
+  names(tmp1)[names(tmp1)=="FAOST_CODE"] <- "FAO_CODE"
+  names(tmp2)[names(tmp2)=="FAOST_CODE"] <- "FAO_CODE"
+  
+  sybMaps.df <- merge(sybMaps.df,tmp1,by=c("FAO_CODE","Year"),all.x=TRUE)
+  sybMaps.df <- merge(sybMaps.df,tmp2,by=c("FAO_CODE","Year"),all.x=TRUE)
+}
+
+#mapInfo <- map_info(mapName = "M.P1.INV.1.6", data = sybMaps.df, mapArea = "Territory")
+#mapInfo <- map_info(mapName = "M.P1.INV.1.6_1", data = sybMaps.df, mapArea = "Territory")
+mapInfo <- map_info(mapName = "M.P1.INV.1.6_2", data = sybMaps.df, mapArea = "Territory")
+
 ## Create the map
 assign(mapInfo$mapName,meta_plot_map() )
 ## export the map
@@ -2615,6 +2650,47 @@ export_map(manual_text="Cropland per capita, ha per cap (2012)")
 # So for each country, I will compute the mean of 2003 to 2013 and 
 # give that mean as a 2014 value
 ## Info
+
+# Data for plots 1.3 and 1.6
+
+water <- sybdata.df[c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+water2000 <- sybdata.df[sybdata.df$Year == 2000, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+water2010 <- sybdata.df[sybdata.df$Year == 2010, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+water2000 <- water2000[!is.na(water2000$AQ.WAT.WATPCP.MC.NO),]
+water2010 <- water2010[!is.na(water2010$AQ.WAT.WATPCP.MC.NO),]
+# top ten
+top_10 <- head(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),10)
+top_00 <- water2000[water2000$FAOST_CODE %in% top_10$FAOST_CODE,]
+# bottom five
+bottom_5 <- tail(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),5)
+bottom_00 <- water2000[water2000$FAOST_CODE %in% bottom_5$FAOST_CODE,]
+
+topdata <- rbind(top_10,top_00)
+bottomdata <- rbind(bottom_5,bottom_00)
+
+#####
+
+## Order bars
+bottomdata$FAO_TABLE_NAME <- factor(bottomdata$FAO_TABLE_NAME, levels=arrange(bottomdata[bottomdata$Year == 2010,], -AQ.WAT.WATPCP.MC.NO)$FAO_TABLE_NAME)
+
+plotInfo <- plot_info(plotName = "C.P4.WATER.1.2")
+
+assign(plotInfo$plotName,
+       
+       ggplot(bottomdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
+         geom_bar(stat="identity",position="dodge") +
+         scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         labs(x=NULL,y="m3/yr/person") +
+         theme(axis.text.x = element_text(angle=45))
+       
+)
+
+
+## Export the plot
+export_plot(manual_text = "Bottom 5 countries with renewable water resources per capita",placement="tr")
+
+
+
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.3")
 
 df2014 <- sybdata.df %>% group_by(FAOST_CODE) %>% dplyr::summarise(AQ.WAT.WWIND.MC.SH = mean(AQ.WAT.WWIND.MC.SH, na.rm=TRUE))
@@ -2661,48 +2737,18 @@ export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share o
 
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.5")
 
-if (!("AQ.WAT.WATPCP.MC.NO.2" %in% names(sybdata.df))) {
-  
-  water <- sybdata.df[c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
-  water2000 <- sybdata.df[sybdata.df$Year == 2000, c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
-  water2010 <- sybdata.df[sybdata.df$Year == 2010, c("FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO")]
-  water2000 <- water2000[!is.na(water2000$AQ.WAT.WATPCP.MC.NO),]
-  water2010 <- water2010[!is.na(water2010$AQ.WAT.WATPCP.MC.NO),]
-  top_10 <- head(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),10)
-  top_00 <- water2000[water2000$FAOST_CODE %in% top_10$FAOST_CODE,]
-  
-  names(top_10)[names(top_10)=="AQ.WAT.WATPCP.MC.NO"] <- "AQ.WAT.WATPCP.MC.NO.2"
-  names(top_00)[names(top_00)=="AQ.WAT.WATPCP.MC.NO"] <- "AQ.WAT.WATPCP.MC.NO.2"
-  
-  topdata <- rbind(top_10,top_00)
-  
-  sybdata.df <- merge(sybdata.df,topdata,by=c("FAOST_CODE","Year"), all.x=TRUE)
-}
-
-plot.data <- sybdata.df[!is.na(sybdata.df$AQ.WAT.WATPCP.MC.NO.2),]
-
-# order.data <- plot.data[plot.data$Year == 2010,]
-# order.data <- arrange(order.data, -AQ.WAT.WATPCP.MC.NO.2)
-# plot.data$SHORT_NAME <- factor(plot.data$SHORT_NAME, levels=order.data$SHORT_NAME)
-
-#cat(paste(shQuote(unique(plot.data$SHORT_NAME), type="cmd"), collapse=", "))
+topdata$FAO_TABLE_NAME <- factor(topdata$FAO_TABLE_NAME, levels=arrange(topdata[topdata$Year == 2010,], -AQ.WAT.WATPCP.MC.NO)$FAO_TABLE_NAME)
 
 assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-              y = plotInfo$yAxis,
-              group = plotInfo$group,
-              type = plotInfo$plotType,
-              subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-		                            Area %in% c(plotInfo$plotArea)")),
-              data = plot.data,
-              scale = plotInfo$scaling,
-              x_lab = plotInfo$xPlotLab,
-              y_lab = plotInfo$yPlotLab,
-              #                 legend_lab = subset(meta.lst$FULL,
-              #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-              col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-              ) 
+       
+       ggplot(topdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
+         geom_bar(stat="identity",position="dodge") +
+         scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+         labs(x=NULL,y="m3/yr/person") +
+         theme(axis.text.x = element_text(angle=45))
 )
+
+
 ## Export the plot
 export_plot(manual_text = "Top 10 countries with renewable water resources per capita",placement="b")
 
