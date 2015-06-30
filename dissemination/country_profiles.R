@@ -328,13 +328,15 @@ M49countries[, "SHORT_NAME"] <-
   sanitizeToLatex(M49countries[, "SHORT_NAME"])
 ## Remove old countries
 OldCountries <- 
-  data.frame(FAOST_CODE = c(15,51,62,151,164,186,228,206,247,246,248),
+  data.frame(FAOST_CODE = c(15,51,62,151,164,186,228,206,247,246,248,
+                            17,83,196,191),
              COUNTRY_NAME = c("Belgium-Luxembourg", "Czechoslovakia",
                               "Ethiopia PDR", "Netherlands Antilles",
                               "Pacific Islands",
                               "Serbia and Montenegro", "Soviet Union",
                               "Sudan (former)", "Yemen (former)", 
-                              "Yemen (old)", "Yugoslav SFR"),
+                              "Yemen (old)", "Yugoslav SFR",
+                              "Bermuda","Kiribati","Seychelles","Saint Vincent and the Grenadines "),
              stringsAsFactors = FALSE)
 M49countries <- 
   M49countries[!M49countries[, "FAOST_CODE"] %in% 
