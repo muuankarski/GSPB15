@@ -167,8 +167,8 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
 # This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
 
 if (!("net_fish_trade" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
+  library(readxl)
+  dat <- read_excel("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
   drops <- names(dat)[grepl("^Symbol", names(dat))]
   dat <- dat[,!(names(dat) %in% drops)]
   dl <- gather(dat, 
@@ -184,6 +184,7 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
   tmp$FAOST_CODE <- 351
   tmp$UN_CODE <- NA
   tmp$Country <- "China"
+  # 
   dl <- rbind(dl,tmp)
   dl <- dl[!(dl$UN_CODE %in% c(156,344,446)),]
   
@@ -191,9 +192,20 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
   dl$Country <- NULL
   
   # Macro aggregates
-#   M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
-#   dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
-  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
+   M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
+   dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
+   
+   m49 <- dl %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
+   names(m49) <- c("FAOST_CODE","Year","net_fish_trade")
+   m49world <- dl %>% group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
+   names(m49world) <- c("Year","net_fish_trade")
+   m49world$FAOST_CODE <- 5000
+   
+   dl$UNSD_MACRO_REG_CODE <- NULL
+   dl <- rbind(dl,m49)
+   dl <- rbind(dl,m49world)
+   
+   sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
 }
 
 

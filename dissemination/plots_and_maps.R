@@ -2289,7 +2289,7 @@ assign(plotInfo$plotName,
        )
 
 # Export plot
-export_plot(manual_text = "Aquaculture vs. capture production", placement = "tr")
+export_plot(manual_text = "Per capita fish food supply", placement = "tr")
 
 # -----------------------------------------------------------
 # 20 countries with highest value of capture production
