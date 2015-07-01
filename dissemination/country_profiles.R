@@ -167,8 +167,8 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
 # This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
 
 if (!("net_fish_trade" %in% names(sybdata.df))) {
-  library(readxl)
-  dat <- read_excel("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
+  library(gdata)
+  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
   drops <- names(dat)[grepl("^Symbol", names(dat))]
   dat <- dat[,!(names(dat) %in% drops)]
   dl <- gather(dat, 
@@ -176,6 +176,7 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
                "net_fish_trade",
                6:28)
   dl <- dl[c(-3,-4,-5)]
+  #names(dl)[names(dl)=="UN code"] <- "UN_CODE"
   dl$Year <- str_replace_all(dl$Year, "X","")
   dl$Year <- factor(dl$Year)
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
@@ -192,9 +193,11 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
   dl$Country <- NULL
   
   # Macro aggregates
-   M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
+   M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE","UNSD_SUB_REG_CODE")]))
    dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
    
+   dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5206] <- 5205
+   dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5207] <- 5205
    m49 <- dl %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
    names(m49) <- c("FAOST_CODE","Year","net_fish_trade")
    m49world <- dl %>% group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
@@ -202,6 +205,7 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
    m49world$FAOST_CODE <- 5000
    
    dl$UNSD_MACRO_REG_CODE <- NULL
+   dl$UNSD_SUB_REG_CODE <- NULL
    dl <- rbind(dl,m49)
    dl <- rbind(dl,m49world)
    
@@ -229,6 +233,7 @@ if (!("production_quantity_index" %in% names(sybdata.df))) {
   dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
   dl <- dl[dl$Year <= 2013,]
   dl <- na.omit(dl)
+  dl <- dl[dl$production_quantity_index > 0,]
   dl <- dl[!is.infinite(dl$production_quantity_index),]
   #M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE")]))
   #dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)

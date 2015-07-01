@@ -735,18 +735,14 @@ export_plot(manual_text = "Aid flows to agriculture, broad (1995-2013)", placeme
 ## ------------------------------------------------------------------------
 # MAPS
 
-df <- merge(mapInfo$mapData,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by.x="FAO_CODE",by.y="FAOST_CODE")
-df <- df[-4]
-df <- arrange(df, -IG.AFFH.STOCGG.USD.SH)
-write.csv(df, file="~/share_of_government_expenditure.csv", row.names=FALSE)
+# df <- merge(mapInfo$mapData,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by.x="FAO_CODE",by.y="FAOST_CODE")
+# df <- df[-4]
+# df <- arrange(df, -IG.AFFH.STOCGG.USD.SH)
+# write.csv(df, file="~/share_of_government_expenditure.csv", row.names=FALSE)
 
 # Share of Government Expenditures on Agriculture (% of Total Outlays)
 
 ## Map info
-
-
-
-
 
 
 if (!("IG_23101_6111_mean" %in% names(sybMaps.df))){
@@ -2728,7 +2724,24 @@ sybdata.df$AQ.WAT.WWAGR.MC.SH <- ifelse(sybdata.df$Year == 2014, sybdata.df$new_
 sybdata.df$new_var <- NULL
 
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 2, n_colors=2) )
+assign(plotInfo$plotName, 
+       
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                #                 legend_lab = subset(meta.lst$FULL,
+                #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french, breaks=c(91,93,95,97,99))
+       
+       )
 ## Export the plot
 export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share of total, highest 20 (1999 to 2013)",placement="r")
 
