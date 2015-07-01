@@ -17,6 +17,7 @@
 \usepackage{bpchem}
 \usepackage{arydshln}
 \usepackage{booktabs}
+\usepackage{changes}
 %\usepackage[document]{ragged2e}
 
 
@@ -714,7 +715,7 @@ chart_spread2(title="Land",
 
 <<Water, eval=TRUE,results='asis'>>=
 chart_spread2(title="Water",                
-            LeftTextCode="Global demand for water has risen sharply over the last century. Total annual water withdrawal from agriculture, municipalities and industries rose from less than 580 km3 in 1900 to more than 3 900 km3 in 2010. Agriculture accounts for approximately 70 percent of total freshwater withdrawal in the world, mostly through irrigation. This has been crucial for gains in food production since irrigation reduces drought risk and encourages crop diversification, thus also enhancing rural incomes. While irrigated agriculture represents about 20 percent of the cultivated land, it contributes to 40 percent of global food production. 
+            LeftTextCode="Global demand for water has risen sharply over the last century. Total annual water withdrawal from agriculture, municipalities and industries rose from less than 580 km3 in 1900 to more than 3 900 km\\textsuperscript{3} in 2010. Agriculture accounts for approximately 70 percent of total freshwater withdrawal in the world, mostly through irrigation. This has been crucial for gains in food production since irrigation reduces drought risk and encourages crop diversification, thus also enhancing rural incomes. While irrigated agriculture represents about 20 percent of the cultivated land, it contributes to 40 percent of global food production. 
 ",  
             RightTextCode="C.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
