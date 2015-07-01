@@ -55,7 +55,8 @@ tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
 tbl <- tbl[c(4,1,3)]
 names(tbl) <- c("","Year","%")
 
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 who are underweight, percent", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 who are underweight, percent", digits = c(0,0,0,1)),
+             type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UT.1.2.tex")
 
 
@@ -111,9 +112,12 @@ gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
-print.xtable(xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+tbl <- xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", digits = c(0,0,0,0))
+#align(tbl) <- c("p{0\\textwidth}","p{0.3\\textwidth}","p{0.25\\textwidth}","p{0.25\\textwidth}")
+print.xtable(tbl, type = "latex", table.placement = NULL, 
+             booktabs = TRUE, include.rownames = FALSE, 
+             size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
-
 
 ##########################################################################
 ##########################################################################

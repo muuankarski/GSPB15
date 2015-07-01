@@ -1810,8 +1810,9 @@ assign(plotInfo$plotName,
                 y_lab = plotInfo$yPlotLab,
                 legend_lab = subset(meta.lst$FULL,
                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       )
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]] 
+                  
+       ) + scale_y_continuous(labels=french, breaks=c(2500,3000,3500))
        
        )
 ## Export the plot
@@ -1840,7 +1841,7 @@ assign(plotInfo$plotName,
                 legend_lab = subset(meta.lst$FULL,
                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       )
+       ) + scale_y_continuous(labels=french, breaks=c(1800,2000,2200))
        
        
        )
@@ -1993,7 +1994,7 @@ mapInfo <- map_info(mapName = "M.P3.CRPRO.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map()
+export_map(manual_text="Crops, gross per capita production index (2004-06 = 100, 2013)")
 
 
 ###########################################################################
@@ -2676,7 +2677,7 @@ assign(plotInfo$plotName,
        ggplot(bottomdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
          geom_bar(stat="identity",position="dodge") +
          scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(x=NULL,y="m3/yr/person") +
+         labs(x=NULL,y=expression(m^"3"/yr/person)) +
          theme(axis.text.x = element_text(angle=45))
        
 )
@@ -2757,8 +2758,9 @@ assign(plotInfo$plotName,
        ggplot(topdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
          geom_bar(stat="identity",position="dodge") +
          scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(x=NULL,y="m3/yr/person") +
-         theme(axis.text.x = element_text(angle=45))
+         labs(x=NULL,y=expression(m^"3"/yr/person)) +
+         theme(axis.text.x = element_text(angle=45)) +
+         scale_y_continuous(labels=french)
 )
 
 
@@ -3212,7 +3214,7 @@ assign(plotInfo$plotName,
        
        )
 ## Export the plot
-export_plot(placement = "b")
+export_plot(manual_text="Forest characteristics (2010)",placement = "b")
 
 # MAPS  ----------------------------------------------------------------- #
 # Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)
