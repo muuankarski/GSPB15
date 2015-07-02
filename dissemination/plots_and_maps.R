@@ -323,7 +323,8 @@ assign(plotInfo$plotName,
        ggplot(data = dat, aes(x = Year, y = share,group=FAO_TABLE_NAME,color=FAO_TABLE_NAME)) +
          geom_line() +
          scale_color_manual(values = plot_colors(part = 1, 5)[["Sub"]]) +
-         labs(y="percent", x="") 
+         labs(y="percent", x="") +
+         coord_cartesian(ylim=c(0,15))
 
        )
 ## Export the plot
@@ -1598,6 +1599,11 @@ assign(plotInfo$plotName,
 ## Export the plot
 export_plot(manual_text="Percentage of children under 5 who are stunted, highest 20 countries (2006 - 2014*)" ,placement="l")
 
+fileConn<-file("./publication/Captions/Caption_C.P2.UT.1.3.tex")
+writeLines(c("\\caption{Percentage of children under 5 who are stunted, highest 20 countries \\hspace{10 mm} (2006 - 2014*)}"), fileConn)
+close(fileConn)
+
+
 # ----------------------------------------------------------------------- #
 # Percentage of children under 5 years of age affected by wasting
 
@@ -2689,7 +2695,7 @@ assign(plotInfo$plotName,
 
 
 ## Export the plot
-export_plot(manual_text = "Bottom 5 countries with renewable water resources per capita",placement="tr")
+export_plot(manual_text = "Countries with the lowest renewable water resources per capita",placement="tr")
 
 
 
@@ -2770,7 +2776,7 @@ assign(plotInfo$plotName,
 
 
 ## Export the plot
-export_plot(manual_text = "Top 10 countries with renewable water resources per capita",placement="b")
+export_plot(manual_text = "Countries with the highest renewable water resources per capita",placement="b")
 
 
 
