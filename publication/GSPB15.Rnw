@@ -76,10 +76,11 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \usepackage{xcolor}
 
 %% Tango color scheme
-\definecolor{Part1}{HTML}{1d5979}
-\definecolor{Part2}{HTML}{e07317}
-\definecolor{Part3}{HTML}{96212d}
-\definecolor{Part4}{HTML}{35802d}
+\definecolor{Part1}{HTML}{005d7b}
+\definecolor{Part2}{HTML}{de8211}
+\definecolor{Part3}{HTML}{9b2a2e}
+\definecolor{Part4}{HTML}{3a7d29}
+\definecolor{Part5}{HTML}{5291c9}
 
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
