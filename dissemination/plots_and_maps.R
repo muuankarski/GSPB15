@@ -280,64 +280,60 @@ export_plot(manual_text="Value added in agriculture, average annual growth (2003
 plotInfo <- plot_info(plotName = "C.P1.ECON.1.5")
 
 
-sybdata.df$NV.AGR.TOTL.KD_Growth <- NULL
-if (!("NV.AGR.TOTL.KD_Growth" %in% names(sybdata.df))) {
+  # constant total gdp from world bank
+  library(WDI)
+  dat <- WDI(indicator = c("NY.GDP.MKTP.KD","iso3Code"), start=2000, end=2013)
+  dl <- dat
+  names(dl)[names(dl)=="year"] <- "Year"
+  dl <- merge(dl,FAOcountryProfile[c("ISO2_WB_CODE","FAOST_CODE","UNSD_MACRO_REG_CODE","UNSD_SUB_REG_CODE")], by.x="iso2c",by.y="ISO2_WB_CODE",all.x=TRUE)
   
-  ff <- sybdata.df[c("FAOST_CODE","SHORT_NAME","Year","NV.AGR.TOTL.KD")]
-  ff <- ff[!is.na(ff$NV.AGR.TOTL.KD),]
+  dl <- na.omit(dl)
+  
+  # aggregates
+  dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5206] <- 5205
+  dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5207] <- 5205
+  m49 <- dl %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(constant_gdp = sum(NY.GDP.MKTP.KD,na.rm=TRUE))
+  names(m49) <- c("FAOST_CODE","Year","constant_gdp")
+  m49world <- dl %>% group_by(Year) %>% dplyr::summarise(constant_gdp = sum(NY.GDP.MKTP.KD,na.rm=TRUE))
+  names(m49world) <- c("Year","constant_gdp")
+  m49world$FAOST_CODE <- 5000
+  
+  dl$UNSD_MACRO_REG_CODE <- NULL
+  dl$UNSD_SUB_REG_CODE <- NULL
+  d <- rbind(m49,m49world)
+  
+  # nominator from sybdata
+  ff <- sybdata.df[c("FAOST_CODE","FAO_TABLE_NAME","Year","NV.AGR.TOTL.KD")]
   ff <- ff[ff$FAOST_CODE >= 5000,]
+  ff <- merge(ff,d,c("FAOST_CODE","Year"))
   
-  #Exchule Oceania
-  ff <- ff[ff$FAOST_CODE != 5200,]
+  ff <- ff[ff$FAOST_CODE %in% c(5100,5300,5205,5400,5500),]
   
-  ff <- arrange(ff, FAOST_CODE, Year)
   
-  # Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
-  d <- ddply(ff,"FAOST_CODE",transform,
-             Growth=c(NA,exp(diff(log(NV.AGR.TOTL.KD)))-1))
-  
-  d$SHORT_NAME <- NULL
-  d$NV.AGR.TOTL.KD <- NULL
-  
-  names(d)[names(d)=="Growth"] <- "NV.AGR.TOTL.KD_Growth"
-  d$NV.AGR.TOTL.KD_Growth <- d$NV.AGR.TOTL.KD_Growth * 100
-
+  dat <- ff %>%  group_by(FAO_TABLE_NAME,Year) %>% mutate(share = NV.AGR.TOTL.KD/constant_gdp*100)
+  dat <- dat[!is.na(dat$share),]
+  dat <- dat[!is.infinite(dat$share),]
     
-  sybdata.df <- merge(sybdata.df,d,by=c("FAOST_CODE","Year"),all.x=TRUE)
-}
 
 #plotInfo$legendLabels <- c("Africa","Asia","Europe","Oceania")
 
 ## Plot
 assign(plotInfo$plotName, 
        
-        plot_syb(x = plotInfo$xAxis,
-                     y = plotInfo$yAxis,
-                     group = plotInfo$group,
-                     type = plotInfo$plotType,
-                     subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                            Area %in% c(plotInfo$plotArea)")),
-                     data = sybdata.df,
-                     scale = plotInfo$scaling,
-                     x_lab = plotInfo$xPlotLab,
-                     y_lab = plotInfo$yPlotLab,
-                    # legend_lab = plotInfo$legendLabels,
-                     col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
-       ) + scale_y_continuous(labels=french)
-       
-       
+       ggplot(data = dat, aes(x = Year, y = share,group=FAO_TABLE_NAME,color=FAO_TABLE_NAME)) +
+         geom_line() +
+         scale_color_manual(values = plot_colors(part = 1, 5)[["Sub"]]) +
+         labs(y="percent", x="") 
+
        )
 ## Export the plot
+
 
 # This is commented because I had to manually (in Inkscape) remove the 
 # Americas from the legend.. june 30. 2015 - Markus
 # export_plot(placement="b")
 
-
-
-
-
-
+export_plot(manual_text="Value added in agriculture as share of GDP",placement="b")
 
 
 
@@ -1636,6 +1632,11 @@ assign(plotInfo$plotName,
 ## Export the plot
 export_plot(manual_text = " Percentage of children under 5 affected by wasting, highest 20 countries (2006 - 2014*)",placement="r")
 
+fileConn<-file("./publication/Captions/Caption_C.P2.UT.1.4.tex")
+writeLines(c("\\caption{Percentage of children under 5 affected by wasting, highest 20 countries \\hspace{10 mm} (2006 - 2014*)}"), fileConn)
+close(fileConn)
+
+
 # ----------------------------------------------------------------------- #
 # Access to improved water source and to improved sanitation facilities 
 
@@ -2484,6 +2485,10 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
 ## Export the plot
 export_plot(manual_text="Top food importing countries in 2012",placement="l")
+
+fileConn<-file("./publication/Captions/Caption_C.P3.TRADE.1.3.tex")
+writeLines(c("\\caption{Top food importing countries \\hspace{20 mm} in 2012 }"), fileConn)
+close(fileConn)
 
 
 # -----------------------------------------------------------
