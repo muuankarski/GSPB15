@@ -360,6 +360,10 @@ source('latex_charts.R')
 #source('./publication/latex_charts.R')
 @
 
+% Set the separator width for table cols
+\setlength{\tabcolsep}{3pt}
+
+
 %
 %                         .^^^\ ../~/\       .==...==.
 %                        .^\ /\  \    ^-------^^ O    O,
@@ -390,6 +394,8 @@ source('latex_charts.R')
 %
 %% PART1 - The Setting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \newpart{part1}
 \rowcolors{1}{part1!10}{white}
