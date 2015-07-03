@@ -2239,6 +2239,156 @@ export_map(manual_text="Cattle and buffaloes per ha of agricultural area, heads 
 #     
 ## Trends in the fisheries sector
 ###########################################################################
+# DATA MUNGING FROM GRAPHS AND TABLES
+##########################################################################
+
+if (!("production_quantity_index" %in% names(sybdata.df))) {
+  
+  
+  # load the raw data on AQUACULT & CAPTURE 2013!!
+  dat <- read.csv("./database/Data/Raw/fishery2015/YB_ESS_2015_FishProductionTABLE.csv", stringsAsFactors = FALSE, header=TRUE)
+  dat2 <- dat[-1:-2,c(7,11,17)]
+  names(dat2) <- c("UNcode","cap2013","aquacul2013")
+  dat2[[1]][dat2[[1]] == ""] <- NA
+  dat2[[2]][dat2[[2]] == ""] <- NA
+  dat2[[3]][dat2[[3]] == ""] <- NA
+  
+  dat2 <- dat2[!is.na(dat2[[1]]),]
+  dat2 <- dat2[!is.na(dat2[[2]]),]
+  dat2 <- dat2[!is.na(dat2[[3]]),]
+  
+  dat2[[1]] <- factor(dat2[[1]])
+  dat2[[1]] <- as.numeric(levels(dat2[[1]]))[dat2[[1]]]
+  dat2[[2]] <- factor(dat2[[2]])
+  dat2[[2]] <- as.numeric(levels(dat2[[2]]))[dat2[[2]]]
+  dat2[[3]] <- factor(dat2[[3]])
+  dat2[[3]] <- as.numeric(levels(dat2[[3]]))[dat2[[3]]]
+  
+  library(countrycode)
+  dat2$FAOST_CODE <- countrycode(dat2$UNcode, origin = "un", destination = "fao" )
+  
+  # compute the aggregates for China
+  tmp <- dat2 %>% filter(UNcode %in% c(156,344,446,214)) %>% dplyr::summarise(cap2013 = sum(cap2013),
+                                                                              aquacul2013 = sum(aquacul2013))
+  tmp$FAOST_CODE <- 351
+  tmp$UNcode <- NA
+  
+  dat2 <- rbind(dat2,tmp)
+  dat2 <- dat2[!(dat2$UNcode %in% c(156,344,446,214)),]
+  dat2$UNcode <- NULL
+  dat2 <- dat2[!is.na(dat2$FAOST_CODE),]
+  dat2$Year <- 2013
+  
+  names(dat2) <- c("FI.PRD.CAPT.TN.NO","FI.PRD.AQ.TN.NO","FAOST_CODE","Year")
+  d2013 <- dat2
+  d2013$FI.PRD.CAPT.TN.NO <- d2013$FI.PRD.CAPT.TN.NO / 1000
+  d2013$FI.PRD.AQ.TN.NO <- d2013$FI.PRD.AQ.TN.NO / 1000
+  
+  # m49 aggregates
+  M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE","UNSD_SUB_REG_CODE")]))
+  d2013 <- merge(d2013,M49macroReg,by="FAOST_CODE",all.x=TRUE)
+  
+  d2013$UNSD_MACRO_REG_CODE[d2013$UNSD_SUB_REG_CODE == 5206] <- 5205
+  d2013$UNSD_MACRO_REG_CODE[d2013$UNSD_SUB_REG_CODE == 5207] <- 5205
+  m49 <- d2013 %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(FI.PRD.CAPT.TN.NO = sum(FI.PRD.CAPT.TN.NO,na.rm=TRUE),
+                                                                           FI.PRD.AQ.TN.NO = sum(FI.PRD.AQ.TN.NO,na.rm=TRUE))
+  names(m49)[names(m49)=="UNSD_MACRO_REG_CODE"] <- "FAOST_CODE"
+  m49world <- d2013 %>% group_by(Year) %>% dplyr::summarise(FI.PRD.CAPT.TN.NO = sum(FI.PRD.CAPT.TN.NO,na.rm=TRUE),
+                                                            FI.PRD.AQ.TN.NO = sum(FI.PRD.AQ.TN.NO,na.rm=TRUE))
+  m49world$FAOST_CODE <- 5000
+  
+  d2013$UNSD_MACRO_REG_CODE <- NULL
+  d2013$UNSD_SUB_REG_CODE <- NULL
+  
+  d2013 <- rbind(d2013,m49)
+  d2013 <- rbind(d2013,m49world)
+  
+  
+  # subset on AQUACULT & CAPTURE prior to 2013!!
+  pre2013 <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO","FI.PRD.AQ.TN.NO")]
+  pre2013 <- filter(pre2013, Year <= 2012)
+  
+  pre2013$FI.PRD.CAPT.TN.NO <- pre2013$FI.PRD.CAPT.TN.NO / 1000000
+  pre2013$FI.PRD.AQ.TN.NO <- pre2013$FI.PRD.AQ.TN.NO / 1000000
+  
+  dat <- rbind(pre2013,d2013)
+  
+  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
+  
+  #ff <- filter(dat, FAOST_CODE == 185)
+  
+  dat$total_prod <- rowSums(dat[3:4], na.rm = TRUE)
+  # compute the 2004-2006 avg
+  prod04_06 <- dat %>% filter(Year %in% c(2004,2005,2006)) %>% group_by(FAOST_CODE) %>% dplyr::summarise(prod_100 = mean(total_prod, na.rm=TRUE))
+  dat <- merge(dat,prod04_06,by="FAOST_CODE",all.x=TRUE)
+  # and the index
+  dat$production_quantity_index <- dat$total_prod / dat$prod_100 * 100
+  dat <- dat[!is.infinite(dat$production_quantity_index),]
+  
+  dat$prod_100 <- NULL
+  
+  sybdata.df$FI.PRD.CAPT.TN.NO <- NULL
+  sybdata.df$FI.PRD.AQ.TN.NO <- NULL
+  
+  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
+}
+
+## net_fish_trade - to be uised in country profile tables
+
+if (!("net_fish_trade" %in% names(sybdata.df))) {
+  library(gdata)
+  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
+  drops <- names(dat)[grepl("^Symbol", names(dat))]
+  dat <- dat[,!(names(dat) %in% drops)]
+  dl <- gather(dat, 
+               "Year",
+               "net_fish_trade",
+               6:28)
+  dl <- dl[c(-3,-4,-5)]
+  #names(dl)[names(dl)=="UN code"] <- "UN_CODE"
+  dl$Year <- str_replace_all(dl$Year, "X","")
+  dl$Year <- factor(dl$Year)
+  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
+  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
+  tmp <- dl %>% filter(UN_CODE %in% c(156,344,446,214)) %>%  group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade))
+  tmp$FAOST_CODE <- 351
+  tmp$UN_CODE <- NA
+  tmp$Country <- "China"
+  # 
+  dl <- rbind(dl,tmp)
+  dl <- dl[!(dl$UN_CODE %in% c(156,344,446,214)),]
+  
+  dl$UN_CODE <- NULL
+  dl$Country <- NULL
+  
+  # Macro aggregates
+  M49macroReg <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UNSD_MACRO_REG_CODE","UNSD_SUB_REG_CODE")]))
+  dl <- merge(dl,M49macroReg,by="FAOST_CODE",all.x=TRUE)
+  
+  dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5206] <- 5205
+  dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5207] <- 5205
+  m49 <- dl %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
+  names(m49) <- c("FAOST_CODE","Year","net_fish_trade")
+  m49world <- dl %>% group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
+  names(m49world) <- c("Year","net_fish_trade")
+  m49world$FAOST_CODE <- 5000
+  
+  dl$UNSD_MACRO_REG_CODE <- NULL
+  dl$UNSD_SUB_REG_CODE <- NULL
+  dl <- rbind(dl,m49)
+  dl <- rbind(dl,m49world)
+  
+  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
+}
+
+
+##########################################################################
+
+
+
+
+
+
 
 # 2. Stacked area graph: aquaculture vs. capture production
 
@@ -2301,43 +2451,7 @@ export_plot(manual_text = "Per capita fish food supply", placement = "tr")
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.3")
 
-
-if (!("capture2013" %in% names(sybdata.df))){
-  
-  library(gdata)
-  library(tidyr)
-  #dat <- read.xls("./database/Data/Raw/fishery2015/YB_ESS_2015_FishProductionTABLE.xlsx", sheet = 1, skip=3)
-  dat <- read.csv("./database/Data/Raw/fishery2015/YB_ESS_2015_FishProductionTABLE.csv", stringsAsFactors = FALSE, header=TRUE)
-  dat2 <- dat[-1:-2,c(7,11,17)]
-  names(dat2) <- c("UNcode","cap2013","aquacul2013")
-  dat2[[1]][dat2[[1]] == ""] <- NA
-  dat2[[2]][dat2[[2]] == ""] <- NA
-  dat2[[3]][dat2[[3]] == ""] <- NA
-  
-  dat2 <- dat2[!is.na(dat2[[1]]),]
-  dat2 <- dat2[!is.na(dat2[[2]]),]
-  dat2 <- dat2[!is.na(dat2[[3]]),]
-  
-  dat2[[1]] <- factor(dat2[[1]])
-  dat2[[1]] <- as.numeric(levels(dat2[[1]]))[dat2[[1]]]
-  dat2[[2]] <- factor(dat2[[2]])
-  dat2[[2]] <- as.numeric(levels(dat2[[2]]))[dat2[[2]]]
-  dat2[[3]] <- factor(dat2[[3]])
-  dat2[[3]] <- as.numeric(levels(dat2[[3]]))[dat2[[3]]]
-  
-  library(countrycode)
-  dat2$FAOST_CODE <- countrycode(dat2$UNcode, origin = "un", destination = "fao" )
-  dat2$UNcode <- NULL
-  dat2 <- dat2[!is.na(dat2$FAOST_CODE),]
-  dat2$Year <- 2013
-  
-  names(dat2) <- c("capture2013","aquaculture2013","FAOST_CODE","Year")
-  dat2$capture2013 <- dat2$capture2013 / 1000
-  dat2$aquaculture2013 <- dat2$aquaculture2013 / 1000
-  
-  sybdata.df <- merge(sybdata.df,dat2,by=c("FAOST_CODE","Year"),all.x=TRUE)
-}
-
+plotInfo$xAxis <- "FI.PRD.CAPT.TN.NO"
 
 ## Plot
 assign(plotInfo$plotName, 
@@ -2367,6 +2481,7 @@ export_plot(manual_text = "20 countries with highest value of capture production
 
 ## Info
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.4")
+plotInfo$xAxis <- "FI.PRD.AQ.TN.NO"
 ## Plot
 assign(plotInfo$plotName, 
        
@@ -2432,33 +2547,19 @@ export_plot(manual_text = "State of the world's fishery stocks (1974 - 2011)", p
 
 # 6. Map: Aquaculture producing countries, MRY (see map 48, WDI)
 
+
 if (!("production_quantity_index" %in% names(sybMaps.df))) {
-  
-  dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO","FI.PRD.AQ.TN.NO","capture2013","aquaculture2013")]
-  # because in previous plots these were shown as million tons!!
-  dat$capture2013 <- dat$capture2013 * 1000000
-  dat$aquaculture2013 <- dat$aquaculture2013 * 1000000
-  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
-  dat$total_prod <- rowSums(dat[3:6], na.rm = TRUE)
-  dat <- dat[c("FAOST_CODE","Year","total_prod")]
-  dat$Year <- paste0("X", dat$Year)
-  dat <- spread(dat, Year, total_prod)
-  dat$mean <- rowMeans(dat[c("X2004","X2005","X2006")],na.rm = TRUE)
-  dat[2:(ncol(dat)-1)] <- apply(dat[2:(ncol(dat)-1)], 2, function(x) x/dat$mean*100)
-  dat$mean <- NULL
-  dl <- gather(dat, "Year", "production_quantity_index"  ,2:ncol(dat))
-  dl$Year <- str_replace_all(dl$Year, "X","")
-  dl$Year <- factor(dl$Year)
-  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
-  dl <- dl[dl$Year <= 2013,]
-  dl <- na.omit(dl)
-  dl <- dl[!is.infinite(dl$production_quantity_index),]
-  sybMaps.df <- merge(sybMaps.df,dl,by.x=c("FAO_CODE","Year"),by.y=c("FAOST_CODE","Year"), all.x=TRUE)
+  sybMaps.df <- merge(sybMaps.df,sybdata.df[c("FAOST_CODE","production_quantity_index","Year")],by.x=c("FAO_CODE","Year"),by.y=c("FAOST_CODE","Year"), all.x=TRUE)
 }
 
 
 ## Map info
 mapInfo <- map_info(mapName = "M.P3.FISH.1.6", data = sybMaps.df, mapArea = "Territory")
+# China 41 <- 351
+
+mapInfo$mapData <- mapInfo$mapData[mapInfo$mapData$FAO_CODE != 41,]
+mapInfo$mapData$FAO_CODE[mapInfo$mapData$FAO_CODE == 351] <- 41
+
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map

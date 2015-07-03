@@ -216,7 +216,7 @@ left=1cm, right=1cm, twoside}{geometry}
   \phantomsection\addcontentsline{toc}{section}{\@chartname}%
   \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
   \hspace{0.05\textwidth}%
-  \raisebox{-\height}{\strut\parbox{0.40\textwidth}{\@RightText}}\par\medskip
+  \raisebox{-\height}{\strut\parbox{0.35\textwidth}{\@RightText}}\par\medskip
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@LeftChart}}%
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
