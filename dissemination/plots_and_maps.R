@@ -2762,31 +2762,68 @@ export_map(manual_text="Cropland per capita, ha per cap (2012)")
 
 # Data for plots 1.3 and 1.6
 
-water <- sybdata.df[c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
-water2000 <- sybdata.df[sybdata.df$Year == 2000, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
-water2010 <- sybdata.df[sybdata.df$Year == 2010, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
-water2000 <- water2000[!is.na(water2000$AQ.WAT.WATPCP.MC.NO),]
-water2010 <- water2010[!is.na(water2010$AQ.WAT.WATPCP.MC.NO),]
-# top ten
-top_10 <- head(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),10)
-top_00 <- water2000[water2000$FAOST_CODE %in% top_10$FAOST_CODE,]
-# bottom five
-bottom_5 <- tail(arrange(water2010, -AQ.WAT.WATPCP.MC.NO),5)
-bottom_00 <- water2000[water2000$FAOST_CODE %in% bottom_5$FAOST_CODE,]
+# water <- sybdata.df[c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+# water2000 <- sybdata.df[sybdata.df$Year == 2000, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+# water2010 <- sybdata.df[sybdata.df$Year == 2010, c("FAO_TABLE_NAME","FAOST_CODE","Year","AQ.WAT.WATPCP.MC.NO","Area")]
+# water2000 <- water2000[!is.na(water2000$AQ.WAT.WATPCP.MC.NO),]
+# water2010 <- water2010[!is.na(water2010$AQ.WAT.WATPCP.MC.NO),]
 
-topdata <- rbind(top_10,top_00)
-bottomdata <- rbind(bottom_5,bottom_00)
+library(readxl)
+g <- read_excel("./database/Data/Raw/UPDATEDWATER_WR_Capita_2000-2010.xlsx")
+names(g) <- c("FAO_TABLE_NAME","Year2000","Year2010")
+g <- gather(g, "Year", "per_capita_water_resources", 2:3)
+g$Year <- as.character(g$Year)
+g$Year[g$Year == "Year2000"] <- 2000
+g$Year[g$Year == "Year2010"] <- 2010
+
+g$Year <- factor(g$Year)
+g$Year <- as.numeric(levels(g$Year))[g$Year]
+
+# change country names for the merge to succeed
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "United Arab Emirates"] <- "the United Arab Emirates"
+
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Bahamas"] <- "the Bahamas"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Philippines"] <- "the Philippines"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Bahamas"] <- "the Bahamas"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Cape Verde"] <- "Cabo Verde"
+#g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Côte d'Ivoire"] <- "C\xf4te d'Ivoire"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Comoros"] <- "the Comoros"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Czech Republic"] <- "the Czech Republic"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Democratic Republic of the Congo"] <- "the Democratic Republic of the Congo"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Dominican Republic"] <- "the Dominican Republic"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Gambia"] <- "the Gambia"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Lao People's Democratic Republic"] <- "the Lao People's Democratic Republic"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Netherlands"] <- "the Netherlands"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Niger"] <- "the Niger"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Russian Federation"] <- "the Russian Federation"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "Syrian Arab Republic"] <- "the Syrian Arab Republic"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "United Kingdom"] <- "the United Kingdom of Great Britain and Northern Ireland"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "United Republic of Tanzania"] <- "the United Republic of Tanzania"
+g$FAO_TABLE_NAME[g$FAO_TABLE_NAME == "United States of America"] <- "the United States of America"
+
+gg <- merge(g,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by="FAO_TABLE_NAME", all.x=TRUE)
+
+# top ten
+top_10 <- head(arrange(filter(gg, Year == 2010), -per_capita_water_resources),10)
+top_10_00 <- gg[gg$Year == 2000 & gg$FAOST_CODE %in% unique(top_10$FAOST_CODE),]
+topdata <- rbind(top_10,top_10_00)
+
+# bottom five
+bottom_5 <- head(arrange(filter(gg, Year == 2010), per_capita_water_resources),5)
+bottom_5_00 <- gg[gg$Year == 2000 & gg$FAOST_CODE %in% unique(bottom_5$FAOST_CODE),]
+bottomdata <- rbind(bottom_5,bottom_5_00)
+
 
 #####
 
 ## Order bars
-bottomdata$FAO_TABLE_NAME <- factor(bottomdata$FAO_TABLE_NAME, levels=arrange(bottomdata[bottomdata$Year == 2010,], -AQ.WAT.WATPCP.MC.NO)$FAO_TABLE_NAME)
+bottomdata$FAO_TABLE_NAME <- factor(bottomdata$FAO_TABLE_NAME, levels=arrange(bottomdata[bottomdata$Year == 2010,], -per_capita_water_resources)$FAO_TABLE_NAME)
 
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.2")
 
 assign(plotInfo$plotName,
        
-       ggplot(bottomdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
+       ggplot(bottomdata, aes(x=FAO_TABLE_NAME,y=per_capita_water_resources,fill=factor(Year))) +
          geom_bar(stat="identity",position="dodge") +
          scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
          labs(x=NULL,y=expression(m^"3"/yr/person)) +
@@ -2863,11 +2900,11 @@ export_plot(manual_text = "Freshwater withdrawal by agricultural sector, share o
 
 plotInfo <- plot_info(plotName = "C.P4.WATER.1.5")
 
-topdata$FAO_TABLE_NAME <- factor(topdata$FAO_TABLE_NAME, levels=arrange(topdata[topdata$Year == 2010,], -AQ.WAT.WATPCP.MC.NO)$FAO_TABLE_NAME)
+topdata$FAO_TABLE_NAME <- factor(topdata$FAO_TABLE_NAME, levels=arrange(topdata[topdata$Year == 2010,], -per_capita_water_resources)$FAO_TABLE_NAME)
 
 assign(plotInfo$plotName,
        
-       ggplot(topdata, aes(x=FAO_TABLE_NAME,y=AQ.WAT.WATPCP.MC.NO,fill=factor(Year))) +
+       ggplot(topdata, aes(x=FAO_TABLE_NAME,y=per_capita_water_resources,fill=factor(Year))) +
          geom_bar(stat="identity",position="dodge") +
          scale_fill_manual(values=plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
          labs(x=NULL,y=expression(m^"3"/yr/person)) +
