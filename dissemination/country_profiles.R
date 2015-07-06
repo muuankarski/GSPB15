@@ -12,6 +12,8 @@ if (!exists("sybdata.df$missing")) {
   
   }
 
+#load("./database/Data/Processed/FAOcountryProfile.RData")
+
 temp <- sybdata.df
 
 ## Download vars from FAOSTAT manually
