@@ -444,11 +444,11 @@ assign(mapInfo$mapName,meta_plot_map() )
 export_map()
 
 
-mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Territory")
-## Create the map
-assign(mapInfo$mapName, meta_plot_map() )
-## export the map
-export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013)")
+# mapInfo <- map_info(mapName = "M.P4.WATER.1.6", data = sybMaps.df, mapArea = "Territory")
+# ## Create the map
+# assign(mapInfo$mapName, meta_plot_map() )
+# ## export the map
+# export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 1999-2013)")
 
 
 
@@ -3203,7 +3203,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_y_continuous(labels=french) +
+       ) + scale_y_continuous(labels=french, breaks=c(10000,20000,30000)) +
          labs(y="billion US$") +
          theme(axis.text.x =element_text(angle = 45))
 )

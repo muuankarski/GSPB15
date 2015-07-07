@@ -17,3 +17,6 @@
 _site
 .Rhistory
 .RData
+
+# database
+database/Data/
