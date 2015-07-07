@@ -73,6 +73,11 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\huge{\@setfontsize\huge\@xvpt{18}}
 \renewcommand\Huge{\@setfontsize\Huge\@xviipt{20}}
 \setlength\parskip{\z@}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% Page dimensions - now height is 21cm
+% ---------------------------------------------------------------------------------
+
 \AtBeginDocument{\geometry{papersize={10cm,21cm}, layoutsize={10cm,21cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
   \setlength\columnsep{20pt}%
@@ -82,20 +87,20 @@ left=1cm, right=1cm, twoside}{geometry}
 \faoset{stripwidth=7.2mm}
 % ---------------------------------------------------------------------------------
 % ---------------------------------------------------------------------------------
-% Headers & Footers
+% Headers & Footers & placement of the color strip!
 % ---------------------------------------------------------------------------------
 \fancypagestyle{plain}{%
   \fancyhf{}%
   \fancyfoot[RO,LE]{\thepage}%
   \fancyhead[LO]{%
     \begin{picture}(0,0)%
-      \put(268,-157){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(268,-162){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\hspace*{-\@stripwidth}%
           \rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \fancyhead[LE]{%
     \begin{picture}(0,0)%
-      \put(-39,-157){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(-39,-162){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \renewcommand{\headrulewidth}{\z@}%
