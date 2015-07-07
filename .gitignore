@@ -1,22 +1,35 @@
-/publication/figure/plot-1.pdf
-/GSPB15.Rproj
-/publication/GSPB15-concordance.tex
-/publication/GSPB15.ilg
-/publication/GSPB15.ind
-/publication/GSPB15.synctex.gz
-/publication/figure/unnamed-chunk-1-1.pdf
-/publication/GSPB15.tex
-/publication/GSPB15.tex
-/publication/GSPB15.aux
-/publication/GSPB15.idx
-/publication/GSPB15.log
-/publication/GSPB15.pdf
-/publication/GSPB15.toc
-/publication/Environments.tex
-.Rproj.user
-_site
-.Rhistory
-.RData
-
 # database
 database/Data/
+ 
+# dissemination
+# include all
+
+# publications
+publication/Captions/
+publication/CountryProfiles/
+publication/Maps/
+publication/Plots/
+publication/Sources/
+publication/Tables/
+publication/Text/
+
+publication/*.tex
+publication/*.html
+publication/GSPB15.ilg
+publication/GSPB15.ind
+publication/GSPB15.synctex.gz
+publication/GSPB15.aux
+publication/GSPB15.idx
+publication/GSPB15.log
+publication/GSPB15.pdf
+publication/GSPB15.toc
+publication/*.pdf
+!publication/GSPB15_20150505_19cm.pdf
+!publication/GSPB15disclamerPage.pdf
+!publication/GSPB15disclamerPage.pdf
+!publication/I4691E_disclaimer.pdf
+
+
+.Rhistory
+.RData
+.Rproj.user/
