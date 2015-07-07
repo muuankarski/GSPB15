@@ -17,6 +17,7 @@
 \usepackage{bpchem}
 \usepackage{arydshln}
 \usepackage{booktabs}
+\usepackage{changes}
 %\usepackage[document]{ragged2e}
 
 
@@ -75,10 +76,11 @@ keepaspectratio]{./cover/back_cover.pdf}%
 \usepackage{xcolor}
 
 %% Tango color scheme
-\definecolor{Part1}{HTML}{1d5979}
-\definecolor{Part2}{HTML}{e07317}
-\definecolor{Part3}{HTML}{96212d}
-\definecolor{Part4}{HTML}{35802d}
+\definecolor{Part1}{HTML}{005d7b}
+\definecolor{Part2}{HTML}{de8211}
+\definecolor{Part3}{HTML}{9b2a2e}
+\definecolor{Part4}{HTML}{3a7d29}
+\definecolor{Part5}{HTML}{5291c9}
 
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
@@ -359,6 +361,10 @@ source('latex_charts.R')
 #source('./publication/latex_charts.R')
 @
 
+% Set the separator width for table cols
+\setlength{\tabcolsep}{3pt}
+
+
 %
 %                         .^^^\ ../~/\       .==...==.
 %                        .^\ /\  \    ^-------^^ O    O,
@@ -390,6 +396,8 @@ source('latex_charts.R')
 %% PART1 - The Setting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \newpart{part1}
 \rowcolors{1}{part1!10}{white}
 \clearpage
@@ -405,6 +413,7 @@ chart_spread2(title="Overview",
             MapCode="M.P1.OVER.1.6")
 @
 
+
 <<economy, eval=TRUE, results='asis'>>=
 chart_spread2(title="Economy",                
             LeftTextCode="While some sectors have been hard hit, agriculture has demonstrated resilience during the recent economic downturn.  Changes in the wider economy, including growing global integration, affect the performance of the agriculture sector.  Higher overall economic growth also raises consumers’ incomes and hence food demand. Changing interest rates influence capital investments, land values and storage levels, while inflation affects input prices, revenues and credit costs. Fluctuations in exchange rates have an important bearing on international competitiveness and trade flows.",  
@@ -414,6 +423,9 @@ chart_spread2(title="Economy",
             BottomChartCode="C.P1.ECON.1.5", 
             MapCode="M.P1.ECON.1.6")         
 @
+
+
+
 
 <<labour, eval=TRUE, results='asis'>>=
 chart_spread2(title="Labour",                
@@ -446,7 +458,7 @@ chart_spread2(title="Investment",
             LeftChartCode="C.P1.INV.1.3",   
             RightChartCode="C.P1.INV.1.4",  
             BottomChartCode="C.P1.INV.1.5", 
-            MapCode="M.P1.INV.1.6",
+            MapCode="M.P1.INV.1.6_2",
             notes=""
             )         
 @
@@ -491,6 +503,7 @@ chart_spread2(title="Investment",
 <<Undernourishmend, eval=TRUE,results='asis'>>=
 chart_spread(title="Undernourishment",                
             LeftTextCode="Undernourishment is a state, lasting for at least one year, of inability to acquire enough food, defined as a level of food intake insufficient to meet dietary energy requirements. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Two hundred and sixteen million million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            footnoteLeft="2014-16 estimates are projections",
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
             RightChartCode="C.P2.UNU.1.4",  
@@ -636,7 +649,7 @@ chart_spread(title="Livestock sector",
 
 <<Trends in the fisheries sector, eval=TRUE,results='asis'>>=
 chart_spread2(title="Fisheries sector",
-            LeftTextCode="Fish is an important component in people’s diets, providing about 2.9 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
+            LeftTextCode="Fish is an important component in people’s diets, providing about 3.1 billion people with almost 20 percent of their average intake of animal protein. Capture fisheries continue to dominate world output, but aquaculture accounts for a growing percentage of total fish supply. Fishery sectors are particularly important in developing countries, providing both food and livelihoods.",  
             RightTextCode="C.P3.FISH.1.2",   
             LeftChartCode="C.P3.FISH.1.3",   
             RightChartCode="C.P3.FISH.1.4",  
@@ -708,9 +721,10 @@ chart_spread2(title="Land",
 @
 
 <<Water, eval=TRUE,results='asis'>>=
-chart_spread(title="Water",                
-            LeftTextCode="Water is key to human life and agricultural activity. It is essential for food security, stable ecosystems and nutrition. Yet global demand for water has risen sharply over the last century and even more so in recent years. And is increasingly evident that the current use of water resources and services they provide is unsustainable. Already very small proportion of the planet’s water is available for human use. The impact of water stress and water scarcity is likely to grow further, particularly with climate change.",  
-            RightTextCode="MT.P4.WATER.1.2",   
+chart_spread2(title="Water",                
+            LeftTextCode="Global demand for water has risen sharply over the last century. Total annual water withdrawal from agriculture, municipalities and industries rose from less than 580 km\\textsuperscript{3} in 1900 to more than 3 900 km\\textsuperscript{3} in 2010. Agriculture accounts for approximately 70 percent of total freshwater withdrawal in the world, mostly through irrigation. This has been crucial for gains in food production since irrigation reduces drought risk and encourages crop diversification, thus also enhancing rural incomes. While irrigated agriculture represents about 20 percent of the cultivated land, it contributes to 40 percent of global food production. 
+",  
+            RightTextCode="C.P4.WATER.1.2",   
             LeftChartCode="C.P4.WATER.1.3",   
             RightChartCode="C.P4.WATER.1.4",  
             BottomChartCode="C.P4.WATER.1.5", 
@@ -745,7 +759,7 @@ chart_spread2(title="Forestry",
 
 <<Climate change, eval=TRUE,results='asis'>>=
 chart_spread2(title="Climate change",                
-            LeftTextCode="The severity and speed of climate change is presenting an unprecedented challenge. Current global surface temperatures are now about 0.6 degrees Celsius higher than the average for the last century. This increase is consistent with model predictions of the effects of rising atmospheric concentrations of carbon dioxide (CO2) and other GHGs, which are a result of human activity. The poorest and most food-insecure regions around the globe are the most vulnerable. Already scarce land and water resources will likely become even more scarce, and insufficient technical and financial means will make adaptation to a changing climate very difficult.",  
+            LeftTextCode="The severity and speed of climate change is presenting an unprecedented challenge. Current global surface temperatures are now about 0.6 degrees Celsius higher than the average for the last century. This increase is consistent with model predictions of the effects of rising atmospheric concentrations of carbon dioxide (CO\\textsubscript{2}) and other GHGs, which are a result of human activity. The poorest and most food-insecure regions around the globe are the most vulnerable. Already scarce land and water resources will likely become even more scarce, and insufficient technical and financial means will make adaptation to a changing climate very difficult.",  
             RightTextCode="C.P4.CC.1.2",   
             LeftChartCode="C.P4.CC.1.3",   
             RightChartCode="C.P4.CC.1.4",  
@@ -798,6 +812,7 @@ chart_spread2(title="Climate change",
 \ifprint\else
 \begin{picture}(0,0)
 \put(-58,-472){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+%\put(-58,-432){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover.pdf}}
 %\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
 \end{picture}
 

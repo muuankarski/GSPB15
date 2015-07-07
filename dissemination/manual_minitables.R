@@ -24,34 +24,43 @@ dat <- dat[c("Year","FAO_TABLE_NAME","FS.OA.POU.PCT3D1")]
 dw <- spread(dat,
              Year,
              FS.OA.POU.PCT3D1)
-dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
+#dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin Am. and the Carib."
+dw$FAO_TABLE_NAME[dw$FAO_TABLE_NAME == "Latin America and the Caribbean"] <- "Latin America and \n the Caribbean"
 dw$X2015[dw$X2015 == "20"] <- "20.0"
 names(dw) <- c("","1990-92","2014-16")
 
 dw <- dw[c(7,3,4,1,2,5,6),]
 
-print.xtable(xtable(dw, caption = " Prevalence of undernourishment (percent)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+# Chiaras comments
+print.xtable(xtable(dw, caption = " Prevalence of undernourishment (percent)", digits = c(0,0,0,0),
+                    align= "l{\raggedright\arraybackslash}p{1.7cm}rr"),
+             type = "latex", table.placement = NULL, 
+             booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UNU.1.2.tex")
+# run this in shell!!! without "system"
+# sed -i 's#\\end{table}#2014-16 estimates are projections.\n\\end{table}#' ./publication/Tables/MT.P2.UNU.1.2.tex
+
 
 ## "Countries with highest share of children under 5 years of age who are underweight
 
-rrr <- function(varname) {
-  filter(dat, Year %in% c(2006:2012)) %>% group_by_("FAOST_CODE") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
-}
 dat <- read.csv("./database/Data/Raw/FSI2015_DisseminationDataset.csv", stringsAsFactors=FALSE)
 dat$FAOST_CODE <- as.factor(dat$FAOST_CODE)
 dat$FAOST_CODE <- as.numeric(levels(dat$FAOST_CODE))[dat$FAOST_CODE]
 
-var <- "SH.STA.MALN.ZS"
-tbl <- rrr(var)
-tbl <- arrange(tbl, -value)[1:5,]
-names(tbl) <- c("FAOST_CODE",var)
-tbl <- left_join(tbl,sybdata.df[c("Year","FAOST_CODE",var)])
+ff <- dat[c("Year","FAOST_CODE","SH.STA.MALN.ZS")]
+ff <- ff[!is.na(ff$SH.STA.MALN.ZS),]
+ff <- filter(ff, Year >= 2008)
+
+maxyear <- ff %>% group_by(FAOST_CODE) %>% dplyr::summarise(Year = max(Year))
+dat <- merge(maxyear,ff,by=c("Year","FAOST_CODE"),all.x=TRUE)
+tbl <- arrange(dat, -SH.STA.MALN.ZS)[1:5,]
 tbl <- left_join(tbl,FAOcountryProfile[c("FAOST_CODE","SHORT_NAME")])
-tbl <- tbl[c(4,3,2)]
+tbl <- tbl[c(4,1,3)]
 names(tbl) <- c("","Year","%")
 
-print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 who are underweight, percent", digits = c(0,0,0,1)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(tbl, caption = "Countries with highest share of children under 5 who are underweight, percent", digits = c(0,0,0,1),
+                    align= "l{\raggedright\arraybackslash}p{1.6cm}rr"),
+             type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P2.UT.1.2.tex")
 
 
@@ -74,7 +83,9 @@ dd <- d %>% group_by(Item) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm
 rc <- arrange(dd, -mean_growth)[1:5,c("Item","mean_growth")]
 names(rc) <- c("","%")
 
-print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,0),
+                    align= "l{\raggedright\arraybackslash}p{2.2cm}r"), 
+             type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
 
 
@@ -107,8 +118,14 @@ gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
-print.xtable(xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
-             file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
+
+print(xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", digits = c(0,0,0,0),
+             align= "l{\raggedright\arraybackslash}p{1.0cm}rr"),
+      type = "latex", table.placement = NULL, 
+      booktabs = TRUE, include.rownames = FALSE, 
+      size = "footnotesize", caption.placement = "top", 
+      file = "./publication/Tables/MT.P3.CRTRE.1.2.tex")
+
 
 
 ##########################################################################
@@ -140,7 +157,9 @@ gg[[3]] <- round(gg[[3]],0)
 gg[[2]]<- prettyNum(gg[[2]], big.mark=" ")
 gg[[3]]<- prettyNum(gg[[3]], big.mark=" ")
 
-print.xtable(xtable(gg, caption = "Live animal production, top 5 in 2013 (thousand heads)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(gg, caption = "Live animal production, top 5 in 2013 (thousand heads)", digits = c(0,0,0,0),
+                    align= "l{\raggedright\arraybackslash}p{1.0cm}rr"),
+             type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.LIVE.1.2.tex")
 
 ##########################################################################
@@ -158,7 +177,9 @@ dw[[3]] <- dw[[3]]/1000000
 dw <- arrange(dw, -Import.Value)
 names(dw) <- c("","Export value", "Import Value")
 
-print.xtable(xtable(dw, caption = " Exports and Imports of food, million US\\$ (2012)", digits = c(0,0,0,0)), type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
+print.xtable(xtable(dw, caption = " Exports and Imports of food, million US\\$ (2012)", digits = c(0,0,0,0),
+                    align= "l{\raggedright\arraybackslash}p{1.0cm}rr"),
+             type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.TRADE.1.3.tex")
 
 

@@ -12,6 +12,8 @@ if (!exists("sybdata.df$missing")) {
   
   }
 
+#load("./database/Data/Processed/FAOcountryProfile.RData")
+
 temp <- sybdata.df
 
 ## Download vars from FAOSTAT manually
@@ -45,13 +47,15 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   #dat$Area[dat$FAOST_CODE == 5205] <- "M49macroReg"
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "<0.1"] <- 0.01
   # dat$FS.OA.NOU.P3D1[dat$FS.OA.NOU.P3D1 == "ns"] <- 0
-  dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
-  dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
-  dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
-  dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
-  dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
-  dat$FS.OA.POFI.PCT3D1 <- as.factor(dat$FS.OA.POFI.PCT3D1)
-  dat$FS.OA.POFI.PCT3D1 <- as.numeric(levels(dat$FS.OA.POFI.PCT3D1))[dat$FS.OA.POFI.PCT3D1]
+  #dat$FS.OA.NOU.P3D1 <- as.factor(dat$FS.OA.NOU.P3D1)
+  #dat$FS.OA.NOU.P3D1 <- as.numeric(levels(dat$FS.OA.NOU.P3D1))[dat$FS.OA.NOU.P3D1]
+  #dat$FS.OA.POU.PCT3D1[dat$FS.OA.POU.PCT3D1 == "<5.0"] <- 0.1
+  #dat$FS.OA.POU.PCT3D1 <- as.factor(dat$FS.OA.POU.PCT3D1)
+  #dat$FS.OA.POU.PCT3D1 <- as.numeric(levels(dat$FS.OA.POU.PCT3D1))[dat$FS.OA.POU.PCT3D1]
+  #dat$FS.OA.POFI.PCT3D1 <- as.factor(dat$FS.OA.POFI.PCT3D1)
+  #dat$FS.OA.POFI.PCT3D1 <- as.numeric(levels(dat$FS.OA.POFI.PCT3D1))[dat$FS.OA.POFI.PCT3D1]
+  
+  
   
   dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
   vars_to_exclude <- names(sybdata.df)[names(sybdata.df) %in% names(dat)][c(-1:-4,-14)]
@@ -140,6 +144,8 @@ if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
     dat[[i]] <- as.numeric(dat[[i]])
   }
   
+  dat$FAOST_CODE[dat$FAOST_CODE == 41] <- 351
+  
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
   sybdata.df$phosphate_tonnes_per_ha <- sybdata.df$phosphate_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
   sybdata.df$potash_tonnes_per_ha <- sybdata.df$potash_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
@@ -153,27 +159,6 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
   sybdata.df$aqua_culture_share <- sybdata.df$FI.PRD.AQ.TN.NO / (sybdata.df$FI.PRD.AQ.TN.NO + sybdata.df$FI.PRD.CAPT.TN.NO) *100
 }
 
-# Fish net trade
-
-if (!("net_fish_trade" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
-  drops <- names(dat)[grepl("^Symbol", names(dat))]
-  dat <- dat[,!(names(dat) %in% drops)]
-  dl <- gather(dat, 
-               "Year",
-               "net_fish_trade",
-               6:28)
-  dl <- dl[c(-3,-4,-5)]
-  dl$Year <- str_replace_all(dl$Year, "X","")
-  dl$Year <- factor(dl$Year)
-  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
-  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
-  dl$UN_CODE <- NULL
-  dl$Country <- NULL
-  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
-  }
-
 
 ## FISHFISHFISH
 
@@ -183,42 +168,8 @@ if (!("net_fish_trade" %in% names(sybdata.df))) {
 # However, at least, it will be preferable to normalize to the base period 2004-06. In the other words, taking average production quantity of 2004-06 as 100. 
 # This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
 
-if (!("net_fish_trade" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip=1)
-  drops <- names(dat)[grepl("^Symbol", names(dat))]
-  dat <- dat[,!(names(dat) %in% drops)]
-  dl <- gather(dat, 
-               "Year",
-               "net_fish_trade",
-               6:28)
-  dl <- dl[c(-3,-4,-5)]
-  dl$Year <- str_replace_all(dl$Year, "X","")
-  dl$Year <- factor(dl$Year)
-  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
-  dl <- translateCountryCode(dl, "UN_CODE", "FAOST_CODE", "UN.code")
-  dl$UN_CODE <- NULL
-  dl$Country <- NULL
-  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
-}
+# These are now computed within the fisheriesn section in plots and maps
 
-
-if (!("production_quantity_index" %in% names(sybdata.df))) {
-  dat <- sybdata.df[c("FAOST_CODE","Year","FI.PRD.CAPT.TN.NO")]
-  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
-  dat$Year <- paste0("X",dat$Year)
-  dat <- spread(dat, Year, FI.PRD.CAPT.TN.NO)
-  dat$mean <- rowMeans(dat[c("X2004","X2005","X2006")],na.rm = TRUE)
-  dat[2:(ncol(dat)-1)] <- apply(dat[2:(ncol(dat)-1)], 2, function(x) x/dat$mean*100)
-  dat$mean <- NULL
-  dl <- gather(dat, "Year", "production_quantity_index"  ,2:ncol(dat))
-  dl$Year <- str_replace_all(dl$Year, "X","")
-  dl$Year <- factor(dl$Year)
-  dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
-  dl <- na.omit(dl)
-  dl$Country <- NULL
-  sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)
-}
 
 
 # New production indices computed by Amanda
@@ -273,18 +224,18 @@ if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
-## bioenergy
 
-if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
-  dat <- dat[c("AreaCode","Year","Value")]
-  names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
-  dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)
-  dat$Year <- as.numeric(dat$Year)
-  dat <- dat[!duplicated(dat[c("FAOST_CODE","Year")]),]
-  sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
-}
+## Water indicators for China
+
+water_vars <- names(sybdata.df)[grep("^AQ.", names(sybdata.df))]
+water_vars_plus <- c("Year","FAOST_CODE",water_vars)
+water_vars.df <- sybdata.df[water_vars_plus]
+water_vars.df <- water_vars.df[water_vars.df$FAOST_CODE != 351,]
+water_vars.df$FAOST_CODE[water_vars.df$FAOST_CODE == 357] <- 351
+
+myvars <- names(sybdata.df) %in% water_vars
+sybdata.df <- sybdata.df[!myvars]
+sybdata.df <- merge(sybdata.df,water_vars.df,by=c("FAOST_CODE","Year"), all.x=TRUE)
 
 
 
@@ -299,13 +250,15 @@ M49countries[, "SHORT_NAME"] <-
   sanitizeToLatex(M49countries[, "SHORT_NAME"])
 ## Remove old countries
 OldCountries <- 
-  data.frame(FAOST_CODE = c(15,51,62,151,164,186,228,206,247,246,248),
+  data.frame(FAOST_CODE = c(15,51,62,151,164,186,228,206,247,246,248,
+                            17,83,196,191),
              COUNTRY_NAME = c("Belgium-Luxembourg", "Czechoslovakia",
                               "Ethiopia PDR", "Netherlands Antilles",
                               "Pacific Islands",
                               "Serbia and Montenegro", "Soviet Union",
                               "Sudan (former)", "Yemen (former)", 
-                              "Yemen (old)", "Yugoslav SFR"),
+                              "Yemen (old)", "Yugoslav SFR",
+                              "Bermuda","Kiribati","Seychelles","Saint Vincent and the Grenadines "),
              stringsAsFactors = FALSE)
 M49countries <- 
   M49countries[!M49countries[, "FAOST_CODE"] %in% 
@@ -508,6 +461,11 @@ for (i in 1:nrow(M49countries)) {
       \\clearpage\n",
       file = fileOut, append = TRUE)
 }
+
+
+# sed -i 's#{ 2014 }#{ 2014* }#' ./publication/Tables/CountryProfiles.tex && sed -i 's#\\end{tabular}#\*We can add a footnote for each table like this..\n\\end{tabular}#' ./publication/Tables/CountryProfiles.tex
+# sed -i 's#Net food#Net food**#' ./publication/Tables/CountryProfiles.tex && sed -i 's#\\end{tabular}#\n\**excluding fish\n\\end{tabular}#' ./publication/Tables/CountryProfiles.tex
+
 
 
 # ###########################################################################
