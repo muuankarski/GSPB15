@@ -681,11 +681,11 @@ export_plot(manual_text="Total credit to agriculture, top 20 countries in 2014 (
 plotInfo <- plot_info(plotName = "C.P1.INV.1.4")
 
 if (!("agri_orientation_index" %in% names(sybdata.df))) {
-  library(gdata)
-  gg <- read.xls("~/fao_temp/pocketbook_temp/investments/Lowest and Top 20 AOI GEA_final_Stat Pocketbook.xlsx")
+  library(readxl)
+  gg <- read_excel("./database/Data/Raw/investments/Lowest and Top 20 AOI GEA_final_Stat Pocketbook.xlsx")
   gg <- gg[c(3,5)]
   gg$Year <- 2010
-  names(gg)[names(gg)=="AOI.average..2008.2012."] <- "agri_orientation_index"
+  names(gg)[names(gg)=="AOI average (2008-2012)"] <- "agri_orientation_index"
   names(gg)[names(gg)=="countrycode"] <- "FAOST_CODE"
   sybdata.df <- merge(sybdata.df,gg,by=c("FAOST_CODE","Year"), all.x=TRUE)  
 }
@@ -2179,7 +2179,7 @@ export_plot(manual_text = "Total egg production, top and bottom 10 countries (20
 
 ## Piechart for livestock
 
-load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+load("./database/Data/Raw/Production_Livestock_E_All_Data.RData")
 d <- dat[dat$CountryCode %in% c(5100,5200,5300,5400,5500),] # World
 d <- d[d$Item == "Pigs",]
 d <- d[d$Year %in% c(2000,2013),]
@@ -2266,9 +2266,9 @@ plotInfo <- plot_info(plotName = "C.P3.FISH.1.2")
 
 if (!("per_capita_catch" %in% names(sybdata.df))){
   
-  library(gdata)
+  library(readxl)
   library(tidyr)
-  dat <- read.xls("./database/Data/Raw/FISH_percapita_production2015.xlsx")
+  dat <- read_excel("./database/Data/Raw/FISH_percapita_production2015.xlsx")
   dat[[1]] <- as.character(dat[[1]])
   dat[1,] <- c("Year",1990:2013)
   names(dat) <- dat[1,]
@@ -2378,8 +2378,8 @@ export_plot(manual_text = "20 countries with highest value of aquaculture produc
 
 plotInfo <- plot_info(plotName = "C.P3.FISH.1.5")
 
-library(gdata)
-dat <- read.xls("./database/Data/Raw/FISH_overfishing_etc2015.xlsx")
+library(readxl)
+dat <- read_excel("./database/Data/Raw/FISH_overfishing_etc2015.xlsx")
 dat <- gather(dat, 
                   "X",
                   "value",
@@ -2387,7 +2387,7 @@ dat <- gather(dat,
 
 dat$X <- as.character(dat$X)
 dat$X[dat$X == "Underfished"] <- "Under or\nmoderately\nexploited"
-dat$X[dat$X == "Fully.fished"] <- "Fully\nexploited"
+dat$X[dat$X == "Fully fished"] <- "Fully\nexploited"
 dat$X[dat$X == "Overfihsed"] <- "Recovering,\ndepleted\nor overexploited"
 
 dat$X <- factor(dat$X, levels= c("Under or\nmoderately\nexploited",
@@ -2843,8 +2843,8 @@ export_map(manual_text="Freshwater resources withdrawn by agriculture (percent, 
 plotInfo <- plot_info(plotName = "C.P4.ENER.1.2")
 
 if (!("total_pellets" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/REN21_Global wood pellet production_2014 03 07.xlsx", sheet=2, skip=3)
+  library(gdata) # not changed into readxl
+  dat <- read.xls("./database/Data/Raw//pellets/REN21_Global wood pellet production_2014 03 07.xlsx", sheet=2, skip=3)
   dat <- dat[1:7,]
   dat <- gather(dat,
                 Year,
@@ -2900,14 +2900,15 @@ plotInfo <- plot_info(plotName = "C.P4.ENER.1.3")
 ## Plot
 
 if (!("total_energy_in_argiculture" %in% names(sybdata.df))) {
-  codes_vs_names <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
-  codes_vs_names <- codes_vs_names[c("FAO.Country.code","Country")]
-  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO.Country.code","Country")]),]
+  #codes_vs_names <- read.xls("./database/Data/Raw/pellets/Data_for_ESS.xlsx", sheet=1)
+  codes_vs_names <- read_excel("./database/Data/Raw/pellets/Data_for_ESS.xlsx", sheet=1)
+  codes_vs_names <- codes_vs_names[c("FAO Country code","Country")]
+  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO Country code","Country")]),]
   names(codes_vs_names) <- c("FAOST_CODE","Country")
   codes_vs_names$Country <- as.character(codes_vs_names$Country)
-  codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
   # reading the data
-  dat <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=2, skip=2, stringsAsFactors=TRUE)
+  #dat <- read.xls("./database/Data/Raw/pellets/Data_for_ESS.xlsx", sheet=2, skip=2, stringsAsFactors=TRUE)
+  dat <- read_excel("./database/Data/Raw/pellets/Data_for_ESS.xlsx", sheet=2, skip=2)
   d <- dat[1:2]
   names(d) <- c("Country","total_energy_in_argiculture")
   d$total_energy_in_argiculture <- d$total_energy_in_argiculture / 1000 # into PJ
@@ -2947,31 +2948,30 @@ plotInfo <- plot_info(plotName = "C.P4.ENER.1.4")
 ## Plot
 
 if (!("total_bioenergy_consumption" %in% names(sybdata.df))) {
-  library(gdata)
-  codes_vs_names <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS.xlsx", sheet=1)
-  codes_vs_names <- codes_vs_names[c("FAO.Country.code","Country")]
-  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO.Country.code","Country")]),]
+  codes_vs_names <- read_excel("./database/Data/Raw/pellets/Data_for_ESS.xlsx", sheet=1)
+  codes_vs_names <- codes_vs_names[c("FAO Country code","Country")]
+  codes_vs_names <- codes_vs_names[!duplicated(codes_vs_names[c("FAO Country code","Country")]),]
   names(codes_vs_names) <- c("FAOST_CODE","Country")
   codes_vs_names$Country <- as.character(codes_vs_names$Country)
-  codes_vs_names$FAOST_CODE <- as.numeric(levels(codes_vs_names$FAOST_CODE))[codes_vs_names$FAOST_CODE]
   # reading the data
-  d <- read.xls("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS_1 AF_fixed.xlsx", sheet=3, skip=1, stringsAsFactors=TRUE)
+  d <- read_excel("./database/Data/Raw/pellets/Data_for_ESS_1 AF_fixed.xlsx", sheet=3, skip=2)
   names(d) <- c("Country","total_bioenergy_consumption")
-  d$total_bioenergy_consumption <- str_replace_all(d$total_bioenergy_consumption, "%", "")
-  
   d$total_bioenergy_consumption <- factor(d$total_bioenergy_consumption)
   d$total_bioenergy_consumption <- as.numeric(levels(d$total_bioenergy_consumption))[d$total_bioenergy_consumption]
   d2 <- merge(d,codes_vs_names, by="Country",all.x=TRUE)
+
   # Alessandros list of "selected countries"
   d2 <- d2[d2$Country %in% c("Algeria","Indonesia","Nicaragua","United States","Viet Nam","Italy",
                              "Australia","Germany","People's Republic of China","Brazil","Argentina",
                              "Dominican Republic","Cambodia","Japan","Kenya","Senegal",
                              "Turkey","Jamaica","Iraq","United Arab Emirates"),]
+  d2$FAOST_CODE[d2$Country == "People's Republic of China"] <- 351
+  d2$FAOST_CODE[d2$Country == "Cambodia"] <- 115
+  d2$FAOST_CODE[d2$Country == "Italy"] <- 106
+  d2$total_bioenergy_consumption <- d2$total_bioenergy_consumption * 100
   d2$Country <- NULL
   d2$Year <- 2012
   d2 <- d2[!is.na(d2$total_bioenergy_consumption),]
-  # China
-  d2$FAOST_CODE[d2$FAOST_CODE == 41] <- 351
   sybdata.df <- merge(sybdata.df,d2,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
@@ -3010,7 +3010,7 @@ if (!("biogases" %in% names(sybdata.df))) {
 #   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
   # R cant read the file, have to feed it in by hand
   
-  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/Data_for_ESS_1 AF_fixed_sheet.csv", stringsAsFactors = FALSE)
+  dat <- read.csv("./database/Data/Raw/pellets/Data_for_ESS_1 AF_fixed_sheet.csv", stringsAsFactors = FALSE)
   dat <- gather(dat,
                 "Year",
                 "value",
@@ -3060,7 +3060,7 @@ export_plot(manual_text = "Biodiesel, biogas, biogasoline and other bio-oil cons
 
 if (!("energy.for.power.irrigation" %in% names(sybMaps.df))) {
   library(gdata)
-  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
+  dat <- read.csv("./database/Data/Raw/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
   dat <- dat[c("AreaCode","Year","Value")]
   names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
   

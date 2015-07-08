@@ -25,6 +25,7 @@ library(tidyr)
 library(stringr)
 library(scales)
 library(ggplot2)
+library(readxl)
 
 
 # merge latest FSI data from Filippo
@@ -76,7 +77,7 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
 if (!("area_harvested" %in% names(sybdata.df))) {
   
   ## Area harvested
-  load("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+  load("./database/Data/Raw/Production_Crops_E_All_Data.RData")
   
   group_means <- function(data,varname,years) {
     filter(data, Year %in% years) %>% group_by_("CountryCode") %>% summarise_(value = interp(~max(varname, na.rm = TRUE), varname = as.name(varname)))
@@ -102,7 +103,9 @@ if (!("area_harvested" %in% names(sybdata.df))) {
 if (!("share_of_des_cereals_roots_tubers" %in% names(sybdata.df))) {
   
   ## Area harvested
-  dat <- read.csv("~/fao_temp/pocketbook_temp/food_security/Food_Security_Data_E_All_Data_(Norm).csv")
+  # dat <- read.csv("./database/Data/Raw/food_security/Food_Security_Data_E_All_Data_(Norm).csv")
+  # save(dat, file="./database/Data/Raw/food_security/Food_Security_Data_E_All_Data_(Norm).RData")
+  load("./database/Data/Raw/food_security/Food_Security_Data_E_All_Data_(Norm).RData")
   
   dat <- dat[dat$Item == "Share of dietary energy supply derived from cereals, roots and tubers (%) (3-year average)",c("Country.Code","Year","Value")]
   names(dat) <- c("FAOST_CODE","Year","share_of_des_cereals_roots_tubers")
@@ -124,7 +127,9 @@ if (!("share_of_des_cereals_roots_tubers" %in% names(sybdata.df))) {
 if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
   
   ## 
-  dat <- read.csv("~/fao_temp/pocketbook_temp/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).csv", stringsAsFactors = FALSE)
+  # dat <- read.csv("~/fao_temp/pocketbook_temp/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).csv", stringsAsFactors = FALSE)
+  # save(dat, file="./database/Data/Raw/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).RData")
+  load("./database/Data/Raw/fertilizers/Inputs_Fertilizers_E_All_Data_(Norm).RData")
   
   dat <- dat[dat$Item %in% c("Phosphate Fertilizers (P205 total nutrients)",
                              "Potash Fertilizers (K20 total nutrients)",
@@ -134,6 +139,7 @@ if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
              c("Country.Code","Year","Value","Item")]
   
   names(dat) <- c("FAOST_CODE","Year","value","Item")
+  dat$Item <- as.character(dat$Item)
   dat$Item[dat$Item == "Phosphate Fertilizers (P205 total nutrients)"] <- "phosphate_tonnes"
   dat$Item[dat$Item == "Potash Fertilizers (K20 total nutrients)"] <- "potash_tonnes"
   dat$Item[dat$Item == "Nitrogen Fertilizers (N total nutrients)"] <- "nitrogen_tonnes"
@@ -176,7 +182,11 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
 
 if (!("Sugar.raw" %in% names(sybdata.df))) {
 
-  dat <- read.csv("~/fao_temp/pocketbook_temp/production_indices/Production_Indices_E_All_Data_(Norm).csv")
+  # dat <- read.csv("./database/Data/Raw/production_indices/Production_Indices_E_All_Data_(Norm).csv")
+  # save(dat, file="./database/Data/Raw/production_indices/Production_Indices_E_All_Data_(Norm).RData")
+  load("./database/Data/Raw/production_indices/Production_Indices_E_All_Data_(Norm).RData")
+  
+  
   
   dat <- dat[dat$Item %in% c("Roots and Tubers,Total",
                              "Vegetables and Fruit Primary",
@@ -214,8 +224,8 @@ if (!("Sugar.raw" %in% names(sybdata.df))) {
 # 
 
 if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
-  library(gdata)
-  dat <- read.csv("~/fao_temp/pocketbook_temp/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
+  #library(gdata)
+  dat <- read.csv("./database/Data/Raw/pellets/energy_consumption_for_power_irrigation.csv", stringsAsFactors = FALSE)
   dat <- dat[c("AreaCode","Year","Value")]
   names(dat) <- c("FAOST_CODE","Year","energy.for.power.irrigation")
   dat$FAOST_CODE <- as.numeric(dat$FAOST_CODE)

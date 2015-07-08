@@ -1,5 +1,5 @@
 # database
-database/Data/
+# database/Data/
  
 # dissemination
 # include all
@@ -34,3 +34,4 @@ publication/*.pdf
 .RData
 .Rproj.user/
 .Rproj.user
+dissemination/Rcode/Final/manual_data_functions/fisheries2015_pocketbook.html

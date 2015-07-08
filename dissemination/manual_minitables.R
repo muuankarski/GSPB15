@@ -68,7 +68,7 @@ print.xtable(xtable(tbl, caption = "Countries with highest share of children und
 
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")
 # save(dat, file="~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
-load("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+load("./database/Data/Raw/Production_Crops_E_All_Data.RData")
 d <- dat[dat$CountryCode == 5000,] # World
 d <- d[d$Element == "Production",]
 d <- d[d$Year >= 2000,]
@@ -96,7 +96,7 @@ print.xtable(xtable(rc, caption = "Fastest growing products based on quantities 
 
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")
 # save(dat, file="~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
-load("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
+load("./database/Data/Raw/Production_Crops_E_All_Data.RData")
 d <- dat[dat$CountryCode == 5000,] # World
 d <- d[d$Element == "Production",]
 d <- d[d$Year == 2013,]
@@ -134,7 +134,7 @@ print(xtable(gg, caption = "Top five items produced in 2013, thousand tonnes", d
 
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.csv")
 # save(dat, file="~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
-load("~/fao_temp/pocketbook_temp/Production_Livestock_E_All_Data.RData")
+load("./database/Data/Raw/Production_Livestock_E_All_Data.RData")
 d <- dat[dat$CountryCode == 5000,] # World
 #d <- d[d$Element == "Production",]
 d <- d[d$Year == 2013,]
@@ -166,7 +166,7 @@ print.xtable(xtable(gg, caption = "Live animal production, top 5 in 2013 (thousa
 ##########################################################################
 ## Trends in agricultural trade
 
-dat <- read.csv("~/fao_temp/pocketbook_temp/food_export_import.csv")
+dat <- read.csv("./database/Data/Raw/food_export_import.csv")
 d <- dat[!(dat$AreaCode %in% 5000),] # World
 d <- d[d$ItemName == "Food and Animals",]
 dd <- d[c("AreaName","ElementName","Value")]

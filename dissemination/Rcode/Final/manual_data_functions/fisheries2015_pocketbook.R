@@ -23,8 +23,7 @@ library(DT)
 # load key data sets
 # load(file = "./database/Data/Processed/SYB.RData") # comment if not spinning!!
 # sybdata.df <- SYB.df; rm(SYB.df) # comment if not spinning!!
-
-# load("./database/Data/Processed/FAOcountryProfile.RData")
+# load("./database/Data/Processed/FAOcountryProfile.RData") # comment if not spinning!!
 
 #### AQUACULTURE
 dat <- read_excel("./database/Data/Raw/fishery2015/Fisheries_bycountry_1990-2013.xlsx", sheet=1, skip=1)
@@ -168,7 +167,7 @@ dat2 <- dat2[!is.infinite(dat2$production_quantity_index),]
 
 dat2$prod_100 <- NULL
 
-datatable(dat)
+datatable(dat2)
 
 #' line plot the index
 
