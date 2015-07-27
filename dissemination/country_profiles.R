@@ -313,6 +313,7 @@ M49countries[M49countries[, "FAOST_CODE"] == 299, "SHORT_NAME"] <-
 ## Chinas
 M49countries <- 
   M49countries[!M49countries[, "FAOST_CODE"] %in% c(41,128,96,357,214),]
+M49countries <- arrange(M49countries, SHORT_NAME)
 ## Add aggregates NOT
 M49countries <- 
   rbind(data.frame(FAOST_CODE = c(5000,5100,5300,5205,5500),
