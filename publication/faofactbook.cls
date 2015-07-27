@@ -79,7 +79,7 @@ left=1cm, right=1cm, twoside}{geometry}
 % ---------------------------------------------------------------------------------
 
 \AtBeginDocument{\geometry{papersize={10cm,21cm}, layoutsize={10cm,21cm},
-  left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
+  left=1cm,right=1cm,bottom=.9cm,top=.9cm,twoside}%
   \setlength\columnsep{20pt}%
 \savegeometry{standard}}
 \newlength\@stripwidth
@@ -94,13 +94,13 @@ left=1cm, right=1cm, twoside}{geometry}
   \fancyfoot[RO,LE]{\thepage}%
   \fancyhead[LO]{%
     \begin{picture}(0,0)%
-      \put(268,-162){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(268,-170){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\hspace*{-\@stripwidth}%
           \rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \fancyhead[LE]{%
     \begin{picture}(0,0)%
-      \put(-39,-162){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(-39,-170){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \renewcommand{\headrulewidth}{\z@}%
@@ -167,11 +167,15 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand*\l@section[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty{-\@highpenalty}%
-    \setlength\@tempdima{3em}%
+    \setlength\@tempdima{2em}%
     \begingroup
      \parskip\z@
-      \parindent \z@ \rightskip -100pt
-      \parfillskip -\@pnumwidth
+% ------------------------------------------------------------
+% define the page number in toc
+     %\parindent \z@ \rightskip -100pt % commenting this line and
+     \parindent \z@ \rightskip \@pnumwidth  % adding this line fixed the page numbers!
+      \parfillskip  - \@pnumwidth 
+% ------------------------------------------------------------
       {\leavevmode\strut
        #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par\@draw@tocrule@section
        \nobreak

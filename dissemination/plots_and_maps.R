@@ -3277,7 +3277,26 @@ export_map(manual_text="Forest area as share of total land area, percent (2012)"
 plotInfo <- plot_info(plotName = "C.P4.CC.1.2")
 #plotInfo$plotYears <- c(2010,2011,2012)
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = "2_2", n_colors=6) )
+assign(plotInfo$plotName, 
+       plot_syb(x = plotInfo$xAxis,
+                     y = plotInfo$yAxis,
+                     group = plotInfo$group,
+                     type = plotInfo$plotType,
+                     subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+		                            Area %in% c(plotInfo$plotArea)")),
+                     data = sybdata.df,
+                     scale = plotInfo$scaling,
+                     x_lab = plotInfo$xPlotLab,
+                    y_lab = expression("    thousand gigagrams CO"[2] * "eq"),
+                     #                 legend_lab = subset(meta.lst$FULL,
+                     #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                     col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
+       ) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) 
+       
+       )
+
+
+
 ## Export the plot
 export_plot(manual_text="Greenhouse gas emissions in agriculture",placement="tr")
 
@@ -3309,7 +3328,7 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) + scale_y_continuous(labels=french) +
-         labs(y="Mt CO2eq")
+         labs(y=expression("Mt CO"[2] * "eq"))
        
        
        )
@@ -3344,7 +3363,7 @@ assign(plotInfo$plotName,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) + scale_y_continuous(labels=french) +
-         labs(y="Mt CO2eq")
+         labs(y=expression("Mt CO"[2] * "eq"))
        
        )
 ## Export the plot
@@ -3384,7 +3403,8 @@ assign(plotInfo$plotName,
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
        ) +
          theme(axis.text.x = element_blank()) + 
-         guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2))
+         guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
+        scale_y_continuous(labels=french)
        
        )
 ## Export the plot
