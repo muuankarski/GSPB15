@@ -168,7 +168,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-       )
+       ) + scale_y_continuous(labels=french)
        )
 ## Export the plot
 export_plot(placement = "b")
@@ -1314,7 +1314,7 @@ assign(plotInfo$plotName,
                 #                 legend_lab = subset(meta.lst$FULL,
                 #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 5)[["Sub"]]
-       ) 
+       )  + scale_y_continuous(labels=french)
 )
 ## Export the plot
 export_plot(manual_text="GDP per capita, PPP, constant 2011 international $",placement = "b")
@@ -3291,7 +3291,8 @@ assign(plotInfo$plotName,
                      #                 legend_lab = subset(meta.lst$FULL,
                      #                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                      col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-       ) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) 
+       ) + guides(fill = guide_legend(nrow = 2), color = guide_legend(nrow = 2)) +
+         scale_y_continuous(labels=french)
        
        )
 

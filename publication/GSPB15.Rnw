@@ -19,7 +19,7 @@
 \usepackage{booktabs}
 \usepackage{changes}
 %\usepackage[document]{ragged2e}
-
+\usepackage[none]{hyphenat}
 
 
 \usepackage{array}
@@ -404,7 +404,7 @@ source('latex_charts.R')
 \clearpage
 
 <<Overview, eval=FALSE, results='asis'>>=
-chart_spread2(title="Demography",                
+chart_spread2(title="Demographics",                
             LeftTextCode="A combination of declining mortality rates, prolonged life expectancy and younger populations in regions with high fertility contributes to population growth in the world. While growth rates have been slowing since the late 1960s, the world’s population has nevertheless doubled since then, to over 7 billion people. Population growth is generally highest where income levels are low. This is especially true in cities. Since 2008, there have been more people living in cities than in rural areas.",  
             footnoteLeft="Data after 2010 are projections.",   
             RightTextCode="C.P1.OVER.1.2",   
@@ -415,7 +415,7 @@ chart_spread2(title="Demography",
 @
 
 
-\begin{ChartPage}{ Demography } 
+\begin{ChartPage}{ Demographics } 
 \LeftText{A combination of declining mortality rates, prolonged life expectancy and younger populations in regions with high fertility contributes to population growth in the world. While growth rates have been slowing since the late 1960s, the world’s population has nevertheless doubled since then, to over 7 billion people. Population growth is generally highest where income levels are low. This is especially true in cities. Since 2008, there have been more people living in cities than in rural areas.} 
 \RightText{\begin{chart} 
  
@@ -444,17 +444,6 @@ chart_spread2(title="Demography",
 \input{./Captions/Caption_M.P1.OVER.1.6.tex} 
 \IfFileExists{./Maps/M.P1.OVER.1.6.pdf}{\centering\includegraphics[height = 1\columnwidth, angle=90]{{./Maps/M.P1.OVER.1.6}.pdf}\par}{\newpage\thispagestyle{empty}\mbox{}}{} 
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
