@@ -196,6 +196,8 @@ sybdata.df[sybdata.df[, "SHORT_NAME"] == "American Samoa" &
             !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "American\nSamoa"
 sybdata.df[sybdata.df[, "SHORT_NAME"] == "Western Sahara" & 
            !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "Western\nSahara"
+sybdata.df[sybdata.df[, "SHORT_NAME"] == "the United Arab Emirates" & 
+             !is.na(sybdata.df[, "SHORT_NAME"]), "SHORT_NAME"] <-   "the United\n Arab Emirates"
 # REMOVE Western Sahara
 sybdata.df <- sybdata.df[sybdata.df$FAOST_CODE != 205, ]
 

@@ -177,11 +177,11 @@ export_plot <- function(placement,manual_text="nothing") {
   
   if (placement %in% c("l","r")) {
     plotWidth <- 3.2
-    plotHeight <- 6.1
+    plotHeight <- 6.5
   }
   if (placement == "b") {
-    plotWidth <- 7
-    plotHeight <- 4.1
+    plotWidth <- 6.2
+    plotHeight <- 3.6
   }
   if (placement == "tr") {
     plotWidth <- 3

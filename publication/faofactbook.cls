@@ -79,7 +79,7 @@ left=1cm, right=1cm, twoside}{geometry}
 % ---------------------------------------------------------------------------------
 
 \AtBeginDocument{\geometry{papersize={10cm,21cm}, layoutsize={10cm,21cm},
-  left=1cm,right=1cm,bottom=.9cm,top=.9cm,twoside}%
+  left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
   \setlength\columnsep{20pt}%
 \savegeometry{standard}}
 \newlength\@stripwidth
@@ -226,6 +226,7 @@ left=1cm, right=1cm, twoside}{geometry}
   \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.35\textwidth}{\@RightText}}\par\medskip
+  \vspace{-0.01\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@LeftChart}}%
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip

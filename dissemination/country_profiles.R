@@ -362,7 +362,7 @@ year1 = 1992
 year2 = 2002
 year3 = 2014
 ## This script creates the latex file
-cat("\\renewcommand{\\arraystretch}{1.1}\n",
+cat("\\renewcommand{\\arraystretch}{1.22}\n",
     file = fileOut, append = TRUE)
 cat("\\setlength{\\tabcolsep}{4pt}\n",
     file = fileOut, append = TRUE) ## Reduce the space between columns
@@ -477,56 +477,6 @@ for (i in 1:nrow(M49countries)) {
 # sed -i 's#{ 2014 }#{ 2014* }#' ./publication/Tables/CountryProfiles.tex && sed -i 's#\\end{tabular}#\*We can add a footnote for each table like this..\n\\end{tabular}#' ./publication/Tables/CountryProfiles.tex
 # sed -i 's#Net food#Net food**#' ./publication/Tables/CountryProfiles.tex && sed -i 's#\\end{tabular}#\n\**excluding fish\n\\end{tabular}#' ./publication/Tables/CountryProfiles.tex
 
-
-
-# ###########################################################################
-# ## Metadata
-# ###########################################################################
-# 
-# # # Definitions -------------------------------------------------------------
-# # 
-# # definitions.df <- 
-# #   read.csv(file = "./Data/Processed/Definitions.csv", , nrows = 71,
-# #            header = TRUE, na.strings = "", stringsAsFactors = FALSE)
-# # definitions.df<- arrange(definitions.df, LABEL)
-# # definitions.df[, "LABEL"] <- 
-# #   sanitizeToLatex(definitions.df[, "LABEL"])
-# # definitions.df[, "DEFINITION"] <- 
-# #   sanitizeToLatex(definitions.df[, "DEFINITION"])
-# # 
-# # # TeX file ----------------------------------------------------------------
-# # 
-# # ## Create the new .tex file
-# # fileOut <- paste("./Outputs/Metadata.tex", sep = "")
-# # if(file.exists(fileOut)) file.remove(fileOut)
-# # file.create(fileOut)
-# # ## This script creates the latex file
-# # # cat("\\renewcommand{\\arraystretch}{1}\n",
-# # #     file = fileOut, append = TRUE)
-# # cat("\\begin{MetadataCollection}\n\n",
-# #     file = fileOut, append = TRUE)
-# # cat("\\twocolumn\n\n",
-# #     file = fileOut, append = TRUE)
-# # cat("\\LARGE\n\n",
-# #     file = fileOut, append = TRUE)
-# # cat("\\textbf{Definitions}\n\n",
-# #     file = fileOut, append = TRUE)
-# # cat("\\footnotesize\n\n",
-# #     file = fileOut, append = TRUE)
-# # for (i in 1:NROW(definitions.df)) {
-# #   cat("\\begin{metadata}{", definitions.df[i, "LABEL"], "}{", definitions.df[i, "STS_ID"], "}\n",
-# #       file = fileOut, append = TRUE)
-# #   cat(definitions.df[i, "DEFINITION"], "\n",
-# #       file = fileOut, append = TRUE)
-# #   cat("\\source{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "SOURCE"]), "}\n",
-# #       file = fileOut, append = TRUE)
-# #   cat("\\owner{", sanitizeToLatex(meta.df[meta.df[, "STS_ID"] == definitions.df[i, "STS_ID"], "OWNER"]), "}\n",
-# #       file = fileOut, append = TRUE)
-# #   cat("\\end{metadata}\n\n",
-# #       file = fileOut, append = TRUE)
-# # }
-# # cat("\\end{MetadataCollection}\n",
-# #     file = fileOut, append = TRUE)
 # # 
 sybdata.df <- temp
 

@@ -35,19 +35,19 @@ chart_spread <- function(title="title",
    
 	cat(paste0("\\LeftChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",LeftChartCode,".tex} \n",
-	               "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
+	               "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 8cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
 	               "\\end{chart}} \n"))
 	
 	cat(paste0("\\RightChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",RightChartCode,".tex} \n",
 	                footnoteRightText,
-	               "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
+	               "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 8cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
 	               "\\end{chart}} \n"))
 
 	
   cat(paste0("\\BottomChart{\\begin{chart} \n 
 	               \\input{./Captions/Caption_",BottomChartCode,".tex} \n",
-	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 6cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
+	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
 	           "\\end{chart}} \n"))
 
 	
@@ -107,19 +107,19 @@ chart_spread2 <- function(title="title",
   
   cat(paste0("\\LeftChart{\\begin{chart} \n 
              \\input{./Captions/Caption_",LeftChartCode,".tex} \n",
-             "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
+             "\\IfFileExists{./Plots/",LeftChartCode,".pdf}{\\includegraphics[width = 4.2cm, height = 7.6cm]{{./Plots/",LeftChartCode,"}.pdf}}{} \n",
              "\\end{chart}} \n"))
   
   cat(paste0("\\RightChart{\\begin{chart} \n 
              \\input{./Captions/Caption_",RightChartCode,".tex} \n",
              footnoteRightText,
-             "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.5cm, height = 7.5cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
+             "\\IfFileExists{./Plots/",RightChartCode,".pdf}{\\includegraphics[width = 4.2cm, height = 7.6cm]{{./Plots/",RightChartCode,"}.pdf}}{} \n",
              "\\end{chart}} \n"))
   
   
   cat(paste0("\\BottomChart{\\begin{chart} \n 
              \\input{./Captions/Caption_",BottomChartCode,".tex} \n",
-             "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
+             "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
              "\\end{chart}} \n"))
   
   
