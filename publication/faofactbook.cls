@@ -230,6 +230,7 @@ left=1cm, right=1cm, twoside}{geometry}
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
   \faoset{floatwidth=\columnwidth}
+  \vspace{-0.02\textwidth}%
   {\centering\@BottomChart\par}}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
 \long\def\RightText#1{\gdef\@RightText{{\bfseries\large\vphantom{\@chartname}\par}#1}}
