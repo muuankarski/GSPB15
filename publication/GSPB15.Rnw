@@ -573,7 +573,7 @@ chart_spread2(title="Food access",
 @
 
 <<Stability, eval=TRUE,results='asis'>>=
-chart_spread2(title="Food stability",                
+chart_spread2(title="Economic and political stability",                
             LeftTextCode="Over the last ten years, food and agricultural markets have entered an unexpectedly turbulent phase, characterized by large supply shortfalls, price swings. Political and economic uncertainties, coupled with extreme weather conditions, can have direct and adverse impacts on food security. The poorer the household, the stronger the impact of external shocks, as poor households spend a proportionally higher share of their incomes on food.",  
             RightTextCode="C.P2.STB.1.2",   
             LeftChartCode="C.P2.STB.1.3",   
