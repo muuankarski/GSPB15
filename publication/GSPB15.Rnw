@@ -658,7 +658,7 @@ chart_spread(title="Crop production",
 @
 
 <<Trends in the crop sector, eval=TRUE,results='asis'>>=
-chart_spread(title="Crop",                
+chart_spread(title="Crops",                
             LeftTextCode="Cereals, which include wheat, rice, barley, maize, rye, oats and millet, make up the majority of the production of the crop sector. They continue to be the most important food source for human consumption. Yet external factors, such as rising incomes and urbanization, are causing diets to shift towards diets that are higher in protein, fats and sugar. In addition, livestock and biofuel production have and will most likely grow at a faster rate than crop production. This is causing a shift away from crops, like wheat and rice, towards coarse grains and oilseeds to meet demands for food, feed and biofuel.",  
             RightTextCode="MT.P3.CRTRE.1.2",   
             LeftChartCode="C.P3.CRTRE.1.3",   
