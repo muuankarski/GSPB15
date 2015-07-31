@@ -3215,34 +3215,34 @@ export_plot(manual_text = "Top 20 importers of forest products (2012)",placement
 # Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)
 
 ## Info
-plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
-
-sybdata.df$GFRA.TOT.PF.HA.NO.mill   <- sybdata.df$GFRA.TOT.PF.HA.NO   / 1000000
-sybdata.df$GFRA.TOT.PLF.HA.NO.mill  <- sybdata.df$GFRA.TOT.PLF.HA.NO  / 1000000
-sybdata.df$GFRA.TOT.ONRF.HA.NO.mill <- sybdata.df$GFRA.TOT.ONRF.HA.NO / 1000000
-
-plotInfo$legendLabels <- c("primary forest","planted forest","other naturally regenerated forest")
-## Plot
-assign(plotInfo$plotName, 
-       
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-                                            Area %in% c(plotInfo$plotArea)")),
-                data = sybdata.df,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = plotInfo$legendLabels,
-                col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
-       ) + scale_y_continuous(labels=french) +
-         labs(y="million ha")
-       
-       )
-## Export the plot
-export_plot(manual_text="Forest characteristics (2010)",placement = "b")
+# plotInfo <- plot_info(plotName = "C.P4.FOR.1.5")
+# 
+# sybdata.df$GFRA.TOT.PF.HA.NO.mill   <- sybdata.df$GFRA.TOT.PF.HA.NO   / 1000000
+# sybdata.df$GFRA.TOT.PLF.HA.NO.mill  <- sybdata.df$GFRA.TOT.PLF.HA.NO  / 1000000
+# sybdata.df$GFRA.TOT.ONRF.HA.NO.mill <- sybdata.df$GFRA.TOT.ONRF.HA.NO / 1000000
+# 
+# plotInfo$legendLabels <- c("primary forest","planted forest","other naturally regenerated forest")
+# ## Plot
+# assign(plotInfo$plotName, 
+#        
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+#                                             Area %in% c(plotInfo$plotArea)")),
+#                 data = sybdata.df,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 legend_lab = plotInfo$legendLabels,
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 3)[["Sub"]]
+#        ) + scale_y_continuous(labels=french) +
+#          labs(y="million ha")
+#        
+#        )
+# ## Export the plot
+# export_plot(manual_text="Forest characteristics (2010)",placement = "b")
 
 # MAPS  ----------------------------------------------------------------- #
 # Forest characteristics (planted forest, primary forest, and other naturally regenerated forest)

@@ -17,10 +17,17 @@ pdftk GSPB15.pdf cat 233-end output definitions.pdf
 pdftk GSPB15.pdf cat 179 output table2.pdf
 #convert -density 200 table2.pdf table2.jpg
 
+pdftk GSPB15.pdf cat 50-55 output agg_tables.pdf.pdf
+convert -density 150 agg_tables.pdf.pdf tbl.jpg
+pdftk GSPB15.pdf cat 109 output fin.pdf.pdf
+convert -density 150 fin.pdf.pdf fin.jpg
+
+
 pandoc comment_charts.md -o comment_charts.html
 pandoc comment_tables.md -o comment_tables.html
+pandoc comment_tables_final.md -o comment_tables_final.html
 pandoc comment_captions.md -o comment_captions.html
 pandoc comment_definitions.md -o comment_definitions.html
 
 # upload the output pdf to kapsi
-scp GSPB15.pdf spreads.pdf table.jpg table2.jpg water.pdf energy.pdf investment.pdf tables_all.pdf comment_captions.html comment_charts.html comment_tables.html definitions.pdf comment_definitions.html output muuankarski@kapsi.fi:public_html/fao/GSPB15
+scp GSPB15.pdf spreads.pdf table.jpg table2.jpg *.jpg water.pdf comment_tables_final.html energy.pdf investment.pdf tables_all.pdf comment_captions.html comment_charts.html comment_tables.html definitions.pdf comment_definitions.html output muuankarski@kapsi.fi:public_html/fao/GSPB15
