@@ -147,8 +147,8 @@ keepaspectratio]{./cover/back_cover.pdf}%
 Food and Agriculture Organization of the United Nations, Rome, 2015
 \end{center}
 
-\Huge{Generated at} \\ 
-\Sexpr{Sys.time()}
+% \Huge{Generated at} \\ 
+% \Sexpr{Sys.time()}
 
 \newpage
 
@@ -259,6 +259,7 @@ FAO is deeply committed to helping countries strengthen their statistical system
         Pietro Gennari
 \hspace*{\fill}
 
+\hspace*{\fill}
         \textit{Chief Statistician and Director, FAO Statistics Division}
 \hspace*{\fill}
 

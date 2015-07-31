@@ -1,9 +1,7 @@
 # database
 # database/Data/
- 
 # dissemination
 # include all
-
 # publications
 publication/Captions/
 publication/CountryProfiles/
@@ -12,7 +10,6 @@ publication/Plots/
 publication/Sources/
 publication/Tables/
 publication/Text/
-
 publication/*.tex
 publication/*.html
 publication/GSPB15.ilg
@@ -28,10 +25,9 @@ publication/*.pdf
 !publication/GSPB15disclamerPage.pdf
 !publication/GSPB15disclamerPage.pdf
 !publication/I4691E_disclaimer.pdf
-
-
 .Rhistory
 .RData
 .Rproj.user/
 .Rproj.user
 dissemination/Rcode/Final/manual_data_functions/fisheries2015_pocketbook.html
+publication (copy)

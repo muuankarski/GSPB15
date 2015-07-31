@@ -18,11 +18,11 @@ setwd("~/btsync/fao_sync/pocketbooks/GSPB15/database")
 
 # R version ---------------------------------------------------------------
 
-rVersion <- R.Version()
-if (rVersion$major != 3 | rVersion$minor != 2) {
-  stop("The script is developed under the 3.2.0 R version.")
-}
-rm(rVersion)
+# rVersion <- R.Version()
+# if (rVersion$major != 3 | rVersion$minor != 2) {
+#   stop("The script is developed under the 3.2.0 R version.")
+# }
+# rm(rVersion)
 
 # Needed libraries --------------------------------------------------------
 
@@ -626,7 +626,6 @@ initial.df <- initial.df[initial.df[, "Year"] <= 2020,]
 ## -- Convert the characters formats as "thousand" into 1000
 
 meta.lst[["UNIT_MULT"]][, "UNIT_MULT"] <- as.numeric(translateUnit(meta.lst[["UNIT_MULT"]]$UNIT_MULT))
-
 
 preConstr.df <- scaleUnit(initial.df, meta.lst[["UNIT_MULT"]])
 rm(initial.df)
