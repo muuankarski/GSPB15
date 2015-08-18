@@ -19,8 +19,12 @@ pdftk GSPB15.pdf cat 179 output table2.pdf
 
 pdftk GSPB15.pdf cat 50-55 output agg_tables.pdf.pdf
 convert -density 150 agg_tables.pdf.pdf tbl.jpg
-pdftk GSPB15.pdf cat 109 output fin.pdf.pdf
-convert -density 150 fin.pdf.pdf fin.jpg
+# Finland
+pdftk GSPB15.pdf cat 109 output fin.pdf
+convert -density 150 fin.pdf fin.jpg
+# Argentina
+pdftk GSPB15.pdf cat 60 output arg.pdf
+convert -density 150 arg.pdf arg.jpg
 
 
 pandoc comment_charts.md -o comment_charts.html

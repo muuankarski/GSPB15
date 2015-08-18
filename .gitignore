@@ -3,13 +3,14 @@
 # dissemination
 # include all
 # publications
-publication/Captions/
+#publication/Captions/
 publication/CountryProfiles/
 publication/Maps/
 publication/Plots/
 publication/Sources/
 publication/Tables/
 publication/Text/
+publication/figure/
 publication/*.tex
 publication/*.html
 publication/GSPB15.ilg
@@ -25,6 +26,8 @@ publication/*.pdf
 !publication/GSPB15disclamerPage.pdf
 !publication/GSPB15disclamerPage.pdf
 !publication/I4691E_disclaimer.pdf
+!publication/Metadata.tex
+!publication/Notes.tex
 .Rhistory
 .RData
 .Rproj.user/
