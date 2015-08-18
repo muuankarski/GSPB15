@@ -208,6 +208,9 @@ dl$Year <- factor(dl$Year)
 dl$Year <- as.numeric(levels(dl$Year))[dl$Year]
   
 # Recode into FAOST_CODE
+
+dl$UN_CODE <- factor(dl$UN_CODE)
+dl$UN_CODE <- as.numeric(levels(dl$UN_CODE))[dl$UN_CODE]
 dl <- merge(dl,FAOcountryProfile[c("FAOST_CODE","UN_CODE")],by="UN_CODE")
   
 # Aggregate China

@@ -174,9 +174,11 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
 # However, at least, it will be preferable to normalize to the base period 2004-06. In the other words, taking average production quantity of 2004-06 as 100. 
 # This way, all food components would show the relative changes within the period, without referring relative contribution among different components."
 
+# -----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 # These are now computed within the fisheriesn section in plots and maps
-
-
+# -----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 # New production indices computed by Amanda
 
