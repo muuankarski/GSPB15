@@ -1935,8 +1935,25 @@ export_map(manual_text="Average dietary energy supply adequacy, percent (2014-20
 plotInfo <- plot_info(plotName = "C.P3.CRPRO.1.3")
 plotInfo$plotYears <- c(min(plotInfo$plotYears),max(plotInfo$plotYears))
 ## Plot
-assign(plotInfo$plotName, meta_plot_plot(plot_type = 3, n_colors=2) )
-## Export the plot
+assign(plotInfo$plotName, 
+       plot_syb(x = plotInfo$xAxis,
+                y = plotInfo$yAxis,
+                group = plotInfo$group,
+                type = plotInfo$plotType,
+                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+                                            Area %in% c(plotInfo$plotArea)")),
+                data = sybdata.df,
+                scale = plotInfo$scaling,
+                x_lab = plotInfo$xPlotLab,
+                y_lab = plotInfo$yPlotLab,
+                legend_lab = subset(meta.lst$FULL,
+                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+       ) + scale_y_continuous(labels=french) 
+       #+ scale_x_continuous(breaks=c(200,300,400,500,600)) # tried adding manual breaks but the x-var is factor and dont know how to change it
+)
+       
+       ## Export the plot
 export_plot(manual_text="Top 20 crop producing countries in 2012 based on net per capita crop production value",placement="l")
 
 
