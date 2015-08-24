@@ -374,7 +374,7 @@ for (i in 1:nrow(M49countries)) {
   ## header
   cat("\\CountryData{", M49countries[i, "SHORT_NAME"], "}
       \\rowcolors{1}{FAOblue!10}{white}
-      \\begin{tabular}{L{3.9cm} R{1cm} R{1cm} R{1cm}}
+      \\begin{tabular}{L{4.0cm} R{1cm} R{1cm} R{1cm}}
       \\toprule
       \\multicolumn{1}{c}{} & \\multicolumn{1}{c}{", year1, "} & \\multicolumn{1}{c}{", year2, "} & \\multicolumn{1}{c}{", year3, "} \\\\
       \\midrule\n",
