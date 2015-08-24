@@ -2,7 +2,7 @@
 ## This script generates the Global Statistical Pocketbook 2015
 ###########################################################################
 
-setwd("~/btsync/fao_sync/pocketbooks/GSPB15")
+setwd("~/btsync/faosync/pocketbooks/GSPB15")
 
 
 # Linux options
