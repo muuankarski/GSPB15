@@ -153,9 +153,11 @@ if (!("nitrogen_tonnes_per_ha" %in% names(sybdata.df))) {
   dat$FAOST_CODE[dat$FAOST_CODE == 41] <- 351
   
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"), all.x=TRUE)
-  sybdata.df$phosphate_tonnes_per_ha <- sybdata.df$phosphate_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
-  sybdata.df$potash_tonnes_per_ha <- sybdata.df$potash_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
-  sybdata.df$nitrogen_tonnes_per_ha <- sybdata.df$nitrogen_tonnes / sybdata.df$RL.AREA.AGR.HA.NO
+  sybdata.df$phosphate_tonnes_per_ha <- sybdata.df$phosphate_tonnes / sybdata.df$RL.AREA.ARBL.HA.NO
+  sybdata.df$potash_tonnes_per_ha <- sybdata.df$potash_tonnes / sybdata.df$RL.AREA.ARBL.HA.NO
+  sybdata.df$nitrogen_tonnes_per_ha <- sybdata.df$nitrogen_tonnes / sybdata.df$RL.AREA.ARBL.HA.NO
+  
+  
 }
 
 
