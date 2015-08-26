@@ -238,6 +238,12 @@ if (!("energy.for.power.irrigation" %in% names(sybdata.df))) {
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
+# Energy consumption for power irrigation
+# US 0 -> NA
+sybdata.df$energy.for.power.irrigation[sybdata.df$energy.for.power.irrigation == 0 & sybdata.df$FAOST_CODE == 231] <- NA
+
+
+
 
 ## Water indicators for China
 
