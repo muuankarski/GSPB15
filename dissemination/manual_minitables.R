@@ -69,21 +69,43 @@ print.xtable(xtable(tbl, caption = "Countries with highest share of children und
 # dat <- read.csv("~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.csv")
 # save(dat, file="~/fao_temp/pocketbook_temp/Production_Crops_E_All_Data.RData")
 load("./database/Data/Raw/Production_Crops_E_All_Data.RData")
-d <- dat[dat$CountryCode == 5000,] # World
-d <- d[d$Element == "Production",]
-d <- d[d$Year >= 2000,]
-library(tidyr)
-d$Year <- paste0("X",d$Year)
-d <- d[c("Item","Year","Value")]
-library(plyr)
-# Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
-d <- ddply(d,"Item",transform,
-           Growth=c(NA,exp(diff(log(Value)))-1))
-dd <- d %>% group_by(Item) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm = TRUE)*100)
-rc <- arrange(dd, -mean_growth)[1:5,c("Item","mean_growth")]
-names(rc) <- c("","%")
+# d <- dat[dat$CountryCode == 5000,] # World
+# d <- d[d$Element == "Production",]
+# d <- d[d$Year >= 2000,]
+# library(tidyr)
+# d$Year <- paste0("X",d$Year)
+# d <- d[c("Item","Year","Value")]
+# library(plyr)
+# # Annual growth rate - geometric mean http://stackoverflow.com/questions/19824601/how-calculate-growth-rate-in-long-format-data-frame
+# d <- ddply(d,"Item",transform,
+#            Growth=c(NA,exp(diff(log(Value)))-1))
+# dd <- d %>% group_by(Item) %>% dplyr::summarise(mean_growth = mean(Growth, na.rm = TRUE)*100)
+# rc <- arrange(dd, -mean_growth)[1:5,c("Item","mean_growth")]
+# names(rc) <- c("","%")
+# 
 
-print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,0),
+# New implementation of least square growth rates!!
+
+growth <- data.frame()
+
+names(dat)[names(dat)=="CountryCode"] <- "FAOST_CODE"
+
+gr_dat <- dat %>% filter(Year >= 2000,FAOST_CODE == 5000,Element == "Production")
+gr_dat <- gr_dat[!is.na(gr_dat$Value),]
+gr_dat$Item <- as.character(gr_dat$Item)
+for (fs in unique(gr_dat$Item)){
+  d <- gr_dat[gr_dat$Item %in% fs,]
+  if (sum(d$Value) == 0) next
+  d <- d[d$Value > 0,]
+  grate <- as.numeric((exp(coef(lm(log(d$Value) ~ Year, d))[2]) - 1) * 100)
+  row <- data.frame(FAOST_CODE = fs,
+                    growth_rate = grate)
+  growth <- rbind(growth,row)
+}
+rc <- growth %>% arrange(-growth_rate) %>% slice(1:5) 
+
+names(rc) <- c("","%")
+print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,1),
                     align= "l{\raggedright\arraybackslash}p{2.2cm}r"), 
              type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")
