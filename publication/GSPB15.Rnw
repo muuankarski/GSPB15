@@ -51,27 +51,27 @@
 
 
 % First page background graphics
-\usepackage{eso-pic}
-\newcommand\taustaeka{%
-\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\vfill
-\centering
-\includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{./cover/front_cover.pdf}%
-\vfill
-}}}
-
-
-\newcommand\taustatoka{%
-\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\vfill
-\centering
-\includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{./cover/back_cover.pdf}%
-\vfill
-}}}
+% \usepackage{eso-pic}
+% \newcommand\taustaeka{%
+% \put(0,0){%
+% \parbox[b][\paperheight]{\paperwidth}{%
+% \vfill
+% \centering
+% \includegraphics[width=\paperwidth,height=\paperheight,%
+% keepaspectratio]{./cover/front_cover.pdf}%
+% \vfill
+% }}}
+% 
+% 
+% \newcommand\taustatoka{%
+% \put(0,0){%
+% \parbox[b][\paperheight]{\paperwidth}{%
+% \vfill
+% \centering
+% \includegraphics[width=\paperwidth,height=\paperheight,%
+% keepaspectratio]{./cover/back_cover.pdf}%
+% \vfill
+% }}}
 
 \usepackage{xcolor}
 
@@ -98,15 +98,15 @@ keepaspectratio]{./cover/back_cover.pdf}%
 
 % \newpage
 
-\AddToShipoutPicture*{\taustaeka}
+% \AddToShipoutPicture*{\taustaeka}
 
 % \thispagestyle{empty}
 % \mbox{}
 % \clearpage
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\clearpage
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+% \clearpage
 \fi
 
 
@@ -835,22 +835,22 @@ chart_spread2(title="Climate change",
 \input{./Metadata.tex}
 \clearpage
 
-\newpage
+% \newpage
 
-\thispagestyle{empty}
-\AddToShipoutPicture*{\taustatoka}
+% \thispagestyle{empty}
+% \AddToShipoutPicture*{\taustatoka}
 
 \mbox{}
 
 
-\ifprint\else
-\begin{picture}(0,0)
-\put(-57,-473){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
-%\put(-58,-432){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover.pdf}}
-%\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
-\end{picture}
+% \ifprint\else
+% \begin{picture}(0,0)
+% \put(-57,-473){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}}
+% %\put(-58,-432){\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover.pdf}}
+% %\includegraphics[width=\paperwidth,height=\paperheight]{./cover/back_cover_2015.png}
+% \end{picture}
 
-\newpage
+% \newpage
 
 \thispagestyle{empty}
 
