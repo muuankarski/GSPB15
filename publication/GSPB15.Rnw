@@ -856,6 +856,6 @@ chart_spread2(title="Climate change",
 
 \newpage
 
-\fi
+% \fi
 
 \end{document}
