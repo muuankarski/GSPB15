@@ -26,7 +26,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{faofactbook}
 [2012/03/25 v0.14 Typesetting FAO Factbook]
-\PassOptionsToPackage{papersize={10cm,21cm},top=1cm,bottom=1cm,
+\PassOptionsToPackage{papersize={12cm,23cm},top=1cm,bottom=1cm,
 left=1cm, right=1cm, twoside}{geometry}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{faoyearbook}}
 \ProcessOptions\relax
@@ -78,7 +78,7 @@ left=1cm, right=1cm, twoside}{geometry}
 % Page dimensions - now height is 21cm
 % ---------------------------------------------------------------------------------
 
-\AtBeginDocument{\geometry{papersize={10cm,21cm}, layoutsize={10cm,21cm},
+\AtBeginDocument{\geometry{papersize={12cm,23cm}, layoutsize={10cm,21cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
   \setlength\columnsep{20pt}%
 \savegeometry{standard}}
@@ -94,13 +94,13 @@ left=1cm, right=1cm, twoside}{geometry}
   \fancyfoot[RO,LE]{\thepage}%
   \fancyhead[LO]{%
     \begin{picture}(0,0)%
-      \put(268,-170){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(268,-175){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\hspace*{-\@stripwidth}%
           \rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \fancyhead[LE]{%
     \begin{picture}(0,0)%
-      \put(-39,-170){\raisebox{-0.729\Gm@layoutheight}{%
+      \put(-39,-175){\raisebox{-0.729\Gm@layoutheight}{%
           \color{@bgcolor}\rule{\@stripwidth}{1.05\Gm@layoutheight}}}%
     \end{picture}}
   \renewcommand{\headrulewidth}{\z@}%

@@ -45,7 +45,7 @@
 \DeclareOption{web}{\printfalse}
 \DeclareOption{print}{\printtrue
   \if@factbook
-  \PassOptionsToPackage{papersize={12cm,21cm},layoutsize={10cm,19cm},
+  \PassOptionsToPackage{papersize={12cm,23cm},layoutsize={10cm,19cm},
     layouthoffset=1cm,layoutvoffset=1cm,twoside}{geometry}%
   \else
   \PassOptionsToPackage{papersize={230mm,317mm},layout=a4paper,
@@ -157,7 +157,7 @@
 \urlstyle{sf}
 \if@factbook
 \AtBeginDocument{%
-  \geometry{layoutsize={10cm,19cm},
+  \geometry{layoutsize={10cm,21cm},
   left=1cm,right=1cm,bottom=1cm,top=1cm,twoside}%
   \setlength\columnsep{10pt}%
 \savegeometry{standard}\@twosidetrue}
