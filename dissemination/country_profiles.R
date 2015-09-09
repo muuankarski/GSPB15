@@ -182,6 +182,17 @@ if (!("aqua_culture_share" %in% names(sybdata.df))) {
 # -----------------------------------------------------------------------
 # -----------------------------------------------------------------------
 
+# and now here too
+
+dim(sybdata.df)
+if (!("production_quantity_index" %in% names(sybdata.df))) {
+  source("./dissemination/Rcode/Final/manual_data_functions/fisheries2015_pocketbook.R")
+}
+dim(sybdata.df)
+
+
+
+
 # New production indices computed by Amanda
 
 if (!("Sugar.raw" %in% names(sybdata.df))) {
