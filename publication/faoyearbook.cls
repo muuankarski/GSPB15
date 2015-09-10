@@ -45,7 +45,7 @@
 \DeclareOption{web}{\printfalse}
 \DeclareOption{print}{\printtrue
   \if@factbook
-  \PassOptionsToPackage{papersize={12cm,23cm},layoutsize={10cm,19cm},
+  \PassOptionsToPackage{papersize={12cm,23cm},layoutsize={10cm,21cm},
     layouthoffset=1cm,layoutvoffset=1cm,twoside}{geometry}%
   \else
   \PassOptionsToPackage{papersize={230mm,317mm},layout=a4paper,

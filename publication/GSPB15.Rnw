@@ -4,9 +4,9 @@
 
 %% Global Pocket Yearbook class
 % \documentclass[print, Draft]{faofactbook}
-\documentclass[print]{faofactbook}
+ % \documentclass[print]{faofactbook}
 %\documentclass[web, Draft]{faofactbook}
-%\documentclass[twoside,web]{faofactbook}
+\documentclass[twoside,web]{faofactbook}
 
 %% Other packages to be loaded
 \usepackage{lipsum,textcomp}
@@ -176,9 +176,9 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 %% Disclamer
 \thispagestyle{empty}
 \ifprint
-\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -70]{./I4691E_disclaimer.pdf}
+\includepdf[width=\paperwidth,height=\paperheight, offset=10 -70]{./I4691E_disclaimer.pdf}
 \else
-\includepdf[width=\paperwidth,height=\paperheight, offset=-10 -50]{./I4691E_disclaimer.pdf}
+\includepdf[width=\paperwidth,height=\paperheight, offset=10 -30]{./I4691E_disclaimer.pdf}
 \fi
 
 
