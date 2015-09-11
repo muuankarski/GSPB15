@@ -2402,14 +2402,14 @@ dat <- gather(dat,
                   "value",
                     2:4)
 
-dat$X <- as.character(dat$X)
-dat$X[dat$X == "Underfished"] <- "Under or\nmoderately\nexploited"
-dat$X[dat$X == "Fully fished"] <- "Fully\nexploited"
-dat$X[dat$X == "Overfihsed"] <- "Recovering,\ndepleted\nor overexploited"
-
-dat$X <- factor(dat$X, levels= c("Under or\nmoderately\nexploited",
-                                "Fully\nexploited",
-                                "Recovering,\ndepleted\nor overexploited"))
+# dat$X <- as.character(dat$X)
+# dat$X[dat$X == "Underfished"] <- "Under or\nmoderately\nexploited"
+# dat$X[dat$X == "Fully fished"] <- "Fully\nexploited"
+# dat$X[dat$X == "Overfihsed"] <- "Recovering,\ndepleted\nor overexploited"
+# 
+# dat$X <- factor(dat$X, levels= c("Under or\nmoderately\nexploited",
+#                                 "Fully\nexploited",
+#                                 "Recovering,\ndepleted\nor overexploited"))
 
 ## create the plot
 assign(plotInfo$plotName,
