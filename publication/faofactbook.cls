@@ -6,7 +6,7 @@
 %%
 %% faofactbook.dtx  (with options: `class')
 %% Copyright (c) 2011, Food and Agriculture Organization of the  United Nations
-%% 
+%%
 %% All rights reserved.
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -50,7 +50,7 @@ left=1cm, right=1cm, twoside}{geometry}
 }
 % ---------------------------------------------------------------------------------
 % ---------------------------------------------------------------------------------
-% New Font sizes 
+% New Font sizes
 % ---------------------------------------------------------------------------------
 \renewcommand\normalsize{%
    \@setfontsize\normalsize{6\p@}{7}% Affects caption sizes and texts size within Chatpage environments
@@ -80,6 +80,10 @@ left=1cm, right=1cm, twoside}{geometry}
 \renewcommand\huge{\@setfontsize\huge\@xvpt{18}}
 \renewcommand\Huge{\@setfontsize\Huge\@xviipt{20}}
 \setlength\parskip{\z@}
+% ---------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------
+% \usepackage[font=huge,labelfont=bf]{caption}
+
 % ---------------------------------------------------------------------------------
 % ---------------------------------------------------------------------------------
 % Page dimensions - now height is 21cm
@@ -147,7 +151,7 @@ left=1cm, right=1cm, twoside}{geometry}
 % ---------------------------------------------------------------------------------
 % ---------------------------------------------------------------------------------
 % Define the Table of Contents
-% ---------------------------------------------------------------------------------                                   
+% ---------------------------------------------------------------------------------
 
 \def\newpart#1{\clearpage
   \arrayrulecolor{#1}%
@@ -181,7 +185,7 @@ left=1cm, right=1cm, twoside}{geometry}
 % define the page number in toc
      %\parindent \z@ \rightskip -100pt % commenting this line and
      \parindent \z@ \rightskip \@pnumwidth  % adding this line fixed the page numbers!
-      \parfillskip  - \@pnumwidth 
+      \parfillskip  - \@pnumwidth
 % ------------------------------------------------------------
       {\leavevmode\strut
        #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par\@draw@tocrule@section

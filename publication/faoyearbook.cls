@@ -6,7 +6,7 @@
 %%
 %% faoyearbook.dtx  (with options: `class')
 %% Copyright (c) 2011, Food and Agriculture Organization of the  United Nations
-%% 
+%%
 %% All rights reserved.
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
