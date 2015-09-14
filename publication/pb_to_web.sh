@@ -2,6 +2,7 @@
 
 cd ~/btsync/faosync/pocketbooks/GSPB15/publication/
 Rscript -e "library(knitr); knit('GSPB15.Rnw')"
+./align_dotplots.sh
 pdflatex GSPB15.tex
 
 #pdftk GSPB15.pdf cat 19-20 output undernourishment.pdf
