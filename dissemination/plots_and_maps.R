@@ -1778,7 +1778,7 @@ p <- p + geom_bar(position="fill", stat="identity")
 p <- p + coord_polar("y")
 p <- p + theme_minimal()
 p <- p + theme(legend.position = "right")
-p <- p + theme(text = element_text(size=11, family="PT Sans"))
+p <- p + theme(text = element_text(size=12, family="PT Sans"))
 p <- p + theme(axis.text = element_blank())
 p <- p + theme(axis.title = element_blank())
 p <- p + theme(axis.ticks = element_blank())
@@ -2209,7 +2209,7 @@ colPart3 <- plot_colors(part = 3, 12)
 
 d <- d %>% group_by(Year) %>% mutate(pos = cumsum(share)- share/2)
 
-p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum))
+p <- ggplot(d, aes(x=sum/2, y = share, fill = Country, width = sum)) #
 p <- p + geom_bar(position="fill", stat="identity")
 p <- p + facet_wrap(~Year)
 p <- p + coord_polar("y")
@@ -2414,7 +2414,7 @@ dat <- gather(dat,
 ## create the plot
 assign(plotInfo$plotName,
 ggplot(data = dat, aes_string(x = "Year", y = as.character("value"))) +
-  geom_area(aes_string(col = "X", fill = "X"), stat="Identity",position = "stack", width = 0.6) +
+  geom_area(aes_string(col = "X", fill = "X"), stat="Identity",position = "stack") +
   scale_fill_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
   scale_color_manual(values = plot_colors(part = 3, 3)[["Sub"]]) +
   guides(fill = guide_legend(reverse = TRUE), color = guide_legend(reverse = TRUE)) +

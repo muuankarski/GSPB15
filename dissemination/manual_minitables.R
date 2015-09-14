@@ -105,7 +105,7 @@ for (fs in unique(gr_dat$Item)){
 rc <- growth %>% arrange(-growth_rate) %>% slice(1:5) 
 
 names(rc) <- c("","%")
-print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average anual growth rate, 2000 to 2013)", digits = c(0,0,1),
+print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average annual growth rate, 2000 to 2013)", digits = c(0,0,1),
                     align= "l{\raggedright\arraybackslash}p{2.2cm}r"), 
              type = "latex", table.placement = NULL, booktabs = TRUE, include.rownames = FALSE, size = "footnotesize", caption.placement = "top", 
              file = "./publication/Tables/MT.P3.CRPRO.1.2.tex")

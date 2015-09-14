@@ -242,7 +242,7 @@ left=1cm, right=1cm, twoside}{geometry}
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.47\textwidth}{\@RightChart}}\par\medskip
   \faoset{floatwidth=\columnwidth}
-  \vspace{-0.02\textwidth}%
+   \vspace{0.00\textwidth}%
   {\centering\@BottomChart\par}}
 \long\def\LeftText#1{\gdef\@LeftText{{\bfseries\large\@chartname\par}#1}}
 \long\def\RightText#1{\gdef\@RightText{{\bfseries\large\vphantom{\@chartname}\par}#1}}
@@ -268,6 +268,7 @@ left=1cm, right=1cm, twoside}{geometry}
   \raisebox{-\height}{\strut\parbox{0.50\textwidth}{\@LeftText}}%
   \hspace{0.05\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.40\textwidth}{\@RightText}}\par\medskip
+  \vspace{-0.01\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@LeftChart}}%
   \hspace{0.09\textwidth}%
   \raisebox{-\height}{\strut\parbox{0.48\textwidth}{\@RightChart}}\par\medskip

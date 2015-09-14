@@ -9,6 +9,3 @@ sed -i -e 's/Caption_C.P1.INPU.1.4.tex}}/Caption_C.P1.INPU.1.4.tex}} \\vspace{-7
 sed -i -e 's/Caption_C.P2.AV.1.3.tex}}/Caption_C.P2.AV.1.3.tex}} \\vspace{-7pt}/g' GSPB15.tex
 sed -i -e 's/Caption_C.P2.ACCESS.1.4.tex}}/Caption_C.P2.ACCESS.1.4.tex}} \\vspace{-7pt}/g' GSPB15.tex
 
-
-# sed -i -e 's/Caption_C.P2.UNU.1.5.tex/Caption_C.P2.UNU.1.5.tex}} \\vspace{-7pt}/g' GSPB15.tex
-# sed -i -e 's/Caption_C.P2.UNU.1.5.tex/Caption_C.P2.UNU.1.5.tex}} \\vspace{-7pt}/g' GSPB15.tex

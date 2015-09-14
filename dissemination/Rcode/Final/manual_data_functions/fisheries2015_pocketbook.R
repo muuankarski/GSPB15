@@ -12,10 +12,10 @@ knitr::opts_knit$set(root.dir = "~/btsync/fao_sync/pocketbooks/GSPB15/")
 library(FAOSTAT)
 library(dplyr)
 library(ggplot2)
-library(knitr)
+# library(knitr)
 library(readxl)
 library(tidyr)
-library(DT)
+# library(DT)
 
 #' ## Download and munge the raw data
 #' Before downloading I saved the sheet `Final table` into a csv-file as the excel formattings were too compilicated for R to digest correctly
@@ -84,8 +84,8 @@ rm(dat2)
 dat2 <- merge(aqua_prod,captu_prod,by=c("UN_CODE","Year"))
 dat2 <- merge(dat2,tot_prod,by=c("UN_CODE","Year"))
 
-kable(head(dat2))
-
+# kable(head(dat2))
+# 
 # Convert uncodes into FAOSTAT we use
 
 UN_CODE <- unique(na.omit(FAOcountryProfile[, c("FAOST_CODE", "UN_CODE")]))
@@ -132,7 +132,7 @@ m49 <- dat2 %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(aquacult
                                                                         capture_fish_production = sum(capture_fish_production),
                                                                         total_fish_production = sum(total_fish_production))
 names(m49)[names(m49)=="UNSD_MACRO_REG_CODE"] <- "FAOST_CODE"
-kable(head(m49))
+# kable(head(m49))
 
 #' ## m49world macro aggregates
 
@@ -140,7 +140,7 @@ m49world <- dat2 %>% group_by(Year) %>% dplyr::summarise(aquaculture_fish_produc
                                                          capture_fish_production = sum(capture_fish_production),
                                                          total_fish_production = sum(total_fish_production))
 m49world$FAOST_CODE <- 5000
-kable(head(m49world))
+# kable(head(m49world))
 
 #' pile up the country level, region level and world level data
 
@@ -150,7 +150,7 @@ dat2$UNSD_SUB_REG_CODE <- NULL
 dat2 <- rbind(dat2,m49)
 dat2 <- rbind(dat2,m49world)
 
-kable(head(dat2))
+# kable(head(dat2))
 
 #' # subset on AQUACULT & CAPTURE prior to 2013 from FAOSTAT 
 #' probably should have taken also years 2011 and 2012 also from your excel
@@ -168,31 +168,31 @@ dat2 <- dat2[!is.infinite(dat2$production_quantity_index),]
 
 dat2$prod_100 <- NULL
 
-datatable(dat2)
-
+# datatable(dat2)
+# 
 #' line plot the index
 
-d <- merge(dat2,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by="FAOST_CODE")
-# no limit
-ggplot(d, aes(x=Year,y=production_quantity_index,color=FAO_TABLE_NAME)) +
-  geom_point() + geom_line() +
-  coord_cartesian(xlim=c(1985,2020)) +
-  geom_text(data=d[d$Year == 2013,], aes(x=Year, y = production_quantity_index, label=FAO_TABLE_NAME), size=2) +
-  theme(legend.position="none")
-
-
-ggplot(d, aes(x=Year,y=production_quantity_index,color=FAO_TABLE_NAME)) +
-  geom_point() + geom_line() +
-  coord_cartesian(ylim=c(0,1000),xlim=c(1985,2020)) +
-  geom_text(data=d[d$Year == 2013,], aes(x=Year, y = production_quantity_index, label=FAO_TABLE_NAME), size=2) +
-  theme(legend.position="none")
+# d <- merge(dat2,FAOcountryProfile[c("FAOST_CODE","FAO_TABLE_NAME")],by="FAOST_CODE")
+# # no limit
+# ggplot(d, aes(x=Year,y=production_quantity_index,color=FAO_TABLE_NAME)) +
+#   geom_point() + geom_line() +
+#   coord_cartesian(xlim=c(1985,2020)) +
+#   geom_text(data=d[d$Year == 2013,], aes(x=Year, y = production_quantity_index, label=FAO_TABLE_NAME), size=2) +
+#   theme(legend.position="none")
+# 
+# 
+# ggplot(d, aes(x=Year,y=production_quantity_index,color=FAO_TABLE_NAME)) +
+#   geom_point() + geom_line() +
+#   coord_cartesian(ylim=c(0,1000),xlim=c(1985,2020)) +
+#   geom_text(data=d[d$Year == 2013,], aes(x=Year, y = production_quantity_index, label=FAO_TABLE_NAME), size=2) +
+#   theme(legend.position="none")
 
 sybdata.df <- merge(sybdata.df,dat2,by=c("FAOST_CODE","Year"), all.x=TRUE)
 
 #' # Net fish trade
 
 dat <- read_excel("./database/Data/Raw/Trade1990_2012_ESSJun2015.xlsx", sheet=1, skip = 1)
-kable(head(dat))
+# kable(head(dat))
   
 # select vars to drop
 drops <- names(dat)[grepl("^Symbol", names(dat))]
@@ -224,7 +224,7 @@ tmp$FAOST_CODE <- 351
 tmp$UN_CODE <- NA
 tmp$Country <- "China"
   
-kable(head(tmp))
+# kable(head(tmp))
   
 # pile up new China with rest of the data and remove the components of China 
 dl <- rbind(dl,tmp)
@@ -246,20 +246,20 @@ dl$UNSD_MACRO_REG_CODE[dl$UNSD_SUB_REG_CODE == 5207] <- 5205
 m49 <- dl %>% group_by(UNSD_MACRO_REG_CODE,Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
 names(m49) <- c("FAOST_CODE","Year","net_fish_trade")
 
-kable(head(m49))
+# kable(head(m49))
 
 m49world <- dl %>% group_by(Year) %>% dplyr::summarise(net_fish_trade = sum(net_fish_trade,na.rm=TRUE))
 names(m49world) <- c("Year","net_fish_trade")
 m49world$FAOST_CODE <- 5000
 
-kable(head(m49))
-  
+# kable(head(m49))
+#   
 dl$UNSD_MACRO_REG_CODE <- NULL
 dl$UNSD_SUB_REG_CODE <- NULL
 dl <- rbind(dl,m49)
 dl <- rbind(dl,m49world)
 
-datatable(dl)
+# datatable(dl)
 
 
 sybdata.df <- merge(sybdata.df,dl,by=c("FAOST_CODE","Year"), all.x=TRUE)

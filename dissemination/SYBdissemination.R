@@ -1,7 +1,8 @@
 ###########################################################################
 ## This script generates the Global Statistical Pocketbook 2015
 ###########################################################################
-
+rm(list=ls(all=TRUE)) 
+gc()
 setwd("~/btsync/faosync/pocketbooks/GSPB15")
 
 
