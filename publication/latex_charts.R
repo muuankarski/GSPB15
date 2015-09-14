@@ -30,7 +30,9 @@ chart_spread <- function(title="title",
 # 	               \\input{./Tables/",RightTextCode,".tex} \n
 # 	               \\end{table}}} \n \n"))
 #
-  cat(paste0("\\RightText{\\input{./Tables/",RightTextCode,".tex}} \n"))
+  cat(paste0("\\RightText{
+   {\\renewcommand\\normalsize{\\fontsize{6.6}{7}}%
+    \\normalsize\\input{./Tables/",RightTextCode,".tex}}} \n"))
 
 
 	cat(paste0("\\LeftChart{\\begin{chart} \n
