@@ -27,7 +27,6 @@ library(scales)
 library(ggplot2)
 library(readxl)
 
-
 # merge latest FSI data from Filippo
 
 if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {

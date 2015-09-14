@@ -1,4 +1,4 @@
-Takes place in september 7th, 2015, ~11.00 am (last time done: Thu sep 10, 1600)
+Takes place in september 7th, 2015, ~11.00 am (last time done: Mon Sep 14, 09.47)
 
 1. Downloaded the published web version here: http://www.fao.org/documents/card/en/c/383d384a-28e6-47b3-a1a2-2496a9e017b2/?utm_content=buffer486e5&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer
 2. noticed that some last minute corrections are not there:
