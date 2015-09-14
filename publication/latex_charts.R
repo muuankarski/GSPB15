@@ -106,7 +106,7 @@ chart_spread2 <- function(title="title",
 
   cat(paste0("\\RightText{\\begin{chart} \n
                 {\\renewcommand\\normalsize{\\fontsize{6.6}{7}}%
-                \\normalsize\\input{./Captions/Caption_",LeftChartCode,".tex}} \n",
+                \\normalsize\\input{./Captions/Caption_",RightTextCode,".tex}} \n",
               #             \\input{./Captions/Caption_",RightTextCode,".tex} \n",
              "\\IfFileExists{./Plots/",RightTextCode,".pdf}{\\includegraphics[width = 4cm, height = 3cm]{{./Plots/",RightTextCode,"}.pdf}}{} \n \n",
              footnoteLeftText,
