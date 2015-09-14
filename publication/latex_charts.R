@@ -52,7 +52,7 @@ chart_spread <- function(title="title",
                 {\\renewcommand\\normalsize{\\fontsize{6.6}{7}}%
                 \\normalsize\\input{./Captions/Caption_",BottomChartCode,".tex}} \n",
                #\\input{./Captions/Caption_",BottomChartCode,".tex} \n",
-	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
+	           "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.2cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
 	           "\\end{chart}} \n"))
 
 
@@ -131,7 +131,7 @@ chart_spread2 <- function(title="title",
               {\\renewcommand\\normalsize{\\fontsize{6.6}{7}}%
               \\normalsize\\input{./Captions/Caption_",BottomChartCode,".tex}} \n",
              #\\input{./Captions/Caption_",BottomChartCode,".tex} \n",
-             "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.5cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
+             "\\IfFileExists{./Plots/",BottomChartCode,".pdf}{\\includegraphics[width = 8cm, height = 4.2cm]{{./Plots/",BottomChartCode,"}.pdf}}{} \n",
              "\\end{chart}} \n"))
 
 

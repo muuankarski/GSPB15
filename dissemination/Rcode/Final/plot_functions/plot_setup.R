@@ -181,7 +181,7 @@ export_plot <- function(placement,manual_text="nothing") {
   }
   if (placement == "b") {
     plotWidth <- 6.2
-    plotHeight <- 3.6
+    plotHeight <- 3.4
   }
   if (placement == "tr") {
     plotWidth <- 3
