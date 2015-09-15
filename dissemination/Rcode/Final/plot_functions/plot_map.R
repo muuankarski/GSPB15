@@ -124,10 +124,10 @@ plot_map = function (shpFile, var, data,
     #  ---- grid below the countries ------------------------
   map <- map + geom_path(data = grat_df_robin, 
               aes(long, lat, group = group, fill = NULL), 
-              linetype = "solid", color = col.main2, size = 0.001)
+              linetype = "solid", color = col.main2, size = 0.01)
     #  ---- rest of the content on top ----------------------
     map <- map +  geom_polygon(aes(fill = fillColor))
-    map <- map +  geom_path(colour = alpha("white", 1/2),  size=.2)
+    map <- map +  geom_path(colour = alpha("white", 1/2),  size=.5)
     map <- map +  coord_equal()
     map <- map +  theme(legend.position = c(0.13,0.17), 
                           legend.justification=c(0,0),

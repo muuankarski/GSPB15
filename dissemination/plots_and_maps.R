@@ -80,7 +80,7 @@ dat <- getFAOtoSYB(domainCode = "OA",
                    itemCode = 3010)
 dat2 <- dat$aggregates
 dat <- join(dat1,dat2)
-dat <- dat[dat$FAOST_CODE == 5000,]
+dat <- dat[dat$FAOST_CODE == 5100,]
 dat$Area <- "M49world"
 
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
