@@ -124,7 +124,8 @@ plot_map = function (shpFile, var, data,
     #  ---- grid below the countries ------------------------
   map <- map + geom_path(data = grat_df_robin, 
               aes(long, lat, group = group, fill = NULL), 
-              linetype = "solid", color = col.main2, size = 0.01)
+              #linetype = "solid", color = col.main2, size = 0.01)
+              linetype = "solid", color = "grey80", size = 0.5)
     #  ---- rest of the content on top ----------------------
     map <- map +  geom_polygon(aes(fill = fillColor))
     map <- map +  geom_path(colour = alpha("white", 1/2),  size=.5)
