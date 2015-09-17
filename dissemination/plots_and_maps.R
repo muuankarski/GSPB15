@@ -116,7 +116,7 @@ assign(plotInfo$plotName,
 )
 
 # Export plot
-export_plot(placement = "tr")
+export_plot(manual_text= "World rural and urban population (1985 to 2016)", placement = "tr")
 
 
 ## ------------------------------------------------------------------------
