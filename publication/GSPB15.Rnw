@@ -229,7 +229,7 @@ knitr::opts_chunk$set(list(echo=FALSE,eval=TRUE,cache=FALSE,warning=FALSE,messag
 
 2015 is a pivotal year as we look back on the progress we have made on the development agenda, and forward on what we must still accomplish. 
 
-This is the end of a 15-year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of what we can learn from that effort. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. Indeed, 72 of the 129 countries monitored for progress have reached that MDG target, while 29 of them also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
+This is the end of a 15-year cycle where the international community partnered with developing countries to tackle the Millennium Development Goals. We are now taking stock of what we can learn from that effort. For example we know that the commitment to halve the percentage of hungry people, that is, to reach the MDG 1c target, has been almost met at the global level. Indeed, 73 of the 129 countries monitored for progress have reached that MDG target, while 29 of them also reached the more ambitious WFS goal by at least halving the number of undernourished people in their populations. 
 
 This year also marks the beginning of the new post-2015 Sustainable Development Agenda. Again the international community will unite around new priorities for the future.
 
@@ -537,7 +537,7 @@ chart_spread2(title="Investment",
 
 <<Undernourishmend, eval=TRUE,results='asis'>>=
 chart_spread(title="Undernourishment",                
-            LeftTextCode="Undernourishment is a state, lasting for at least one year, of inability to acquire enough food, defined as a level of food intake insufficient to meet dietary energy requirements. About 795 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Two hundred and sixteen million million fewer people suffer from undernourishment than 25 years ago and 167 million fewer than a decade ago.",  
+            LeftTextCode="Undernourishment is a state, lasting for at least one year, of inability to acquire enough food, defined as a level of food intake insufficient to meet dietary energy requirements. About 793 million people – just over one in every nine people – in the world still lack sufficient food for conducting an active and healthy life. Yet progress has been made, even in the presence of significant population growth. Two hundred and eighteen million million fewer people suffer from undernourishment than 25 years ago and 169 million fewer than a decade ago.",  
             footnoteLeft="2014-16 estimates are projections",
             RightTextCode="MT.P2.UNU.1.2",   
             LeftChartCode="C.P2.UNU.1.3",   
