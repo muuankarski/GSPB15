@@ -112,6 +112,7 @@ assign(plotInfo$plotName,
          centerYear() +
          # scale_x_continuous(breaks=c(1965, 1985, 2005, 2015 ,2025)) +
          # geom_vline(xintercept = 2015, linetype = "dashed") +
+         scale_y_continuous(labels=french) +
          labs(y="billion people")
 )
 
@@ -2417,6 +2418,15 @@ dat <- gather(dat,
 # dat$X <- factor(dat$X, levels= c("Under or\nmoderately\nexploited",
 #                                 "Fully\nexploited",
 #                                 "Recovering,\ndepleted\nor overexploited"))
+
+dat$X <- as.character(dat$X)
+dat$X[dat$X == "Overfihsed"] <- "Overfished"
+
+dat$X <- factor(dat$X, levels= c("Overfished",
+                                 "Fully fished",
+                                 "Underfished"))
+
+
 
 ## create the plot
 assign(plotInfo$plotName,
