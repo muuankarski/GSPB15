@@ -70,6 +70,20 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   dat <- dat %>% filter(Year != 2014)
   dat$Year[dat$Year == 2015] <- 2014
   
+  # trick to show the 1991 undernourishment figures (1990-1992) for year 1990 (as in the title)
+  dat$Year[dat$Year == 2015] <- 2014
+  
+  dat <- arrange(dat, FAOST_CODE, Year)
+  
+  dat$FBS.PCS.PDES.KCD3D <- ifelse(dat$Year == 1990, c(dat[-1,"FBS.PCS.PDES.KCD3D"],NA), dat$FBS.PCS.PDES.KCD3D)
+  dat$FS.DA.ADESA.PCT3D  <- ifelse(dat$Year == 1990, c(dat[-1,"FS.DA.ADESA.PCT3D"],NA), dat$FS.DA.ADESA.PCT3D)
+  dat$FS.OA.POU.PCT3D1   <- ifelse(dat$Year == 1990, c(dat[-1,"FS.OA.POU.PCT3D1"],NA), dat$FS.OA.POU.PCT3D1)
+
+  
+    
+  
+  
+  
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
 
@@ -421,7 +435,7 @@ for (i in 1:nrow(M49countries)) {
             chunk1 = y1
           }
         } else {
-          lya = na.locf(tmp[tmp[, "Year"] %in% c((year1-2):(year1+3)), subindicators.df[j, "INDICATOR1"]], na.rm = FALSE)[6]
+          lya = na.locf(tmp[tmp[, "Year"] %in% c((year1-2):(year1+3)), subindicators.df[j, "INDICATOR1"]], na.rm = FALSE)[6] # Why it takes 1993
           if (!is.na(lya)) {
             if (is.numeric(lya)) {
               chunk1 = paste0("\\textit{", format(round(lya, digits = subindicators.df[j, "DIGITS"]), nsmall = 0, big.mark = ","), "}")
