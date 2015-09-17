@@ -66,6 +66,9 @@ if (!("FS.DA.ADESA.PCT3D" %in% names(sybdata.df))) {
   myvars <- names(dat) %in% vars_to_exclude
   dat <- dat[!myvars]
   
+  # trick to show the latest undernourishment figures (2015) for year 2014 (as in the title)
+  dat <- dat %>% filter(Year != 2014)
+  dat$Year[dat$Year == 2015] <- 2014
   
   sybdata.df <- merge(sybdata.df,dat,by=c("FAOST_CODE","Year"),all.x=TRUE)
 }
