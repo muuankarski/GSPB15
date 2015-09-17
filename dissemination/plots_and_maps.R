@@ -71,17 +71,23 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 ## Info
 
 # Longer time series
-dat <- getFAOtoSYB(domainCode = "OA",
-                   elementCode = 551,
-                   itemCode = 3010)
-dat1 <- dat$aggregates
-dat <- getFAOtoSYB(domainCode = "OA",
-                   elementCode = 561,
-                   itemCode = 3010)
-dat2 <- dat$aggregates
-dat <- join(dat1,dat2)
-dat <- dat[dat$FAOST_CODE == 5100,]
+# dat <- getFAOtoSYB(domainCode = "OA",
+#                    elementCode = 551,
+#                    itemCode = 3010)
+# dat1 <- dat$aggregates
+# dat <- getFAOtoSYB(domainCode = "OA",
+#                    elementCode = 561,
+#                    itemCode = 3010)
+# dat2 <- dat$aggregates
+# dat <- join(dat1,dat2)
+
+# dat <- dat[dat$FAOST_CODE == 5000,]
+# dat$Area <- "M49world"
+
+dat <- sybdata.df %>% filter(FAOST_CODE == 5000) %>% select(FAOST_CODE,Year,OA.TPU.POP.PPL.NO,OA.TPR.POP.PPL.NO)
 dat$Area <- "M49world"
+
+
 
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
 plotInfo$yAxis <- c(names(dat)[3],names(dat)[4])
@@ -99,12 +105,13 @@ assign(plotInfo$plotName,
                 y_lab = plotInfo$yPlotLab,
                 #legend_lab = subset(meta.lst$FULL,
                 #                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                legend_lab <- c("Rural population","Urban population"),
+                # legend_lab <- c("Rural population","Urban population"),
+                legend_lab <- c("Urban population","Rural population"),
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
        ) +
          centerYear() +
-         scale_x_continuous(breaks=c(1965, 1985, 2005, 2015 ,2025)) +
-         geom_vline(xintercept = 2015, linetype = "dashed") +
+         # scale_x_continuous(breaks=c(1965, 1985, 2005, 2015 ,2025)) +
+         # geom_vline(xintercept = 2015, linetype = "dashed") +
          labs(y="billion people")
 )
 
