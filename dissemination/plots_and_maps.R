@@ -912,25 +912,43 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
 
 plot.data <- dat[dat$FAOST_CODE %in% unique(FAOcountryProfile[FAOcountryProfile$FAO_RAF_REG == "RAFregion",]$FAOST_CODE),]
 
+dat <- arrange(plot.data, -Year, -FS.OA.NOU.P3D1)
+top15 <- dat %>% slice(1:17) %>% mutate(color = "2014-2016")
+top91 <- dat %>% filter(FAOST_CODE %in% top15$FAOST_CODE, Year == 1991) %>% mutate(color = "1990-1992")
+dat_plot <- rbind(top15,top91)
+
+p <- ggplot(dat_plot, aes(x=reorder(SHORT_NAME, FS.OA.NOU.P3D1),y=FS.OA.NOU.P3D1))
+p <- p + geom_point(aes(color=color),size = 3, alpha = 0.75)
+p <- p + scale_color_manual(values=plot_colors(part = 2, 2)[["Sub"]])
+p <- p + coord_flip()
+p <- p + labs(x="",y="million people")
+p <- p + guides(color = guide_legend(nrow = 1))
+
 assign(plotInfo$plotName,
-       plot_syb(x = plotInfo$xAxis,
-                y = plotInfo$yAxis,
-                group = plotInfo$group,
-                type = plotInfo$plotType,
-                subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
-		                            Area %in% c(plotInfo$plotArea)")),
-                data = plot.data,
-                scale = plotInfo$scaling,
-                x_lab = plotInfo$xPlotLab,
-                y_lab = plotInfo$yPlotLab,
-                legend_lab = subset(meta.lst$FULL,
-                                    subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
-                col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_fill_manual(labels = c("1990-92", "2014-16"),
-                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         scale_color_manual(labels = c("1990-92", "2014-16"),
-                            values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(y="million people")
+       
+       
+       p
+       
+#        
+#        
+#        plot_syb(x = plotInfo$xAxis,
+#                 y = plotInfo$yAxis,
+#                 group = plotInfo$group,
+#                 type = plotInfo$plotType,
+#                 subset = eval(parse(text = "Year %in% c(plotInfo$plotYears) &
+# 		                            Area %in% c(plotInfo$plotArea)")),
+#                 data = plot.data,
+#                 scale = plotInfo$scaling,
+#                 x_lab = plotInfo$xPlotLab,
+#                 y_lab = plotInfo$yPlotLab,
+#                 legend_lab = subset(meta.lst$FULL,
+#                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
+#                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
+#        ) + scale_fill_manual(labels = c("1990-92", "2014-16"),
+#                              values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+#          scale_color_manual(labels = c("1990-92", "2014-16"),
+#                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
+#          labs(y="million people")
 )
 # Export
 export_plot(manual_text= "African countries with the highest number of undernourished in 2014-16", placement = "l")
