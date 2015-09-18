@@ -6,6 +6,7 @@ gc()
 setwd("~/btsync/faosync/pocketbooks/GSPB15")
 
 
+
 # Linux options
 options(scipen=999) # disable scientific number formatting
 

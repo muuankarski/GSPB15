@@ -898,7 +898,7 @@ assign(plotInfo$plotName,
                              values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
          scale_color_manual(labels = c("1990-92", "2014-16"),
                             values = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]) +
-         labs(y="million people")
+         labs(y="million people") + scale_y_continuous(breaks=c(0,50,100,150,200,250))
 )
 # Export
 export_plot(manual_text= "Asian countries with the highest number of undernourished in 2014-16", placement = "l")
@@ -912,9 +912,9 @@ plotInfo$plotYears <- c(min(plotInfo$plotYears), max(plotInfo$plotYears))
 
 plot.data <- dat[dat$FAOST_CODE %in% unique(FAOcountryProfile[FAOcountryProfile$FAO_RAF_REG == "RAFregion",]$FAOST_CODE),]
 
-dat <- arrange(plot.data, -Year, -FS.OA.NOU.P3D1)
-top15 <- dat %>% slice(1:17) %>% mutate(color = "2014-2016")
-top91 <- dat %>% filter(FAOST_CODE %in% top15$FAOST_CODE, Year == 1991) %>% mutate(color = "1990-1992")
+dat_z <- arrange(plot.data, -Year, -FS.OA.NOU.P3D1)
+top15 <- dat_z %>% slice(1:17) %>% mutate(color = "2014-2016")
+top91 <- dat_z %>% filter(FAOST_CODE %in% top15$FAOST_CODE, Year == 1991) %>% mutate(color = "1990-1992")
 dat_plot <- rbind(top15,top91)
 
 p <- ggplot(dat_plot, aes(x=reorder(SHORT_NAME, FS.OA.NOU.P3D1),y=FS.OA.NOU.P3D1))
@@ -1904,7 +1904,7 @@ assign(plotInfo$plotName,
   #              legend_lab = subset(meta.lst$FULL,
   #                                 subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 6)[["Sub"]]
-       )
+       ) + scale_y_continuous(labels=french)
 
        )
 ## Export the plot
@@ -3097,7 +3097,7 @@ assign(plotInfo$plotName,
                 y_lab = plotInfo$yPlotLab,
                 legend_lab = plotInfo$legendLabels,
                 col_pallete = plot_colors(part = plotInfo$plotPart, 4)[["Sub"]]
-       )
+       ) + scale_y_continuous(labels=french)
 
 
        )
