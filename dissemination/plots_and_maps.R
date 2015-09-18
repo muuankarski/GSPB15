@@ -1422,7 +1422,7 @@ assign(plotInfo$plotName,
                 legend_lab = subset(meta.lst$FULL,
                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       )
+       ) + scale_y_continuous(breaks=c(50,100,150,200))
        )
 ## Export the plot
 export_plot(manual_text="Per capita food supply variability, top 20 countries in 2011, kcal/capita/day",placement="l")
@@ -1957,8 +1957,7 @@ assign(plotInfo$plotName,
                 legend_lab = subset(meta.lst$FULL,
                                     subset = STS_ID %in% plotInfo$yAxis)[, "TITLE_STS_SHORT"],
                 col_pallete = plot_colors(part = plotInfo$plotPart, 2)[["Sub"]]
-       ) + scale_y_continuous(labels=french) 
-       #+ scale_x_continuous(breaks=c(200,300,400,500,600)) # tried adding manual breaks but the x-var is factor and dont know how to change it
+       ) + scale_y_continuous(labels=french, breaks=c(200,300,400,500,600)) 
 )
 
        ## Export the plot

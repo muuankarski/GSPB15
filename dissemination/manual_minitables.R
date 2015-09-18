@@ -102,7 +102,7 @@ for (fs in unique(gr_dat$Item)){
                     growth_rate = grate)
   growth <- rbind(growth,row)
 }
-rc <- growth %>% arrange(-growth_rate) %>% slice(1:5) 
+rc <- growth %>% arrange(-growth_rate) %>% slice(2:6) # leave the 1st, Fruit, pome nes , out from the table as pointed by Amy sep 18, 2015
 
 names(rc) <- c("","%")
 print.xtable(xtable(rc, caption = "Fastest growing products based on quantities (average annual growth rate, 2000 to 2013)", digits = c(0,0,1),
