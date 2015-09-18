@@ -28,8 +28,8 @@
 [2012/03/25 v0.14 Typesetting FAO Factbook]
 
 % IF FOR THE WEB
-% \PassOptionsToPackage{papersize={10cm,21cm},top=1cm,bottom=1cm,
-% left=1cm, right=1cm, twoside}{geometry}
+\PassOptionsToPackage{papersize={10cm,21cm},top=1cm,bottom=1cm,
+left=1cm, right=1cm, twoside}{geometry}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{faoyearbook}}
 \ProcessOptions\relax
