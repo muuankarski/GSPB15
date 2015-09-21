@@ -87,7 +87,8 @@ source('./dissemination/Rcode/Final/plot_functions/plot_setup.R')
 dat <- sybdata.df %>% filter(FAOST_CODE == 5000) %>% select(FAOST_CODE,Year,OA.TPU.POP.PPL.NO,OA.TPR.POP.PPL.NO)
 dat$Area <- "M49world"
 
-
+dat$OA.TPU.POP.PPL.NO <- dat$OA.TPU.POP.PPL.NO / 1000
+dat$OA.TPR.POP.PPL.NO <- dat$OA.TPR.POP.PPL.NO / 1000
 
 plotInfo <- plot_info(plotName = "C.P1.OVER.1.2")
 plotInfo$yAxis <- c(names(dat)[3],names(dat)[4])
