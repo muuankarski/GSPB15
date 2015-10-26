@@ -2109,7 +2109,7 @@ mapInfo <- map_info(mapName = "M.P3.CRTRE.1.6", data = sybMaps.df, mapArea = "Te
 ## Create the map
 assign(mapInfo$mapName, meta_plot_map() )
 ## export the map
-export_map(manual_text ="Cereal production, tonnes/cap (2013)")
+export_map(manual_text ="Cereal production, kilograms/cap (2013)")
 
 
 ###########################################################################
