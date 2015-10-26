@@ -288,10 +288,15 @@ sybdata.df <- merge(sybdata.df,water_vars.df,by=c("FAOST_CODE","Year"), all.x=TR
 
 # Countries ---------------------------------------------------------------
 
+
 M49countries <- 
   FAOcountryProfile[FAOcountryProfile[, "UNSD_WORLD_REG"] == "World", 
                     c("FAOST_CODE", "SHORT_NAME")]
 M49countries <- na.omit(arrange(M49countries, SHORT_NAME))
+# Change North Korea into Democratic People's Republic of Korea
+M49countries$SHORT_NAME[M49countries$FAOST_CODE == 116] <- "Democratic People's Republic of Korea"
+
+
 ## Sanitize the country names
 M49countries[, "SHORT_NAME"] <- 
   sanitizeToLatex(M49countries[, "SHORT_NAME"])

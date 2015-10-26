@@ -203,6 +203,9 @@ sybdata.df[sybdata.df[, "SHORT_NAME"] == "the United Arab Emirates" &
 # REMOVE Western Sahara
 sybdata.df <- sybdata.df[sybdata.df$FAOST_CODE != 205, ]
 
+# Change North Korea into Democratic People's Republic of Korea
+sybdata.df$SHORT_NAME[sybdata.df$FAOST_CODE == 116] <- "Korea, Dem Rep"
+
 
 # re-create the short name also in faocountryprofile (taken from regional book)
 # Recode the Short Name Variables
@@ -243,7 +246,8 @@ FAOcountryProfile[FAOcountryProfile[, "SHORT_NAME"] == "Netherlands Antilles"   
 #FAOcountryProfile[FAOcountryProfile[, "SHORT_NAME"] == ""                                            & !is.na(FAOcountryProfile[, "SHORT_NAME"]), "SHORT_NAME"] <- ""
 
 
-
+# Change North Korea into Democratic People's Republic of Korea
+FAOcountryProfile$SHORT_NAME[FAOcountryProfile$FAOST_CODE == 116] <- "Korea, Dem Rep"
 
 ## Chinas
 sybdata.df[sybdata.df[, "FAOST_CODE"] %in% c(357), "Area"] <- "China 357"
